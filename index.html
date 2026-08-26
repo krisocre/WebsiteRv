@@ -782,5 +782,8 @@
         });
     })();
 </script>
+<script>
+  navigator.sendBeacon('/api/collect?path=' + encodeURIComponent(window.location.pathname));
+</script>
 </body>
 </html>
