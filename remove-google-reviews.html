@@ -84,11 +84,12 @@
         .nav-links a:hover{color:var(--red-dark)}
         .nav-links a:hover::after{width:100%}
         .nav-cta{padding:10px 18px!important;color:#fff!important;border-radius:7px!important}
-        .nav-service{padding:8px 13px!important;border-radius:6px!important;font-weight:600!important}
+        .nav-service{padding:5px 1px!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;color:var(--navy)!important;font-weight:600!important}
         .nav-service::after{display:none}
-        .nav-reviews{background:#0885fe;color:#fff!important;box-shadow:0 3px 12px rgba(8,133,254,.2)}
-        .nav-reviews:hover{background:#0373e1;color:#fff!important}
-        .nav-removal{border:1px solid #e7aaad;background:var(--red-soft);color:var(--red-dark)!important}
+        .nav-reviews{border-bottom:2px solid #0885fe}
+        .nav-reviews:hover{color:#0373e1!important}
+        .nav-removal{border-bottom:2px solid var(--red);color:var(--navy)!important}
+        .nav-removal:hover{color:var(--red-dark)!important}
         .hamburger{display:none;background:none;border:0;padding:8px;cursor:pointer}
         .hamburger span{display:block;width:24px;height:2.5px;background:var(--navy);border-radius:3px;margin:5px 0}
 
@@ -218,6 +219,7 @@
 
         @media(max-width:1180px){
             .nav-links{display:none}.nav-links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;gap:4px;padding:14px 20px 20px;background:#fff;border-bottom:1px solid #eee;box-shadow:0 12px 24px rgba(0,0,0,.08)}.nav-links a{display:block;padding:9px 4px}.nav-links .nav-cta{text-align:center;margin-top:4px}.hamburger{display:block}
+            .nav-links .nav-service{display:inline-block;width:max-content}
         }
         @media(max-width:900px){
             .container{padding:0 20px}.section-pad{padding:68px 0}.section-title{font-size:32px}
@@ -254,12 +256,12 @@
         <a href="index.html" class="nav-logo" aria-label="ReviewsBoost home"><span class="logo-icon"><i class="fa-solid fa-star"></i></span>ReviewsBoost</a>
         <ul class="nav-links" id="navLinks">
             <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#pricing" class="nav-service nav-reviews">Get Reviews</a></li>
-            <li><a href="remove-google-reviews.html" class="nav-service nav-removal" aria-current="page">Review Removal</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="blog.html">Learning Centre</a></li>
             <li><a href="google-reviews-faq.html">FAQ</a></li>
+            <li><a href="index.html#pricing" class="nav-service nav-reviews">Get Reviews</a></li>
+            <li><a href="remove-google-reviews.html" class="nav-service nav-removal" aria-current="page">Review Removal</a></li>
             <li><button class="btn btn-primary nav-cta open-order" type="button">Start Removal Process</button></li>
         </ul>
         <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>

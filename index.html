@@ -257,8 +257,11 @@
         }
 
         .nav-service {
-            padding: 8px 14px!important;
-            border-radius: 6px!important;
+            padding: 5px 1px!important;
+            border-radius: 0!important;
+            background: transparent!important;
+            box-shadow: none!important;
+            color: #16223b!important;
             font-weight: 600!important
         }
 
@@ -267,25 +270,19 @@
         }
 
         .nav-service-primary {
-            background: #0885fe;
-            color: #fff!important;
-            box-shadow: 0 3px 12px rgba(8, 133, 254, 0.22)
+            border-bottom: 2px solid #0885fe
         }
 
         .nav-service-primary:hover {
-            background: #0373e1;
-            color: #fff!important
+            color: #0373e1!important
         }
 
         .nav-service-secondary {
-            border: 1px solid #b8c9dc;
-            background: #fff;
-            color: #16223b!important
+            border-bottom: 2px solid #e1292f
         }
 
         .nav-service-secondary:hover {
-            border-color: #0885fe;
-            background: #eef6ff
+            color: #a9131d!important
         }
         
         .hamburger {
@@ -1570,11 +1567,11 @@
             <a href="index.html" class="nav-logo" aria-label="ReviewsBoost Home">
                 <div class="logo-icon"><i class="fa-solid fa-star"></i></div>ReviewsBoost</a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#pricing" class="nav-service nav-service-primary">Get Reviews</a></li>
-                <li><a href="remove-google-reviews.html" class="nav-service nav-service-secondary">Review Removal</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="blog.html">Learning Centre</a></li>
                 <li><a href="google-reviews-faq.html">FAQ</a></li>
+                <li><a href="#pricing" class="nav-service nav-service-primary">Get Reviews</a></li>
+                <li><a href="remove-google-reviews.html" class="nav-service nav-service-secondary">Review Removal</a></li>
                 <li><a href="#contact" class="btn btn-primary nav-cta">Contact</a></li>
             </ul>
             <button class="hamburger" id="hamburger" type="button" aria-label="Menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>

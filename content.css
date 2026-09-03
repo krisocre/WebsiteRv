@@ -131,31 +131,30 @@ textarea {
   text-underline-offset: 6px;
 }
 .nav-links .nav-service {
-  padding: 8px 13px;
-  border-radius: 6px;
+  padding: 6px 1px 5px;
+  border-radius: 0;
   font-weight: 600;
+  text-decoration: none;
 }
 .nav-links .nav-service-primary {
-  background: #066dcc;
-  color: #fff;
-  text-decoration: none;
+  border-bottom: 2px solid #0885fe;
+  background: transparent;
+  color: var(--navy);
 }
 .nav-links .nav-service-primary:hover {
-  background: #054f99;
-  color: #fff;
-  text-decoration: none;
+  background: transparent;
+  color: var(--blue-dark);
 }
 .nav-links .nav-service-secondary {
-  border: 1px solid #b8c9dc;
-  background: #fff;
+  border: 0;
+  border-bottom: 2px solid #e1292f;
+  background: transparent;
   color: var(--navy);
-  text-decoration: none;
 }
 .nav-links .nav-service-secondary:hover {
-  border-color: var(--blue);
-  background: var(--blue-soft);
-  color: var(--blue-dark);
-  text-decoration: none;
+  border-color: #b51218;
+  background: transparent;
+  color: #9e1117;
 }
 
 .hero {
@@ -738,6 +737,10 @@ h1 {
   }
   .nav-links .nav-contact {
     display: none;
+  }
+  .nav-links .nav-service {
+    width: max-content;
+    margin-inline: auto;
   }
   .hero {
     padding: 48px 0;
