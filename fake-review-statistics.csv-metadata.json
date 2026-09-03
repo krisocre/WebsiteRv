@@ -1,0 +1,28 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    { "@language": "en" }
+  ],
+  "url": "fake-review-statistics.csv",
+  "dc:title": "Selected fake-review platform and regulator disclosures",
+  "dc:description": "A ReviewsBoost source table preserving selected public figures, periods, definitions and comparison limitations from platforms, regulators and research.",
+  "dc:creator": "ReviewsBoost Editorial Team",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "dc:modified": "2026-09-03",
+  "dialect": {
+    "encoding": "utf-8",
+    "header": true
+  },
+  "tableSchema": {
+    "columns": [
+      { "name": "platform_or_authority", "titles": "Platform or authority", "datatype": "string", "required": true },
+      { "name": "reporting_period", "titles": "Reporting period", "datatype": "string", "required": true },
+      { "name": "metric", "titles": "Metric", "datatype": "string", "required": true },
+      { "name": "reported_value", "titles": "Reported value", "datatype": "string", "required": true },
+      { "name": "scope_or_definition", "titles": "Scope or definition", "datatype": "string", "required": true },
+      { "name": "source_published", "titles": "Source publication date", "datatype": "string" },
+      { "name": "source_url", "titles": "Source URL", "datatype": "anyURI", "required": true },
+      { "name": "comparison_note", "titles": "Comparison note", "datatype": "string" }
+    ]
+  }
+}

@@ -12,12 +12,14 @@
 ## Guides and tools
 
 - [How to get more Google reviews](https://reviewsboost.ca/get-more-google-reviews.html): Authentic, incentive-free customer request process.
+- [Google reviews not showing](https://reviewsboost.ca/google-reviews-not-showing.html): Delayed, missing and disappearing review troubleshooting.
+- [Fake review statistics](https://reviewsboost.ca/fake-review-statistics.html): A seven-year Google moderation series, cross-platform disclosures, regulator cases, transparent calculations and downloadable CSV data with machine-readable metadata.
 - [How to respond to Google reviews](https://reviewsboost.ca/respond-to-google-reviews.html): Response framework and 30 examples.
 - [How to report a fake Google review](https://reviewsboost.ca/remove-fake-google-review.html): Assessment, evidence, official reporting and follow-up.
 - [Google review link and QR code](https://reviewsboost.ca/google-review-link-qr-code.html): Setup, testing, placement and accessibility.
 - [Google review policy for Canadian businesses](https://reviewsboost.ca/google-review-policy-canada.html): Platform rules and Canadian context.
 - [Google Business Profile local SEO checklist](https://reviewsboost.ca/google-business-profile-local-seo.html): Profile, website, reviews and measurement.
-- [Google reviews FAQ](https://reviewsboost.ca/google-reviews-faq.html): Forty detailed questions and answers.
+- [Google reviews FAQ](https://reviewsboost.ca/google-reviews-faq.html): Forty-one detailed questions and answers.
 - [Review rating calculator](https://reviewsboost.ca/google-review-calculator.html): Transparent weighted-average calculator.
 
 ## Important limitations
@@ -25,4 +27,3 @@
 - Google controls its platforms, search results and moderation decisions.
 - Educational content is general information, not legal advice or a guarantee of rankings, ratings or outcomes.
 - Primary-source links and visible review dates should be used to verify time-sensitive policy claims.
-

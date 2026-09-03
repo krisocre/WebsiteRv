@@ -1,0 +1,29 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    { "@language": "en" }
+  ],
+  "url": "google-maps-review-moderation-2019-2025.csv",
+  "dc:title": "Google Maps policy-violating review moderation disclosures, 2019–2025",
+  "dc:description": "A ReviewsBoost compilation of annual Google disclosures covering policy-violating reviews removed or blocked and removed. The values retain Google's rounded qualifiers and source terminology.",
+  "dc:creator": "ReviewsBoost Editorial Team",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "dc:modified": "2026-09-03",
+  "dialect": {
+    "encoding": "utf-8",
+    "header": true
+  },
+  "tableSchema": {
+    "primaryKey": "year",
+    "columns": [
+      { "name": "year", "titles": "Reporting year", "datatype": "gYear", "required": true },
+      { "name": "reported_count_millions", "titles": "Reported count in millions", "datatype": { "base": "decimal", "minimum": 0 }, "required": true },
+      { "name": "qualifier", "titles": "Source qualifier", "datatype": "string" },
+      { "name": "action_scope", "titles": "Action and policy scope", "datatype": "string", "required": true },
+      { "name": "source_title", "titles": "Source title", "datatype": "string", "required": true },
+      { "name": "source_published", "titles": "Source publication date", "datatype": "date", "required": true },
+      { "name": "source_url", "titles": "Source URL", "datatype": "anyURI", "required": true },
+      { "name": "comparison_note", "titles": "Comparison note", "datatype": "string" }
+    ]
+  }
+}
