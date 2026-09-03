@@ -188,11 +188,11 @@ h3 {
 h1 {
   max-width: 920px;
   margin: 0 0 20px;
-  font-size: clamp(38px, 6vw, 60px);
+  font-size: clamp(36px, 5vw, 48px);
   letter-spacing: -0.035em;
 }
 .article-hero h1 {
-  font-size: clamp(36px, 5.5vw, 54px);
+  font-size: clamp(34px, 4.8vw, 48px);
 }
 .lede {
   max-width: 820px;
@@ -213,6 +213,7 @@ h1 {
   margin-bottom: 8px;
   color: var(--navy);
   font-size: 18px;
+  font-weight: 600;
 }
 .hero-card p {
   margin: 0;
@@ -268,7 +269,8 @@ h1 {
 }
 .section-head h2 {
   margin: 0 0 12px;
-  font-size: clamp(29px, 4vw, 42px);
+  font-size: clamp(28px, 3.6vw, 38px);
+  font-weight: 700;
 }
 .section-head p {
   margin: 0;
@@ -338,7 +340,8 @@ h1 {
 .prose h2 {
   margin: 2.4em 0 0.65em;
   padding-top: 0.15em;
-  font-size: clamp(28px, 3.5vw, 36px);
+  font-size: clamp(27px, 3.2vw, 32px);
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 .prose h3 {
@@ -503,7 +506,7 @@ h1 {
   cursor: pointer;
   padding: 17px 48px 17px 18px;
   color: var(--navy);
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.4;
 }
 .faq-list details > div {
@@ -515,6 +518,10 @@ h1 {
 }
 .faq-group {
   margin-top: 50px;
+}
+.faq-group h2 {
+  font-size: clamp(27px, 3vw, 31px);
+  font-weight: 700;
 }
 
 .calculator {
