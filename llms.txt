@@ -1,0 +1,28 @@
+# ReviewsBoost
+
+> ReviewsBoost publishes practical Google review and local reputation resources for Canadian businesses. It is an independent service and is not affiliated with Google.
+
+## Primary pages
+
+- [Home](https://reviewsboost.ca/): Service overview and contact path.
+- [Learning Centre](https://reviewsboost.ca/blog.html): Index of all educational resources.
+- [About](https://reviewsboost.ca/about.html): Scope, principles, contact information and independence statement.
+- [Editorial policy](https://reviewsboost.ca/editorial-policy.html): Sourcing, authorship, corrections and content standards.
+
+## Guides and tools
+
+- [How to get more Google reviews](https://reviewsboost.ca/get-more-google-reviews.html): Authentic, incentive-free customer request process.
+- [How to respond to Google reviews](https://reviewsboost.ca/respond-to-google-reviews.html): Response framework and 30 examples.
+- [How to report a fake Google review](https://reviewsboost.ca/remove-fake-google-review.html): Assessment, evidence, official reporting and follow-up.
+- [Google review link and QR code](https://reviewsboost.ca/google-review-link-qr-code.html): Setup, testing, placement and accessibility.
+- [Google review policy for Canadian businesses](https://reviewsboost.ca/google-review-policy-canada.html): Platform rules and Canadian context.
+- [Google Business Profile local SEO checklist](https://reviewsboost.ca/google-business-profile-local-seo.html): Profile, website, reviews and measurement.
+- [Google reviews FAQ](https://reviewsboost.ca/google-reviews-faq.html): Forty detailed questions and answers.
+- [Review rating calculator](https://reviewsboost.ca/google-review-calculator.html): Transparent weighted-average calculator.
+
+## Important limitations
+
+- Google controls its platforms, search results and moderation decisions.
+- Educational content is general information, not legal advice or a guarantee of rankings, ratings or outcomes.
+- Primary-source links and visible review dates should be used to verify time-sensitive policy claims.
+

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">ReviewsBoost Canada</title>
+  <desc id="desc">Practical Google review and local reputation resources for Canadian businesses.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#dceeff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1080" cy="80" r="260" fill="#0885fe" opacity=".08"/>
+  <circle cx="90" cy="610" r="230" fill="#16bbd4" opacity=".08"/>
+  <rect x="82" y="74" width="72" height="72" rx="16" fill="#0885fe"/>
+  <path d="M118 88l8.1 19.3 20.9 3.2-15.8 15.4 4.3 20.7-17.5-10.2-17.5 10.2 4.3-20.7L89 110.5l20.9-3.2z" fill="#fff"/>
+  <text x="176" y="127" font-family="Arial, Helvetica, sans-serif" font-size="42" font-weight="700" fill="#13213a">ReviewsBoost</text>
+  <text x="82" y="282" font-family="Georgia, serif" font-size="70" font-weight="700" fill="#13213a">Google review guidance</text>
+  <text x="82" y="365" font-family="Georgia, serif" font-size="70" font-weight="700" fill="#066dcc">for Canadian businesses</text>
+  <text x="85" y="452" font-family="Arial, Helvetica, sans-serif" font-size="30" fill="#435064">Practical resources for reputation, responses and local visibility</text>
+  <g transform="translate(85 520)" fill="#f0a400">
+    <path d="M18 0l4.2 10.2 11 .8-8.4 7.2 2.6 10.8L18 23.3 8.6 29l2.6-10.8L2.8 11l11-.8z"/>
+    <path transform="translate(44)" d="M18 0l4.2 10.2 11 .8-8.4 7.2 2.6 10.8L18 23.3 8.6 29l2.6-10.8L2.8 11l11-.8z"/>
+    <path transform="translate(88)" d="M18 0l4.2 10.2 11 .8-8.4 7.2 2.6 10.8L18 23.3 8.6 29l2.6-10.8L2.8 11l11-.8z"/>
+    <path transform="translate(132)" d="M18 0l4.2 10.2 11 .8-8.4 7.2 2.6 10.8L18 23.3 8.6 29l2.6-10.8L2.8 11l11-.8z"/>
+    <path transform="translate(176)" d="M18 0l4.2 10.2 11 .8-8.4 7.2 2.6 10.8L18 23.3 8.6 29l2.6-10.8L2.8 11l11-.8z"/>
+  </g>
+  <text x="915" y="552" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#13213a">reviewsboost.ca</text>
+</svg>

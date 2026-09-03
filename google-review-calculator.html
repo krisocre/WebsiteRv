@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Google Review Rating Calculator: Free &amp; Explained</title>
+    <meta
+      name="description"
+      content="Estimate how many new 5-star reviews may be needed to reach a target average. Free Google review calculator with formula, rounding limits and examples."
+    />
+    <meta
+      name="robots"
+      content="index,follow,max-image-preview:large,max-snippet:-1"
+    />
+    <meta name="author" content="ReviewsBoost Editorial Team" />
+    <meta name="theme-color" content="#0885fe" />
+    <link
+      rel="canonical"
+      href="https://reviewsboost.ca/google-review-calculator.html"
+    />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="ReviewsBoost learning centre"
+      href="https://reviewsboost.ca/feed.xml"
+    />
+    <link rel="stylesheet" href="content.css" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:site_name" content="ReviewsBoost" />
+    <meta property="og:title" content="Free Google Review Rating Calculator" />
+    <meta
+      property="og:description"
+      content="Estimate the five-star reviews required for a target average and understand the formula's limits."
+    />
+    <meta
+      property="og:url"
+      content="https://reviewsboost.ca/google-review-calculator.html"
+    />
+    <meta
+      property="og:image"
+      content="https://reviewsboost.ca/social-card.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="ReviewsBoost Google review guidance for Canadian businesses"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Google Review Rating Calculator" />
+    <meta
+      name="twitter:description"
+      content="A free estimate with the assumptions explained."
+    />
+    <meta
+      name="twitter:image"
+      content="https://reviewsboost.ca/social-card.png"
+    />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://reviewsboost.ca/#organization",
+            "name": "ReviewsBoost",
+            "url": "https://reviewsboost.ca/"
+          },
+          {
+            "@type": "WebApplication",
+            "name": "Google Review Rating Calculator",
+            "url": "https://reviewsboost.ca/google-review-calculator.html",
+            "applicationCategory": "BusinessApplication",
+            "operatingSystem": "Any web browser",
+            "isAccessibleForFree": true,
+            "offers": {
+              "@type": "Offer",
+              "price": "0",
+              "priceCurrency": "CAD"
+            },
+            "description": "Estimates the number of new five-star reviews needed to reach a target average.",
+            "publisher": { "@id": "https://reviewsboost.ca/#organization" }
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://reviewsboost.ca/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Learning Centre",
+                "item": "https://reviewsboost.ca/blog.html"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Review rating calculator",
+                "item": "https://reviewsboost.ca/google-review-calculator.html"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#calculator">Skip to calculator</a>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Primary navigation">
+        <a class="brand" href="index.html"
+          ><span class="brand-mark" aria-hidden="true">★</span>ReviewsBoost</a
+        >
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="blog.html" aria-current="page">Learning Centre</a></li>
+          <li><a href="get-more-google-reviews.html">Get Reviews</a></li>
+          <li><a href="respond-to-google-reviews.html">Responses</a></li>
+          <li><a href="remove-fake-google-review.html">Report a Review</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a class="nav-cta" href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="container">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Learning Centre</a></li>
+        <li aria-current="page">Review rating calculator</li>
+      </ol>
+    </nav>
+    <main>
+      <header class="hero">
+        <div class="container hero-grid">
+          <div>
+            <p class="eyebrow">Free review planning tool</p>
+            <h1>Google review rating calculator</h1>
+            <p class="lede">
+              Estimate how many additional 5-star reviews are mathematically
+              needed to reach a target average. The calculation is instant,
+              private and runs only in your browser.
+            </p>
+          </div>
+          <aside class="hero-card" aria-label="Calculator limitation">
+            <strong>Use it as an estimate</strong>
+            <p>
+              A displayed rating is rounded and may not reveal the exact
+              underlying average. Google can also remove or delay reviews. The
+              result is planning math, not a promise.
+            </p>
+          </aside>
+        </div>
+      </header>
+      <section
+        class="section alt"
+        id="calculator"
+        aria-labelledby="calculator-title"
+      >
+        <div class="container">
+          <div class="section-head">
+            <h2 id="calculator-title">Calculate reviews needed</h2>
+            <p>
+              Enter the rating and count currently visible on the profile.
+              Choose the exact target method for the more conservative estimate.
+            </p>
+          </div>
+          <form class="calculator" id="ratingCalculator">
+            <div class="field-grid">
+              <div class="field">
+                <label for="currentRating">Current average rating</label
+                ><input
+                  id="currentRating"
+                  name="currentRating"
+                  type="number"
+                  min="1"
+                  max="5"
+                  step="0.1"
+                  value="4.2"
+                  required
+                  inputmode="decimal"
+                />
+              </div>
+              <div class="field">
+                <label for="reviewCount">Current number of reviews</label
+                ><input
+                  id="reviewCount"
+                  name="reviewCount"
+                  type="number"
+                  min="1"
+                  max="10000000"
+                  step="1"
+                  value="50"
+                  required
+                  inputmode="numeric"
+                />
+              </div>
+              <div class="field">
+                <label for="targetRating">Target rating</label
+                ><input
+                  id="targetRating"
+                  name="targetRating"
+                  type="number"
+                  min="1.1"
+                  max="5"
+                  step="0.1"
+                  value="4.5"
+                  required
+                  inputmode="decimal"
+                />
+              </div>
+              <div class="field">
+                <label for="method">Calculation method</label
+                ><select id="method" name="method">
+                  <option value="exact">Reach the exact target average</option>
+                  <option value="display">
+                    Estimate one-decimal display threshold
+                  </option>
+                </select>
+              </div>
+            </div>
+            <button class="button" type="submit">
+              Calculate reviews needed
+            </button>
+            <div
+              class="result"
+              id="calculatorResult"
+              role="status"
+              aria-live="polite"
+            >
+              <strong>Enter your numbers and calculate.</strong
+              ><span>The result and assumptions will appear here.</span>
+            </div>
+            <p class="fine-print">
+              No form data is transmitted. The calculator assumes every new
+              review is exactly 5 stars and no reviews are removed or added by
+              anyone else.
+            </p>
+          </form>
+        </div>
+      </section>
+      <div class="container article-shell">
+        <article class="prose">
+          <h2 id="formula">How the Google review calculator works</h2>
+          <p>
+            If a business has <em>n</em> reviews averaging <em>a</em>, and
+            receives <em>x</em> new 5-star reviews, the new average is:
+          </p>
+          <div class="example">
+            <p><strong>New average = (n × a + 5 × x) ÷ (n + x)</strong></p>
+          </div>
+          <p>
+            Solving for the number of new reviews needed to reach target
+            <em>t</em> gives:
+          </p>
+          <div class="example">
+            <p><strong>x = n × (t − a) ÷ (5 − t)</strong></p>
+          </div>
+          <p>
+            The calculator rounds <em>x</em> up to the next whole review because
+            a fraction of a review is not possible. If the current average
+            already meets the target, the answer is zero. If the target is a
+            perfect 5.0 and the current average is below 5.0, no finite number
+            of new 5-star reviews can make the exact mathematical average equal
+            5.0.
+          </p>
+
+          <h2 id="rounding">Exact average versus displayed rating</h2>
+          <p>
+            The number shown on a public profile may be rounded to one decimal,
+            while the exact underlying average is not visible. The “exact
+            target” method requires the calculated average to meet the entered
+            number. The “display threshold” method uses a conventional half-step
+            threshold—target minus 0.05—as an estimate of what might round to
+            that one-decimal display.
+          </p>
+          <div class="callout warning">
+            <strong>Why the display estimate can be wrong:</strong> the visible
+            current rating is already rounded, the platform’s internal
+            calculation and display updates are not controlled by this page, and
+            review filtering can change the count. Use the exact method for
+            conservative planning and treat both outputs as estimates.
+          </div>
+
+          <h2 id="examples">Worked examples</h2>
+          <h3>Example: 50 reviews at 4.2, target 4.5</h3>
+          <p>
+            The exact-target calculation is 50 × (4.5 − 4.2) ÷ (5 − 4.5) = 30.
+            If every new review is 5 stars and the displayed inputs equal the
+            exact underlying data, 30 new reviews bring the average to exactly
+            4.5.
+          </p>
+          <h3>Example: 120 reviews at 4.6, target 4.8</h3>
+          <p>
+            The exact calculation is 120 × 0.2 ÷ 0.2 = 120 new 5-star reviews.
+            Moving a well-established average near five requires many reviews
+            because the new values have limited room above the existing average.
+          </p>
+          <h3>Example: 10 reviews at 4.0, target 4.5</h3>
+          <p>
+            The exact calculation is 10 × 0.5 ÷ 0.5 = 10 new 5-star reviews.
+            Afterward, 40 existing rating points plus 50 new points equal 90
+            points across 20 reviews, or 4.5.
+          </p>
+
+          <h2 id="responsible">How to use the target responsibly</h2>
+          <p>
+            A calculator should inform service improvement and authentic request
+            planning—not justify fabricated, paid or incentivized reviews.
+            Invite all eligible genuine customers, ask for honest feedback, and
+            let them choose their own rating and words.
+          </p>
+          <ul class="checklist">
+            <li>Use the number as a planning scenario, not a staff quota.</li>
+            <li>
+              Do not promise the business a particular rating by a particular
+              date.
+            </li>
+            <li>Track customer experience themes as well as the average.</li>
+            <li>Keep the review invitation neutral and incentive-free.</li>
+            <li>Expect legitimate ratings across the whole scale.</li>
+            <li>
+              Recalculate using current numbers rather than hiding older
+              feedback.
+            </li>
+          </ul>
+
+          <h2 id="questions">Calculator questions</h2>
+          <h3>Why does the required number rise so quickly near 5.0?</h3>
+          <p>
+            New reviews cannot score above 5. Each new 5-star rating pulls the
+            average upward by a decreasing amount. An exact average below five
+            can approach 5.0 indefinitely but cannot become exactly 5.0 through
+            a finite number of additional fives.
+          </p>
+          <h3>Can I calculate the effect of a future one-star review?</h3>
+          <p>
+            Use the general weighted-average formula. Add the future star points
+            to the current total and divide by the new count. This calculator
+            focuses on the common five-star planning question and does not
+            predict actual customer ratings.
+          </p>
+          <h3>
+            Does Google weigh some reviews more heavily in the star average?
+          </h3>
+          <p>
+            This calculator assumes a simple arithmetic mean because it is
+            transparent and can be checked. It does not claim access to Google’s
+            internal systems. Display, filtering and product behaviour can
+            change.
+          </p>
+          <h3>
+            Why is the current displayed rating not enough for an exact answer?
+          </h3>
+          <p>
+            A displayed 4.2 might represent a range of underlying averages
+            depending on rounding. Two profiles with the same count and
+            displayed rating can therefore cross the next display threshold
+            after different numbers of reviews.
+          </p>
+          <h3>Can removed reviews change the result?</h3>
+          <p>
+            Yes. If Google removes existing or new reviews, both the total star
+            points and count change. Re-enter the current visible values after
+            any material change.
+          </p>
+
+          <h2 id="next">Next steps after calculating</h2>
+          <ol>
+            <li>Audit the experience issues mentioned in recent feedback.</li>
+            <li>Create one objective post-service invitation trigger.</li>
+            <li>Use the correct official review link for each location.</li>
+            <li>
+              Ask every eligible customer for an honest review without an
+              incentive.
+            </li>
+            <li>Respond to feedback and track themes monthly.</li>
+          </ol>
+          <p>
+            Use the
+            <a href="get-more-google-reviews.html"
+              >authentic review acquisition guide</a
+            >
+            to build the process, then read the
+            <a href="respond-to-google-reviews.html">response examples</a> to
+            handle what arrives.
+          </p>
+          <div class="author-box">
+            <strong>About this tool</strong>
+            <p>
+              Built by the ReviewsBoost Editorial Team as a transparent planning
+              aid. The formula and assumptions are shown so readers can verify
+              the result. It is not affiliated with Google and does not
+              guarantee a rating or review outcome.
+            </p>
+          </div>
+        </article>
+        <aside class="toc" aria-label="On this page">
+          <strong>On this page</strong>
+          <ol>
+            <li><a href="#calculator">Calculator</a></li>
+            <li><a href="#formula">Formula</a></li>
+            <li><a href="#rounding">Rounding</a></li>
+            <li><a href="#examples">Examples</a></li>
+            <li><a href="#responsible">Responsible use</a></li>
+            <li><a href="#questions">Questions</a></li>
+            <li><a href="#next">Next steps</a></li>
+          </ol>
+        </aside>
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h2>ReviewsBoost</h2>
+            <p>
+              Google review and online reputation resources for Canadian
+              businesses.
+            </p>
+          </div>
+          <div>
+            <h3>Guides</h3>
+            <a href="blog.html">Learning Centre</a
+            ><a href="google-reviews-faq.html">Detailed FAQ</a
+            ><a href="google-business-profile-local-seo.html"
+              >Local SEO checklist</a
+            >
+          </div>
+          <div>
+            <h3>Company</h3>
+            <a href="about.html">About</a
+            ><a href="editorial-policy.html">Editorial policy</a
+            ><a href="index.html#contact">Contact</a>
+          </div>
+          <div>
+            <h3>Policies</h3>
+            <a href="privacy-policy.html">Privacy</a
+            ><a href="terms-of-service.html">Terms</a
+            ><a href="refund-policy.html">Refunds</a
+            ><a href="accessibility.html">Accessibility</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 ReviewsBoost</span
+          ><span
+            ><a href="mailto:support@reviewsboost.ca"
+              >support@reviewsboost.ca</a
+            ></span
+          >
+        </div>
+      </div>
+    </footer>
+    <script>
+      (function () {
+        "use strict";
+        var form = document.getElementById("ratingCalculator");
+        var result = document.getElementById("calculatorResult");
+        function format(value) {
+          return Number(value).toLocaleString("en-CA", {
+            maximumFractionDigits: 2,
+          });
+        }
+        form.addEventListener("submit", function (event) {
+          event.preventDefault();
+          var current = Number(document.getElementById("currentRating").value);
+          var count = Number(document.getElementById("reviewCount").value);
+          var targetEntered = Number(
+            document.getElementById("targetRating").value,
+          );
+          var method = document.getElementById("method").value;
+          if (
+            !Number.isFinite(current) ||
+            !Number.isFinite(count) ||
+            !Number.isFinite(targetEntered) ||
+            current < 1 ||
+            current > 5 ||
+            count < 1 ||
+            !Number.isInteger(count) ||
+            targetEntered <= 1 ||
+            targetEntered > 5
+          ) {
+            result.innerHTML =
+              "<strong>Check the entries.</strong><span>Use a rating from 1.0 to 5.0 and a whole review count of at least 1.</span>";
+            return;
+          }
+          var target =
+            method === "display"
+              ? Math.max(1, targetEntered - 0.05)
+              : targetEntered;
+          if (current >= target) {
+            result.innerHTML =
+              "<strong>0 additional 5-star reviews</strong><span>The entered current rating already meets this calculation threshold.</span>";
+            return;
+          }
+          if (target >= 5) {
+            result.innerHTML =
+              "<strong>No finite number reaches an exact 5.0</strong><span>An average below 5.0 can approach, but never exactly equal, 5.0 using a finite number of new 5-star reviews.</span>";
+            return;
+          }
+          var needed = Math.ceil(
+            (count * (target - current)) / (5 - target) - 1e-12,
+          );
+          var projected = (count * current + needed * 5) / (count + needed);
+          var label =
+            method === "display"
+              ? "the estimated " + format(targetEntered) + " display threshold"
+              : "an exact " + format(targetEntered) + " average";
+          result.innerHTML =
+            "<strong>" +
+            needed.toLocaleString("en-CA") +
+            " additional 5-star review" +
+            (needed === 1 ? "" : "s") +
+            "</strong><span>Under the stated assumptions, this produces a calculated average of " +
+            projected.toFixed(3) +
+            " and reaches " +
+            label +
+            ".</span>";
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+/* SITE */
+Name: ReviewsBoost
+URL: https://reviewsboost.ca/
+Contact: support@reviewsboost.ca
+Language: English (Canada)
+
+/* CONTENT */
+Publisher: ReviewsBoost Editorial Team
+Editorial policy: https://reviewsboost.ca/editorial-policy.html
+Last major content update: 2026-09-02
+
+/* TECHNOLOGY */
+Type: Static HTML and CSS
+Hosting: GitHub Pages with Cloudflare delivery
+

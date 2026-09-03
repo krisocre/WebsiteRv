@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ReviewsBoost Learning Centre</title>
+    <link>https://reviewsboost.ca/blog.html</link>
+    <description>Practical Google review, online reputation and local SEO resources for Canadian businesses.</description>
+    <language>en-ca</language>
+    <lastBuildDate>Wed, 02 Sep 2026 12:00:00 -0400</lastBuildDate>
+    <atom:link href="https://reviewsboost.ca/feed.xml" rel="self" type="application/rss+xml"/>
+    <item><title>How to Get More Google Reviews: A Practical Canada Guide</title><link>https://reviewsboost.ca/get-more-google-reviews.html</link><guid isPermaLink="true">https://reviewsboost.ca/get-more-google-reviews.html</guid><pubDate>Wed, 02 Sep 2026 12:00:00 -0400</pubDate><description>A repeatable, policy-aware process for requesting authentic customer reviews.</description></item>
+    <item><title>How to Respond to Google Reviews: Frameworks and 30 Examples</title><link>https://reviewsboost.ca/respond-to-google-reviews.html</link><guid isPermaLink="true">https://reviewsboost.ca/respond-to-google-reviews.html</guid><pubDate>Wed, 02 Sep 2026 12:00:00 -0400</pubDate><description>Practical response frameworks for positive, neutral, negative and suspected fake reviews.</description></item>
+    <item><title>How to Report a Fake or Policy-Violating Google Review</title><link>https://reviewsboost.ca/remove-fake-google-review.html</link><guid isPermaLink="true">https://reviewsboost.ca/remove-fake-google-review.html</guid><pubDate>Wed, 02 Sep 2026 12:00:00 -0400</pubDate><description>A careful workflow for assessment, evidence, reporting and follow-up.</description></item>
+    <item><title>Google Review Link and QR Code Guide</title><link>https://reviewsboost.ca/google-review-link-qr-code.html</link><guid isPermaLink="true">https://reviewsboost.ca/google-review-link-qr-code.html</guid><pubDate>Wed, 02 Sep 2026 12:00:00 -0400</pubDate><description>How to find, test, share and measure a review link and accessible QR code.</description></item>
+    <item><title>Google Review Policy for Canadian Businesses</title><link>https://reviewsboost.ca/google-review-policy-canada.html</link><guid isPermaLink="true">https://reviewsboost.ca/google-review-policy-canada.html</guid><pubDate>Wed, 02 Sep 2026 12:00:00 -0400</pubDate><description>Paid reviews, incentives, review gating, conflicts and reporting explained.</description></item>
+    <item><title>Google Business Profile Local SEO Checklist</title><link>https://reviewsboost.ca/google-business-profile-local-seo.html</link><guid isPermaLink="true">https://reviewsboost.ca/google-business-profile-local-seo.html</guid><pubDate>Wed, 02 Sep 2026 12:00:00 -0400</pubDate><description>A prioritized profile, website, review and measurement checklist.</description></item>
+  </channel>
+</rss>
+
