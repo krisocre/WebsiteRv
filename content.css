@@ -172,7 +172,7 @@ textarea {
   margin: 0 0 12px;
   color: var(--blue-dark);
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -181,9 +181,8 @@ h2,
 h3 {
   color: var(--navy);
   font-family: Merriweather, Georgia, serif;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.2;
-  text-shadow: 0.15px 0 currentColor;
 }
 h1 {
   max-width: 920px;
@@ -213,7 +212,7 @@ h1 {
   margin-bottom: 8px;
   color: var(--navy);
   font-size: 18px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .hero-card p {
   margin: 0;
@@ -270,7 +269,7 @@ h1 {
 .section-head h2 {
   margin: 0 0 12px;
   font-size: clamp(28px, 3.6vw, 38px);
-  font-weight: 500;
+  font-weight: 400;
 }
 .section-head p {
   margin: 0;
@@ -307,7 +306,7 @@ h1 {
   background: var(--blue-soft);
   color: var(--blue-dark);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -315,7 +314,7 @@ h1 {
 .card h3 {
   margin: 0 0 10px;
   font-size: 22px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .card p {
   margin: 0 0 18px;
@@ -324,7 +323,7 @@ h1 {
 }
 .card a {
   margin-top: auto;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .article-shell {
@@ -344,13 +343,13 @@ h1 {
   margin: 2.4em 0 0.65em;
   padding-top: 0.15em;
   font-size: clamp(27px, 3.2vw, 32px);
-  font-weight: 500;
+  font-weight: 400;
   letter-spacing: -0.02em;
 }
 .prose h3 {
   margin: 1.9em 0 0.5em;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .prose p {
   margin: 0 0 1.2em;
@@ -366,7 +365,7 @@ h1 {
 }
 .prose strong {
   color: #111c2e;
-  font-weight: 500;
+  font-weight: 400;
 }
 .prose blockquote {
   margin: 1.5em 0;
@@ -441,7 +440,7 @@ h1 {
 .comparison th {
   background: var(--navy);
   color: #fff;
-  font-weight: 500;
+  font-weight: 400;
 }
 .table-scroll {
   max-width: 100%;
@@ -461,7 +460,7 @@ h1 {
 .data-figure figcaption {
   margin-bottom: 18px;
   color: var(--navy);
-  font-weight: 500;
+  font-weight: 400;
 }
 .bar-chart {
   display: grid;
@@ -567,9 +566,8 @@ h1 {
   cursor: pointer;
   padding: 17px 48px 17px 18px;
   color: var(--navy);
-  font-weight: 500;
+  font-weight: 400;
   line-height: 1.4;
-  text-shadow: 0.12px 0 currentColor;
 }
 .faq-list details > div {
   padding: 0 18px 18px;
@@ -583,12 +581,12 @@ h1 {
 }
 .faq-group h2 {
   font-size: clamp(27px, 3vw, 31px);
-  font-weight: 500;
+  font-weight: 400;
 }
 .toc > strong,
 .author-box > strong,
 .callout > strong:first-child {
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .calculator {
@@ -608,7 +606,7 @@ h1 {
   display: block;
   margin-bottom: 6px;
   color: var(--navy);
-  font-weight: 600;
+  font-weight: 500;
 }
 .field input,
 .field select {
@@ -636,7 +634,7 @@ h1 {
   border-radius: 7px;
   background: var(--blue);
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   cursor: pointer;
 }

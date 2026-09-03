@@ -1559,6 +1559,25 @@
         .step-card .step-num { background: transparent; color: #fff }
         .step-card h3 { color: #fff }
         .step-card p { color: #eef4fb }
+
+        /* Lighter typography, aligned with the Learning Centre. */
+        h1, h2, h3, strong { font-weight: 400 }
+        .section-tag, .hero-badge, .hero-trust-card .trust-title,
+        .trust-caption, .press-item span, .pricing-card .pkg-badge,
+        .order-summary .summary-info h3, .service-card h3,
+        .step-card .step-num, .step-card h3, .guar-card h3,
+        .ind-card .ind-name, .test-card .test-name, .tool-card h3,
+        .tool-link, .faq-question, .cta-form h3, .form-group label {
+            font-weight: 400
+        }
+        .section-title, .hero h1, .pricing-card .pkg-reviews,
+        .pricing-card .pkg-price, .order-summary .summary-price,
+        .ach-value {
+            font-weight: 400
+        }
+        .btn, .nav-logo, .nav-cta, .nav-service {
+            font-weight: 500 !important
+        }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto }
             *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important }
@@ -1604,7 +1623,7 @@
                 </div>
                 <div class="hero-visual">
                     <div class="hero-phone">
-                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><strong style="font-size:32px;font-weight:800;">4.8</strong>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;"><strong style="font-size:32px;font-weight:500;">4.8</strong>
                             <div class="stars-row">★★★★★</div>
                         </div>
                         <p style="font-size:12px;color:#888;margin-bottom:14px;">Based on 350+ client ratings</p>
@@ -2167,14 +2186,14 @@
             <button class="modal-close" id="modalClose" type="button" aria-label="Close order form">&times;</button>
             <h2 id="orderModalTitle">Place Your Order</h2>
             <form id="quoteForm">
-                <div class="form-group"><label for="selected_plan">Selected Plan</label><input type="text" id="selected_plan" name="selected_plan" value="15 Reviews" readonly style="background:#f8f8f8;font-weight:600"></div>
+                <div class="form-group"><label for="selected_plan">Selected Plan</label><input type="text" id="selected_plan" name="selected_plan" value="15 Reviews" readonly style="background:#f8f8f8;font-weight:500"></div>
                 <div class="form-group"><label for="full_name">Full Name *</label><input type="text" id="full_name" name="full_name" placeholder="Your full name" required></div>
                 <div class="form-group"><label for="contact_method">How do you want to be contacted?</label><select id="contact_method" name="contact_method"><option value="Email">Email</option><option value="WhatsApp">WhatsApp</option><option value="Phone Call">Phone Call</option><option value="SMS">SMS</option></select></div>
                 <div id="emailContainer" class="form-group"><label for="email_address">Email Address *</label><input type="email" id="email_address" name="contact_detail" placeholder="your@email.com" required></div>
                 <div id="phoneContainer" class="form-group" style="display:none"><label for="phone_number">Phone Number *</label><input type="tel" id="phone_number" name="contact_detail" placeholder="555-123-4567" disabled maxlength="12"></div>
                 <div class="form-group"><label for="business_url">Google Business Profile URL *</label><input type="url" id="business_url" name="business_url" placeholder="https://maps.google.com/..." required></div>
                 <button type="submit" id="submitBtn" class="btn btn-primary">Submit Request</button>
-                <p id="formStatus" style="display:none;margin-top:12px;text-align:center;font-size:13px;font-weight:600"></p>
+                <p id="formStatus" style="display:none;margin-top:12px;text-align:center;font-size:13px;font-weight:500"></p>
             </form>
         </div>
     </div>
