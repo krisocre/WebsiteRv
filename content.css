@@ -183,6 +183,7 @@ h3 {
   font-family: Merriweather, Georgia, serif;
   font-weight: 500;
   line-height: 1.2;
+  text-shadow: 0.15px 0 currentColor;
 }
 h1 {
   max-width: 920px;
@@ -242,7 +243,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 7px;
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   list-style: none;
 }
@@ -566,8 +567,9 @@ h1 {
   cursor: pointer;
   padding: 17px 48px 17px 18px;
   color: var(--navy);
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.4;
+  text-shadow: 0.12px 0 currentColor;
 }
 .faq-list details > div {
   padding: 0 18px 18px;
