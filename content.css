@@ -136,12 +136,12 @@ textarea {
   font-weight: 600;
 }
 .nav-links .nav-service-primary {
-  background: var(--blue);
+  background: #066dcc;
   color: #fff;
   text-decoration: none;
 }
 .nav-links .nav-service-primary:hover {
-  background: var(--blue-dark);
+  background: #054f99;
   color: #fff;
   text-decoration: none;
 }
@@ -657,7 +657,7 @@ h1 {
   font-size: 13px;
 }
 
-@media (max-width: 920px) {
+@media (max-width: 1080px) {
   .nav {
     justify-content: flex-end;
   }
@@ -672,6 +672,9 @@ h1 {
   .nav-links .nav-optional {
     display: none;
   }
+}
+
+@media (max-width: 920px) {
   .hero-grid,
   .article-shell {
     grid-template-columns: 1fr;
