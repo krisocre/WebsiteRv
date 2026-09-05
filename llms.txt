@@ -14,6 +14,7 @@
 - [How to get more Google reviews](https://reviewsboost.ca/get-more-google-reviews.html): Authentic, incentive-free customer request process.
 - [Google reviews not showing](https://reviewsboost.ca/google-reviews-not-showing.html): Delayed, missing and disappearing review troubleshooting.
 - [Fake review statistics](https://reviewsboost.ca/fake-review-statistics.html): A seven-year Google moderation series, cross-platform disclosures, regulator cases, transparent calculations and downloadable CSV data with machine-readable metadata.
+- [Google review rating resilience study](https://reviewsboost.ca/google-review-rating-resilience-study.html): An original 420-scenario mathematical analysis of how review count buffers exact averages against incoming one-star ratings.
 - [How to respond to Google reviews](https://reviewsboost.ca/respond-to-google-reviews.html): Response framework and 30 examples.
 - [How to report a fake Google review](https://reviewsboost.ca/remove-fake-google-review.html): Assessment, evidence, official reporting and follow-up.
 - [Google review link and QR code](https://reviewsboost.ca/google-review-link-qr-code.html): Setup, testing, placement and accessibility.
@@ -21,6 +22,15 @@
 - [Google Business Profile local SEO checklist](https://reviewsboost.ca/google-business-profile-local-seo.html): Profile, website, reviews and measurement.
 - [Google reviews FAQ](https://reviewsboost.ca/google-reviews-faq.html): Forty-one detailed questions and answers.
 - [Review rating calculator](https://reviewsboost.ca/google-review-calculator.html): Transparent weighted-average calculator.
+
+## Open data and citation files
+
+- [Cross-platform review disclosure data](https://reviewsboost.ca/fake-review-statistics.csv): Source-labelled CSV with W3C CSVW metadata.
+- [Google Maps moderation series, 2019-2025](https://reviewsboost.ca/google-maps-review-moderation-2019-2025.csv): Seven-year first-party disclosure series with W3C CSVW metadata.
+- [Citation metadata](https://reviewsboost.ca/CITATION.cff): Citation File Format metadata for the original compilation.
+- [BibTeX citation](https://reviewsboost.ca/fake-review-statistics.bib): Ready-to-import citation record.
+- [Rating resilience dataset](https://reviewsboost.ca/google-review-rating-resilience.csv): The complete 420-scenario CSV with W3C CSVW metadata and reproducible JavaScript.
+- [Rating resilience citation metadata](https://reviewsboost.ca/google-review-rating-resilience-study.cff): Citation File Format metadata for the original study.
 
 ## Important limitations
 

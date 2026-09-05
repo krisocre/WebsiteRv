@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="removal-title removal-desc">
+  <title id="removal-title">Google review removal eligibility guide</title>
+  <desc id="removal-desc">Possible policy issues include fake engagement, conflicts of interest, harassment, personal information, spam and off-topic content. A low rating, harsh opinion, factual disagreement or relevant complaint is not enough by itself. Verify, save evidence, report the closest policy issue and respond calmly while Google decides.</desc>
+  <rect width="1200" height="675" rx="24" fill="#f8fafc"/>
+  <text x="60" y="67" fill="#16223b" font-family="Georgia, serif" font-size="39">Could a Google review qualify for removal?</text>
+  <text x="60" y="105" fill="#536176" font-family="Arial, Helvetica, sans-serif" font-size="20">Start with the content policy—not whether the review is negative</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <rect x="60" y="145" width="520" height="355" rx="15" fill="#eef8f3" stroke="#b8dfcd"/>
+    <rect x="620" y="145" width="520" height="355" rx="15" fill="#fff3f3" stroke="#e8c1c3"/>
+    <text x="90" y="194" fill="#0f6741" font-size="24">Possible policy issue</text>
+    <text x="650" y="194" fill="#8a1d24" font-size="24">Not enough by itself</text>
+    <g fill="#244236" font-size="19"><text x="90" y="246">✓ No genuine customer experience</text><text x="90" y="291">✓ Competitor or employee conflict</text><text x="90" y="336">✓ Harassment, threats or hate speech</text><text x="90" y="381">✓ Non-public personal information</text><text x="90" y="426">✓ Spam, promotion or off-topic content</text><text x="90" y="471">✓ Repeated or duplicated submissions</text></g>
+    <g fill="#583236" font-size="19"><text x="650" y="246">— A one-star or otherwise low rating</text><text x="650" y="291">— A harsh but relevant customer opinion</text><text x="650" y="336">— Disagreement without supporting facts</text><text x="650" y="381">— A civil complaint about price or wait time</text><text x="650" y="426">— A reviewer using a nickname</text><text x="650" y="471">— Criticism that remains relevant and lawful</text></g>
+  </g>
+  <path d="M110 555h210l25 26 25-26h210l25 26 25-26h210l25 26 25-26h210" fill="none" stroke="#cbd5e1" stroke-width="3"/>
+  <g fill="#16223b" font-family="Arial, Helvetica, sans-serif" font-size="18" text-anchor="middle"><text x="215" y="545">1. Verify the experience</text><text x="475" y="545">2. Preserve evidence</text><text x="735" y="545">3. Report one policy</text><text x="995" y="545">4. Respond calmly</text></g>
+  <text x="60" y="623" fill="#536176" font-family="Arial, Helvetica, sans-serif" font-size="16">Google controls the platform and makes the final moderation decision.</text>
+  <text x="1140" y="648" fill="#b81722" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="end">ReviewsBoost</text>
+</svg>

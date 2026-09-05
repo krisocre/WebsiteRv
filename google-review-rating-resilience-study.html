@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en-CA">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Google Review Rating Resilience Study (420 Scenarios)</title>
+    <meta
+      name="description"
+      content="Original study of 420 scenarios showing how many one-star ratings lower an exact Google review average by 0.1, 0.2 or 0.5 points."
+    />
+    <meta
+      name="robots"
+      content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"
+    />
+    <meta name="author" content="ReviewsBoost Editorial Team" />
+    <meta
+      name="citation_title"
+      content="Google Review Rating Resilience Study: 420 Exact-Average Scenarios"
+    />
+    <meta name="citation_author" content="ReviewsBoost Editorial Team" />
+    <meta name="citation_publication_date" content="2026/09/04" />
+    <meta name="citation_technical_report_institution" content="ReviewsBoost" />
+    <meta name="citation_technical_report_number" content="RRI-1.0" />
+    <meta
+      name="citation_fulltext_html_url"
+      content="https://reviewsboost.ca/google-review-rating-resilience-study.html"
+    />
+    <meta name="theme-color" content="#087fe8" />
+    <link
+      rel="canonical"
+      href="https://reviewsboost.ca/google-review-rating-resilience-study.html"
+    />
+    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+    <link
+      rel="alternate"
+      type="text/csv"
+      title="Google review rating resilience dataset"
+      href="google-review-rating-resilience.csv"
+    />
+    <link
+      rel="alternate"
+      type="text/yaml"
+      title="Citation File Format metadata"
+      href="google-review-rating-resilience-study.cff"
+    />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="ReviewsBoost learning centre"
+      href="https://reviewsboost.ca/feed.xml"
+    />
+    <link rel="stylesheet" href="content.css" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="en_CA" />
+    <meta property="og:site_name" content="ReviewsBoost" />
+    <meta
+      property="og:title"
+      content="Google Review Rating Resilience Study: 420 Scenarios"
+    />
+    <meta
+      property="og:description"
+      content="A transparent mathematical study of how review count buffers an exact Google rating against incoming one-star ratings."
+    />
+    <meta
+      property="og:url"
+      content="https://reviewsboost.ca/google-review-rating-resilience-study.html"
+    />
+    <meta property="og:image" content="https://reviewsboost.ca/social-card.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="ReviewsBoost Google review guidance for Canadian businesses"
+    />
+    <meta property="article:published_time" content="2026-09-04" />
+    <meta property="article:modified_time" content="2026-09-04" />
+    <meta property="article:section" content="Original research" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Google Review Rating Resilience Study"
+    />
+    <meta
+      name="twitter:description"
+      content="An auditable 420-scenario study of how one-star ratings move exact Google review averages."
+    />
+    <meta name="twitter:image" content="https://reviewsboost.ca/social-card.png" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://reviewsboost.ca/#organization",
+            "name": "ReviewsBoost",
+            "url": "https://reviewsboost.ca/",
+            "email": "support@reviewsboost.ca"
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://reviewsboost.ca/#website",
+            "url": "https://reviewsboost.ca/",
+            "name": "ReviewsBoost",
+            "alternateName": "Reviews Boost",
+            "publisher": { "@id": "https://reviewsboost.ca/#organization" },
+            "inLanguage": "en-CA"
+          },
+          {
+            "@type": "Article",
+            "@id": "https://reviewsboost.ca/google-review-rating-resilience-study.html#article",
+            "headline": "Google Review Rating Resilience Study: How Many One-Star Ratings Move an Average?",
+            "description": "Original analysis of 420 mathematically reproducible Google review rating scenarios.",
+            "datePublished": "2026-09-04",
+            "dateModified": "2026-09-04",
+            "author": {
+              "@type": "Organization",
+              "@id": "https://reviewsboost.ca/editorial-policy.html#editorial-team",
+              "name": "ReviewsBoost Editorial Team",
+              "url": "https://reviewsboost.ca/editorial-policy.html#authorship"
+            },
+            "publisher": { "@id": "https://reviewsboost.ca/#organization" },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://reviewsboost.ca/google-review-rating-resilience-study.html"
+            },
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://reviewsboost.ca/google-review-rating-resilience-4-8.svg",
+              "width": 1200,
+              "height": 675,
+              "caption": "One-star ratings required to lower an exact 4.8 average by at least 0.1 points"
+            },
+            "articleSection": "Original research",
+            "inLanguage": "en-CA",
+            "keywords": [
+              "Google review rating resilience",
+              "one-star review impact",
+              "Google rating calculation",
+              "review count",
+              "review bombing mathematics"
+            ],
+            "citation": [
+              "https://support.google.com/business/answer/4801187",
+              "https://support.google.com/business/answer/7091",
+              "https://doi.org/10.1007/s11135-024-01981-z"
+            ]
+          },
+          {
+            "@type": "Dataset",
+            "@id": "https://reviewsboost.ca/google-review-rating-resilience-study.html#dataset",
+            "name": "Google Review Rating Resilience Dataset: 420 Exact-Average Scenarios",
+            "alternateName": "ReviewsBoost RRI-1.0",
+            "description": "Minimum incoming one-star rating thresholds for exact-average declines of 0.1, 0.2 and 0.5 points across starting averages from 3.0 to 4.9 and review counts from 10 to 1,000.",
+            "creator": {
+              "@id": "https://reviewsboost.ca/editorial-policy.html#editorial-team"
+            },
+            "publisher": { "@id": "https://reviewsboost.ca/#organization" },
+            "datePublished": "2026-09-04",
+            "dateModified": "2026-09-04",
+            "version": "1.0",
+            "license": "https://creativecommons.org/licenses/by/4.0/",
+            "isAccessibleForFree": true,
+            "inLanguage": "en-CA",
+            "measurementTechnique": "Deterministic enumeration using m = ceiling(dN / (R - 1 - d)); every row is checked to confirm m reaches the stated decline and m minus one does not.",
+            "variableMeasured": [
+              "exact starting average",
+              "starting review count",
+              "decline threshold",
+              "minimum incoming one-star ratings",
+              "resulting exact average",
+              "actual decline"
+            ],
+            "isBasedOn": "https://support.google.com/business/answer/4801187",
+            "distribution": [
+              {
+                "@type": "DataDownload",
+                "name": "Rating resilience scenarios in CSV format",
+                "encodingFormat": "text/csv",
+                "contentUrl": "https://reviewsboost.ca/google-review-rating-resilience.csv"
+              },
+              {
+                "@type": "DataDownload",
+                "name": "W3C CSVW metadata",
+                "encodingFormat": "application/ld+json",
+                "contentUrl": "https://reviewsboost.ca/google-review-rating-resilience.csv-metadata.json"
+              },
+              {
+                "@type": "DataDownload",
+                "name": "Reproducible calculation and validation code",
+                "encodingFormat": "text/javascript",
+                "contentUrl": "https://reviewsboost.ca/google-review-rating-resilience-method.mjs"
+              }
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://reviewsboost.ca/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Learning Centre",
+                "item": "https://reviewsboost.ca/blog.html"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "Google review rating resilience study",
+                "item": "https://reviewsboost.ca/google-review-rating-resilience-study.html"
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#article">Skip to article</a>
+    <header class="site-header">
+      <nav class="nav container" aria-label="Primary navigation">
+        <a class="brand" href="/"
+          ><span class="brand-mark" aria-hidden="true">&#9733;</span>ReviewsBoost</a
+        >
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li class="nav-optional">
+            <a href="blog.html" aria-current="page">Learning Centre</a>
+          </li>
+          <li><a href="google-reviews-faq.html">FAQ</a></li>
+          <li class="nav-optional"><a href="about.html">About</a></li>
+          <li class="nav-contact"><a href="/#contact">Contact</a></li>
+          <li>
+            <a class="nav-service nav-service-primary" href="/#pricing"
+              >Get Reviews</a
+            >
+          </li>
+          <li>
+            <a
+              class="nav-service nav-service-secondary"
+              href="remove-google-reviews.html"
+              >Review Removal</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol class="container">
+        <li><a href="/">Home</a></li>
+        <li><a href="blog.html">Learning Centre</a></li>
+        <li aria-current="page">Rating resilience study</li>
+      </ol>
+    </nav>
+
+    <main id="article">
+      <header class="hero article-hero">
+        <div class="container">
+          <p class="eyebrow">Original data study · RRI-1.0</p>
+          <h1>
+            Google review rating resilience study: how many one-star ratings
+            move an average?
+          </h1>
+          <p class="lede">
+            We calculated 420 exact-average scenarios to measure how review
+            volume changes a profile&rsquo;s exposure to incoming one-star ratings.
+            The result is a reproducible threshold, not a vague warning that one
+            bad review &ldquo;hurts.&rdquo;
+          </p>
+          <div class="meta-row">
+            <span
+              >By
+              <a href="editorial-policy.html#authorship" rel="author"
+                >ReviewsBoost Editorial Team</a
+              ></span
+            ><span
+              >Published
+              <time datetime="2026-09-04">September 4, 2026</time></span
+            ><span>Version 1.0</span><span>14-minute read</span>
+          </div>
+        </div>
+      </header>
+
+      <div class="container article-shell">
+        <article class="prose">
+          <div class="callout success">
+            <strong>The short version</strong>
+            <p>
+              At an exact 4.8 average, a profile with 10 published ratings needs
+              only one incoming one-star rating to fall by at least 0.1 points.
+              A profile with 100 needs three; a profile with 500 needs 14; and a
+              profile with 1,000 needs 28. Review count is a measurable buffer,
+              even though it does not make any individual customer experience
+              less important.
+            </p>
+          </div>
+
+          <p>
+            Business owners often ask a deceptively simple question: how much
+            will one bad Google review change my rating? Most answers either use
+            a single made-up business or calculate how many five-star ratings are
+            needed afterward. Those examples are useful, but they do not measure
+            resilience before the rating arrives.
+          </p>
+          <p>
+            This study takes a different approach. It asks how many incoming
+            one-star ratings are required to reduce an exact starting average by
+            at least 0.1, 0.2 or 0.5 points. We ran the calculation across 20
+            starting averages and seven review counts, producing 420 scenarios
+            that anyone can reproduce from the published code.
+          </p>
+
+          <h2 id="findings">Four findings from the 420 scenarios</h2>
+          <ol>
+            <li>
+              <strong>Review volume is the main buffer.</strong> At a 4.8 exact
+              average, the 0.1-point threshold rises from one incoming one-star
+              rating at 10 reviews to 28 at 1,000 reviews.
+            </li>
+            <li>
+              <strong>Small profiles move in jumps.</strong> One one-star rating
+              lowers a 4.8 average with 10 existing ratings by 0.345455 points.
+              With 100 ratings, the same input changes the exact average by
+              0.037624 points.
+            </li>
+            <li>
+              <strong>Higher averages are slightly more exposed to the same low
+              score.</strong> With 100 existing ratings, an exact 3.0 average
+              needs six incoming one-star ratings to decline by at least 0.1;
+              an exact 4.9 average needs three. The one-star score lies farther
+              below the higher starting average.
+            </li>
+            <li>
+              <strong>Discrete ratings create unavoidable overshoot.</strong>
+              At 4.8 with 100 ratings, two new one-star ratings are not enough
+              for a 0.1 decline, while three take the exact average to 4.689320—a
+              decline of 0.110680 rather than exactly 0.1.
+            </li>
+          </ol>
+
+          <figure class="guide-figure">
+            <a href="google-review-rating-resilience-4-8.svg">
+              <img
+                src="google-review-rating-resilience-4-8.svg"
+                width="1200"
+                height="675"
+                alt="Bar chart showing that at an exact 4.8 average, profiles with 10, 20, 50, 100, 200, 500 and 1,000 reviews need 1, 1, 2, 3, 6, 14 and 28 incoming one-star ratings to decline at least 0.1 points"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
+            <figcaption>
+              Figure 1. The minimum count of incoming one-star ratings required
+              to lower an exact 4.8 average by at least 0.1 points. Open the
+              full-size chart for reuse.
+            </figcaption>
+          </figure>
+
+          <h2 id="table">The 4.8-star resilience table</h2>
+          <p>
+            The clearest way to see the volume effect is to hold the starting
+            average constant. The following table uses an exact 4.8 average and
+            shows the minimum count that reaches or exceeds each decline. One
+            fewer incoming rating does not reach the stated threshold.
+          </p>
+          <div class="table-scroll">
+            <table class="comparison">
+              <thead>
+                <tr>
+                  <th scope="col">Starting ratings</th>
+                  <th scope="col">Drop at least 0.1</th>
+                  <th scope="col">Drop at least 0.2</th>
+                  <th scope="col">Drop at least 0.5</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>10</td><td>1</td><td>1</td><td>2</td></tr>
+                <tr><td>20</td><td>1</td><td>2</td><td>4</td></tr>
+                <tr><td>50</td><td>2</td><td>3</td><td>8</td></tr>
+                <tr><td>100</td><td>3</td><td>6</td><td>16</td></tr>
+                <tr><td>200</td><td>6</td><td>12</td><td>31</td></tr>
+                <tr><td>500</td><td>14</td><td>28</td><td>76</td></tr>
+                <tr><td>1,000</td><td>28</td><td>56</td><td>152</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="fine-print">
+            Counts refer to published one-star ratings added to a profile whose
+            pre-event exact average is 4.8. The calculation does not classify the
+            ratings as genuine, false or policy-violating.
+          </p>
+
+          <h2 id="single-rating">What one one-star rating does at 4.8</h2>
+          <p>
+            Thresholds answer a practical risk question, but the underlying
+            movement is continuous. One one-star rating has the following effect
+            when the exact starting average is 4.8:
+          </p>
+          <div class="table-scroll">
+            <table class="comparison">
+              <thead>
+                <tr>
+                  <th scope="col">Starting ratings</th>
+                  <th scope="col">New exact average</th>
+                  <th scope="col">Exact decline</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>10</td><td>4.454545</td><td>0.345455</td></tr>
+                <tr><td>20</td><td>4.619048</td><td>0.180952</td></tr>
+                <tr><td>50</td><td>4.725490</td><td>0.074510</td></tr>
+                <tr><td>100</td><td>4.762376</td><td>0.037624</td></tr>
+                <tr><td>200</td><td>4.781095</td><td>0.018905</td></tr>
+                <tr><td>500</td><td>4.792415</td><td>0.007585</td></tr>
+                <tr><td>1,000</td><td>4.796204</td><td>0.003796</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>
+            The 1,000-rating profile experiences roughly one-ninety-first of the
+            exact movement experienced by the 10-rating profile. That is the
+            mathematical meaning of rating resilience here: the same new score
+            represents a smaller share of a larger body of published ratings.
+          </p>
+
+          <h2 id="calculator">Calculate a custom resilience threshold</h2>
+          <p>
+            The published dataset fixes every incoming score at one star. This
+            calculator applies the same method to any incoming rating from one
+            to four stars. Use an exact average if you know it; a rounded number
+            copied from the public profile produces only a scenario estimate.
+          </p>
+          <div class="calculator">
+            <div class="field-grid">
+              <div class="field">
+                <label for="exactAverage">Exact starting average</label>
+                <input id="exactAverage" type="number" min="1.01" max="4.99" step="0.01" value="4.8" />
+              </div>
+              <div class="field">
+                <label for="startingCount">Published rating count</label>
+                <input id="startingCount" type="number" min="1" step="1" value="100" />
+              </div>
+              <div class="field">
+                <label for="incomingRating">Incoming rating</label>
+                <select id="incomingRating">
+                  <option value="1" selected>1 star</option>
+                  <option value="2">2 stars</option>
+                  <option value="3">3 stars</option>
+                  <option value="4">4 stars</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="declineThreshold">Exact decline threshold</label>
+                <select id="declineThreshold">
+                  <option value="0.1" selected>0.1 points</option>
+                  <option value="0.2">0.2 points</option>
+                  <option value="0.5">0.5 points</option>
+                </select>
+              </div>
+            </div>
+            <button class="button" id="calculateResilience" type="button">Calculate threshold</button>
+            <div class="result" id="resilienceResult" role="status" aria-live="polite"></div>
+          </div>
+
+          <h2 id="method">Method and formula</h2>
+          <p>
+            Google states that a place or business review score is the average
+            of all ratings published on Google for that profile, on a one-to-five
+            scale. Google also notes that a new rating can take up to two weeks
+            to appear in the updated score. Those statements establish the model
+            used here; they do not disclose every interface or rounding detail.
+            See Google&rsquo;s
+            <a
+              href="https://support.google.com/business/answer/4801187"
+              rel="external noreferrer"
+              >review-score documentation</a
+            >.
+          </p>
+          <p>
+            Let <em>R</em> be the exact starting average, <em>N</em> the number of
+            published ratings, <em>s</em> the value of every incoming rating,
+            <em>m</em> the number of incoming ratings, and <em>d</em> the decline
+            we want to measure. The new average is:
+          </p>
+          <div class="example">
+            <p><strong>New average = (RN + ms) / (N + m)</strong></p>
+            <p>
+              The decline is m(R &minus; s) / (N + m). Solving for the minimum
+              whole number of incoming ratings gives:<br />
+              <strong>m = ceiling[dN / (R &minus; s &minus; d)]</strong>
+            </p>
+          </div>
+          <p>
+            Version 1.0 sets <em>s</em> to one star and enumerates 20 exact
+            starting averages from 3.0 through 4.9, seven starting counts (10,
+            20, 50, 100, 200, 500 and 1,000), and three decline thresholds (0.1,
+            0.2 and 0.5). That produces 20 &times; 7 &times; 3 = 420 rows.
+          </p>
+          <p>
+            Every chosen starting count is divisible by 10. That matters because
+            each one-decimal starting average can then correspond to a possible
+            whole-number star total. For every row, the validation script checks
+            two conditions: the published minimum reaches the target decline,
+            and one fewer incoming rating does not.
+          </p>
+
+          <h3 id="downloads">Download and reproduce the study</h3>
+          <ul>
+            <li>
+              <a href="google-review-rating-resilience.csv" download
+                >All 420 scenarios (CSV)</a
+              >
+            </li>
+            <li>
+              <a href="google-review-rating-resilience.csv-metadata.json"
+                >Column definitions and provenance (W3C CSVW JSON)</a
+              >
+            </li>
+            <li>
+              <a href="google-review-rating-resilience-method.mjs"
+                >Calculation and row-validation code (JavaScript)</a
+              >
+            </li>
+            <li>
+              <a href="google-review-rating-resilience-study.cff"
+                >Citation File Format record</a
+              >
+              &middot;
+              <a href="google-review-rating-resilience-study.bib">BibTeX record</a>
+            </li>
+          </ul>
+          <p class="fine-print">
+            The original compilation, formula presentation, chart and dataset
+            are licensed under
+            <a
+              href="https://creativecommons.org/licenses/by/4.0/"
+              rel="license external noreferrer"
+              >CC BY 4.0</a
+            >. Attribute the underlying Google platform description to Google.
+          </p>
+
+          <h2 id="limits">What this study does not prove</h2>
+          <ul>
+            <li>
+              It does not predict exactly when the public display will move.
+              The model uses the exact arithmetic mean, while a public profile
+              may show a rounded value and updates may be delayed.
+            </li>
+            <li>
+              It does not estimate how often businesses receive one-star
+              ratings. The 420 rows are scenarios, not a sample of 420 businesses.
+            </li>
+            <li>
+              It does not determine whether a rating is genuine or violates
+              policy. That requires evidence and a content-policy assessment.
+            </li>
+            <li>
+              It does not measure sales, consumer sentiment or search position.
+              Rating resilience is not the same thing as ranking resilience.
+            </li>
+            <li>
+              It assumes the ratings included in the starting count and the new
+              inputs remain published. Google may delay, filter or remove content.
+            </li>
+          </ul>
+
+          <h2 id="interpretation">How businesses should use the findings</h2>
+          <p>
+            The responsible response is not to chase a perfect score or flood a
+            profile after criticism. It is to build a steady, representative
+            stream of feedback from genuine customers. Google permits businesses
+            to remind customers to leave reviews, but says those contributions
+            must reflect genuine experiences and prohibits incentives in exchange
+            for posting, changing or removing reviews. Google also advises
+            businesses to value all reviews, noting that balanced feedback can
+            feel more trustworthy. Its
+            <a
+              href="https://support.google.com/business/answer/3474122"
+              rel="external noreferrer"
+              >review-request guidance</a
+            > explains those boundaries.
+          </p>
+          <p>
+            Review volume has relevance beyond this calculation, but it should
+            not be treated as a stand-alone ranking formula. Google describes
+            local results as mainly based on relevance, distance and prominence;
+            it says more reviews and positive ratings can help local ranking, not
+            that a specific count guarantees a position. See Google&rsquo;s
+            <a
+              href="https://support.google.com/business/answer/7091"
+              rel="external noreferrer"
+              >local-ranking guidance</a
+            >.
+          </p>
+          <p>
+            A sudden cluster of low ratings can also be a content-integrity issue,
+            but low sentiment alone is not proof of manipulation. Peer-reviewed
+            research defines review bombing around coordinated action intended to
+            alter a rating metric; it is a behavioural phenomenon, not simply a
+            synonym for receiving criticism. The
+            <a href="https://doi.org/10.1007/s11135-024-01981-z" rel="external noreferrer"
+              >2025 <cite>Quality &amp; Quantity</cite> study</a
+            > provides that wider context.
+          </p>
+
+          <h2 id="novelty">Novelty and search note</h2>
+          <p>
+            Before publication, we searched the web for the phrases &ldquo;review
+            rating resilience,&rdquo; &ldquo;review resilience index,&rdquo; &ldquo;how many one-star
+            reviews drop a rating by 0.1,&rdquo; and related formula wording. We found
+            calculators and articles that show how many five-star ratings offset
+            one one-star rating. We did not identify a publication presenting
+            this exact 420-scenario matrix of fixed decline thresholds.
+          </p>
+          <p>
+            That is a bounded search statement, not a claim that no similar work
+            exists anywhere. Readers who know of earlier directly comparable work
+            can send it to
+            <a href="mailto:support@reviewsboost.ca">support@reviewsboost.ca</a>.
+            We will review it and update this note when appropriate.
+          </p>
+
+          <h2 id="cite">How to cite this study</h2>
+          <p>
+            ReviewsBoost Editorial Team (2026),
+            <cite>Google Review Rating Resilience Study: 420 Exact-Average
+            Scenarios</cite>, version 1.0, ReviewsBoost, September 4, 2026,
+            CC BY 4.0.
+          </p>
+
+          <h2 id="questions">Detailed questions</h2>
+          <h3>How many one-star reviews will lower a 4.8 Google rating?</h3>
+          <p>
+            It depends on the exact starting average, the published rating count
+            and how large a decline you mean. In this model, an exact 4.8 average
+            with 100 ratings needs three new one-star ratings to decline by at
+            least 0.1 points. With 500 ratings, it needs 14. These are exact-average
+            thresholds, not promises about the rounded public display.
+          </p>
+          <h3>Does one one-star review always lower the rating by 0.1?</h3>
+          <p>
+            No. At an exact 4.8, one one-star input lowers the mean by about 0.345
+            points when there are 10 existing ratings, but only about 0.0038 when
+            there are 1,000. The public display may not reveal either exact change.
+          </p>
+          <h3>Why does the starting average matter?</h3>
+          <p>
+            A one-star score is 3.9 points below a 4.9 average but only two points
+            below a 3.0 average. With the same review count, the larger gap exerts
+            more downward pressure on the mean.
+          </p>
+          <h3>Can this model identify a review attack?</h3>
+          <p>
+            No. It measures arithmetic only. Coordination, authenticity and policy
+            eligibility require evidence about the accounts, timing, content and
+            underlying customer experiences.
+          </p>
+
+          <h2 id="sources">Sources</h2>
+          <ul class="sources">
+            <li>
+              <a href="https://support.google.com/business/answer/4801187" rel="external noreferrer"
+                >Google Business Profile Help: Understand review scores for local places and businesses</a
+              >
+            </li>
+            <li>
+              <a href="https://support.google.com/business/answer/3474122" rel="external noreferrer"
+                >Google Business Profile Help: Tips to get more reviews</a
+              >
+            </li>
+            <li>
+              <a href="https://support.google.com/business/answer/7091" rel="external noreferrer"
+                >Google Business Profile Help: Tips to improve local ranking</a
+              >
+            </li>
+            <li>
+              <a href="https://doi.org/10.1007/s11135-024-01981-z" rel="external noreferrer"
+                >Cantone, Tomaselli and Mazzeo: Review bombing and ideological polarization in online ratings</a
+              >
+            </li>
+            <li>
+              <a href="https://competition-bureau.canada.ca/en/deceptive-marketing-practices-digest-volume-3" rel="external noreferrer"
+                >Competition Bureau Canada: Online reviews and endorsements guidance</a
+              >
+            </li>
+          </ul>
+
+          <div class="author-box">
+            <strong>About this analysis</strong>
+            <p>
+              Prepared by the ReviewsBoost Editorial Team under our
+              <a href="editorial-policy.html">editorial policy</a>. This is a
+              deterministic mathematical study based on Google&rsquo;s published
+              description of review scores. It is not a survey, legal advice, a
+              ranking study or a forecast of platform moderation.
+            </p>
+          </div>
+        </article>
+
+        <aside class="toc" aria-label="On this page">
+          <strong>On this page</strong>
+          <ol>
+            <li><a href="#findings">Four findings</a></li>
+            <li><a href="#table">4.8 resilience table</a></li>
+            <li><a href="#single-rating">One-rating impact</a></li>
+            <li><a href="#calculator">Custom calculator</a></li>
+            <li><a href="#method">Method and formula</a></li>
+            <li><a href="#downloads">Downloads</a></li>
+            <li><a href="#limits">Limitations</a></li>
+            <li><a href="#interpretation">Interpretation</a></li>
+            <li><a href="#novelty">Novelty note</a></li>
+            <li><a href="#cite">How to cite</a></li>
+            <li><a href="#questions">Questions</a></li>
+            <li><a href="#sources">Sources</a></li>
+          </ol>
+        </aside>
+      </div>
+    </main>
+
+    <section class="related" aria-labelledby="related-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="related-title">Use the numbers in context</h2>
+        </div>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Google review calculator</h3>
+            <p>Model a current average, review count and target rating.</p>
+            <a href="google-review-calculator.html">Open the calculator &rarr;</a>
+          </article>
+          <article class="card">
+            <h3>Fake review statistics</h3>
+            <p>Explore sourced platform moderation and enforcement disclosures.</p>
+            <a href="fake-review-statistics.html">Read the data analysis &rarr;</a>
+          </article>
+          <article class="card">
+            <h3>Authentic review requests</h3>
+            <p>Build a consistent, incentive-free customer request process.</p>
+            <a href="get-more-google-reviews.html">Read the practical guide &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h2>ReviewsBoost</h2>
+            <p>Google review and online reputation resources for Canadian businesses.</p>
+          </div>
+          <div>
+            <h3>Guides</h3>
+            <a href="blog.html">Learning Centre</a
+            ><a href="google-reviews-faq.html">Detailed FAQ</a
+            ><a href="google-review-calculator.html">Rating calculator</a>
+          </div>
+          <div>
+            <h3>Company</h3>
+            <a href="about.html">About</a
+            ><a href="editorial-policy.html">Editorial policy</a
+            ><a href="/#contact">Contact</a>
+          </div>
+          <div>
+            <h3>Policies</h3>
+            <a href="privacy-policy.html">Privacy</a
+            ><a href="terms-of-service.html">Terms</a
+            ><a href="refund-policy.html">Refunds</a
+            ><a href="accessibility.html">Accessibility</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 ReviewsBoost</span
+          ><span><a href="mailto:support@reviewsboost.ca">support@reviewsboost.ca</a></span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        var button = document.getElementById("calculateResilience");
+        var result = document.getElementById("resilienceResult");
+
+        function calculate() {
+          var average = Number(document.getElementById("exactAverage").value);
+          var count = Math.floor(Number(document.getElementById("startingCount").value));
+          var incoming = Number(document.getElementById("incomingRating").value);
+          var decline = Number(document.getElementById("declineThreshold").value);
+
+          if (!Number.isFinite(average) || average <= 1 || average >= 5 || !Number.isInteger(count) || count < 1) {
+            result.innerHTML = "Enter an exact average above 1 and below 5, plus a whole-number rating count.";
+            return;
+          }
+
+          var denominator = average - incoming - decline;
+          if (denominator <= 0) {
+            result.innerHTML = "<strong>That decline cannot be reached</strong>Repeated " + incoming + "-star ratings approach an average of " + incoming.toFixed(1) + " but cannot lower this starting average by the selected amount.";
+            return;
+          }
+
+          var minimum = Math.ceil((decline * count) / denominator - 1e-12);
+          var newAverage = (average * count + minimum * incoming) / (count + minimum);
+          var actualDecline = average - newAverage;
+          var noun = minimum === 1 ? "rating" : "ratings";
+          result.innerHTML = "<strong>" + minimum.toLocaleString("en-CA") + " incoming " + incoming + "-star " + noun + "</strong>The exact average becomes " + newAverage.toFixed(6) + ", a decline of " + actualDecline.toFixed(6) + " points. This models arithmetic, not Google&rsquo;s displayed rounding or moderation.";
+        }
+
+        button.addEventListener("click", calculate);
+        calculate();
+      })();
+    </script>
+  </body>
+</html>

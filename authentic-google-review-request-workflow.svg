@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="request-title request-desc">
+  <title id="request-title">A policy-aware Google review request workflow</title>
+  <desc id="request-desc">Four steps: complete a genuine customer experience, send the same neutral request to every eligible customer, send at most one optional reminder, then learn from feedback and measure results. Avoid incentives, review gating, required ratings and scripted claims.</desc>
+  <defs><linearGradient id="request-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fbff"/><stop offset="1" stop-color="#eaf4ff"/></linearGradient></defs>
+  <rect width="1200" height="675" rx="24" fill="url(#request-bg)"/>
+  <text x="55" y="66" fill="#16223b" font-family="Georgia, serif" font-size="38">A policy-aware Google review request workflow</text>
+  <text x="55" y="103" fill="#536176" font-family="Arial, Helvetica, sans-serif" font-size="20">A repeatable process for genuine, unbiased customer feedback</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <g fill="#ffffff" stroke="#c9dced"><rect x="55" y="145" width="250" height="355" rx="14"/><rect x="330" y="145" width="250" height="355" rx="14"/><rect x="605" y="145" width="250" height="355" rx="14"/><rect x="880" y="145" width="250" height="355" rx="14"/></g>
+    <g fill="#0885fe"><circle cx="95" cy="187" r="23"/><circle cx="370" cy="187" r="23"/><circle cx="645" cy="187" r="23"/><circle cx="920" cy="187" r="23"/></g>
+    <g fill="#fff" font-size="20" text-anchor="middle"><text x="95" y="194">1</text><text x="370" y="194">2</text><text x="645" y="194">3</text><text x="920" y="194">4</text></g>
+    <g fill="#16223b" font-size="23"><text x="78" y="240">Complete the</text><text x="78" y="269">experience</text><text x="353" y="240">Send a neutral</text><text x="353" y="269">request</text><text x="628" y="240">Use one optional</text><text x="628" y="269">reminder</text><text x="903" y="240">Learn and</text><text x="903" y="269">measure</text></g>
+    <g fill="#536176" font-size="18"><text x="78" y="320">Use an objective trigger:</text><text x="78" y="349">finished visit, delivery,</text><text x="78" y="378">project or resolved case.</text><text x="78" y="424">Invite every eligible</text><text x="78" y="453">customer consistently.</text><text x="353" y="320">Ask for honest feedback.</text><text x="353" y="349">Do not suggest a rating</text><text x="353" y="378">or supply talking points.</text><text x="353" y="424">Use the correct location’s</text><text x="353" y="453">direct review link.</text><text x="628" y="320">Keep participation optional.</text><text x="628" y="349">A polite reminder may help;</text><text x="628" y="378">repeated messages do not.</text><text x="628" y="424">Honour consent rules</text><text x="628" y="453">and opt-out requests.</text><text x="903" y="320">Track request delivery and</text><text x="903" y="349">review completion rates.</text><text x="903" y="395">Look for recurring service</text><text x="903" y="424">issues, then improve the</text><text x="903" y="453">customer experience.</text></g>
+  </g>
+  <rect x="55" y="540" width="1075" height="75" rx="12" fill="#fff7e5" stroke="#ead49b"/>
+  <text x="82" y="575" fill="#704a00" font-family="Arial, Helvetica, sans-serif" font-size="18">Avoid: incentives · review gating · required star ratings · scripted customer claims</text>
+  <text x="82" y="600" fill="#704a00" font-family="Arial, Helvetica, sans-serif" font-size="15">Use Google’s current content policy and applicable consent rules as the final reference.</text>
+  <text x="1130" y="648" fill="#0568c0" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="end">ReviewsBoost</text>
+</svg>

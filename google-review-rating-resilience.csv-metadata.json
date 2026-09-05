@@ -1,0 +1,92 @@
+{
+  "@context": [
+    "http://www.w3.org/ns/csvw",
+    {
+      "schema": "https://schema.org/",
+      "dc": "http://purl.org/dc/terms/"
+    }
+  ],
+  "url": "google-review-rating-resilience.csv",
+  "dc:title": "Google Review Rating Resilience Dataset: 420 Exact-Average Scenarios",
+  "dc:description": "A reproducible mathematical dataset showing the minimum number of incoming one-star ratings required to reduce an exact Google review average by at least 0.1, 0.2 or 0.5 points across 20 starting averages and seven review counts.",
+  "dc:creator": {
+    "@id": "https://reviewsboost.ca/editorial-policy.html#editorial-team"
+  },
+  "dc:issued": {
+    "@value": "2026-09-04",
+    "@type": "http://www.w3.org/2001/XMLSchema#date"
+  },
+  "dc:modified": {
+    "@value": "2026-09-04",
+    "@type": "http://www.w3.org/2001/XMLSchema#date"
+  },
+  "dc:license": {
+    "@id": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "dc:source": {
+    "@id": "https://support.google.com/business/answer/4801187"
+  },
+  "schema:version": "1.0",
+  "schema:measurementTechnique": "Deterministic enumeration using m = ceiling(dN / (R - 1 - d)), where R is the exact starting average, N is the starting review count, d is the target decline and every incoming rating is one star.",
+  "dialect": {
+    "header": true,
+    "encoding": "UTF-8"
+  },
+  "tableSchema": {
+    "primaryKey": [
+      "baseline_exact_average",
+      "starting_review_count",
+      "decline_threshold"
+    ],
+    "columns": [
+      {
+        "name": "baseline_exact_average",
+        "titles": "Baseline exact average",
+        "datatype": { "base": "decimal", "minimum": 3.0, "maximum": 4.9 },
+        "required": true
+      },
+      {
+        "name": "starting_review_count",
+        "titles": "Starting review count",
+        "datatype": { "base": "integer", "minimum": 10 },
+        "required": true
+      },
+      {
+        "name": "incoming_rating",
+        "titles": "Incoming rating",
+        "datatype": { "base": "integer", "minimum": 1, "maximum": 1 },
+        "required": true
+      },
+      {
+        "name": "decline_threshold",
+        "titles": "Target exact-average decline",
+        "datatype": { "base": "decimal", "minimum": 0.1, "maximum": 0.5 },
+        "required": true
+      },
+      {
+        "name": "minimum_incoming_ratings",
+        "titles": "Minimum incoming one-star ratings",
+        "datatype": { "base": "integer", "minimum": 1 },
+        "required": true
+      },
+      {
+        "name": "resulting_exact_average",
+        "titles": "Resulting exact average",
+        "datatype": "decimal",
+        "required": true
+      },
+      {
+        "name": "actual_decline",
+        "titles": "Actual exact-average decline",
+        "datatype": "decimal",
+        "required": true
+      },
+      {
+        "name": "formula_version",
+        "titles": "Formula version",
+        "datatype": "string",
+        "required": true
+      }
+    ]
+  }
+}

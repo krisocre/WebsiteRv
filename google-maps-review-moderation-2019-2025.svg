@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="chart-title chart-desc">
+  <title id="chart-title">Google-reported policy-violating review actions, 2019 to 2025</title>
+  <desc id="chart-desc">Horizontal bar chart of annual Google disclosures: more than 75 million reviews removed in 2019; 55 million blocked or removed in 2020; more than 95 million in 2021; over 115 million in 2022; over 170 million in 2023; more than 240 million in 2024; and over 292 million in 2025.</desc>
+  <metadata>ReviewsBoost compilation, CC BY 4.0. Source links, definitions and downloadable CSV are at https://reviewsboost.ca/fake-review-statistics.html.</metadata>
+  <defs>
+    <linearGradient id="chart-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#edf5ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" rx="24" fill="url(#chart-bg)"/>
+  <text x="64" y="64" fill="#16223b" font-family="Georgia, serif" font-size="35">Google Maps review-moderation disclosures</text>
+  <text x="64" y="101" fill="#536176" font-family="Arial, Helvetica, sans-serif" font-size="21">Policy-violating reviews blocked or removed, millions · reported lower-bound figures</text>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="20">
+    <g fill="#16223b">
+      <text x="64" y="172">2019</text><text x="64" y="227">2020</text><text x="64" y="282">2021</text>
+      <text x="64" y="337">2022</text><text x="64" y="392">2023</text><text x="64" y="447">2024</text><text x="64" y="502">2025</text>
+    </g>
+    <g fill="#d7e6f5">
+      <rect x="150" y="150" width="820" height="28" rx="4"/><rect x="150" y="205" width="820" height="28" rx="4"/>
+      <rect x="150" y="260" width="820" height="28" rx="4"/><rect x="150" y="315" width="820" height="28" rx="4"/>
+      <rect x="150" y="370" width="820" height="28" rx="4"/><rect x="150" y="425" width="820" height="28" rx="4"/>
+      <rect x="150" y="480" width="820" height="28" rx="4"/>
+    </g>
+    <g fill="#0568c0">
+      <rect x="150" y="150" width="211" height="28" rx="4"/><rect x="150" y="205" width="154" height="28" rx="4"/>
+      <rect x="150" y="260" width="267" height="28" rx="4"/><rect x="150" y="315" width="323" height="28" rx="4"/>
+      <rect x="150" y="370" width="478" height="28" rx="4"/><rect x="150" y="425" width="674" height="28" rx="4"/>
+      <rect x="150" y="480" width="820" height="28" rx="4"/>
+    </g>
+    <g fill="#16223b">
+      <text x="985" y="172">&gt;75m</text><text x="985" y="227">55m</text><text x="985" y="282">&gt;95m</text>
+      <text x="985" y="337">&gt;115m</text><text x="985" y="392">&gt;170m</text><text x="985" y="447">&gt;240m</text><text x="985" y="502">&gt;292m</text>
+    </g>
+  </g>
+  <line x1="64" y1="545" x2="1136" y2="545" stroke="#c9d7e6"/>
+  <text x="64" y="579" fill="#536176" font-family="Arial, Helvetica, sans-serif" font-size="16">Google changed the 2019 scope from “removed” to “blocked or removed” from 2020 onward.</text>
+  <text x="64" y="607" fill="#536176" font-family="Arial, Helvetica, sans-serif" font-size="16">Full source notes and reusable CSV: reviewsboost.ca/fake-review-statistics.html</text>
+  <text x="1052" y="607" fill="#0568c0" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="end">ReviewsBoost</text>
+</svg>

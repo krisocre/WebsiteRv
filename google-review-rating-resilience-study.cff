@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this study or dataset, please cite it using these metadata."
+type: dataset
+title: "Google Review Rating Resilience Study: 420 Exact-Average Scenarios"
+abstract: >-
+  An original, reproducible mathematical analysis of the minimum number of
+  incoming one-star ratings required to reduce an exact Google review average
+  by 0.1, 0.2 or 0.5 points across 20 starting averages and seven review counts.
+authors:
+  - name: "ReviewsBoost Editorial Team"
+version: "1.0"
+date-released: 2026-09-04
+url: "https://reviewsboost.ca/google-review-rating-resilience-study.html"
+license: CC-BY-4.0
+keywords:
+  - Google reviews
+  - rating resilience
+  - review count
+  - one-star ratings
+  - online reputation

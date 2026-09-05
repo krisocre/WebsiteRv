@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="response-title response-desc">
+  <title id="response-title">Four-part Google review response framework</title>
+  <desc id="response-desc">Acknowledge the reviewer, reflect one safe detail, respond without arguing, and route sensitive specifics to a private contact channel.</desc>
+  <defs><linearGradient id="response-bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fbff"/><stop offset="1" stop-color="#edf5ff"/></linearGradient></defs>
+  <rect width="1200" height="675" rx="24" fill="url(#response-bg)"/>
+  <text x="60" y="68" fill="#16223b" font-family="Georgia, serif" font-size="39">The four-part Google review response framework</text>
+  <text x="60" y="106" fill="#536176" font-family="Arial, Helvetica, sans-serif" font-size="20">A practical structure for positive, mixed and negative feedback</text>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <g fill="#ffffff" stroke="#c9dced"><rect x="60" y="160" width="250" height="330" rx="14"/><rect x="337" y="160" width="250" height="330" rx="14"/><rect x="614" y="160" width="250" height="330" rx="14"/><rect x="891" y="160" width="250" height="330" rx="14"/></g>
+    <g fill="#0885fe" font-size="18"><text x="84" y="205">STEP 1</text><text x="361" y="205">STEP 2</text><text x="638" y="205">STEP 3</text><text x="915" y="205">STEP 4</text></g>
+    <g fill="#16223b" font-family="Georgia, serif" font-size="28"><text x="84" y="252">Acknowledge</text><text x="361" y="252">Reflect</text><text x="638" y="252">Respond</text><text x="915" y="252">Route</text></g>
+    <g fill="#536176" font-size="19"><text x="84" y="310">Greet the reviewer and</text><text x="84" y="340">recognize the feedback.</text><text x="84" y="392">Keep the opening natural,</text><text x="84" y="422">brief and proportionate.</text><text x="361" y="310">Mention one relevant,</text><text x="361" y="340">non-sensitive detail.</text><text x="361" y="392">Show that a person read</text><text x="361" y="422">the actual review.</text><text x="638" y="310">Thank them, apologize or</text><text x="638" y="340">explain an improvement.</text><text x="638" y="392">Do not argue or invent</text><text x="638" y="422">facts in public.</text><text x="915" y="310">Move account-specific</text><text x="915" y="340">details to a real private</text><text x="915" y="370">contact channel.</text><text x="915" y="422">Give one clear next step.</text></g>
+  </g>
+  <rect x="60" y="530" width="1081" height="78" rx="12" fill="#eef8f3" stroke="#b8dfcd"/>
+  <text x="87" y="565" fill="#0f6741" font-family="Arial, Helvetica, sans-serif" font-size="18">Public-response rule: never reveal customer, patient, tenant, legal or account details.</text>
+  <text x="87" y="591" fill="#0f6741" font-family="Arial, Helvetica, sans-serif" font-size="15">Verify sensitive facts privately and edit every draft before posting.</text>
+  <text x="1140" y="648" fill="#0568c0" font-family="Arial, Helvetica, sans-serif" font-size="16" text-anchor="end">ReviewsBoost</text>
+</svg>

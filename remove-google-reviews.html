@@ -33,8 +33,9 @@
     <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[
       {"@type":"Organization","@id":"https://reviewsboost.ca/#organization","name":"ReviewsBoost","url":"https://reviewsboost.ca/","email":"support@reviewsboost.ca","areaServed":{"@type":"Country","name":"Canada"}},
-      {"@type":"WebPage","@id":"https://reviewsboost.ca/remove-google-reviews.html#webpage","url":"https://reviewsboost.ca/remove-google-reviews.html","name":"Google Review Removal Help in Canada","description":"Assessment and policy-based assistance challenging potentially violating Google reviews.","dateModified":"2026-09-03","inLanguage":"en-CA"},
-      {"@type":"Service","@id":"https://reviewsboost.ca/remove-google-reviews.html#service","name":"Google Review Removal Assistance","provider":{"@id":"https://reviewsboost.ca/#organization"},"areaServed":{"@type":"Country","name":"Canada"},"description":"Assessment and assistance challenging fake, spam, abusive and other potentially policy-violating Google reviews.","offers":{"@type":"Offer","price":"30","priceCurrency":"CAD","description":"CAD $30 upfront case fee plus CAD $40 after successful removal."}},
+      {"@type":"WebPage","@id":"https://reviewsboost.ca/remove-google-reviews.html#webpage","url":"https://reviewsboost.ca/remove-google-reviews.html","name":"Google Review Removal Help in Canada","description":"Assessment and policy-based assistance challenging potentially violating Google reviews.","dateModified":"2026-09-04","primaryImageOfPage":{"@id":"https://reviewsboost.ca/remove-google-reviews.html#primaryimage"},"inLanguage":"en-CA"},
+      {"@type":"ImageObject","@id":"https://reviewsboost.ca/remove-google-reviews.html#primaryimage","url":"https://reviewsboost.ca/google-review-removal-eligibility.svg","width":1200,"height":675,"caption":"Google review removal eligibility and reporting guide"},
+      {"@type":"Service","@id":"https://reviewsboost.ca/remove-google-reviews.html#service","name":"Google Review Removal Assistance","provider":{"@id":"https://reviewsboost.ca/#organization"},"areaServed":{"@type":"Country","name":"Canada"},"image":{"@id":"https://reviewsboost.ca/remove-google-reviews.html#primaryimage"},"description":"Assessment and assistance challenging fake, spam, abusive and other potentially policy-violating Google reviews.","offers":{"@type":"Offer","price":"30","priceCurrency":"CAD","description":"CAD $30 upfront case fee plus CAD $40 after successful removal."}},
       {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reviewsboost.ca/"},{"@type":"ListItem","position":2,"name":"Google review removal","item":"https://reviewsboost.ca/remove-google-reviews.html"}]}
     ]}
     </script>
@@ -184,6 +185,7 @@
         .policy-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px}
         .policy-card{border-radius:7px;padding:29px;border:1px solid var(--line)}
         .policy-card.good{background:#f3fbf7;border-color:#d8eee2}.policy-card.bad{background:#faf9f9}
+        .seo-figure{max-width:1040px;margin:38px auto 0;text-align:left}.seo-figure a{display:block;overflow:hidden;border:1px solid #dddfe5;border-radius:10px;background:#fff}.seo-figure img{display:block;width:100%;height:auto}.seo-figure figcaption{margin-top:9px;color:#68686e;font-size:12px}
         .policy-head{display:flex;align-items:center;gap:12px;margin-bottom:17px}.policy-head i{width:38px;height:38px;display:grid;place-items:center;border-radius:5px;font-size:17px}.good .policy-head i{background:#d9f3e5;color:var(--green)}.bad .policy-head i{background:#eeeaea;color:#777}
         .policy-head h3{font-size:18px;color:var(--navy)}
         .policy-card li{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:#5f5b5d;padding:8px 0;border-top:1px solid rgba(40,30,30,.06)}.policy-card li i{font-size:11px;margin-top:5px}.good li i{color:var(--green)}.bad li i{color:#999}
@@ -213,8 +215,14 @@
         .modal-close{position:absolute;right:16px;top:13px;border:0;background:none;font-size:27px;color:#aaa;cursor:pointer}
         .modal-tag{color:var(--red);font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;margin-bottom:5px}.modal h2{font-family:'Merriweather',Georgia,serif;color:var(--navy);font-size:25px;margin-bottom:5px}.modal-sub{font-size:12.5px;color:#777;margin-bottom:20px}
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:13px}.form-group{margin-bottom:13px}.form-group label{display:block;color:#454144;font-size:11.5px;font-weight:900;margin-bottom:5px}.form-group input,.form-group select,.form-group textarea{width:100%;border:1px solid #ddd6d5;border-radius:7px;padding:10px 11px;outline:none;color:#292629;background:#fff;font-size:13px}.form-group textarea{resize:vertical;min-height:78px}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(225,41,47,.08)}
+        .form-help{display:block;margin-top:6px;color:#6f696b;font-size:11px;line-height:1.5}.form-help i{color:var(--red);margin-right:4px}
         .modal .btn{width:100%;margin-top:3px}.form-status{display:none;margin-top:12px;text-align:center;font-size:13px;font-weight:900}
         .form-privacy{text-align:center;color:#aaa;font-size:10.5px;margin-top:10px}
+        .submission-success{padding:30px 8px 12px;text-align:center}
+        .submission-success[hidden]{display:none}
+        .submission-success-icon{width:92px;height:92px;margin:0 auto 22px;border:2px solid #8bd5ad;border-radius:50%;background:#eaf8f0;color:#117a49;display:grid;place-items:center;font-size:49px;line-height:1}
+        .submission-success h2{margin-bottom:10px}
+        .submission-success p{max-width:370px;margin:0 auto 22px;color:#615a5c;line-height:1.65}
         .mobile-cta{display:none}
 
         @media(max-width:1180px){
@@ -263,16 +271,16 @@
 
 <nav class="navbar" id="navbar">
     <div class="container">
-        <a href="index.html" class="nav-logo" aria-label="ReviewsBoost home"><span class="logo-icon"><i class="fa-solid fa-star"></i></span>ReviewsBoost</a>
+        <a href="/" class="nav-logo" aria-label="ReviewsBoost home"><span class="logo-icon"><i class="fa-solid fa-star"></i></span>ReviewsBoost</a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
             <li><a href="#pricing">Pricing</a></li>
             <li><a href="blog.html">Learning Centre</a></li>
             <li><a href="google-reviews-faq.html">FAQ</a></li>
-            <li><a href="index.html#pricing" class="nav-service nav-reviews">Get Reviews</a></li>
+            <li><a href="/#pricing" class="nav-service nav-reviews">Get Reviews</a></li>
             <li><a href="remove-google-reviews.html" class="nav-service nav-removal" aria-current="page">Review Removal</a></li>
-            <li><button class="btn btn-primary nav-cta open-order" type="button">Start Removal Process</button></li>
+            <li><a class="btn btn-primary nav-cta" href="#review-count">Choose Number of Reviews</a></li>
         </ul>
         <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
@@ -287,12 +295,12 @@
                 <p class="hero-desc">We help Canadian businesses challenge fake, abusive, spam, and competitor-posted reviews. Send us the review and we’ll assess it against Google’s content policies.</p>
                 <ul class="hero-points">
                     <li><i class="fa-solid fa-circle-check"></i> $30 upfront + $40 if removed</li>
-                    <li><i class="fa-solid fa-circle-check"></i> 99% removal guarantee</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Eligibility screened before acceptance</li>
                     <li><i class="fa-solid fa-circle-check"></i> No account password needed</li>
                     <li><i class="fa-solid fa-circle-check"></i> Clear status updates</li>
                 </ul>
                 <div class="hero-actions">
-                    <button class="btn btn-primary open-order" type="button">Start Removal Process <i class="fa-solid fa-arrow-right"></i></button>
+                    <a class="btn btn-primary" href="#review-count">Choose Number of Reviews <i class="fa-solid fa-arrow-down"></i></a>
                     <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
                 </div>
                 <p class="hero-note"><i class="fa-solid fa-lock"></i> Confidential assessment. We never need access to your Google account.</p>
@@ -320,7 +328,7 @@
                         <div class="case-numbers">
                             <div class="case-number"><strong>$30</strong><span>Upfront per review</span></div>
                             <div class="case-number"><strong>$40</strong><span>Only when removed</span></div>
-                            <div class="case-number"><strong>99%</strong><span>Removal guarantee</span></div>
+                            <div class="case-number"><strong>Policy</strong><span>Eligibility screened</span></div>
                         </div>
                     </div>
                 </div>
@@ -388,10 +396,10 @@
                         <li><i class="fa-solid fa-check"></i> Supporting evidence guidance</li>
                         <li><i class="fa-solid fa-check"></i> Case status updates</li>
                         <li><i class="fa-solid fa-check"></i> Escalation when available</li>
-                        <li><i class="fa-solid fa-check"></i> 99% removal guarantee</li>
+                        <li><i class="fa-solid fa-check"></i> Eligibility screened before acceptance</li>
                     </ul>
                 </div>
-                <div class="calculator">
+                <div class="calculator" id="review-count">
                     <label for="reviewQuantity">Number of reviews</label>
                     <div class="quantity"><button type="button" id="decreaseQty" aria-label="Remove one review">−</button><input type="number" id="reviewQuantity" value="1" min="1" max="50" inputmode="numeric"><button type="button" id="increaseQty" aria-label="Add one review">+</button></div>
                     <div class="total-row"><span>Due today</span><strong id="upfrontTotal">$30</strong></div>
@@ -405,18 +413,18 @@
 
     <section class="guarantee section-pad" id="guarantee">
         <div class="container guarantee-grid">
-            <div class="seal"><i class="fa-solid fa-shield-halved"></i><strong>99%</strong><span>Removal<br>Guarantee</span></div>
+            <div class="seal"><i class="fa-solid fa-shield-halved"></i><strong>Case</strong><span>Support<br>Commitment</span></div>
             <div>
                 <span class="section-tag">Our promise</span>
-                <h2>Our 99% Removal Guarantee</h2>
-                <p class="guarantee-copy">Once we accept a review-removal case, it is covered by our 99% removal guarantee. Our team stays on the case, uses the available policy and escalation routes, and keeps you informed throughout.</p>
+                <h2>Our Accepted-Case Commitment</h2>
+                <p class="guarantee-copy">Before accepting a review-removal case, we assess whether the content presents a credible policy issue. For accepted cases, our team documents the challenge, uses available reporting or escalation routes, and keeps you informed throughout.</p>
                 <ul class="guarantee-points">
                     <li><i class="fa-solid fa-circle-check"></i> Case reviewed before acceptance</li>
                     <li><i class="fa-solid fa-circle-check"></i> No hidden per-case add-ons</li>
                     <li><i class="fa-solid fa-circle-check"></i> Human support throughout</li>
                 </ul>
                 <button class="btn btn-primary open-order" type="button">Start Removal Process <i class="fa-solid fa-arrow-right"></i></button>
-                <small>The guarantee applies to cases accepted as eligible after assessment. Google controls its platform and makes final content-moderation decisions.</small>
+                <small>Google controls its platform and makes every final content-moderation decision. Acceptance means we believe there is a credible policy basis to pursue; it does not guarantee removal.</small>
             </div>
         </div>
     </section>
@@ -436,6 +444,10 @@
                     <ul><li><i class="fa-solid fa-minus"></i> Honest criticism from a verified customer</li><li><i class="fa-solid fa-minus"></i> A low star rating without a policy violation</li><li><i class="fa-solid fa-minus"></i> Feedback you disagree with but cannot disprove</li><li><i class="fa-solid fa-minus"></i> Reviews that are negative but remain relevant and civil</li></ul>
                 </article>
             </div>
+            <figure class="seo-figure">
+                <a href="google-review-removal-eligibility.svg"><img src="google-review-removal-eligibility.svg" width="1200" height="675" loading="lazy" decoding="async" alt="Decision guide comparing Google reviews that may violate content policy with negative reviews that usually are not eligible for removal"></a>
+                <figcaption>Eligibility depends on a specific policy issue, supporting context and Google&rsquo;s final moderation decision. Open the full-size decision guide.</figcaption>
+            </figure>
         </div>
     </section>
 
@@ -446,7 +458,7 @@
             <div class="faq-list text-left">
                 <div class="faq-item open"><button class="faq-question" type="button">How much does it cost to remove a Google review?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Pricing is $30 CAD upfront per review to open the case, plus a $40 success fee only after that review is successfully removed. Each submitted review is assessed individually.</p></div></div>
                 <div class="faq-item"><button class="faq-question" type="button">Can you remove any bad or one-star review?<span class="faq-icon">+</span></button><div class="faq-answer"><p>No legitimate service can remove every negative opinion. The strongest cases involve fake experiences, spam, conflicts of interest, harassment, threats, personal information, or other policy violations. We assess eligibility before accepting a case.</p></div></div>
-                <div class="faq-item"><button class="faq-question" type="button">What does the 99% removal guarantee mean?<span class="faq-icon">+</span></button><div class="faq-answer"><p>The guarantee applies to review-removal cases that our team assesses and accepts as eligible. Google remains the final decision-maker for content on its platform, and complete terms can be confirmed during your assessment.</p></div></div>
+                <div class="faq-item"><button class="faq-question" type="button">What happens after you accept a removal case?<span class="faq-icon">+</span></button><div class="faq-answer"><p>We document the policy basis, organize relevant evidence, use the available reporting or escalation route, and provide status updates. Google remains the final decision-maker, so accepting a case does not guarantee removal.</p></div></div>
                 <div class="faq-item"><button class="faq-question" type="button">Do you need my Google password?<span class="faq-icon">+</span></button><div class="faq-answer"><p>No. We do not ask for your Google account password. To assess the review, we need your public Google Business Profile URL, the review link or text, and any relevant context or evidence.</p></div></div>
                 <div class="faq-item"><button class="faq-question" type="button">How long does review removal take?<span class="faq-icon">+</span></button><div class="faq-answer"><p>Timelines vary because each case and moderation path is different. After assessment, our team will explain the case strength, next steps, and what to expect for your specific review.</p></div></div>
             </div>
@@ -476,7 +488,7 @@
     <div class="container">
         <div class="footer-grid">
             <div><div class="footer-brand"><span class="logo-icon"><i class="fa-solid fa-star"></i></span>ReviewsBoost</div><p>Canadian Google review services for businesses that want to protect their reputation, strengthen trust, and show their best work online.</p></div>
-            <div><h2>Services</h2><a href="index.html#pricing">Get Google Reviews</a><a href="remove-google-reviews.html">Remove Bad Reviews</a><a href="blog.html">Learning Centre</a></div>
+            <div><h2>Services</h2><a href="/#pricing">Get Google Reviews</a><a href="remove-google-reviews.html">Remove Bad Reviews</a><a href="blog.html">Learning Centre</a></div>
             <div><h2>Review Resources</h2><a href="remove-fake-google-review.html">Reporting Guide</a><a href="fake-review-statistics.html">Review Statistics</a><a href="google-review-policy-canada.html">Policy Guide</a><a href="google-reviews-faq.html">Detailed FAQ</a></div>
             <div><h2>Support</h2><a href="#" class="open-order">Contact Us</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
         </div>
@@ -487,11 +499,14 @@
 <div class="modal-overlay" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
         <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
-        <p class="modal-tag">Review removal request</p>
-        <h2 id="modalTitle">Start the Removal Process</h2>
-        <p class="modal-sub">Enter the profile and review details below. Our team will assess the case and contact you with the next step.</p>
+        <div id="removalFormIntro">
+            <p class="modal-tag">Review removal request</p>
+            <h2 id="modalTitle">Start the Removal Process</h2>
+            <p class="modal-sub">Enter the profile and review details below. Our team will assess the case and contact you with the next step.</p>
+        </div>
         <form id="removalForm">
             <input type="hidden" id="selectedPlan" name="selected_plan" value="Google Review Removal - 1 review - $30 upfront + $40 after successful removal">
+            <input type="hidden" name="contact_method" value="Email">
             <div class="form-row">
                 <div class="form-group"><label for="fullName">Full Name *</label><input type="text" id="fullName" name="full_name" autocomplete="name" required></div>
                 <div class="form-group"><label for="businessName">Business Name *</label><input type="text" id="businessName" name="business_name" autocomplete="organization" required></div>
@@ -501,17 +516,29 @@
                 <div class="form-group"><label for="phone">Phone (optional)</label><input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="555-123-4567"></div>
             </div>
             <div class="form-group"><label for="businessUrl">Google Business Profile URL *</label><input type="url" id="businessUrl" name="business_url" placeholder="https://maps.google.com/..." required></div>
-            <div class="form-group"><label for="reviewDetails">Bad Review Link(s) or Details *</label><textarea id="reviewDetails" name="notes" placeholder="Paste the review link or text and tell us why you believe it violates Google’s policies." required></textarea></div>
+            <div class="form-group"><label for="formReviewQuantity">How many reviews do you want removed? *</label><input type="number" id="formReviewQuantity" name="review_quantity" value="1" min="1" max="50" inputmode="numeric" required></div>
+            <div class="form-group">
+                <label for="reviewLinks">Review link(s) (optional)</label>
+                <textarea id="reviewLinks" name="review_links" placeholder="Paste one review link per line, if available." aria-describedby="reviewLinksHelp"></textarea>
+                <small class="form-help" id="reviewLinksHelp"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>If no individual link is provided, we will use the latest one-star review(s) on the profile, up to the number selected, for the removal assessment.</small>
+            </div>
+            <div class="form-group"><label for="removalReason">Why should these reviews be removed? *</label><textarea id="removalReason" name="reason" placeholder="Tell us what is wrong with the reviews—for example, no genuine customer experience, a competitor or former employee, spam, threats, harassment, or another policy issue." required></textarea></div>
             <button class="btn btn-primary" id="submitButton" type="submit">Submit Removal Request <i class="fa-solid fa-arrow-right"></i></button>
             <p class="form-status" id="formStatus"></p>
             <p class="form-privacy"><i class="fa-solid fa-lock"></i> Your submission is handled according to our <a href="privacy-policy.html">privacy policy</a>.</p>
         </form>
+        <div class="submission-success" id="removalSuccess" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
+            <div class="submission-success-icon" aria-hidden="true">&#10003;</div>
+            <h2 id="removalSuccessTitle">Removal request submitted</h2>
+            <p>Your review details have been sent. A specialist will assess the case and contact you with the next step.</p>
+            <button class="btn btn-primary" id="removalSuccessClose" type="button">Done</button>
+        </div>
     </div>
 </div>
 
 <div class="mobile-cta">
     <div class="mobile-price"><strong>$30 upfront</strong><span>+$40 when removed</span></div>
-    <button class="btn btn-primary open-order" type="button">Start Removal Process <i class="fa-solid fa-arrow-right"></i></button>
+    <a class="btn btn-primary" href="#review-count">Choose Quantity <i class="fa-solid fa-arrow-down"></i></a>
 </div>
 
 <script>
@@ -520,24 +547,31 @@
         var hamburger = document.getElementById('hamburger');
         var navLinks = document.getElementById('navLinks');
         var quantity = document.getElementById('reviewQuantity');
+        var formQuantity = document.getElementById('formReviewQuantity');
         var upfrontTotal = document.getElementById('upfrontTotal');
         var successTotal = document.getElementById('successTotal');
         var selectedPlan = document.getElementById('selectedPlan');
         var modal = document.getElementById('orderModal');
         var modalClose = document.getElementById('modalClose');
         var removalForm = document.getElementById('removalForm');
+        var removalFormIntro = document.getElementById('removalFormIntro');
         var submitButton = document.getElementById('submitButton');
         var formStatus = document.getElementById('formStatus');
+        var removalSuccess = document.getElementById('removalSuccess');
         var phone = document.getElementById('phone');
+        var businessName = document.getElementById('businessName');
+        var reviewLinks = document.getElementById('reviewLinks');
+        var removalReason = document.getElementById('removalReason');
 
-        function currentQuantity() {
-            var value = parseInt(quantity.value, 10) || 1;
+        function currentQuantity(source) {
+            var value = parseInt((source || quantity).value, 10) || 1;
             return Math.max(1, Math.min(50, value));
         }
 
-        function updatePrice() {
-            var count = currentQuantity();
+        function updatePrice(source) {
+            var count = currentQuantity(source);
             quantity.value = count;
+            formQuantity.value = count;
             upfrontTotal.textContent = '$' + (count * 30);
             successTotal.textContent = '$' + (count * 40);
             selectedPlan.value = 'Google Review Removal - ' + count + (count === 1 ? ' review' : ' reviews') + ' - $' + (count * 30) + ' upfront + $40 per successfully removed review';
@@ -545,22 +579,28 @@
 
         document.getElementById('decreaseQty').addEventListener('click', function () {
             quantity.value = Math.max(1, currentQuantity() - 1);
-            updatePrice();
+            updatePrice(quantity);
         });
         document.getElementById('increaseQty').addEventListener('click', function () {
             quantity.value = Math.min(50, currentQuantity() + 1);
-            updatePrice();
+            updatePrice(quantity);
         });
-        quantity.addEventListener('input', updatePrice);
-        quantity.addEventListener('blur', updatePrice);
+        quantity.addEventListener('input', function () { updatePrice(quantity); });
+        quantity.addEventListener('blur', function () { updatePrice(quantity); });
+        formQuantity.addEventListener('input', function () { updatePrice(formQuantity); });
+        formQuantity.addEventListener('blur', function () { updatePrice(formQuantity); });
 
         function openModal(event) {
             if (event) event.preventDefault();
-            updatePrice();
+            updatePrice(quantity);
             navLinks.classList.remove('open');
             hamburger.setAttribute('aria-expanded', 'false');
             modal.classList.add('open');
+            modal.setAttribute('aria-labelledby', 'modalTitle');
             document.body.classList.add('modal-open');
+            removalFormIntro.hidden = false;
+            removalForm.hidden = false;
+            removalSuccess.hidden = true;
             formStatus.style.display = 'none';
             window.setTimeout(function () { document.getElementById('fullName').focus(); }, 60);
         }
@@ -572,6 +612,7 @@
 
         document.querySelectorAll('.open-order').forEach(function (button) { button.addEventListener('click', openModal); });
         modalClose.addEventListener('click', closeModal);
+        document.getElementById('removalSuccessClose').addEventListener('click', closeModal);
         modal.addEventListener('click', function (event) { if (event.target === modal) closeModal(); });
         document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeModal(); });
 
@@ -628,18 +669,32 @@
             event.preventDefault();
             submitButton.disabled = true;
             submitButton.textContent = 'Sending...';
+            var removalPayload = new FormData(removalForm);
+            var linkDetails = reviewLinks.value.trim() || 'Not provided — use the latest one-star review(s), up to the requested quantity.';
+            var reasonDetails = [
+                'Removal reason: ' + removalReason.value.trim(),
+                'Business name: ' + businessName.value.trim(),
+                'Requested quantity: ' + formQuantity.value,
+                'Review links: ' + linkDetails
+            ];
+            if (phone.value.trim()) reasonDetails.push('Optional phone: ' + phone.value.trim());
+            removalPayload.set('reason', reasonDetails.join('\n'));
+            removalPayload.set('contact_method', phone.value.trim() ? 'Email (phone also provided)' : 'Email');
             fetch('https://script.google.com/macros/s/AKfycbwG8KGBlFkXRlDUW9liT1j-x4uRodinv8N_r7hWQBsYq_CVw55yL6J-7v0of3O6cIfuag/exec', {
                 method: 'POST',
                 mode: 'no-cors',
-                body: new FormData(removalForm)
+                body: removalPayload
             }).then(function () {
-                formStatus.style.display = 'block';
-                formStatus.style.color = '#15965f';
-                formStatus.textContent = 'Received! A specialist will review your case and contact you shortly.';
                 removalForm.reset();
                 updatePrice();
                 submitButton.disabled = false;
                 submitButton.innerHTML = 'Submit Removal Request <i class="fa-solid fa-arrow-right"></i>';
+                formStatus.style.display = 'none';
+                removalFormIntro.hidden = true;
+                removalForm.hidden = true;
+                removalSuccess.hidden = false;
+                modal.setAttribute('aria-labelledby', 'removalSuccessTitle');
+                removalSuccess.focus();
             }).catch(function () {
                 formStatus.style.display = 'block';
                 formStatus.style.color = '#e1292f';

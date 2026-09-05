@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it using these metadata."
+type: dataset
+title: "Google Maps Policy-Violating Review Moderation Disclosures, 2019-2025"
+abstract: >-
+  A source-linked compilation of annual Google disclosures about policy-violating
+  Google Maps review moderation actions from 2019 through 2025, with definitions,
+  qualifiers, calculations and reuse notes.
+authors:
+  - name: "ReviewsBoost Editorial Team"
+version: "1.0"
+date-released: 2026-09-03
+url: "https://reviewsboost.ca/fake-review-statistics.html"
+license: CC-BY-4.0
+keywords:
+  - Google Maps
+  - fake reviews
+  - review moderation
+  - online reputation
+  - platform transparency

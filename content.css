@@ -450,6 +450,25 @@ h1 {
 .table-scroll .comparison {
   min-width: 720px;
 }
+.guide-figure {
+  margin: 30px 0 38px;
+}
+.guide-figure > a {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--wash);
+}
+.guide-figure img {
+  width: 100%;
+  height: auto;
+}
+.guide-figure figcaption {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 13px;
+}
 .data-figure {
   margin: 26px 0 34px;
   padding: 22px;
@@ -462,37 +481,15 @@ h1 {
   color: var(--navy);
   font-weight: 400;
 }
-.bar-chart {
-  display: grid;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.bar-row {
-  display: grid;
-  grid-template-columns: 46px minmax(120px, 1fr) 64px;
-  gap: 12px;
-  align-items: center;
-  font-size: 14px;
-}
-.bar-track {
-  height: 14px;
-  overflow: hidden;
-  border-radius: 3px;
-  background: #dce8f4;
-}
-.bar-fill {
+.data-figure > a {
   display: block;
-  width: var(--bar-width);
-  height: 100%;
-  border-radius: inherit;
-  background: #0568c0;
+  margin-bottom: 22px;
+  border-radius: 10px;
+  overflow: hidden;
 }
-.bar-value {
-  color: #3f4f63;
-  text-align: right;
-  white-space: nowrap;
+.data-figure img {
+  width: 100%;
+  height: auto;
 }
 .data-note {
   margin: 16px 0 0;
@@ -632,14 +629,14 @@ h1 {
   padding: 10px 20px;
   border: 0;
   border-radius: 7px;
-  background: var(--blue);
+  background: var(--blue-dark);
   color: #fff;
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
 }
 .button:hover {
-  background: var(--blue-dark);
+  background: #004d99;
   color: #fff;
 }
 .result {

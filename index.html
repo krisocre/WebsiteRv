@@ -39,7 +39,7 @@
       "@context":"https://schema.org",
       "@graph":[
         {"@type":"Organization","@id":"https://reviewsboost.ca/#organization","name":"ReviewsBoost","url":"https://reviewsboost.ca/","logo":{"@type":"ImageObject","url":"https://reviewsboost.ca/favicon-512.png","width":512,"height":512},"email":"support@reviewsboost.ca","contactPoint":{"@type":"ContactPoint","email":"support@reviewsboost.ca","contactType":"customer support","areaServed":"CA","availableLanguage":["English"]},"description":"Google review education and online reputation support for Canadian businesses.","areaServed":{"@type":"Country","name":"Canada"}},
-        {"@type":"WebSite","@id":"https://reviewsboost.ca/#website","url":"https://reviewsboost.ca/","name":"ReviewsBoost","publisher":{"@id":"https://reviewsboost.ca/#organization"},"inLanguage":"en-CA"},
+        {"@type":"WebSite","@id":"https://reviewsboost.ca/#website","url":"https://reviewsboost.ca/","name":"ReviewsBoost","alternateName":"Reviews Boost","publisher":{"@id":"https://reviewsboost.ca/#organization"},"inLanguage":"en-CA"},
         {"@type":"WebPage","@id":"https://reviewsboost.ca/#webpage","url":"https://reviewsboost.ca/","name":"Google Review Services Canada","description":"Google review support, educational resources and policy-based review removal help for Canadian businesses.","isPartOf":{"@id":"https://reviewsboost.ca/#website"},"about":{"@type":"Thing","name":"Online reputation management"},"inLanguage":"en-CA","dateModified":"2026-09-03"},
         {"@type":"Service","@id":"https://reviewsboost.ca/#service","name":"Google review services","provider":{"@id":"https://reviewsboost.ca/#organization"},"areaServed":{"@type":"Country","name":"Canada"},"url":"https://reviewsboost.ca/"}
       ]
@@ -549,6 +549,10 @@
             background: #fff;
             border-bottom: 1px solid #f0f0f0
         }
+
+        .pricing-section>.container {
+            position: relative
+        }
         
         .pricing-grid {
             display: grid;
@@ -627,17 +631,53 @@
             letter-spacing: 0.05em
         }
         
+        .order-summary-slot {
+            margin-top: 28px
+        }
+
         .order-summary {
             background: #f8fafc;
             border: 1px solid #eef2f8;
             border-radius: 14px;
             padding: 28px 30px;
-            margin-top: 28px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
             gap: 20px
+        }
+
+        .order-summary.is-docked,
+        .order-summary.is-contained {
+            border-color: #dce8f6;
+            box-shadow: 0 14px 40px rgba(22, 34, 59, 0.18)
+        }
+
+        .order-summary.is-docked {
+            position: fixed;
+            z-index: 1100;
+            left: 50%;
+            bottom: 12px;
+            bottom: max(12px, env(safe-area-inset-bottom));
+            width: min(calc(100vw - 48px), 1152px);
+            transform: translateX(-50%);
+            background: rgba(248, 250, 252, 0.97);
+            -webkit-backdrop-filter: blur(14px);
+            backdrop-filter: blur(14px)
+        }
+
+        .order-summary.is-contained {
+            position: absolute;
+            z-index: 10;
+            right: 24px;
+            bottom: 0;
+            left: 24px
+        }
+
+        body.order-summary-active #scrollTop.visible {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none
         }
         
         .order-summary .summary-info h3 {
@@ -1382,6 +1422,40 @@
             justify-content: center;
             margin-top: 6px
         }
+
+        .submission-success {
+            padding: 28px 8px 10px;
+            text-align: center
+        }
+
+        .submission-success[hidden] {
+            display: none
+        }
+
+        .submission-success-icon {
+            width: 92px;
+            height: 92px;
+            margin: 0 auto 22px;
+            border: 2px solid #8bd5ad;
+            border-radius: 50%;
+            background: #eaf8f0;
+            color: #117a49;
+            display: grid;
+            place-items: center;
+            font-size: 49px;
+            line-height: 1
+        }
+
+        .submission-success h2 {
+            margin-bottom: 10px
+        }
+
+        .submission-success p {
+            max-width: 360px;
+            margin: 0 auto 22px;
+            color: #596273;
+            line-height: 1.65
+        }
         
         @media(max-width:1060px) {
             .tools-grid {
@@ -1492,6 +1566,42 @@
                 flex-direction: column;
                 text-align: center
             }
+            .order-summary.is-docked,
+            .order-summary.is-contained {
+                right: auto;
+                left: 50%;
+                width: calc(100vw - 40px);
+                padding: 14px 16px;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                gap: 10px 14px;
+                text-align: left;
+                transform: translateX(-50%)
+            }
+            .order-summary.is-contained {
+                bottom: 0
+            }
+            .order-summary.is-docked .summary-info p,
+            .order-summary.is-contained .summary-info p {
+                display: none
+            }
+            .order-summary.is-docked .summary-price,
+            .order-summary.is-contained .summary-price {
+                font-size: 28px;
+                white-space: nowrap
+            }
+            .order-summary.is-docked .summary-price small,
+            .order-summary.is-contained .summary-price small {
+                display: block;
+                font-size: 11px;
+                line-height: 1.2
+            }
+            .order-summary.is-docked .order-btn,
+            .order-summary.is-contained .order-btn {
+                width: 100%;
+                grid-column: 1/-1;
+                justify-content: center
+            }
         }
         
         @media(max-width:480px) {
@@ -1541,6 +1651,10 @@
             .ach-grid {
                 grid-template-columns: repeat(2, 1fr)
             }
+            .order-summary.is-docked,
+            .order-summary.is-contained {
+                width: calc(100vw - 32px)
+            }
         }
 
         /* Accessibility contrast and focus improvements */
@@ -1589,7 +1703,7 @@
 
     <nav class="navbar" id="navbar">
         <div class="container">
-            <a href="index.html" class="nav-logo" aria-label="ReviewsBoost Home">
+            <a href="/" class="nav-logo" aria-label="ReviewsBoost Home">
                 <div class="logo-icon"><i class="fa-solid fa-star"></i></div>ReviewsBoost</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="#how-it-works">How It Works</a></li>
@@ -1743,13 +1857,15 @@
                         <div class="pkg-features">~38 days delivery<br>2 reviews per day</div>
                     </div>
                 </div>
-                <div class="order-summary" id="orderSummary">
-                    <div class="summary-info">
-                        <h3 id="summaryTitle">15 Google Reviews</h3>
-                        <p>~8 days delivery · 2 reviews per day · Canadian accounts · 60-day replacement guarantee</p>
+                <div class="order-summary-slot" id="orderSummarySlot">
+                    <div class="order-summary" id="orderSummary">
+                        <div class="summary-info">
+                            <h3 id="summaryTitle">15 Google Reviews</h3>
+                            <p id="summaryDetails">~8 days delivery · 2 reviews per day · Canadian accounts · 60-day replacement guarantee</p>
+                        </div>
+                        <div class="summary-price" id="summaryPrice">$90 <small>one-time</small></div>
+                        <button class="btn btn-primary order-btn" id="orderNowBtn" type="button" data-plan="15 Reviews">Get Reviews Now <i class="fa-solid fa-arrow-right"></i></button>
                     </div>
-                    <div class="summary-price" id="summaryPrice">$90 <small>one-time</small></div>
-                    <button class="btn btn-primary order-btn" id="orderNowBtn" type="button" data-plan="15 Reviews">Get Reviews Now <i class="fa-solid fa-arrow-right"></i></button>
                 </div>
             </div>
         </section>
@@ -2071,7 +2187,7 @@
                         <p>Build a neutral, repeatable process for requesting honest feedback from genuine customers without incentives or review gating.</p><a href="get-more-google-reviews.html" class="tool-link">Read the Guide <i class="fa-solid fa-arrow-right"></i></a></div>
                     <div class="tool-card">
                         <div class="tool-icon-wrap"><i class="fa-solid fa-reply"></i></div>
-                        <h3>Review Response Generator</h3>
+                        <h3>Review Response Examples</h3>
                         <p>Use a four-part response framework and 30 adaptable examples for positive, neutral, negative and disputed feedback.</p><a href="respond-to-google-reviews.html" class="tool-link">See Response Examples <i class="fa-solid fa-arrow-right"></i></a></div>
                     <div class="tool-card">
                         <div class="tool-icon-wrap"><i class="fa-solid fa-magnifying-glass"></i></div>
@@ -2136,6 +2252,7 @@
                 <div class="cta-form" id="orderFormContainer">
                     <h3>Request a Free Quote</h3>
                     <form id="orderForm">
+                        <input type="hidden" name="contact_method" value="Email">
                         <div class="form-row-2">
                             <div class="form-group"><label for="inquiry_name">Full Name *</label><input type="text" id="inquiry_name" name="full_name" autocomplete="name" placeholder="John Smith" required></div>
                             <div class="form-group"><label for="inquiry_email">Email Address *</label><input type="email" id="inquiry_email" name="contact_detail" autocomplete="email" placeholder="john@business.ca" required></div>
@@ -2143,9 +2260,9 @@
                         <div class="form-group"><label for="inquiry_profile">Google Business Profile URL *</label><input type="url" id="inquiry_profile" name="business_url" placeholder="https://maps.google.com/..." required></div>
                         <div class="form-row-2">
                             <div class="form-group"><label for="inquiry_package">Package Interest</label><select id="inquiry_package" name="selected_plan"><option value="">Select a package...</option><option value="5 Reviews ($35)">5 Reviews ($35)</option><option value="10 Reviews ($65)">10 Reviews ($65)</option><option value="15 Reviews ($90)">15 Reviews ($90)</option><option value="25 Reviews ($137)">25 Reviews ($137)</option><option value="40 Reviews ($200)">40 Reviews ($200)</option><option value="75 Reviews ($337)">75 Reviews ($337)</option><option value="Custom / Not Sure Yet">Custom / Not Sure Yet</option></select></div>
-                            <div class="form-group"><label for="inquiry_phone">Phone (optional)</label><input type="tel" id="inquiry_phone" name="phone" autocomplete="tel" placeholder="555-123-4567"></div>
+                            <div class="form-group"><label for="inquiry_phone">Phone (optional)</label><input type="tel" id="inquiry_phone" name="phone_number" autocomplete="tel" placeholder="555-123-4567"></div>
                         </div>
-                        <div class="form-group"><label for="inquiry_notes">Any details about your business and goals?</label><textarea id="inquiry_notes" name="notes" rows="3" placeholder="Tell us about your business, location in Canada, and what you're looking to achieve..."></textarea></div>
+                        <div class="form-group"><label for="inquiry_notes">Any details about your business and goals?</label><textarea id="inquiry_notes" name="reason" rows="3" placeholder="Tell us about your business, location in Canada, and what you're looking to achieve..."></textarea></div>
                         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Inquiry <i class="fa-solid fa-arrow-right"></i></button>
                         <p id="inquiryStatus" role="status" aria-live="polite" style="display:none;font-size:13px;text-align:center;margin-top:10px"></p>
                         <p style="font-size:11px;color:#596273;text-align:center;margin-top:10px">Submitting this form sends your information to our service provider for follow-up. See our <a href="privacy-policy.html">privacy policy</a>.</p>
@@ -2195,6 +2312,12 @@
                 <button type="submit" id="submitBtn" class="btn btn-primary">Submit Request</button>
                 <p id="formStatus" style="display:none;margin-top:12px;text-align:center;font-size:13px;font-weight:500"></p>
             </form>
+            <div class="submission-success" id="purchaseSuccess" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
+                <div class="submission-success-icon" aria-hidden="true">&#10003;</div>
+                <h2 id="purchaseSuccessTitle">Request submitted</h2>
+                <p>Your order request has been sent. We will contact you using your selected contact method with the next step.</p>
+                <button class="btn btn-primary" id="purchaseSuccessClose" type="button">Done</button>
+            </div>
         </div>
     </div>
 
@@ -2204,6 +2327,7 @@
         var quoteForm = document.getElementById('quoteForm');
         var statusMsg = document.getElementById('formStatus');
         var submitBtn = document.getElementById('submitBtn');
+        var purchaseSuccess = document.getElementById('purchaseSuccess');
         var contactMethodSelect = document.getElementById('contact_method');
         var emailContainer = document.getElementById('emailContainer');
         var emailInput = document.getElementById('email_address');
@@ -2242,14 +2366,17 @@
                 mode: 'no-cors',
                 body: new FormData(quoteForm)
             }).then(function() {
-                statusMsg.style.display = 'block';
-                statusMsg.innerText = 'Thank you! Your request has been submitted.';
-                statusMsg.style.color = 'green';
                 quoteForm.reset();
                 document.getElementById('selected_plan').value = '15 Reviews';
                 contactMethodSelect.dispatchEvent(new Event('change'));
                 submitBtn.disabled = false;
                 submitBtn.innerText = 'Submit Request';
+                statusMsg.style.display = 'none';
+                document.getElementById('orderModalTitle').hidden = true;
+                quoteForm.hidden = true;
+                purchaseSuccess.hidden = false;
+                document.getElementById('orderModal').setAttribute('aria-labelledby', 'purchaseSuccessTitle');
+                purchaseSuccess.focus();
             }).catch(function() {
                 statusMsg.style.display = 'block';
                 statusMsg.innerText = 'Something went wrong. Please try again.';
@@ -2302,8 +2429,67 @@
             });
             var cards = document.querySelectorAll('.pricing-card'),
                 summaryTitle = document.getElementById('summaryTitle'),
+                summaryDetails = document.getElementById('summaryDetails'),
                 summaryPrice = document.getElementById('summaryPrice'),
                 orderBtn = document.getElementById('orderNowBtn');
+
+            var pricingSection = document.getElementById('pricing'),
+                pricingGrid = document.getElementById('pricingGrid'),
+                orderSummary = document.getElementById('orderSummary'),
+                orderSummarySlot = document.getElementById('orderSummarySlot'),
+                pricingContainer = pricingSection.querySelector('.container'),
+                dockedSummaryHeight = 0,
+                orderDockFrame = 0;
+
+            function measureOrderSummary() {
+                var wasDocked = orderSummary.classList.contains('is-docked'),
+                    wasContained = orderSummary.classList.contains('is-contained');
+                orderSummary.classList.remove('is-docked', 'is-contained');
+                orderSummarySlot.style.height = 'auto';
+                orderSummarySlot.style.height = orderSummary.offsetHeight + 'px';
+                orderSummary.classList.add('is-docked');
+                dockedSummaryHeight = orderSummary.offsetHeight;
+                orderSummary.classList.remove('is-docked');
+                if (wasDocked) orderSummary.classList.add('is-docked');
+                if (wasContained) orderSummary.classList.add('is-contained');
+            }
+
+            function updateOrderSummaryDock() {
+                orderDockFrame = 0;
+                var bottomGap = 12,
+                    gridTop = pricingGrid.getBoundingClientRect().top,
+                    containerBottom = pricingContainer.getBoundingClientRect().bottom,
+                    dockTop = window.innerHeight - dockedSummaryHeight - bottomGap,
+                    packagesReached = gridTop <= dockTop,
+                    summaryStillInSection = containerBottom > bottomGap,
+                    shouldDock = packagesReached && summaryStillInSection && containerBottom > window.innerHeight - bottomGap,
+                    shouldContain = packagesReached && summaryStillInSection && !shouldDock;
+                orderSummary.classList.toggle('is-docked', shouldDock);
+                orderSummary.classList.toggle('is-contained', shouldContain);
+                document.body.classList.toggle('order-summary-active', shouldDock || shouldContain);
+            }
+
+            function queueOrderSummaryDock() {
+                if (!orderDockFrame) orderDockFrame = window.requestAnimationFrame(updateOrderSummaryDock);
+            }
+
+            measureOrderSummary();
+            updateOrderSummaryDock();
+            window.addEventListener('scroll', queueOrderSummaryDock, { passive: true });
+            window.addEventListener('resize', function() {
+                measureOrderSummary();
+                queueOrderSummaryDock();
+            });
+            window.addEventListener('load', function() {
+                measureOrderSummary();
+                queueOrderSummaryDock();
+            });
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(function() {
+                    measureOrderSummary();
+                    queueOrderSummaryDock();
+                });
+            }
             cards.forEach(function(card) {
                 card.addEventListener('click', function() {
                     cards.forEach(function(c) {
@@ -2317,6 +2503,7 @@
                     if (parseInt(rev) >= 15) label = '~' + days + ' days delivery · 2 reviews per day · Local Canadian accounts · 60-day replacement guarantee';
                     if (parseInt(rev) >= 40) label = '~' + days + ' days delivery · 2 reviews per day · Photos · Dedicated manager · 90-day replacement guarantee';
                     summaryTitle.textContent = rev + ' Google Reviews';
+                    summaryDetails.textContent = label;
                     summaryPrice.innerHTML = '$' + pr + ' <small>one-time</small>';
                     orderBtn.dataset.plan = rev + ' Reviews';
                 })
@@ -2328,6 +2515,10 @@
             function om(p) {
                 mp.value = p;
                 modal.classList.add('open');
+                modal.setAttribute('aria-labelledby', 'orderModalTitle');
+                document.getElementById('orderModalTitle').hidden = false;
+                quoteForm.hidden = false;
+                purchaseSuccess.hidden = true;
                 document.getElementById('formStatus').style.display = 'none';
                 contactMethodSelect.dispatchEvent(new Event('change'));
             }
@@ -2341,6 +2532,7 @@
                 })
             });
             mc.addEventListener('click', cm);
+            document.getElementById('purchaseSuccessClose').addEventListener('click', cm);
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) cm()
             });
@@ -2352,10 +2544,16 @@
                 inquiryButton.disabled = true;
                 inquiryButton.textContent = 'Sending...';
                 inquiryStatus.style.display = 'none';
+                var inquiryPayload = new FormData(inquiryForm),
+                    inquiryPhone = document.getElementById('inquiry_phone').value.trim(),
+                    inquiryReason = document.getElementById('inquiry_notes').value.trim();
+                if (inquiryPhone) {
+                    inquiryPayload.set('reason', (inquiryReason ? inquiryReason + '\n' : '') + 'Optional phone: ' + inquiryPhone);
+                }
                 fetch('https://script.google.com/macros/s/AKfycbwG8KGBlFkXRlDUW9liT1j-x4uRodinv8N_r7hWQBsYq_CVw55yL6J-7v0of3O6cIfuag/exec', {
                     method: 'POST',
                     mode: 'no-cors',
-                    body: new FormData(inquiryForm)
+                    body: inquiryPayload
                 }).then(function() {
                     inquiryForm.style.display = 'none';
                     document.getElementById('formSuccess').style.display = ''

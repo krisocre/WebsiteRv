@@ -18,6 +18,7 @@
       rel="canonical"
       href="https://reviewsboost.ca/fake-review-statistics.html"
     />
+    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
     <link rel="manifest" href="site.webmanifest" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link
@@ -53,7 +54,7 @@
       content="ReviewsBoost analysis of fake review statistics"
     />
     <meta property="article:published_time" content="2026-09-03" />
-    <meta property="article:modified_time" content="2026-09-03" />
+    <meta property="article:modified_time" content="2026-09-04" />
     <meta property="article:section" content="Review data and research" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -83,18 +84,25 @@
             "headline": "Fake Review Statistics 2026: Platform and Regulator Data",
             "description": "A seven-year Google Maps review moderation series plus sourced platform disclosures, enforcement data and transparent derived calculations.",
             "datePublished": "2026-09-03",
-            "dateModified": "2026-09-03",
+            "dateModified": "2026-09-04",
             "author": {
               "@type": "Organization",
+              "@id": "https://reviewsboost.ca/editorial-policy.html#editorial-team",
               "name": "ReviewsBoost Editorial Team",
-              "url": "https://reviewsboost.ca/editorial-policy.html"
+              "url": "https://reviewsboost.ca/editorial-policy.html#authorship"
             },
             "publisher": { "@id": "https://reviewsboost.ca/#organization" },
             "mainEntityOfPage": {
               "@type": "WebPage",
               "@id": "https://reviewsboost.ca/fake-review-statistics.html"
             },
-            "image": "https://reviewsboost.ca/social-card.png",
+            "image": {
+              "@type": "ImageObject",
+              "url": "https://reviewsboost.ca/google-maps-review-moderation-2019-2025.svg",
+              "width": 1200,
+              "height": 630,
+              "caption": "Google-reported policy-violating review actions from 2019 through 2025"
+            },
             "inLanguage": "en-CA",
             "citation": [
               "https://blog.google/products-and-platforms/products/maps/new-ways-were-protecting-businesses-on-maps/",
@@ -150,7 +158,7 @@
             },
             "publisher": { "@id": "https://reviewsboost.ca/#organization" },
             "datePublished": "2026-09-03",
-            "dateModified": "2026-09-03",
+            "dateModified": "2026-09-04",
             "license": "https://creativecommons.org/licenses/by/4.0/",
             "isAccessibleForFree": true,
             "inLanguage": "en-CA",
@@ -206,7 +214,7 @@
             },
             "publisher": { "@id": "https://reviewsboost.ca/#organization" },
             "datePublished": "2026-09-03",
-            "dateModified": "2026-09-03",
+            "dateModified": "2026-09-04",
             "license": "https://creativecommons.org/licenses/by/4.0/",
             "isAccessibleForFree": true,
             "inLanguage": "en",
@@ -265,19 +273,19 @@
     <a class="skip-link" href="#article">Skip to article</a>
     <header class="site-header">
       <nav class="nav container" aria-label="Primary navigation">
-        <a class="brand" href="index.html"
+        <a class="brand" href="/"
           ><span class="brand-mark" aria-hidden="true">&#9733;</span>ReviewsBoost</a
         >
         <ul class="nav-links">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li class="nav-optional">
             <a href="blog.html" aria-current="page">Learning Centre</a>
           </li>
           <li><a href="google-reviews-faq.html">FAQ</a></li>
           <li class="nav-optional"><a href="about.html">About</a></li>
-          <li class="nav-contact"><a href="index.html#contact">Contact</a></li>
+          <li class="nav-contact"><a href="/#contact">Contact</a></li>
           <li>
-            <a class="nav-service nav-service-primary" href="index.html#pricing"
+            <a class="nav-service nav-service-primary" href="/#pricing"
               >Get Reviews</a
             >
           </li>
@@ -293,7 +301,7 @@
     </header>
     <nav class="breadcrumb" aria-label="Breadcrumb">
       <ol class="container">
-        <li><a href="index.html">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li><a href="blog.html">Learning Centre</a></li>
         <li aria-current="page">Fake review statistics</li>
       </ol>
@@ -310,7 +318,8 @@
             the available evidence cannot support.
           </p>
           <div class="meta-row">
-            <span>Published and reviewed September 3, 2026</span>
+            <span>By <a href="editorial-policy.html#authorship" rel="author">ReviewsBoost Editorial Team</a></span>
+            <span>Published September 3, 2026 · updated September 4, 2026</span>
             <span>Sources checked individually</span>
           </div>
         </div>
@@ -419,6 +428,18 @@
               >CC BY 4.0</a
             >. Source facts remain attributable to their original publishers.
           </p>
+          <h3 id="cite-data">How to cite or reuse the dataset</h3>
+          <p>
+            Suggested citation: ReviewsBoost Editorial Team (2026),
+            <cite>Google Maps Policy-Violating Review Moderation Disclosures,
+            2019&ndash;2025</cite>, version 1.0, ReviewsBoost, CC BY 4.0.
+          </p>
+          <p>
+            Reference-manager files:
+            <a href="CITATION.cff">Citation File Format (CFF)</a> &middot;
+            <a href="fake-review-statistics.bib">BibTeX</a>. Please preserve the
+            dataset title, version, URL and access date when reusing the data.
+          </p>
 
           <h2 id="google-timeline">
             Seven years of Google Maps review moderation disclosures
@@ -435,32 +456,20 @@
             <figcaption id="google-trend-caption">
               Google-reported policy-violating review actions, millions
             </figcaption>
-            <ol class="bar-chart">
-              <li class="bar-row">
-                <span>2019</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--bar-width: 25.7%"></span></span><span class="bar-value">&gt;75m</span>
-              </li>
-              <li class="bar-row">
-                <span>2020</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--bar-width: 18.8%"></span></span><span class="bar-value">55m</span>
-              </li>
-              <li class="bar-row">
-                <span>2021</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--bar-width: 32.5%"></span></span><span class="bar-value">&gt;95m</span>
-              </li>
-              <li class="bar-row">
-                <span>2022</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--bar-width: 39.4%"></span></span><span class="bar-value">&gt;115m</span>
-              </li>
-              <li class="bar-row">
-                <span>2023</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--bar-width: 58.2%"></span></span><span class="bar-value">&gt;170m</span>
-              </li>
-              <li class="bar-row">
-                <span>2024</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--bar-width: 82.2%"></span></span><span class="bar-value">&gt;240m</span>
-              </li>
-              <li class="bar-row">
-                <span>2025</span><span class="bar-track" aria-hidden="true"><span class="bar-fill" style="--bar-width: 100%"></span></span><span class="bar-value">&gt;292m</span>
-              </li>
-            </ol>
+            <a href="google-maps-review-moderation-2019-2025.svg">
+              <img
+                src="google-maps-review-moderation-2019-2025.svg"
+                width="1200"
+                height="630"
+                alt="Bar chart of Google-reported policy-violating review actions increasing from more than 75 million in 2019 to more than 292 million in 2025, with a temporary decline to 55 million in 2020"
+                loading="lazy"
+                decoding="async"
+              />
+            </a>
             <p class="data-note">
               Bar lengths use the printed rounded values. Qualifiers and source
-              definitions are preserved in the downloadable dataset.
+              definitions are preserved in the downloadable dataset. Open the
+              chart image for a shareable, full-size version.
             </p>
           </figure>
           <p>
@@ -657,7 +666,7 @@
             </li>
             <li>
               <strong>Cut-off date.</strong> Sources and links were checked through
-              September 3, 2026. A figure's reporting year is preserved even when
+              September 4, 2026. A figure's reporting year is preserved even when
               the source was published later.
             </li>
             <li>
@@ -789,6 +798,7 @@
           <ol>
             <li><a href="#snapshot">Statistics snapshot</a></li>
             <li><a href="#downloads">Downloadable data</a></li>
+            <li><a href="#cite-data">Cite or reuse the dataset</a></li>
             <li><a href="#google-timeline">Seven-year Google series</a></li>
             <li><a href="#google">Google review data</a></li>
             <li><a href="#platforms">Other platforms</a></li>
@@ -822,6 +832,11 @@
             <p>Build a consistent, incentive-free customer request process.</p>
             <a href="get-more-google-reviews.html">Read the acquisition guide &rarr;</a>
           </article>
+          <article class="card">
+            <h3>Rating resilience study</h3>
+            <p>Explore 420 reproducible scenarios for one-star rating impact.</p>
+            <a href="google-review-rating-resilience-study.html">Read the original analysis &rarr;</a>
+          </article>
         </div>
       </div>
     </section>
@@ -842,7 +857,7 @@
             <h3>Company</h3>
             <a href="about.html">About</a
             ><a href="editorial-policy.html">Editorial policy</a
-            ><a href="index.html#contact">Contact</a>
+            ><a href="/#contact">Contact</a>
           </div>
           <div>
             <h3>Policies</h3>
