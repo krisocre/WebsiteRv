@@ -7,7 +7,10 @@ const cases = [
   { url: origin + '/index.html', redirect: origin + '/' },
   { url: origin + '/index.html?utm_source=seo-check', redirect: origin + '/?utm_source=seo-check' },
   { url: origin + '/remove-google-reviews.html', status: 200 },
-  { url: origin + '/sitemap.xml', status: 200 }
+  { url: origin + '/sitemap.xml', status: 200, type: /(?:application|text)\/xml/ },
+  { url: origin + '/robots.txt', status: 200, type: 'text/plain' },
+  { url: origin + '/reviewsboost-missing-page-check', status: 404, type: 'text/html' },
+  { url: origin + '/nested/reviewsboost-missing-page-check', status: 404, type: 'text/html' }
 ];
 if (process.argv.includes('--after-deploy')) cases.push(
   { url: origin + '/google-review-removal-checker.html', status: 200, type: 'text/html' },

@@ -2,6 +2,10 @@
 
 > ReviewsBoost publishes practical Google review and local reputation resources for Canadian businesses. It is an independent service and is not affiliated with Google.
 
+## Service area
+
+Paid services are exclusively for business locations in Canada. Online service covers all ten provinces and three territories, including smaller communities. Prices are in CAD. The [Canadian coverage section](https://reviewsboost.ca/#canada) lists representative markets; it does not describe physical branch offices. Public resources remain readable worldwide.
+
 ## Primary pages
 
 - [Home](https://reviewsboost.ca/): Service overview and contact path.
