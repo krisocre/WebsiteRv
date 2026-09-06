@@ -678,7 +678,7 @@
             submitButton.textContent = 'Sending...';
             var removalPayload = new FormData(removalForm);
             removalPayload.set('contact_detail', document.getElementById('email').value.trim());
-            fetch('https://script.google.com/macros/s/AKfycbwG8KGBlFkXRlDUW9liT1j-x4uRodinv8N_r7hWQBsYq_CVw55yL6J-7v0of3O6cIfuag/exec', {
+            fetch('https://script.google.com/macros/s/AKfycby4mQu0BJFu8Jmbw_zZPzrBb9TF_YRw4j0Ayu3PFvwgicSN5vtzynX0ASet2utzxtlnMw/exec', {
                 method: 'POST',
                 mode: 'no-cors',
                 body: removalPayload

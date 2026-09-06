@@ -1,6 +1,14 @@
 # Forms and Google Sheets
 
-The website posts all three forms to the existing Google Apps Script web app URL.
+All three website forms are configured to post to this Google Apps Script deployment:
+
+```text
+https://script.google.com/macros/s/AKfycby4mQu0BJFu8Jmbw_zZPzrBb9TF_YRw4j0Ayu3PFvwgicSN5vtzynX0ASet2utzxtlnMw/exec
+```
+
+Deploy the updated `index.html` and `remove-google-reviews.html` as well as the Apps Script handler. Changing the Apps Script deployment does not publish the website's HTML or change its visible fields. A live-site check on September 5, 2026 still found the previous URL and old field names on both public pages.
+
+The handler only defines `doPost`, so opening the endpoint in a browser may show `Script function not found: doGet`. That GET response does not test whether a form POST is saved successfully.
 
 | Form | `form_type` | Fields |
 | --- | --- | --- |
