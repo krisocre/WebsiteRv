@@ -1,0 +1,16 @@
+[hidden] { display: none !important; }
+.evidence-form { max-width: 900px; }
+.evidence-form fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.evidence-form legend { margin-bottom: 18px; font-size: 20px; color: var(--navy); }
+.evidence-form .case-notes { margin-top: 20px; }
+.evidence-form textarea { width: 100%; padding: 12px; border: 1px solid #aeb9c6; border-radius: 7px; resize: vertical; }
+.evidence-form textarea:focus-visible { outline: 3px solid #0885fe; outline-offset: 3px; }
+.evidence-checklist { margin: 22px 0; padding: 18px; background: var(--wash); border-radius: 8px; }
+.evidence-checklist label { display: flex; align-items: flex-start; gap: 10px; margin: 12px 0; cursor: pointer; }
+.evidence-checklist input { width: 20px; height: 20px; flex: 0 0 20px; margin-top: 3px; }
+.case-output { max-width: 900px; margin-top: 28px; padding: 28px; border: 1px solid var(--line); border-radius: 14px; background: #fff; }
+.case-output pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 18px; background: var(--wash); font: inherit; font-size: 14px; border-radius: 8px; }
+.tool-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.table-wrap { max-width: 100%; overflow-x: auto; }
+@media (max-width: 600px) { .evidence-form, .case-output { padding: 20px; } }
+@media print { .evidence-form, .tool-actions { display: none; } .case-output { max-width: none; border: 0; padding: 0; } }

@@ -1,0 +1,44 @@
+GOOGLE REVIEW EVIDENCE WORKSHEET
+ReviewsBoost | Version 1.0 | September 5, 2026
+https://reviewsboost.ca/google-review-removal-checker.html
+
+Use one worksheet per review. This is a preparation aid, not a submitted report.
+Replace bracketed prompts with verified facts or mark them unknown.
+
+Business: [Name and location]
+Business Profile URL: [URL]
+Review URL: [Direct review URL]
+Date first observed: [Date and timezone]
+Reporting stage: [Not reported / pending / rejected / appealed]
+Existing case reference and decision: [If applicable]
+
+CONCERN TO ASSESS
+[Specific issue and relevant Google policy section]
+Policy source: https://support.google.com/contributionpolicy/answer/7400114
+
+VERIFIABLE FACTS
+[Short relevant excerpt or observable behaviour]
+[Dated supporting fact and evidence reference]
+
+WHAT IS STILL UNCERTAIN
+[Unknown identity, missing records, alternative explanations]
+
+EVIDENCE INDEX
+Attachment A: [Filename, date captured, what it establishes]
+Attachment B: [Filename, date captured, what it establishes]
+Related review URLs and timeline: [If applicable]
+
+REPORT OR APPEAL NOTE
+[Explain the policy issue using only the facts above. For an appeal, identify
+the previous decision and the evidence it may have missed.]
+
+NEXT ACTION AND DATE
+[Action, owner, date]
+
+Official reporting and appeal guidance:
+https://support.google.com/business/answer/4596773
+Direct demands for payment in exchange for review removal:
+https://support.google.com/business/answer/16404809
+
+Keep sensitive evidence private. A low rating, disagreement, or unrecognized
+name alone does not establish a policy violation. Google makes the decision.

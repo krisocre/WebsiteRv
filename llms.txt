@@ -11,6 +11,8 @@
 
 ## Guides and tools
 
+- [Review removal checker and evidence builder](https://reviewsboost.ca/google-review-removal-checker.html): A private concern-specific evidence checklist with report-stage guidance and a downloadable case worksheet.
+
 - [How to get more Google reviews](https://reviewsboost.ca/get-more-google-reviews.html): Authentic, incentive-free customer request process.
 - [Google reviews not showing](https://reviewsboost.ca/google-reviews-not-showing.html): Delayed, missing and disappearing review troubleshooting.
 - [Fake review statistics](https://reviewsboost.ca/fake-review-statistics.html): A seven-year Google moderation series, cross-platform disclosures, regulator cases, transparent calculations and downloadable CSV data with machine-readable metadata.
@@ -21,7 +23,7 @@
 - [Google review policy for Canadian businesses](https://reviewsboost.ca/google-review-policy-canada.html): Platform rules and Canadian context.
 - [Google Business Profile local SEO checklist](https://reviewsboost.ca/google-business-profile-local-seo.html): Profile, website, reviews and measurement.
 - [Google reviews FAQ](https://reviewsboost.ca/google-reviews-faq.html): Forty-one detailed questions and answers.
-- [Review rating calculator](https://reviewsboost.ca/google-review-calculator.html): Transparent weighted-average calculator.
+- [Review rating calculator](https://reviewsboost.ca/google-review-calculator.html): Weighted-average calculator with feasible integer-star ranges for rounded public ratings, exact targets and shareable scenarios.
 
 ## Open data and citation files
 

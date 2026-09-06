@@ -13,8 +13,7 @@
     <link rel="canonical" href="https://reviewsboost.ca/">
     <link rel="manifest" href="site.webmanifest">
     <link rel="alternate" type="application/rss+xml" title="ReviewsBoost learning centre" href="https://reviewsboost.ca/feed.xml">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="site-icons.css">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <!-- Open Graph / Social -->
@@ -40,7 +39,7 @@
       "@graph":[
         {"@type":"Organization","@id":"https://reviewsboost.ca/#organization","name":"ReviewsBoost","url":"https://reviewsboost.ca/","logo":{"@type":"ImageObject","url":"https://reviewsboost.ca/favicon-512.png","width":512,"height":512},"email":"support@reviewsboost.ca","contactPoint":{"@type":"ContactPoint","email":"support@reviewsboost.ca","contactType":"customer support","areaServed":"CA","availableLanguage":["English"]},"description":"Google review education and online reputation support for Canadian businesses.","areaServed":{"@type":"Country","name":"Canada"}},
         {"@type":"WebSite","@id":"https://reviewsboost.ca/#website","url":"https://reviewsboost.ca/","name":"ReviewsBoost","alternateName":"Reviews Boost","publisher":{"@id":"https://reviewsboost.ca/#organization"},"inLanguage":"en-CA"},
-        {"@type":"WebPage","@id":"https://reviewsboost.ca/#webpage","url":"https://reviewsboost.ca/","name":"Google Review Services Canada","description":"Google review support, educational resources and policy-based review removal help for Canadian businesses.","isPartOf":{"@id":"https://reviewsboost.ca/#website"},"about":{"@type":"Thing","name":"Online reputation management"},"inLanguage":"en-CA","dateModified":"2026-09-03"},
+        {"@type":"WebPage","@id":"https://reviewsboost.ca/#webpage","url":"https://reviewsboost.ca/","name":"Google Review Services Canada","description":"Google review support, educational resources and policy-based review removal help for Canadian businesses.","isPartOf":{"@id":"https://reviewsboost.ca/#website"},"about":{"@type":"Thing","name":"Online reputation management"},"inLanguage":"en-CA","dateModified":"2026-09-05"},
         {"@type":"Service","@id":"https://reviewsboost.ca/#service","name":"Google review services","provider":{"@id":"https://reviewsboost.ca/#organization"},"areaServed":{"@type":"Country","name":"Canada"},"url":"https://reviewsboost.ca/"}
       ]
     }
@@ -137,6 +136,15 @@
             box-shadow: 0 6px 18px rgba(22, 34, 59, 0.3)
         }
         
+        .review-paths { padding: 28px 0; background: #f5f8fc; border-bottom: 1px solid #dce3eb; }
+        .review-paths h2 { font-size: 21px; color: #16223b; margin-bottom: 16px; }
+        .review-path-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+        .review-path-grid a { display: block; padding: 20px; border: 1px solid #dce3eb; border-radius: 10px; background: #fff; }
+        .review-path-grid a:hover, .review-path-grid a:focus-visible { border-color: #0885fe; }
+        .review-path-grid strong { display: block; color: #0568c0; margin-bottom: 5px; }
+        .review-path-grid span { display: block; font-size: 13px; color: #596273; }
+        @media (max-width: 700px) { .review-path-grid { grid-template-columns: 1fr; } }
+
         .section-pad {
             padding: 80px 0
         }
@@ -1775,6 +1783,17 @@
             </div>
         </section>
 
+        <section class="review-paths" aria-labelledby="review-paths-title">
+            <div class="container">
+                <h2 id="review-paths-title">Compare review services and free planning tools</h2>
+                <div class="review-path-grid">
+                    <a href="#pricing"><strong>Compare review packages →</strong><span>Six package sizes, from 5 reviews at CAD $35 to 75 at CAD $337.</span></a>
+                    <a href="google-review-removal-checker.html"><strong>Prepare a review removal case →</strong><span>Check the concern, organize supporting evidence, and download a free worksheet.</span></a>
+                    <a href="google-review-calculator.html#hidden-range"><strong>See what a rating change takes →</strong><span>A public 4.2 can hide several exact averages. Calculate the range for your review count.</span></a>
+                </div>
+            </div>
+        </section>
+
         <section class="press-section" aria-label="Press mentions">
             <p class="press-title">ReviewsBoost is Recognized On…</p>
             <div class="press-mask">
@@ -1924,8 +1943,7 @@
                     <div class="service-card">
                         <div class="svc-icon-wrap svc-green"><i class="fa-solid fa-map-pin"></i></div>
                         <h3>Local Canadian Accounts</h3>
-                        <p>Reviews from accounts based in Ontario, Alberta, British Columbia, Quebec and across Canada. Locally-sourced reviews carry significantly more weight in Canadian Google Maps rankings. <a href="#contact">Contact us</a> to learn more
-                            about our local approach.</p>
+                        <p>Coverage includes Ontario, Alberta, British Columbia, Quebec and across Canada. A reviewer's location does not establish a ranking advantage. Our <a href="google-business-profile-local-seo.html">local visibility guide</a> explains relevance, distance and prominence, the factors Google publicly describes.</p>
                     </div>
                     <div class="service-card">
                         <div class="svc-icon-wrap svc-amber"><i class="fa-solid fa-shield-halved"></i></div>
@@ -2178,6 +2196,14 @@
                 <p class="section-sub text-center" style="margin:0 auto">Plan authentic review requests, calculate rating scenarios, and write thoughtful responses—no signup required.</p>
                 <div class="tools-grid">
                     <div class="tool-card">
+                        <div class="tool-icon-wrap"><i class="fa-solid fa-list-check"></i></div>
+                        <h3>Review Removal Evidence Builder</h3>
+                        <p>Turn a review concern into a checklist and a downloadable case worksheet, with guidance for pending reports and appeals.</p><a href="google-review-removal-checker.html" class="tool-link">Build a Free Worksheet <i class="fa-solid fa-arrow-right"></i></a></div>
+                    <div class="tool-card">
+                        <div class="tool-icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
+                        <h3>Original Rating Resilience Study</h3>
+                        <p>Explore 420 reproducible scenarios showing how review volume changes the impact of incoming one-star ratings.</p><a href="google-review-rating-resilience-study.html" class="tool-link">Explore the Data <i class="fa-solid fa-arrow-right"></i></a></div>
+                    <div class="tool-card">
                         <div class="tool-icon-wrap"><i class="fa-solid fa-calculator"></i></div>
                         <h3>Google Review Rating Calculator</h3>
                         <p>Estimate how many 5-star reviews are mathematically needed to reach a target average, with assumptions explained.</p><a href="google-review-calculator.html" class="tool-link">Open Calculator <i class="fa-solid fa-arrow-right"></i></a></div>
@@ -2252,11 +2278,13 @@
                 <div class="cta-form" id="orderFormContainer">
                     <h3>Request a Free Quote</h3>
                     <form id="orderForm">
+                        <input type="hidden" name="form_type" value="quote_request">
                         <input type="hidden" name="contact_method" value="Email">
                         <div class="form-row-2">
                             <div class="form-group"><label for="inquiry_name">Full Name *</label><input type="text" id="inquiry_name" name="full_name" autocomplete="name" placeholder="John Smith" required></div>
-                            <div class="form-group"><label for="inquiry_email">Email Address *</label><input type="email" id="inquiry_email" name="contact_detail" autocomplete="email" placeholder="john@business.ca" required></div>
+                            <div class="form-group"><label for="inquiry_email">Email Address *</label><input type="email" id="inquiry_email" name="email_address" autocomplete="email" placeholder="john@business.ca" required></div>
                         </div>
+                        <div class="form-group"><label for="inquiry_business">Business Name *</label><input type="text" id="inquiry_business" name="business_name" autocomplete="organization" placeholder="Your business name" required></div>
                         <div class="form-group"><label for="inquiry_profile">Google Business Profile URL *</label><input type="url" id="inquiry_profile" name="business_url" placeholder="https://maps.google.com/..." required></div>
                         <div class="form-row-2">
                             <div class="form-group"><label for="inquiry_package">Package Interest</label><select id="inquiry_package" name="selected_plan"><option value="">Select a package...</option><option value="5 Reviews ($35)">5 Reviews ($35)</option><option value="10 Reviews ($65)">10 Reviews ($65)</option><option value="15 Reviews ($90)">15 Reviews ($90)</option><option value="25 Reviews ($137)">25 Reviews ($137)</option><option value="40 Reviews ($200)">40 Reviews ($200)</option><option value="75 Reviews ($337)">75 Reviews ($337)</option><option value="Custom / Not Sure Yet">Custom / Not Sure Yet</option></select></div>
@@ -2303,14 +2331,17 @@
             <button class="modal-close" id="modalClose" type="button" aria-label="Close order form">&times;</button>
             <h2 id="orderModalTitle">Place Your Order</h2>
             <form id="quoteForm">
+                <input type="hidden" name="form_type" value="buy_reviews">
                 <div class="form-group"><label for="selected_plan">Selected Plan</label><input type="text" id="selected_plan" name="selected_plan" value="15 Reviews" readonly style="background:#f8f8f8;font-weight:500"></div>
-                <div class="form-group"><label for="full_name">Full Name *</label><input type="text" id="full_name" name="full_name" placeholder="Your full name" required></div>
+                <div class="form-group"><label for="full_name">Full Name *</label><input type="text" id="full_name" name="full_name" autocomplete="name" placeholder="Your full name" required></div>
+                <div class="form-group"><label for="business_name">Business Name *</label><input type="text" id="business_name" name="business_name" autocomplete="organization" placeholder="Your business name" required></div>
                 <div class="form-group"><label for="contact_method">How do you want to be contacted?</label><select id="contact_method" name="contact_method"><option value="Email">Email</option><option value="WhatsApp">WhatsApp</option><option value="Phone Call">Phone Call</option><option value="SMS">SMS</option></select></div>
-                <div id="emailContainer" class="form-group"><label for="email_address">Email Address *</label><input type="email" id="email_address" name="contact_detail" placeholder="your@email.com" required></div>
-                <div id="phoneContainer" class="form-group" style="display:none"><label for="phone_number">Phone Number *</label><input type="tel" id="phone_number" name="contact_detail" placeholder="555-123-4567" disabled maxlength="12"></div>
+                <div id="emailContainer" class="form-group"><label for="email_address">Email Address *</label><input type="email" id="email_address" name="email_address" autocomplete="email" placeholder="your@email.com" required></div>
+                <div id="phoneContainer" class="form-group" style="display:none"><label for="phone_number">Phone Number *</label><input type="tel" id="phone_number" name="phone_number" autocomplete="tel" placeholder="555-123-4567" disabled maxlength="12"></div>
                 <div class="form-group"><label for="business_url">Google Business Profile URL *</label><input type="url" id="business_url" name="business_url" placeholder="https://maps.google.com/..." required></div>
+                <div class="form-group"><label for="order_notes">Additional details (optional)</label><textarea id="order_notes" name="reason" rows="3" placeholder="Tell us about your business and any details for your order."></textarea></div>
                 <button type="submit" id="submitBtn" class="btn btn-primary">Submit Request</button>
-                <p id="formStatus" style="display:none;margin-top:12px;text-align:center;font-size:13px;font-weight:500"></p>
+                <p id="formStatus" role="status" aria-live="polite" style="display:none;margin-top:12px;text-align:center;font-size:13px;font-weight:500"></p>
             </form>
             <div class="submission-success" id="purchaseSuccess" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
                 <div class="submission-success-icon" aria-hidden="true">&#10003;</div>
@@ -2361,10 +2392,12 @@
             e.preventDefault();
             submitBtn.disabled = true;
             submitBtn.innerText = 'Sending...';
+            var orderPayload = new FormData(quoteForm);
+            orderPayload.set('contact_detail', (contactMethodSelect.value === 'Email' ? emailInput.value : phoneInput.value).trim());
             fetch('https://script.google.com/macros/s/AKfycbwG8KGBlFkXRlDUW9liT1j-x4uRodinv8N_r7hWQBsYq_CVw55yL6J-7v0of3O6cIfuag/exec', {
                 method: 'POST',
                 mode: 'no-cors',
-                body: new FormData(quoteForm)
+                body: orderPayload
             }).then(function() {
                 quoteForm.reset();
                 document.getElementById('selected_plan').value = '15 Reviews';
@@ -2544,12 +2577,8 @@
                 inquiryButton.disabled = true;
                 inquiryButton.textContent = 'Sending...';
                 inquiryStatus.style.display = 'none';
-                var inquiryPayload = new FormData(inquiryForm),
-                    inquiryPhone = document.getElementById('inquiry_phone').value.trim(),
-                    inquiryReason = document.getElementById('inquiry_notes').value.trim();
-                if (inquiryPhone) {
-                    inquiryPayload.set('reason', (inquiryReason ? inquiryReason + '\n' : '') + 'Optional phone: ' + inquiryPhone);
-                }
+                var inquiryPayload = new FormData(inquiryForm);
+                inquiryPayload.set('contact_detail', document.getElementById('inquiry_email').value.trim());
                 fetch('https://script.google.com/macros/s/AKfycbwG8KGBlFkXRlDUW9liT1j-x4uRodinv8N_r7hWQBsYq_CVw55yL6J-7v0of3O6cIfuag/exec', {
                     method: 'POST',
                     mode: 'no-cors',
