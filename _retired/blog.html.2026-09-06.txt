@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Online Reputation Management Guides Canada | ReviewsBoost</title>
+    <title>Google Review &amp; Local SEO Guides Canada | ReviewsBoost</title>
     <meta
       name="description"
-      content="Online reputation management guides for Canadian businesses: bad review removal, response planning, monitoring, recovery, policy and local visibility."
+      content="Practical Google review, reputation management and local SEO guides for Canadian businesses, with detailed answers, templates and checklists."
     />
     <meta
       name="robots"
@@ -29,11 +29,11 @@
     <meta property="og:site_name" content="ReviewsBoost" />
     <meta
       property="og:title"
-      content="Online Reputation Management Guides for Canada"
+      content="Google Review &amp; Local SEO Guides for Canada"
     />
     <meta
       property="og:description"
-      content="Practical resources for handling harmful reviews, responding carefully, monitoring reputation risk and improving local visibility."
+      content="Detailed, practical resources for earning authentic feedback, responding well, handling fake reviews and improving local visibility."
     />
     <meta property="og:url" content="https://reviewsboost.ca/blog.html" />
     <meta
@@ -49,7 +49,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content="Online Reputation Management Guides for Canada"
+      content="Google Review &amp; Local SEO Guides for Canada"
     />
     <meta
       name="twitter:description"
@@ -84,8 +84,8 @@
             "@type": "CollectionPage",
             "@id": "https://reviewsboost.ca/blog.html#webpage",
             "url": "https://reviewsboost.ca/blog.html",
-            "name": "Online Reputation Management Guides for Canadian Businesses",
-            "description": "A learning centre covering harmful-review assessment, policy-based reporting, public responses, monitoring, recovery and local visibility.",
+            "name": "Google Review and Local SEO Guides for Canadian Businesses",
+            "description": "A learning centre covering authentic review requests, review responses, policy-based reporting, local SEO and reputation management.",
             "isPartOf": { "@id": "https://reviewsboost.ca/#website" },
             "about": [
               { "@type": "Thing", "name": "Google reviews" },
@@ -99,13 +99,13 @@
           {
             "@type": "ItemList",
             "@id": "https://reviewsboost.ca/blog.html#guide-list",
-            "name": "ReviewsBoost online reputation management guides",
+            "name": "ReviewsBoost Google review and local SEO guides",
             "numberOfItems": 12,
             "itemListOrder": "https://schema.org/ItemListUnordered",
             "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Google review removal checker and evidence builder", "url": "https://reviewsboost.ca/google-review-removal-checker.html" },
-              { "@type": "ListItem", "position": 2, "name": "How to report a fake Google review", "url": "https://reviewsboost.ca/remove-fake-google-review.html" },
-              { "@type": "ListItem", "position": 3, "name": "How to respond to Google reviews", "url": "https://reviewsboost.ca/respond-to-google-reviews.html" },
+              { "@type": "ListItem", "position": 1, "name": "How to get more Google reviews", "url": "https://reviewsboost.ca/get-more-google-reviews.html" },
+              { "@type": "ListItem", "position": 2, "name": "How to respond to Google reviews", "url": "https://reviewsboost.ca/respond-to-google-reviews.html" },
+              { "@type": "ListItem", "position": 3, "name": "How to report a fake Google review", "url": "https://reviewsboost.ca/remove-fake-google-review.html" },
               { "@type": "ListItem", "position": 4, "name": "Create and use a Google review link and QR code", "url": "https://reviewsboost.ca/google-review-link-qr-code.html" },
               { "@type": "ListItem", "position": 5, "name": "Google review policy for Canadian businesses", "url": "https://reviewsboost.ca/google-review-policy-canada.html" },
               { "@type": "ListItem", "position": 6, "name": "Google Business Profile local SEO checklist", "url": "https://reviewsboost.ca/google-business-profile-local-seo.html" },
@@ -114,7 +114,7 @@
               { "@type": "ListItem", "position": 9, "name": "Why Google reviews are not showing", "url": "https://reviewsboost.ca/google-reviews-not-showing.html" },
               { "@type": "ListItem", "position": 10, "name": "Fake review statistics and source data", "url": "https://reviewsboost.ca/fake-review-statistics.html" },
               { "@type": "ListItem", "position": 11, "name": "Google review rating resilience study", "url": "https://reviewsboost.ca/google-review-rating-resilience-study.html" },
-              { "@type": "ListItem", "position": 12, "name": "How to request authentic Google reviews", "url": "https://reviewsboost.ca/get-more-google-reviews.html" }
+              { "@type": "ListItem", "position": 12, "name": "Google review removal checker and evidence builder", "url": "https://reviewsboost.ca/google-review-removal-checker.html" }
             ]
           },
           {
@@ -150,9 +150,9 @@
           <li class="nav-optional"><a href="blog.html" aria-current="page">Learning Centre</a></li>
           <li><a href="google-reviews-faq.html">FAQ</a></li>
           <li class="nav-optional"><a href="about.html">About</a></li>
-          <li class="nav-contact"><a href="online-reputation-management.html#contact">Contact</a></li>
-          <li><a class="nav-service nav-service-primary" href="online-reputation-management.html#reputation-management">Reputation Management</a></li>
-          <li><a class="nav-service nav-service-secondary" href="/">Review Removal</a></li>
+          <li class="nav-contact"><a href="/#contact">Contact</a></li>
+          <li><a class="nav-service nav-service-primary" href="/#reputation-management">Reputation Management</a></li>
+          <li><a class="nav-service nav-service-secondary" href="remove-google-reviews.html">Review Removal</a></li>
         </ul>
       </nav>
     </header>
@@ -161,13 +161,13 @@
         <div class="container hero-grid">
           <div>
             <p class="eyebrow">ReviewsBoost learning centre</p>
-            <h1>Online reputation management guides for Canadian businesses</h1>
+            <h1>Practical Google review and local SEO guides for Canada</h1>
             <p class="lede">
-              Practical help for assessing harmful reviews, organizing removal
-              evidence, responding carefully, monitoring reputation risk and
-              improving how a business appears in local search.
+              Straightforward help for Canadian business owners trying to earn real
+              customer feedback, handle replies well, understand the rules and
+              improve how they appear in local search.
             </p>
-            <p>Need hands-on help with a Canadian business location? See our <a href="online-reputation-management.html#canada">nationwide online service coverage</a> and <a href="/">review removal assistance</a>.</p>
+            <p>Need hands-on help with a Canadian business location? See our <a href="/#canada">nationwide online service coverage</a> and <a href="remove-google-reviews.html">review removal assistance</a>.</p>
           </div>
           <aside class="hero-card">
             <strong>Built for useful answers</strong>
@@ -184,7 +184,7 @@
         <div class="container">
           <div class="section-head">
             <p class="eyebrow">Start here</p>
-            <h2 id="featured-guides">Core reputation management guides</h2>
+            <h2 id="featured-guides">Core Google review guides</h2>
             <p>
               Start with the problem in front of you, or use the guides in
               order to build a solid review process from the ground up.
@@ -192,14 +192,14 @@
           </div>
           <div class="card-grid">
             <article class="card">
-              <span class="tag">Removal</span>
-              <h2>How to report a fake Google review</h2>
+              <span class="tag">Acquisition</span>
+              <h2>How to get more Google reviews</h2>
               <p>
-                Work out what may breach policy, what evidence is worth saving,
-                how reporting works, and what to do if a review remains live.
+                A sensible way to invite every eligible customer, with email,
+                SMS, receipt and in-person wording you can adapt.
               </p>
-              <a href="remove-fake-google-review.html"
-                >Review the reporting workflow →</a
+              <a href="get-more-google-reviews.html"
+                >Build an authentic review process →</a
               >
             </article>
             <article class="card">
@@ -215,14 +215,14 @@
               >
             </article>
             <article class="card">
-              <span class="tag">Customer feedback</span>
-              <h2>How to request authentic Google reviews</h2>
+              <span class="tag">Removal</span>
+              <h2>How to report a fake Google review</h2>
               <p>
-                A policy-aware way to invite every eligible customer, with email,
-                SMS, receipt and in-person wording you can adapt.
+                Work out what may breach policy, what evidence is worth saving,
+                how reporting works, and what to do if a review remains live.
               </p>
-              <a href="get-more-google-reviews.html"
-                >Build an authentic request process →</a
+              <a href="remove-fake-google-review.html"
+                >Review the reporting workflow →</a
               >
             </article>
             <article class="card">
@@ -353,14 +353,14 @@
           </div>
           <div class="card-grid">
             <div class="card">
-              <h3>Authentic customer feedback</h3>
+              <h3>Getting reviews</h3>
               <p>
                 When should I ask? Can I text a review link? Can employees ask?
                 How often should I follow up? What is review gating? Can I offer
                 a discount?
               </p>
               <a href="get-more-google-reviews.html"
-                >See customer request answers →</a
+                >See acquisition answers →</a
               >
             </div>
             <div class="card">
@@ -410,7 +410,7 @@
             <div class="card">
               <h3>Policies and compliance</h3>
               <p>
-                What counts as fake engagement? Are contest entries incentives? Can
+                Are paid reviews allowed? Are contest entries incentives? Can
                 staff review an employer? Can I ask only happy customers? What
                 claims should be documented?
               </p>
@@ -433,7 +433,7 @@
             its platform.
           </p>
         </div>
-        <a class="button" href="/"
+        <a class="button" href="remove-google-reviews.html"
           >View review-removal help</a
         >
       </div>
@@ -458,7 +458,7 @@
             <h3>Company</h3>
             <a href="about.html">About</a
             ><a href="editorial-policy.html">Editorial policy</a
-            ><a href="online-reputation-management.html#contact">Contact</a>
+            ><a href="/#contact">Contact</a>
           </div>
           <div>
             <h3>Policies</h3>

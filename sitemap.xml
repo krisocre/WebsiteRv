@@ -1,41 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url><loc>https://reviewsboost.ca/</loc><lastmod>2026-09-06</lastmod></url>
   <url>
-    <loc>https://reviewsboost.ca/remove-google-reviews.html</loc>
+    <loc>https://reviewsboost.ca/</loc>
     <lastmod>2026-09-06</lastmod>
     <image:image><image:loc>https://reviewsboost.ca/google-review-removal-eligibility.svg</image:loc></image:image>
   </url>
+  <url><loc>https://reviewsboost.ca/online-reputation-management.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://reviewsboost.ca/blog.html</loc><lastmod>2026-09-06</lastmod></url>
   <url>
     <loc>https://reviewsboost.ca/fake-review-statistics.html</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <image:image><image:loc>https://reviewsboost.ca/google-maps-review-moderation-2019-2025.svg</image:loc></image:image>
   </url>
   <url>
     <loc>https://reviewsboost.ca/google-review-rating-resilience-study.html</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <image:image><image:loc>https://reviewsboost.ca/google-review-rating-resilience-4-8.svg</image:loc></image:image>
   </url>
   <url>
     <loc>https://reviewsboost.ca/get-more-google-reviews.html</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <image:image><image:loc>https://reviewsboost.ca/authentic-google-review-request-workflow.svg</image:loc></image:image>
   </url>
-  <url><loc>https://reviewsboost.ca/google-reviews-not-showing.html</loc><lastmod>2026-09-03</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-reviews-not-showing.html</loc><lastmod>2026-09-06</lastmod></url>
   <url>
     <loc>https://reviewsboost.ca/respond-to-google-reviews.html</loc>
-    <lastmod>2026-09-04</lastmod>
+    <lastmod>2026-09-06</lastmod>
     <image:image><image:loc>https://reviewsboost.ca/google-review-response-framework.svg</image:loc></image:image>
   </url>
-  <url><loc>https://reviewsboost.ca/remove-fake-google-review.html</loc><lastmod>2026-09-05</lastmod></url>
-  <url><loc>https://reviewsboost.ca/google-review-link-qr-code.html</loc><lastmod>2026-09-03</lastmod></url>
-  <url><loc>https://reviewsboost.ca/google-review-policy-canada.html</loc><lastmod>2026-09-03</lastmod></url>
-  <url><loc>https://reviewsboost.ca/google-business-profile-local-seo.html</loc><lastmod>2026-09-03</lastmod></url>
-  <url><loc>https://reviewsboost.ca/google-reviews-faq.html</loc><lastmod>2026-09-03</lastmod></url>
+  <url><loc>https://reviewsboost.ca/remove-fake-google-review.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-review-link-qr-code.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-review-policy-canada.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-business-profile-local-seo.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-reviews-faq.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://reviewsboost.ca/google-review-calculator.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://reviewsboost.ca/about.html</loc><lastmod>2026-09-06</lastmod></url>
-  <url><loc>https://reviewsboost.ca/editorial-policy.html</loc><lastmod>2026-09-02</lastmod></url>
+  <url><loc>https://reviewsboost.ca/editorial-policy.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://reviewsboost.ca/privacy-policy.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://reviewsboost.ca/terms-of-service.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://reviewsboost.ca/refund-policy.html</loc><lastmod>2026-09-06</lastmod></url>

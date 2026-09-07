@@ -4,7 +4,7 @@ Implemented in the local website. Publishing and Search Console access are neede
 
 ## Location coverage without repetitive city pages
 
-The homepage now has one service coverage section at `/online-reputation-management.html#canada`. It explains nationwide online delivery, identifies representative markets by region, includes all provinces and territories, and tells visitors what to provide for their business location. Smaller and rural communities are explicitly included. The locations represent the service area, not additional offices.
+The homepage now has one service coverage section at `/#canada`. It explains nationwide online delivery, identifies representative markets by region, includes all provinces and territories, and tells visitors what to provide for their business location. Smaller and rural communities are explicitly included. The locations represent the service area, not additional offices.
 
 | Region | Representative markets included |
 | --- | --- |
@@ -19,8 +19,8 @@ Google identifies unnatural city-name blocks and substantially similar regional 
 
 ## Changes made
 
-- Reframed the homepage around online reputation management for Canadian businesses, with review removal, response planning, monitoring and recovery as the primary services.
-- Made Canadian business eligibility explicit near service descriptions and the reputation assessment form. Removal fees remain stated in CAD on the dedicated service page.
+- Reframed the homepage headline around the customer: Canadian businesses. The previous headline emphasized Canadian reviewer accounts, which could also interest buyers outside Canada.
+- Made Canadian business eligibility and CAD pricing explicit near service descriptions, package prices, FAQs and enquiry forms. Package selection retains the CAD label.
 - Replaced the unlinked publication-name carousel with the service-area notice. There is no evidence that the carousel caused US traffic; the change gives that space useful, verifiable information.
 - Connected the coverage section from the removal service, About page, learning centre and calculator. The checker now identifies the Canadian service audience in its description and service invitation.
 - Kept the existing `.ca`, Canadian English and Canada service-area signals. Updated service descriptions in structured data and the removal offer's `eligibleRegion` to `CA`, matching the visible eligibility. This markup states facts; it is not a claimed country-ranking switch. [Schema.org eligibleRegion](https://schema.org/eligibleRegion).
@@ -46,6 +46,6 @@ The hosting redirect observations and remaining actions from the earlier pass ar
 
 ## Validation
 
-- Site-wide SEO audit and HTML validation for all crawlable pages.
+- Site-wide SEO audit and HTML validation for all six changed pages.
 - Browser layout checks at desktop, tablet and mobile sizes; coverage also available without JavaScript.
-- Reputation assessment and removal-request form flows checked locally. Google Sheets, email and endpoint requests were mocked; no live submissions were sent.
+- Package currency labels and all three form flows checked locally. Google Sheets, email and endpoint requests were mocked; no live submissions were sent.

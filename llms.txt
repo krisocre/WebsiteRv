@@ -1,14 +1,15 @@
 # ReviewsBoost
 
-> ReviewsBoost publishes practical Google review and local reputation resources for Canadian businesses. It is an independent service and is not affiliated with Google.
+> ReviewsBoost provides online reputation management and Google review removal assistance for Canadian businesses, alongside practical public resources. It is independent and is not affiliated with Google.
 
 ## Service area
 
-Paid services are exclusively for business locations in Canada. Online service covers all ten provinces and three territories, including smaller communities. Prices are in CAD. The [Canadian coverage section](https://reviewsboost.ca/#canada) lists representative markets; it does not describe physical branch offices. Public resources remain readable worldwide.
+Services are exclusively for business locations in Canada. Online support covers all ten provinces and three territories, including smaller communities. Removal fees are in CAD. The [Canadian coverage section](https://reviewsboost.ca/online-reputation-management.html#canada) lists representative markets; it does not describe physical branch offices. Public resources remain readable worldwide.
 
 ## Primary pages
 
-- [Home](https://reviewsboost.ca/): Service overview and contact path.
+- [Google review removal](https://reviewsboost.ca/): Eligibility, process, fees and removal request form.
+- [Online reputation management](https://reviewsboost.ca/online-reputation-management.html): Canada-wide assessment, response planning, monitoring and recovery resources.
 - [Learning Centre](https://reviewsboost.ca/blog.html): Index of all educational resources.
 - [About](https://reviewsboost.ca/about.html): Scope, principles, contact information and independence statement.
 - [Editorial policy](https://reviewsboost.ca/editorial-policy.html): Sourcing, authorship, corrections and content standards.

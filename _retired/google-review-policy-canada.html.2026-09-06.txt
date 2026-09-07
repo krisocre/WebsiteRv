@@ -6,7 +6,7 @@
     <title>Google Review Policy for Canadian Businesses (2026)</title>
     <meta
       name="description"
-      content="A plain-language guide to Google review rules for Canadian businesses: fake engagement, incentives, review gating, conflicts, employee reviews and reporting."
+      content="A plain-language guide to Google review rules for Canadian businesses: paid reviews, incentives, review gating, conflicts, employee reviews and reporting."
     />
     <meta
       name="robots"
@@ -36,7 +36,7 @@
     />
     <meta
       property="og:description"
-      content="Fake engagement, incentives, gating, conflicts of interest and reporting explained in plain language."
+      content="Paid reviews, incentives, gating, conflicts of interest and reporting explained in plain language."
     />
     <meta
       property="og:url"
@@ -53,7 +53,7 @@
       content="ReviewsBoost Google review guidance for Canadian businesses"
     />
     <meta property="article:published_time" content="2026-09-02" />
-    <meta property="article:modified_time" content="2026-09-06" />
+    <meta property="article:modified_time" content="2026-09-03" />
     <meta property="article:section" content="Review policy" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -83,7 +83,7 @@
             "headline": "Google Review Policy for Canadian Businesses",
             "description": "A plain-language guide to Google Maps review policy and Canadian deceptive marketing considerations.",
             "datePublished": "2026-09-02",
-            "dateModified": "2026-09-06",
+            "dateModified": "2026-09-03",
             "author": {
               "@type": "Organization",
               "@id": "https://reviewsboost.ca/editorial-policy.html#editorial-team",
@@ -137,9 +137,9 @@
           <li class="nav-optional"><a href="blog.html" aria-current="page">Learning Centre</a></li>
           <li><a href="google-reviews-faq.html">FAQ</a></li>
           <li class="nav-optional"><a href="about.html">About</a></li>
-          <li class="nav-contact"><a href="online-reputation-management.html#contact">Contact</a></li>
-          <li><a class="nav-service nav-service-primary" href="online-reputation-management.html#reputation-management">Reputation Management</a></li>
-          <li><a class="nav-service nav-service-secondary" href="/">Review Removal</a></li>
+          <li class="nav-contact"><a href="/#contact">Contact</a></li>
+          <li><a class="nav-service nav-service-primary" href="/#reputation-management">Reputation Management</a></li>
+          <li><a class="nav-service nav-service-secondary" href="remove-google-reviews.html">Review Removal</a></li>
         </ul>
       </nav>
     </header>
@@ -203,8 +203,8 @@
                 <td>Use an objective post-service trigger</td>
               </tr>
               <tr>
-                <td>Reward people for posting reviews</td>
-                <td>Google expressly prohibits incentivized content</td>
+                <td>Pay people to post reviews</td>
+                <td>Google expressly prohibits paid reviews</td>
                 <td>Invest in genuine customer follow-up</td>
               </tr>
               <tr>
@@ -238,10 +238,10 @@
             </tbody>
           </table>
 
-          <h2 id="paid">Are incentivized or fabricated Google reviews allowed?</h2>
+          <h2 id="paid">Are paid Google reviews allowed?</h2>
           <p>
-            No. Google’s published policy identifies reviews or ratings created
-            in exchange for money or another benefit as fake engagement. It also
+            No. Google’s published policy identifies reviews or ratings that
+            have been paid for, directly or in kind, as fake engagement. It also
             prohibits offering incentives such as payment, discounts, free goods
             or services in exchange for posting, revising or removing a review.
           </p>
@@ -306,7 +306,7 @@
             support, and give every eligible customer the same neutral public
             review invitation. Read our
             <a href="get-more-google-reviews.html"
-              >authentic customer request guide</a
+              >authentic review acquisition guide</a
             >
             for a complete workflow.
           </p>
@@ -454,7 +454,7 @@
           <h2 id="statistics">How common are fake reviews?</h2>
           <p>
             Platform disclosures show large-scale enforcement, but there is no
-            credible universal percentage of businesses that use fabricated reviews or pay
+            credible universal percentage of businesses that buy reviews or pay
             for review deletion. Google reported more than 292 million
             policy-violating review interventions in 2025; Tripadvisor and
             Trustpilot publish narrower platform-specific figures. Their labels,
@@ -467,7 +467,7 @@
               >fake review statistics analysis and downloadable source table</a
             >
             for exact citations, calculations and limits—including why the claim
-            that “one in five businesses uses review manipulation” is not currently
+            that “one in five businesses buys reviews” is not currently
             supportable from representative evidence.
           </p>
 
@@ -523,7 +523,7 @@
           <strong>On this page</strong>
           <ol>
             <li><a href="#baseline">Genuine experiences</a></li>
-            <li><a href="#paid">Incentivized and fabricated content</a></li>
+            <li><a href="#paid">Paid reviews</a></li>
             <li><a href="#incentives">Incentives</a></li>
             <li><a href="#gating">Review gating</a></li>
             <li><a href="#conflicts">Conflicts</a></li>
@@ -581,7 +581,7 @@
             <h3>Company</h3>
             <a href="about.html">About</a
             ><a href="editorial-policy.html">Editorial policy</a
-            ><a href="online-reputation-management.html#contact">Contact</a>
+            ><a href="/#contact">Contact</a>
           </div>
           <div>
             <h3>Policies</h3>

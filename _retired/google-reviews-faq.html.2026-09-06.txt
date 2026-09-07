@@ -77,14 +77,14 @@
             "@id": "https://reviewsboost.ca/google-reviews-faq.html#webpage",
             "url": "https://reviewsboost.ca/google-reviews-faq.html",
             "name": "Google Reviews FAQ for Businesses",
-            "description": "Detailed answers about review requests, reputation response, removal, policy and measurement.",
+            "description": "Detailed answers about Google review acquisition, response, removal, policy and measurement.",
             "author": {
               "@type": "Organization",
               "@id": "https://reviewsboost.ca/editorial-policy.html#editorial-team",
               "name": "ReviewsBoost Editorial Team",
               "url": "https://reviewsboost.ca/editorial-policy.html#authorship"
             },
-            "dateModified": "2026-09-06",
+            "dateModified": "2026-09-03",
             "inLanguage": "en-CA"
           },
           {
@@ -235,9 +235,9 @@
           <li class="nav-optional"><a href="blog.html">Learning Centre</a></li>
           <li><a href="google-reviews-faq.html" aria-current="page">FAQ</a></li>
           <li class="nav-optional"><a href="about.html">About</a></li>
-          <li class="nav-contact"><a href="online-reputation-management.html#contact">Contact</a></li>
-          <li><a class="nav-service nav-service-primary" href="online-reputation-management.html#reputation-management">Reputation Management</a></li>
-          <li><a class="nav-service nav-service-secondary" href="/">Review Removal</a></li>
+          <li class="nav-contact"><a href="/#contact">Contact</a></li>
+          <li><a class="nav-service nav-service-primary" href="/#reputation-management">Reputation Management</a></li>
+          <li><a class="nav-service nav-service-secondary" href="remove-google-reviews.html">Review Removal</a></li>
         </ul>
       </nav>
     </header>
@@ -695,7 +695,7 @@
                   No legitimate process can guarantee what independent customers
                   will say or how a platform will display or moderate content.
                   Mathematical models can estimate how ratings affect an average
-                  but cannot guarantee that customers will post or how the platform will behave.
+                  but cannot guarantee review acquisition or platform behaviour.
                 </p>
               </div>
             </details>
@@ -907,7 +907,7 @@
           </article>
           <article class="card">
             <h3>Policy guide</h3>
-            <p>Fake engagement, incentives and gating explained.</p>
+            <p>Paid reviews, incentives and gating explained.</p>
             <a href="google-review-policy-canada.html"
               >Read the policy guide →</a
             >
@@ -937,7 +937,7 @@
             <h3>Company</h3>
             <a href="about.html">About</a
             ><a href="editorial-policy.html">Editorial policy</a
-            ><a href="online-reputation-management.html#contact">Contact</a>
+            ><a href="/#contact">Contact</a>
           </div>
           <div>
             <h3>Policies</h3>

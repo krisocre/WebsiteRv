@@ -10,13 +10,13 @@ The local website has been checked against all nine requested items. The earlier
 | 4. Broken links | Live GET checks passed for 52 unique internal page/asset URLs and 38 external destinations. Local references and fragment targets pass. Fixed the 404 template's relative stylesheet, favicon and recovery links, which broke when an error occurred below the site root. |
 | 5. Anchor text | Changed the About page's raw domain label to “ReviewsBoost homepage.” The other links passed the generic/raw-URL text scan. Browser inventory covered 838 anchors. |
 | 6. Canonicals | Every document has a canonical tag. All content pages self-reference their preferred URL; the homepage uses `/`. The legacy redirect correctly identifies `/blog.html` as its destination. Added the error template's canonical while retaining `noindex`. |
-| 7. Open Graph | All 23 documents now have nonempty `og:title`, `og:image`, `og:description` and `og:url`. Added missing descriptions on Accessibility, Privacy, Refund and Terms pages, plus metadata on the error and legacy pages. Social images resolve successfully. |
-| 8. XML sitemap | The existing sitemap contains all 21 indexable canonical pages, with no duplicates or error/redirect pages. XML parsing and namespace validation pass; updated modification dates on changed pages. The live sitemap returns HTTP 200. Account submission remains pending. |
+| 7. Open Graph | All 24 documents now have nonempty `og:title`, `og:image`, `og:description` and `og:url`. Added missing descriptions on Accessibility, Privacy, Refund and Terms pages, plus metadata on the error and redirect pages. Social images resolve successfully. |
+| 8. XML sitemap | The existing sitemap contains all 22 indexable canonical pages, with no duplicates or error/redirect pages. XML parsing and namespace validation pass; updated modification dates on changed pages. The live sitemap returns HTTP 200. Account submission remains pending. |
 | 9. robots.txt | The local and live files permit general crawling and declare `https://reviewsboost.ca/sitemap.xml`. The live response is HTTP 200 with a text/plain content type. |
 
 The 404 template itself is accessible at `/404.html` with `noindex`; actual missing URLs at both root and nested paths return HTTP 404. The corrected template was checked in a browser at 1280px and 390px: its stylesheet loads, links reach their intended pages and the layout has no horizontal overflow.
 
-The redirect page intentionally does not self-canonicalize: its job is to send visitors and search engines to the Learning Centre. Google treats an immediate meta refresh as a permanent redirect and recommends server redirects when available. [Google redirect guidance](https://developers.google.com/search/docs/crawling-indexing/301-redirects).
+The redirect pages intentionally canonicalize to their destinations: the legacy learning URL points to the Learning Centre, and the former removal URL points to the new removal homepage. Google treats an immediate meta refresh as a permanent redirect and recommends server redirects when available. [Google redirect guidance](https://developers.google.com/search/docs/crawling-indexing/301-redirects).
 
 ## Complete sitemap submission
 

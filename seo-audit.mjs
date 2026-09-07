@@ -5,6 +5,11 @@ const files = fs.readdirSync(".").filter((file) => file.endsWith(".html"));
 const canonicalOwners = new Map();
 const errors = [];
 
+const jekyllConfig = fs.existsSync("_config.yml") ? fs.readFileSync("_config.yml", "utf8") : "";
+if (!/^\s*-\s*_retired\s*$/m.test(jekyllConfig)) {
+  errors.push("_config.yml: _retired must remain excluded from the published site");
+}
+
 function decodeEntities(value) {
   return value.replace(/&(?:amp|quot|apos|lt|gt|#39|#\d+|#x[\da-f]+);/gi, entity => {
     const named = { '&amp;': '&', '&quot;': '"', '&apos;': "'", '&#39;': "'", '&lt;': '<', '&gt;': '>' };
@@ -73,6 +78,9 @@ function checkLocalReference(reference, currentFile, label) {
 for (const file of files) {
   const html = fs.readFileSync(file, "utf8");
   const markup = withoutCode(html);
+  if (/\b(?:href|src)\s*=\s*["'][^"']*_retired(?:\/|\\)/i.test(markup)) {
+    errors.push(`${file}: public markup links to the retired source archive`);
+  }
   const metas = tags(markup, 'meta');
   const metaValues = (key, attr = 'name') => metas.filter(tag => attribute(tag, attr) === key).map(tag => attribute(tag, 'content') ?? '');
   const titleMatches = [...html.matchAll(/<title>([\s\S]*?)<\/title>/gi)];

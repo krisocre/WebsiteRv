@@ -49,20 +49,16 @@ function doPost(e) {
     var reason = field('reason') || 'None Provided';
     var formType = field('form_type');
 
-    // Reject retired or unexpected forms instead of silently accepting stale submissions.
-    if (formType && ['remove_reviews', 'quote_request'].indexOf(formType) === -1) {
-      throw new Error('This form type is no longer supported.');
-    }
-
-    // Older removal forms may not send a type, so infer only when the field is blank.
-    if (!formType) {
+    // A removal request also has a selected plan, so check its type first.
+    if (['buy_reviews', 'remove_reviews', 'quote_request'].indexOf(formType) === -1) {
       formType = /remov/i.test(selectedPlan) || reviewCount !== 'N/A' || reviewLinks !== 'N/A'
         ? 'remove_reviews'
-        : 'quote_request';
+        : selectedPlan !== 'N/A' ? 'buy_reviews' : 'quote_request';
     }
     var formLabels = {
+      buy_reviews: 'New Buy Reviews Order',
       remove_reviews: 'New Review Removal Request',
-      quote_request: 'New Reputation Assessment Request'
+      quote_request: 'New Assessment / Quote Request'
     };
     var formLabel = formLabels[formType];
 
@@ -91,9 +87,7 @@ function doPost(e) {
       'Contact Detail: ' + contactInfo + '\n' +
       'Google Business Profile URL: ' + businessUrl + '\n\n';
 
-    if (selectedPlan !== 'N/A') {
-      body += (formType === 'remove_reviews' ? 'Selected Removal Service: ' : 'Requested Reputation Service: ') + selectedPlan + '\n';
-    }
+    if (selectedPlan !== 'N/A') body += 'Selected Plan: ' + selectedPlan + '\n';
     if (formType === 'remove_reviews') {
       body += 'Reviews to Remove: ' + reviewCount + '\n' +
         'Review Links: ' + (reviewLinks !== 'N/A' ? reviewLinks :

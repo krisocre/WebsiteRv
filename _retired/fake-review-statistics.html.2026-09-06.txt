@@ -54,7 +54,7 @@
       content="ReviewsBoost analysis of fake review statistics"
     />
     <meta property="article:published_time" content="2026-09-03" />
-    <meta property="article:modified_time" content="2026-09-06" />
+    <meta property="article:modified_time" content="2026-09-04" />
     <meta property="article:section" content="Review data and research" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
@@ -84,7 +84,7 @@
             "headline": "Fake Review Statistics 2026: Platform and Regulator Data",
             "description": "A seven-year Google Maps review moderation series plus sourced platform disclosures, enforcement data and transparent derived calculations.",
             "datePublished": "2026-09-03",
-            "dateModified": "2026-09-06",
+            "dateModified": "2026-09-04",
             "author": {
               "@type": "Organization",
               "@id": "https://reviewsboost.ca/editorial-policy.html#editorial-team",
@@ -158,7 +158,7 @@
             },
             "publisher": { "@id": "https://reviewsboost.ca/#organization" },
             "datePublished": "2026-09-03",
-            "dateModified": "2026-09-06",
+            "dateModified": "2026-09-04",
             "license": "https://creativecommons.org/licenses/by/4.0/",
             "isAccessibleForFree": true,
             "inLanguage": "en-CA",
@@ -214,7 +214,7 @@
             },
             "publisher": { "@id": "https://reviewsboost.ca/#organization" },
             "datePublished": "2026-09-03",
-            "dateModified": "2026-09-06",
+            "dateModified": "2026-09-04",
             "license": "https://creativecommons.org/licenses/by/4.0/",
             "isAccessibleForFree": true,
             "inLanguage": "en",
@@ -283,12 +283,12 @@
           </li>
           <li><a href="google-reviews-faq.html">FAQ</a></li>
           <li class="nav-optional"><a href="about.html">About</a></li>
-          <li class="nav-contact"><a href="online-reputation-management.html#contact">Contact</a></li>
-          <li><a class="nav-service nav-service-primary" href="online-reputation-management.html#reputation-management">Reputation Management</a></li>
+          <li class="nav-contact"><a href="/#contact">Contact</a></li>
+          <li><a class="nav-service nav-service-primary" href="/#reputation-management">Reputation Management</a></li>
           <li>
             <a
               class="nav-service nav-service-secondary"
-              href="/"
+              href="remove-google-reviews.html"
               >Review Removal</a
             >
           </li>
@@ -569,13 +569,13 @@
             Tripadvisor's detected-fraud ratio or Trustpilot's removal percentage.
           </p>
 
-          <h2 id="prevalence">Does evidence support a one-in-five manipulation claim?</h2>
+          <h2 id="prevalence">Do one in five businesses buy reviews or deletions?</h2>
           <p>
             We did not find a credible, representative source supporting the claim
-            that one in five businesses uses fabricated feedback or pays for
+            that one in five businesses buys reviews, or that one in five buys
             review deletion. Publishing that sentence as a fact would confuse three
             different populations: reviews, business listings and businesses that
-            use manipulation services.
+            purchase manipulation services.
           </p>
           <p>
             Platform enforcement totals show that manipulation operates at large
@@ -629,11 +629,11 @@
             claim that every employee review is illegal or fake.
           </p>
 
-          <h3>United States: a rule expressly covers creation and dissemination</h3>
+          <h3>United States: a rule expressly covers buying and selling</h3>
           <p>
             The US Federal Trade Commission's Consumer Reviews and Testimonials Rule
             took effect on October 21, 2024. Among other conduct, it addresses the
-            creation or dissemination of fake reviews and testimonials
+            creation or sale of fake reviews, the knowing purchase or dissemination
             of fake reviews, incentives conditioned on positive or negative
             sentiment, certain undisclosed insider reviews, review suppression and
             misrepresented company-controlled review sites. Businesses operating in
@@ -641,7 +641,7 @@
             than rely on summaries.
           </p>
 
-          <h3>United Kingdom: a compliance review is not proof of manipulation</h3>
+          <h3>United Kingdom: compliance review is not proof of purchasing</h3>
           <p>
             In 2025, the UK Competition and Markets Authority reviewed more than 100
             business websites for visible policies addressing fake and incentivized
@@ -649,7 +649,7 @@
             missing, unclear, incomplete or inaccessible. In March 2026, the CMA
             opened investigations into five businesses concerning online-review
             practices. An investigation is not a finding of wrongdoing, and the
-            54-business result is not evidence that 54% of all businesses use fake
+            54-business result is not evidence that 54% of all businesses buy fake
             reviews.
           </p>
 
@@ -826,7 +826,7 @@
           <article class="card">
             <h3>Earn authentic reviews</h3>
             <p>Build a consistent, incentive-free customer request process.</p>
-            <a href="get-more-google-reviews.html">Read the authentic request guide &rarr;</a>
+            <a href="get-more-google-reviews.html">Read the acquisition guide &rarr;</a>
           </article>
           <article class="card">
             <h3>Rating resilience study</h3>
@@ -841,7 +841,7 @@
         <div class="footer-grid">
           <div>
             <h2>ReviewsBoost</h2>
-            <p>Online reputation management and Google review resources for Canadian businesses.</p>
+            <p>Google review and online reputation resources for Canadian businesses.</p>
           </div>
           <div>
             <h3>Guides</h3>
@@ -853,7 +853,7 @@
             <h3>Company</h3>
             <a href="about.html">About</a
             ><a href="editorial-policy.html">Editorial policy</a
-            ><a href="online-reputation-management.html#contact">Contact</a>
+            ><a href="/#contact">Contact</a>
           </div>
           <div>
             <h3>Policies</h3>
