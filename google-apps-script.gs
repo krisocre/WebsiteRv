@@ -65,6 +65,9 @@ function doPost(e) {
       quote_request: 'New Reputation Assessment Request'
     };
     var formLabel = formLabels[formType];
+    var platformMatch = selectedPlan.match(/^(Google|Facebook|Yelp|Tripadvisor|Trustpilot|Glassdoor)\b/i);
+    var platformName = platformMatch ? platformMatch[1] : 'Public business';
+    if (formType === 'remove_reviews') formLabel = 'New ' + platformName + ' Review Removal Request';
 
     // Keep the existing 12-column sheet layout:
     // Timestamp | Selected Plan | Full Name | Business Name | Email | Phone |
@@ -89,7 +92,7 @@ function doPost(e) {
       'Phone: ' + phone + '\n' +
       'Preferred Contact Method: ' + contactMethod + '\n' +
       'Contact Detail: ' + contactInfo + '\n' +
-      'Google Business Profile URL: ' + businessUrl + '\n\n';
+      (formType === 'remove_reviews' ? platformName + ' Profile URL: ' : 'Public Business Profile URL: ') + businessUrl + '\n\n';
 
     if (selectedPlan !== 'N/A') {
       body += (formType === 'remove_reviews' ? 'Selected Removal Service: ' : 'Requested Reputation Service: ') + selectedPlan + '\n';
@@ -97,7 +100,7 @@ function doPost(e) {
     if (formType === 'remove_reviews') {
       body += 'Reviews to Remove: ' + reviewCount + '\n' +
         'Review Links: ' + (reviewLinks !== 'N/A' ? reviewLinks :
-          'Not provided - assess the latest one-star review(s), up to the requested quantity.') + '\n' +
+          'Not provided - use the submitted profile and identifying details to locate the review(s), up to the requested quantity.') + '\n' +
         'Removal Reason: ' + reason + '\n';
     } else {
       body += 'Additional Details: ' + reason + '\n';

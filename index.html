@@ -9,6 +9,9 @@
     <meta name="author" content="ReviewsBoost">
     <meta name="theme-color" content="#e1292f">
     <link rel="canonical" href="https://reviewsboost.ca/">
+    <link rel="alternate" hreflang="en-CA" href="https://reviewsboost.ca/">
+    <link rel="alternate" hreflang="fr-CA" href="https://reviewsboost.ca/suppression-avis-google.html">
+    <link rel="alternate" hreflang="x-default" href="https://reviewsboost.ca/">
     <link rel="manifest" href="site.webmanifest">
     <link rel="alternate" type="application/rss+xml" title="ReviewsBoost learning centre" href="https://reviewsboost.ca/feed.xml">
     <link rel="stylesheet" href="site-icons.css">
@@ -20,6 +23,7 @@
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="ReviewsBoost">
     <meta property="og:locale" content="en_CA">
+    <meta property="og:locale:alternate" content="fr_CA">
     <meta property="og:image" content="https://reviewsboost.ca/social-card.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -31,10 +35,12 @@
 
     <script type="application/ld+json">
     {"@context":"https://schema.org","@graph":[
-      {"@type":"Organization","@id":"https://reviewsboost.ca/#organization","name":"ReviewsBoost","url":"https://reviewsboost.ca/","email":"support@reviewsboost.ca","areaServed":{"@type":"Country","name":"Canada"},"description":"Online reputation management and Google review removal assistance for businesses located in Canada."},
-      {"@type":"WebPage","@id":"https://reviewsboost.ca/#webpage","url":"https://reviewsboost.ca/","name":"Google Review Removal Help in Canada","description":"Assessment and policy-based assistance challenging potentially violating Google reviews.","dateModified":"2026-09-06","primaryImageOfPage":{"@id":"https://reviewsboost.ca/#primaryimage"},"inLanguage":"en-CA"},
+      {"@type":"Organization","@id":"https://reviewsboost.ca/#organization","name":"ReviewsBoost","url":"https://reviewsboost.ca/","logo":{"@type":"ImageObject","url":"https://reviewsboost.ca/favicon-512.png","width":512,"height":512},"email":"support@reviewsboost.ca","contactPoint":{"@type":"ContactPoint","contactType":"customer support","email":"support@reviewsboost.ca","areaServed":"CA","availableLanguage":["English","French"]},"areaServed":{"@type":"Country","name":"Canada"},"description":"Online reputation management and Google review removal assistance for businesses located in Canada."},
+      {"@type":"WebSite","@id":"https://reviewsboost.ca/#website","url":"https://reviewsboost.ca/","name":"ReviewsBoost","alternateName":"ReviewsBoost Canada","publisher":{"@id":"https://reviewsboost.ca/#organization"},"inLanguage":["en-CA","fr-CA"]},
+      {"@type":"WebPage","@id":"https://reviewsboost.ca/#webpage","url":"https://reviewsboost.ca/","isPartOf":{"@id":"https://reviewsboost.ca/#website"},"name":"Google Review Removal Help in Canada","description":"Assessment and policy-based assistance challenging potentially violating Google reviews.","dateModified":"2026-09-09","primaryImageOfPage":{"@id":"https://reviewsboost.ca/#primaryimage"},"inLanguage":"en-CA"},
       {"@type":"ImageObject","@id":"https://reviewsboost.ca/#primaryimage","url":"https://reviewsboost.ca/google-review-removal-eligibility.svg","width":1200,"height":675,"caption":"Google review removal eligibility and reporting guide"},
-      {"@type":"Service","@id":"https://reviewsboost.ca/#service","name":"Google review removal assistance for Canadian businesses","provider":{"@id":"https://reviewsboost.ca/#organization"},"areaServed":{"@type":"Country","name":"Canada"},"image":{"@id":"https://reviewsboost.ca/#primaryimage"},"description":"Online policy-based review removal assistance exclusively for business locations in Canada, across all provinces and territories.","offers":{"@type":"Offer","price":"30","priceCurrency":"CAD","description":"CAD $30 upfront case fee plus CAD $40 after successful removal.","eligibleRegion":"CA"},"availableChannel":{"@type":"ServiceChannel","serviceUrl":"https://reviewsboost.ca/"}}
+      {"@type":"Service","@id":"https://reviewsboost.ca/#service","name":"Google review removal assistance for Canadian businesses","provider":{"@id":"https://reviewsboost.ca/#organization"},"areaServed":{"@type":"Country","name":"Canada"},"image":{"@id":"https://reviewsboost.ca/#primaryimage"},"description":"Online policy-based review removal assistance exclusively for business locations in Canada, across all provinces and territories.","offers":{"@type":"Offer","price":"30","priceCurrency":"CAD","description":"CAD $30 upfront case fee plus CAD $40 after successful removal.","eligibleRegion":"CA"},"availableChannel":{"@type":"ServiceChannel","serviceUrl":"https://reviewsboost.ca/"}},
+      {"@type":"ItemList","name":"Review removal services by platform","itemListElement":[{"@type":"ListItem","position":1,"name":"Google review removal","url":"https://reviewsboost.ca/"},{"@type":"ListItem","position":2,"name":"Facebook review removal","url":"https://reviewsboost.ca/remove-facebook-reviews.html"},{"@type":"ListItem","position":3,"name":"Yelp review removal","url":"https://reviewsboost.ca/remove-yelp-reviews.html"},{"@type":"ListItem","position":4,"name":"Tripadvisor review removal","url":"https://reviewsboost.ca/remove-tripadvisor-reviews.html"},{"@type":"ListItem","position":5,"name":"Trustpilot review removal","url":"https://reviewsboost.ca/remove-trustpilot-reviews.html"},{"@type":"ListItem","position":6,"name":"Glassdoor review removal","url":"https://reviewsboost.ca/remove-glassdoor-reviews.html"}]}
     ]}
     </script>
 
@@ -266,6 +272,22 @@
         .section-title,.hero h1,.price-line strong,.success-fee strong,
         .seal strong{font-weight:400}
         .btn,.nav-logo,.nav-service{font-weight:500!important}
+        /* Primary toolbar and accessible service menu. */
+        .navbar{background:rgba(255,255,255,.97);border-bottom:1px solid #e7e9ee;box-shadow:0 4px 22px rgba(22,34,59,.05)}
+        .navbar .container{height:74px;gap:28px}.nav-logo{flex:0 0 auto;font-size:20px;letter-spacing:-.02em}.logo-icon{box-shadow:0 5px 14px rgba(8,133,254,.22)}
+        .nav-links{gap:4px}.nav-links>li>a,.services-toggle{display:inline-flex;min-height:38px;align-items:center;gap:7px;padding:8px 11px!important;border-radius:8px;color:#3d4553!important;font-size:13px!important;font-weight:600!important;white-space:nowrap;transition:background .18s,color .18s,transform .18s}
+        .nav-links>li>a:not(.nav-cta)::after{display:none}.nav-links>li>a:hover,.services-toggle:hover,.nav-dropdown.open .services-toggle{background:#f3f5f8;color:var(--navy)!important;transform:none}
+        .nav-links>li>a.nav-cta{min-height:40px!important;margin-left:5px;padding:9px 16px!important;background:var(--red)!important;color:#fff!important;box-shadow:0 7px 18px rgba(225,41,47,.22)!important}.nav-links>li>a.nav-cta:hover{background:var(--red-dark)!important;color:#fff!important}
+        .nav-dropdown{position:relative}.nav-dropdown::after{position:absolute;top:100%;right:0;width:340px;height:12px;content:''}.services-toggle{border:0;background:transparent;cursor:pointer}.services-arrow{width:12px;height:7px;fill:none;stroke:currentColor;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8;transition:transform .18s}.nav-dropdown.open .services-arrow,.nav-dropdown:hover .services-arrow{transform:rotate(180deg)}
+        .services-dropdown{position:absolute;top:calc(100% + 10px);right:0;width:340px;padding:10px;border:1px solid #e1e5eb;border-radius:14px;background:#fff;box-shadow:0 20px 55px rgba(22,34,59,.16);opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-7px);transition:opacity .18s,visibility .18s,transform .18s}
+        .nav-dropdown:hover .services-dropdown,.nav-dropdown.open .services-dropdown{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
+        .services-dropdown::before{position:absolute;top:-7px;right:30px;width:13px;height:13px;border-top:1px solid #e1e5eb;border-left:1px solid #e1e5eb;background:#fff;content:'';transform:rotate(45deg)}
+        .services-dropdown a{display:grid!important;grid-template-columns:38px 1fr;gap:11px;align-items:center;min-height:58px!important;padding:8px 10px!important;border-radius:9px!important;color:var(--navy)!important}.services-dropdown a::after{display:none!important}.services-dropdown a:hover,.services-dropdown a:focus{background:#f6f8fb!important}.service-mark{width:36px;height:36px;display:grid;place-items:center;border-radius:9px;background:var(--service-soft);color:var(--service-color);font-size:12px;font-weight:800}.service-copy strong,.service-copy small{display:block}.service-copy strong{font-size:13px}.service-copy small{margin-top:1px;color:#747b87;font-size:11px;font-weight:400}.services-dropdown-footer{margin:7px 5px 2px;padding:10px 7px 2px;border-top:1px solid #eceef2}.services-dropdown-footer a{display:flex!important;min-height:36px!important;padding:6px!important;color:#0568c0!important;font-size:12px!important}
+        .platforms-section{background:linear-gradient(180deg,#f8fafc 0%,#f3f6fa 100%);border-block:1px solid #e8ebf0}.platforms-head{max-width:780px;margin:0 auto 38px;text-align:center}.platforms-head h2{font-size:clamp(30px,4vw,42px);margin:10px 0 12px}.platforms-head p{color:#68636a}.platform-service-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}.platform-service-card{position:relative;display:flex;min-height:250px;grid-column:span 2;flex-direction:column;padding:27px 24px;border:1px solid #e1e5eb;border-top:0;border-radius:16px;background:linear-gradient(145deg,#fff 65%,color-mix(in srgb,var(--platform-color) 6%,white));box-shadow:0 9px 26px rgba(22,34,59,.06);overflow:hidden;transition:transform .2s,box-shadow .2s,border-color .2s}.platform-service-card:nth-child(4),.platform-service-card:nth-child(5){grid-column:span 3}.platform-service-card::before{position:absolute;inset:0 auto 0 0;width:5px;background:var(--platform-color);content:''}.platform-service-card:hover{border-color:color-mix(in srgb,var(--platform-color) 30%,#e1e5eb);box-shadow:0 18px 42px rgba(22,34,59,.12);transform:translateY(-4px)}.platform-service-card h3{display:flex;align-items:center;gap:9px;margin:0 0 9px;font-size:23px}.platform-service-card h3::before{width:10px;height:10px;border-radius:50%;background:var(--platform-color);box-shadow:0 0 0 5px color-mix(in srgb,var(--platform-color) 12%,white);content:''}.platform-service-card p{margin:0 0 20px;color:#626873;font-size:13px;line-height:1.65}.platform-service-card .platform-fee{display:block;margin-top:auto;color:var(--platform-color);font-size:20px}.platform-service-card .platform-fee small{display:block;margin-top:2px;color:#727985;font-size:11px}.platform-service-card a{display:inline-flex;align-items:center;justify-content:space-between;margin-top:17px;padding:10px 12px;border-radius:8px;background:color-mix(in srgb,var(--platform-color) 9%,white);color:var(--platform-color);font-size:12px;font-weight:700}.platform-service-card a::after{content:'→';font-size:17px}.platform-service-card a:hover{background:color-mix(in srgb,var(--platform-color) 15%,white)}.platform-pricing-note{max-width:850px;margin:27px auto 0;padding:17px 19px;border:1px solid #f0d8a8;border-left:4px solid #d97706;border-radius:9px;background:#fff9ec;color:#674313;font-size:14px}
+        @media(max-width:1050px){.nav-links>li>a,.services-toggle{padding-inline:7px!important;font-size:12px!important}.nav-links .nav-resource{display:none}.platform-service-grid{grid-template-columns:repeat(2,1fr)}.platform-service-card,.platform-service-card:nth-child(4),.platform-service-card:nth-child(5){grid-column:span 1}}
+        @media(max-width:1180px){.navbar .container{height:68px}.nav-links.open{top:68px;max-height:calc(100vh - 68px);overflow-y:auto;padding:14px 20px 22px}.nav-links>li>a,.services-toggle{width:100%;justify-content:space-between;padding:10px 11px!important;font-size:13px!important}.nav-cta{justify-content:center!important;margin-left:0}.nav-dropdown{width:100%}.nav-dropdown::after{display:none}.services-dropdown{position:static;display:none;width:100%;margin:3px 0 8px;padding:7px;border:0;border-left:3px solid #dfe5ed;border-radius:0;box-shadow:none;opacity:1;visibility:visible;pointer-events:auto;transform:none}.nav-dropdown:hover .services-dropdown,.nav-dropdown:focus-within .services-dropdown{display:none}.nav-dropdown.open .services-dropdown{display:block}.services-dropdown::before{display:none}.services-dropdown a{grid-template-columns:34px 1fr!important;min-height:52px!important}.service-mark{width:32px;height:32px}.services-dropdown-footer{margin-top:4px}.nav-links .nav-resource{display:block}}
+        @media(max-width:700px){.platform-service-grid{grid-template-columns:1fr}.platform-service-card{min-height:0}}
+        @media(max-width:600px){.navbar .container{height:60px}.nav-links.open{top:60px;max-height:calc(100vh - 60px)}}
         @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}}
     </style>
 </head>
@@ -275,14 +297,22 @@
     <div class="container">
         <a href="/" class="nav-logo" aria-label="ReviewsBoost home"><span class="logo-icon"><i class="fa-solid fa-star"></i></span>ReviewsBoost</a>
         <ul class="nav-links" id="navLinks">
-            <li><a href="/">Home</a></li>
             <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#eligibility">Eligibility</a></li>
             <li><a href="#pricing">Pricing</a></li>
-            <li><a href="blog.html">Learning Centre</a></li>
-            <li><a href="google-reviews-faq.html">FAQ</a></li>
-            <li><a href="online-reputation-management.html#reputation-management" class="nav-service nav-reviews">Reputation Management</a></li>
-            <li><a href="/" class="nav-service nav-removal" aria-current="page">Review Removal</a></li>
-            <li><a class="btn btn-primary nav-cta" href="#review-count">Choose Number of Reviews</a></li>
+            <li class="nav-resource"><a href="blog.html">Resources</a></li>
+            <li class="nav-dropdown" id="servicesMenu">
+                <button class="services-toggle" id="servicesMenuButton" type="button" aria-expanded="false" aria-controls="servicesDropdown">Other Services <svg class="services-arrow" viewBox="0 0 12 7" aria-hidden="true"><path d="M1 1l5 5 5-5"/></svg></button>
+                <div class="services-dropdown" id="servicesDropdown">
+                    <a href="remove-facebook-reviews.html"><span class="service-mark" style="--service-color:#1b63b7;--service-soft:#edf5ff">FB</span><span class="service-copy"><strong>Facebook Reviews</strong><small>$30 upfront + $45 after removal</small></span></a>
+                    <a href="remove-yelp-reviews.html"><span class="service-mark" style="--service-color:#b81722;--service-soft:#fff1f2">Y</span><span class="service-copy"><strong>Yelp Reviews</strong><small>$30 upfront + $55 after removal</small></span></a>
+                    <a href="remove-tripadvisor-reviews.html"><span class="service-mark" style="--service-color:#0f766e;--service-soft:#ecfdf5">TA</span><span class="service-copy"><strong>Tripadvisor Reviews</strong><small>$30 upfront + $65 after removal</small></span></a>
+                    <a href="remove-trustpilot-reviews.html"><span class="service-mark" style="--service-color:#007a5a;--service-soft:#ecfdf5">TP</span><span class="service-copy"><strong>Trustpilot Reviews</strong><small>$30 upfront + $75 after removal</small></span></a>
+                    <a href="remove-glassdoor-reviews.html"><span class="service-mark" style="--service-color:#237a3b;--service-soft:#f0fdf4">GD</span><span class="service-copy"><strong>Glassdoor Reviews</strong><small>$30 upfront + $95 after removal</small></span></a>
+                    <div class="services-dropdown-footer"><a href="online-reputation-management.html">View online reputation management</a><a href="suppression-avis-google.html" lang="fr-CA">Français : suppression d’avis Google</a></div>
+                </div>
+            </li>
+            <li><a class="btn btn-primary nav-cta" href="#review-count">Start Assessment</a></li>
         </ul>
         <button class="hamburger" id="hamburger" type="button" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false"><span></span><span></span><span></span></button>
     </div>
@@ -347,7 +377,25 @@
         </div>
     </section>
 
-    <section class="problem section-pad">
+    <section class="platforms-section section-pad" id="other-platforms">
+        <div class="container">
+            <div class="platforms-head">
+                <span class="section-tag">Review removal beyond Google</span>
+                <h2>Five Other Platforms Businesses Ask About</h2>
+                <p>Each platform applies different content rules and evidence standards. The $30 CAD upfront fee remains fixed; only the per-review success fee rises with case difficulty.</p>
+            </div>
+            <div class="platform-service-grid">
+                <article class="platform-service-card" style="--platform-color:#1b63b7"><h3>Facebook</h3><p>Recommendations, impersonation, harassment, private information and deceptive accounts.</p><strong class="platform-fee">+$45 after removal<small>$30 upfront · focused</small></strong><a href="remove-facebook-reviews.html">Facebook removal details</a></article>
+                <article class="platform-service-card" style="--platform-color:#b81722"><h3>Yelp</h3><p>Conflicts of interest, hearsay, inappropriate content and reviews posted to the wrong business.</p><strong class="platform-fee">+$55 after removal<small>$30 upfront · moderate</small></strong><a href="remove-yelp-reviews.html">Yelp removal details</a></article>
+                <article class="platform-service-card" style="--platform-color:#0f766e"><h3>Tripadvisor</h3><p>Firsthand-experience, bias, listing relevance and travel-content fraud concerns.</p><strong class="platform-fee">+$65 after removal<small>$30 upfront · specialist</small></strong><a href="remove-tripadvisor-reviews.html">Tripadvisor removal details</a></article>
+                <article class="platform-service-card" style="--platform-color:#007a5a"><h3>Trustpilot</h3><p>Potentially fake experiences, harmful material, personal information and flagging follow-up.</p><strong class="platform-fee">+$75 after removal<small>$30 upfront · advanced</small></strong><a href="remove-trustpilot-reviews.html">Trustpilot removal details</a></article>
+                <article class="platform-service-card" style="--platform-color:#237a3b"><h3>Glassdoor</h3><p>Anonymous workplace reviews involving authenticity, relevance, privacy or harmful conduct.</p><strong class="platform-fee">+$95 after removal<small>$30 upfront · high complexity</small></strong><a href="remove-glassdoor-reviews.html">Glassdoor removal details</a></article>
+            </div>
+            <p class="platform-pricing-note"><strong>Why the success fees differ:</strong> platform moderation systems vary in evidence requirements, account workflows, anonymity and available follow-up. Fees cover our work only. Every platform controls its own final decision.</p>
+        </div>
+    </section>
+
+    <section class="problem section-pad" id="eligibility">
         <div class="container problem-grid">
             <aside class="damage-panel">
                 <h2>Why inaccurate reviews matter</h2>
@@ -497,7 +545,7 @@
     <div class="container">
         <div class="footer-grid">
             <div><div class="footer-brand"><span class="logo-icon"><i class="fa-solid fa-star"></i></span>ReviewsBoost</div><p>Online reputation management for Canadian businesses that need to assess harmful reviews, organize evidence and rebuild trust.</p></div>
-            <div><h2>Services</h2><a href="online-reputation-management.html#reputation-management">Reputation Management</a><a href="/">Remove Bad Reviews</a><a href="online-reputation-management.html#canada">Canadian Service Area</a><a href="blog.html">Learning Centre</a></div>
+            <div><h2>Services</h2><a href="online-reputation-management.html#reputation-management">Reputation Management</a><a href="/">Remove Google Reviews</a><a href="#other-platforms">Other Review Platforms</a><a href="online-reputation-management.html#canada">Canadian Service Area</a></div>
             <div><h2>Review Resources</h2><a href="remove-fake-google-review.html">Reporting Guide</a><a href="fake-review-statistics.html">Review Statistics</a><a href="google-review-policy-canada.html">Policy Guide</a><a href="google-reviews-faq.html">Detailed FAQ</a></div>
             <div><h2>Support</h2><a href="#" class="open-order">Contact Us</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
         </div>
@@ -556,6 +604,8 @@
         var navbar = document.getElementById('navbar');
         var hamburger = document.getElementById('hamburger');
         var navLinks = document.getElementById('navLinks');
+        var servicesMenu = document.getElementById('servicesMenu');
+        var servicesMenuButton = document.getElementById('servicesMenuButton');
         var quantity = document.getElementById('reviewQuantity');
         var formQuantity = document.getElementById('formReviewQuantity');
         var upfrontTotal = document.getElementById('upfrontTotal');
@@ -621,14 +671,41 @@
         modalClose.addEventListener('click', closeModal);
         document.getElementById('removalSuccessClose').addEventListener('click', closeModal);
         modal.addEventListener('click', function (event) { if (event.target === modal) closeModal(); });
-        document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeModal(); });
+        function closeServicesMenu() {
+            servicesMenu.classList.remove('open');
+            servicesMenuButton.setAttribute('aria-expanded', 'false');
+        }
+
+        servicesMenuButton.addEventListener('click', function (event) {
+            event.stopPropagation();
+            var isOpen = servicesMenu.classList.toggle('open');
+            servicesMenuButton.setAttribute('aria-expanded', String(isOpen));
+        });
+        servicesMenu.addEventListener('mouseenter', function () {
+            if (window.matchMedia('(min-width: 1181px)').matches) servicesMenuButton.setAttribute('aria-expanded', 'true');
+        });
+        servicesMenu.addEventListener('mouseleave', function () {
+            if (window.matchMedia('(min-width: 1181px)').matches && !servicesMenu.contains(document.activeElement)) closeServicesMenu();
+        });
+        servicesMenu.addEventListener('focusout', function () {
+            window.setTimeout(function () { if (!servicesMenu.contains(document.activeElement)) closeServicesMenu(); }, 0);
+        });
+        document.addEventListener('click', function (event) { if (!servicesMenu.contains(event.target)) closeServicesMenu(); });
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                servicesMenuButton.focus();
+                closeServicesMenu();
+            }
+        });
 
         hamburger.addEventListener('click', function () {
             var isOpen = navLinks.classList.toggle('open');
             hamburger.setAttribute('aria-expanded', String(isOpen));
+            if (!isOpen) closeServicesMenu();
         });
         navLinks.querySelectorAll('a').forEach(function (link) {
-            link.addEventListener('click', function () { navLinks.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); });
+            link.addEventListener('click', function () { navLinks.classList.remove('open'); hamburger.setAttribute('aria-expanded', 'false'); closeServicesMenu(); });
         });
 
         document.querySelectorAll('.faq-question').forEach(function (question, faqIndex) {

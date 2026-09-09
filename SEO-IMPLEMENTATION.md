@@ -1,4 +1,4 @@
-# SEO improvements — September 5, 2026
+# SEO improvements — September 7, 2026
 
 Implemented in the local site. This pass did not publish the site or change Cloudflare settings. Ranking and traffic changes cannot be measured from this workspace; Search Console data was not available.
 
@@ -8,6 +8,7 @@ Implemented in the local site. This pass did not publish the site or change Clou
 | --- | --- | --- |
 | Online reputation management in Canada | `/online-reputation-management.html` | Direct paths to removal assessment, evidence preparation, response planning, monitoring and reputation recovery resources |
 | Google review removal Canada / removal cost | `/` | Explicit full fee and partial-success examples; free preparation path before a service enquiry |
+| Facebook, Yelp, Tripadvisor, Trustpilot and Glassdoor review removal | Five platform-specific service pages | Official policy routes, platform-specific eligibility, evidence checklists, unique FAQs and difficulty-adjusted success fees |
 | Google review removal checker / evidence checklist / appeal worksheet | `/google-review-removal-checker.html` | Seven concerns × four reporting stages, evidence checklist, private editable inputs, copy and text export, plus an ungated blank template |
 | How many five-star reviews to reach a target | `/google-review-calculator.html` | Feasible integer-star ranges behind rounded ratings, known-exact mode, transparent source and shareable calculations |
 
@@ -21,7 +22,7 @@ Google's current guidance emphasizes useful original material for its generative
 
 - Replaced the remote Font Awesome CSS and solid font with a local CSS mask bundle using the same 54 icons. The old assets measured 102,025 + 150,124 decoded bytes. The replacement is 39,757 bytes, or 9,802 bytes when gzip-compressed locally. This reduces those decoded asset bytes by about 84%; it is not a measured Core Web Vitals score improvement. Original icon attribution and licence links remain in `site-icons.css`.
 - Added contextual links from the homepage, removal service, reporting guide and resource index. The homepage also links directly to the existing 420-scenario study.
-- A crawl of static links reaches all 21 indexable pages within two clicks of the homepage; the new checker and original study are one click away.
+- A crawl of static links reaches all 26 indexable pages within two clicks of the homepage; all six review-removal services are linked directly from the homepage or their cross-platform service navigation.
 - Updated the sitemap for pages actually changed, the resource index's structured list, and the RSS feed. The new checker has factual WebPage, WebApplication and breadcrumb markup; no invented ratings or review counts were added.
 - Corrected the homepage claim that local reviewer accounts carry extra ranking weight, which conflicted with the FAQ. Google's published local-ranking factors are described in its [ranking guidance](https://support.google.com/business/answer/7091).
 

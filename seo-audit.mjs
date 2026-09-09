@@ -3,6 +3,8 @@ import fs from "node:fs";
 const SITE_ORIGIN = "https://reviewsboost.ca";
 const files = fs.readdirSync(".").filter((file) => file.endsWith(".html"));
 const canonicalOwners = new Map();
+const titleOwners = new Map();
+const descriptionOwners = new Map();
 const errors = [];
 
 const jekyllConfig = fs.existsSync("_config.yml") ? fs.readFileSync("_config.yml", "utf8") : "";
@@ -96,6 +98,7 @@ for (const file of files) {
   const isIndexable = !metaValues('robots').some(value => /\bnoindex\b/i.test(value));
   const refresh = metaValues('refresh', 'http-equiv')[0];
   const redirectTarget = refresh?.match(/\burl\s*=\s*(.+)$/i)?.[1];
+  const structuredTypes = new Set();
 
   if (titleMatches.length !== 1 || !title.trim()) errors.push(`${file}: expected one nonempty title; found ${titleMatches.length}`);
   if (descriptionMatches.length !== 1 || !description.trim()) errors.push(`${file}: expected one nonempty meta description; found ${descriptionMatches.length}`);
@@ -103,6 +106,20 @@ for (const file of files) {
   if (h1Count !== 1) errors.push(`${file}: expected one H1; found ${h1Count}`);
   if (title.length > 65) errors.push(`${file}: title is ${title.length} characters`);
   if (description.length > 165) errors.push(`${file}: description is ${description.length} characters`);
+  if (isIndexable && title.trim()) {
+    if (titleOwners.has(title)) errors.push(`${file}: duplicates title used by ${titleOwners.get(title)}`);
+    titleOwners.set(title, file);
+  }
+  if (isIndexable && description.trim()) {
+    if (descriptionOwners.has(description)) errors.push(`${file}: duplicates description used by ${descriptionOwners.get(description)}`);
+    descriptionOwners.set(description, file);
+  }
+  if (/\bbuy\s+(?:fake\s+)?google\s+reviews?\b/i.test(plainText(markup))) {
+    errors.push(`${file}: public copy contains retired Google-review-buying language`);
+  }
+  if (/fonts\.googleapis\.com/i.test(markup)) {
+    errors.push(`${file}: remove render-blocking Google Fonts dependency`);
+  }
   if (canonical) {
     // A moved page should point to its destination, not compete with it.
     const expectedCanonical = redirectTarget || (file === "index.html" ? SITE_ORIGIN + "/" : SITE_ORIGIN + "/" + file);
@@ -149,10 +166,18 @@ for (const file of files) {
     /<script[^>]+type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi,
   )) {
     try {
-      JSON.parse(match[1]);
+      const data = JSON.parse(match[1]);
+      const nodes = Array.isArray(data) ? data : (data['@graph'] || [data]);
+      for (const node of nodes) {
+        const types = Array.isArray(node?.['@type']) ? node['@type'] : [node?.['@type']];
+        for (const type of types.filter(Boolean)) structuredTypes.add(type);
+      }
     } catch (error) {
       errors.push(`${file}: invalid JSON-LD (${error.message})`);
     }
+  }
+  if (file === 'index.html' && !structuredTypes.has('WebSite')) {
+    errors.push('index.html: homepage needs WebSite structured data for the preferred site name');
   }
 
   for (const tag of tags(markup, '(?:a|link)')) {

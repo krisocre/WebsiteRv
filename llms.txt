@@ -9,6 +9,12 @@ Services are exclusively for business locations in Canada. Online support covers
 ## Primary pages
 
 - [Google review removal](https://reviewsboost.ca/): Eligibility, process, fees and removal request form.
+- [Suppression d’avis Google en français](https://reviewsboost.ca/suppression-avis-google.html): Page canadienne en français sur l’admissibilité, le processus, les tarifs et la demande d’évaluation.
+- [Facebook review removal](https://reviewsboost.ca/remove-facebook-reviews.html): Recommendations, Community Standards assessment, $30 upfront and $45 after removal.
+- [Yelp review removal](https://reviewsboost.ca/remove-yelp-reviews.html): Conflict, firsthand-experience and inappropriate-content assessment, $30 upfront and $55 after removal.
+- [Tripadvisor review removal](https://reviewsboost.ca/remove-tripadvisor-reviews.html): Travel-review eligibility, fraud and listing-context assessment, $30 upfront and $65 after removal.
+- [Trustpilot review removal](https://reviewsboost.ca/remove-trustpilot-reviews.html): Flag category, documentation and Content Integrity support, $30 upfront and $75 after removal.
+- [Glassdoor review removal](https://reviewsboost.ca/remove-glassdoor-reviews.html): Employer-review authenticity, privacy and conduct assessment, $30 upfront and $95 after removal.
 - [Online reputation management](https://reviewsboost.ca/online-reputation-management.html): Canada-wide assessment, response planning, monitoring and recovery resources.
 - [Learning Centre](https://reviewsboost.ca/blog.html): Index of all educational resources.
 - [About](https://reviewsboost.ca/about.html): Scope, principles, contact information and independence statement.
