@@ -5,6 +5,7 @@ const files = fs.readdirSync(".").filter((file) => file.endsWith(".html"));
 const canonicalOwners = new Map();
 const titleOwners = new Map();
 const descriptionOwners = new Map();
+const localePages = new Map();
 const errors = [];
 
 const jekyllConfig = fs.existsSync("_config.yml") ? fs.readFileSync("_config.yml", "utf8") : "";
@@ -96,6 +97,10 @@ for (const file of files) {
   const h1Count = headings.filter(heading => heading[1] === '1').length;
   const wordCount = plainText(html).split(/\s+/).filter(Boolean).length;
   const isIndexable = !metaValues('robots').some(value => /\bnoindex\b/i.test(value));
+  const alternates = new Map(tags(markup, 'link')
+    .filter(tag => attribute(tag, 'rel') === 'alternate' && attribute(tag, 'hreflang'))
+    .map(tag => [attribute(tag, 'hreflang').toLowerCase(), attribute(tag, 'href')]));
+  if (isIndexable) localePages.set(canonical, { file, isIndexable, alternates, language: attribute(tags(markup, 'html')[0] || '', 'lang')?.toLowerCase() });
   const refresh = metaValues('refresh', 'http-equiv')[0];
   const redirectTarget = refresh?.match(/\burl\s*=\s*(.+)$/i)?.[1];
   const structuredTypes = new Set();
@@ -122,7 +127,7 @@ for (const file of files) {
   }
   if (canonical) {
     // A moved page should point to its destination, not compete with it.
-    const expectedCanonical = redirectTarget || (file === "index.html" ? SITE_ORIGIN + "/" : SITE_ORIGIN + "/" + file);
+    const expectedCanonical = redirectTarget?.split('#')[0] || (file === "index.html" ? SITE_ORIGIN + "/" : SITE_ORIGIN + "/" + file);
     if (canonical !== expectedCanonical) {
       errors.push(`${file}: canonical should be ${expectedCanonical}`);
     }
@@ -204,6 +209,39 @@ for (const file of files) {
 }
 
 const sitemap = fs.readFileSync("sitemap.xml", "utf8");
+// Language variants must point to indexable canonical pages and return the same links.
+// This catches mismatched French/English pairs even when each page passes metadata checks.
+for (const [canonical, page] of localePages) {
+  if (!page.alternates.size) continue;
+  if (page.alternates.get(page.language) !== canonical) {
+    errors.push(`${page.file}: hreflang must include this page's own language and canonical`);
+  }
+  for (const [language, target] of page.alternates) {
+    const alternate = localePages.get(target);
+    if (!alternate?.isIndexable || !canonicalOwners.has(target)) {
+      errors.push(`${page.file}: ${language} alternate must be an indexable canonical page: ${target}`);
+      continue;
+    }
+    if (language !== 'x-default' && alternate.language !== language) {
+      errors.push(`${page.file}: ${language} alternate has document language ${alternate.language}`);
+    }
+    for (const [returnLanguage, returnTarget] of page.alternates) {
+      if (alternate.alternates.get(returnLanguage) !== returnTarget) {
+        errors.push(`${page.file}: ${alternate.file} is missing matching return hreflang ${returnLanguage}`);
+      }
+    }
+  }
+}
+for (const entry of sitemap.matchAll(/<url>([\s\S]*?)<\/url>/gi)) {
+  const canonical = entry[1].match(/<loc>([^<]+)<\/loc>/i)?.[1];
+  const links = tags(entry[1], 'xhtml:link');
+  if (!links.length) continue;
+  const htmlAlternates = localePages.get(canonical)?.alternates;
+  const xmlAlternates = new Map(links.map(tag => [attribute(tag, 'hreflang')?.toLowerCase(), attribute(tag, 'href')]));
+  if (!htmlAlternates || htmlAlternates.size !== xmlAlternates.size || [...xmlAlternates].some(([language, target]) => htmlAlternates.get(language) !== target)) {
+    errors.push(`sitemap.xml: alternate languages disagree with HTML for ${canonical}`);
+  }
+}
 const sitemapUrlList =
   [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/gi)]
     .map((entry) => entry[1].match(/<loc>([^<]+)<\/loc>/i)?.[1])
@@ -240,5 +278,5 @@ if (errors.length) {
   for (const error of errors) console.error(`- ${error}`);
   process.exitCode = 1;
 } else {
-  console.log("\nSEO audit passed: heading hierarchy, IDs, metadata, canonicals, Open Graph, alt text, anchor text, internal targets, JSON-LD, sitemap and robots.txt.");
+  console.log("\nSEO audit passed: heading hierarchy, IDs, metadata, canonicals, reciprocal language alternates, Open Graph, alt text, anchor text, internal targets, JSON-LD, sitemap and robots.txt.");
 }

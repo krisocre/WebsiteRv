@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="453.6pt" viewBox="0 0 864 453.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-09-09T22:23:58.010913</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.10.7, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 453.6 
+L 864 453.6 
+L 864 0 
+L 0 0 
+z
+" style="fill: #f5f8fc"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 259.2 337.932 
+L 777.6 337.932 
+L 777.6 142.884 
+L 259.2 142.884 
+z
+" style="fill: #f5f8fc"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 259.2 337.932 
+L 259.2 142.884 
+" clip-path="url(#pc741e3ce80)" style="fill: none; stroke: #dce3eb; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2"/>
+     <g id="text_1">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #566478" x="259.2" y="358.290281" transform="rotate(-0 259.2 358.290281)">0%</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 388.8 337.932 
+L 388.8 142.884 
+" clip-path="url(#pc741e3ce80)" style="fill: none; stroke: #dce3eb; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4"/>
+     <g id="text_2">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #566478" x="388.8" y="358.290281" transform="rotate(-0 388.8 358.290281)">20%</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 518.4 337.932 
+L 518.4 142.884 
+" clip-path="url(#pc741e3ce80)" style="fill: none; stroke: #dce3eb; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6"/>
+     <g id="text_3">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #566478" x="518.4" y="358.290281" transform="rotate(-0 518.4 358.290281)">40%</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 648 337.932 
+L 648 142.884 
+" clip-path="url(#pc741e3ce80)" style="fill: none; stroke: #dce3eb; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8"/>
+     <g id="text_4">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #566478" x="648" y="358.290281" transform="rotate(-0 648 358.290281)">60%</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 777.6 337.932 
+L 777.6 142.884 
+" clip-path="url(#pc741e3ce80)" style="fill: none; stroke: #dce3eb; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10"/>
+     <g id="text_5">
+      <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: middle; fill: #566478" x="777.6" y="358.290281" transform="rotate(-0 777.6 358.290281)">80%</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_11"/>
+     <g id="text_6">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #16223b" x="247.2" y="170.635033" transform="rotate(-0 247.2 170.635033)">Recommended</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_12"/>
+     <g id="text_7">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #16223b" x="247.2" y="220.443001" transform="rotate(-0 247.2 220.443001)">Not recommended</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_13"/>
+     <g id="text_8">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #16223b" x="247.2" y="270.250968" transform="rotate(-0 247.2 270.250968)">Removed by Yelp</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_14"/>
+     <g id="text_9">
+      <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: end; fill: #16223b" x="247.2" y="320.058935" transform="rotate(-0 247.2 320.058935)">Removed by reviewers</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 259.2 151.749818 
+L 712.8 151.749818 
+L 712.8 179.64228 
+L 259.2 179.64228 
+z
+" clip-path="url(#pc741e3ce80)" style="fill: #1b63b7"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 259.2 201.557785 
+L 369.36 201.557785 
+L 369.36 229.450247 
+L 259.2 229.450247 
+z
+" clip-path="url(#pc741e3ce80)" style="fill: #087f80"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 259.2 251.365753 
+L 330.48 251.365753 
+L 330.48 279.258215 
+L 259.2 279.258215 
+z
+" clip-path="url(#pc741e3ce80)" style="fill: #a33d24"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 259.2 301.17372 
+L 272.16 301.17372 
+L 272.16 329.066182 
+L 259.2 329.066182 
+z
+" clip-path="url(#pc741e3ce80)" style="fill: #566478"/>
+   </g>
+   <g id="text_10">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #16223b" x="721.224" y="169.835112" transform="rotate(-0 721.224 169.835112)">70%</text>
+   </g>
+   <g id="text_11">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #16223b" x="377.784" y="219.643079" transform="rotate(-0 377.784 219.643079)">17%</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #16223b" x="338.904" y="269.451046" transform="rotate(-0 338.904 269.451046)">11%</text>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 15px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #16223b" x="280.584" y="319.259013" transform="rotate(-0 280.584 319.259013)">2%</text>
+   </g>
+  </g>
+  <g id="text_14">
+   <text style="font-weight: 700; font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #0568c0" x="47.52" y="34.02" transform="rotate(-0 47.52 34.02)">REVIEWSBOOST  /  SOURCE DATA EXPLAINED</text>
+  </g>
+  <g id="text_15">
+   <text style="font-weight: 700; font-size: 27px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #16223b" x="47.52" y="70.308" transform="rotate(-0 47.52 70.308)">Filtered does not mean deleted</text>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 13px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #566478" x="47.52" y="98.8848" transform="rotate(-0 47.52 98.8848)">Yelp review contributions in 2025 · Global · Rounded source shares</text>
+  </g>
+  <g id="text_17">
+   <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #16223b" x="47.52" y="392.364" transform="rotate(-0 47.52 392.364)">17 / (17 + 11 + 2) = 56.7%</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #566478" x="47.52" y="412.776" transform="rotate(-0 47.52 412.776)">Share of the combined non-recommended + removed group that was filtered, not deleted.</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans'; text-anchor: start; fill: #566478" x="47.52" y="438.6312" transform="rotate(-0 47.52 438.6312)">Source: Yelp, 2025 Trust &amp; Safety Report (Feb. 25, 2026). Analysis: reviewsboost.ca · Not Canadian success odds.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc741e3ce80">
+   <rect x="259.2" y="142.884" width="518.4" height="195.048"/>
+  </clipPath>
+ </defs>
+</svg>

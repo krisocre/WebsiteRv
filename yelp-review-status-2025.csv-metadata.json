@@ -1,0 +1,49 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/yelp-review-status-2025.csv",
+  "dc:title": "Yelp 2025 review-status shares and normalized illustrative counts",
+  "dc:description": "Secondary analysis of rounded global disclosures; illustrative counts and approximate implied volumes are calculations, not independently observed review records. Not a Canadian success rate.",
+  "dc:source": "https://blog.yelp.com/news/2025-trust-and-safety-report/",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "dc:creator": "ReviewsBoost Editorial Team",
+  "dc:issued": "2026-09-09",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "reporting_year",
+        "datatype": "integer",
+        "titles": "Contribution year"
+      },
+      {
+        "name": "geographic_scope",
+        "datatype": "string",
+        "titles": "Source geography"
+      },
+      {
+        "name": "status",
+        "datatype": "string",
+        "titles": "Source classification"
+      },
+      {
+        "name": "reported_share_percent",
+        "datatype": "integer",
+        "titles": "Rounded source share, percent"
+      },
+      {
+        "name": "illustrative_per_10000",
+        "datatype": "integer",
+        "titles": "Calculated share times 100; hypothetical counts"
+      },
+      {
+        "name": "approximate_implied_volume",
+        "datatype": "integer",
+        "titles": "Approximation: 22000000 times reported share divided by 100; not exact observed count"
+      },
+      {
+        "name": "source_url",
+        "datatype": "anyURI",
+        "titles": "Underlying first-party disclosure"
+      }
+    ]
+  }
+}

@@ -1,3 +1,40 @@
+# SEO and editorial consolidation — September 9, 2026
+
+Implemented locally; this pass did not publish the site or submit URLs to Search Console. It adds one article and consolidates one overlapping article. No traffic, backlink or enquiry analytics were available, so the retirement decision is based on scope and overlap, not an invented performance decline.
+
+## New reference material
+
+`yelp-review-removal-statistics.html` explains Yelp's 2025 review-status disclosures. It provides an original four-category normalization, a PNG/SVG chart, source-linked CSV with column definitions, executable calculation and plotting sources, a BibTeX citation, and an empty review-outcome ledger. The underlying data belongs to Yelp; the article explicitly distinguishes secondary analysis from independently collected observations.
+
+The useful distinction is that 17 / (17 + 11 + 2) is approximately 56.7%: the proportion of the combined non-recommended/removal group classified as filtered. It is not a success probability. The report's more-than-193,700 reported removals are U.S.-only, while the approximately 22 million contribution total is global. The article preserves those footnotes rather than presenting a Canadian removal rate.
+
+Sources are Yelp's February 25, 2026 announcement and release, its recommendation-software explanation, and Michael Luca and Georgios Zervas's 2016 Management Science paper. Noorie Malik's short quotation is attributed to the release; none of these people is presented as an author, reviewer or endorser of this site. AI assistance, formulas, approximate inputs and limitations are disclosed. Direct HTTP checks returned 200 for the Yelp blog and recommendation explanation; the press-release and journal pages blocked the automated request with 403 but were readable through browser research. No citation returned 404 in these checks.
+
+## Discovery and Canadian/French targeting
+
+- Existing reciprocal English/French alternates and sitemap annotations were already correct and retained. The SEO audit now verifies language, canonical destination, return annotations and sitemap agreement.
+- The learning centre now links to all six removal platforms and the French Google service page. Five platform-page footers provide static French links, and service offers explicitly identify Canada as their eligible region, matching visible service coverage.
+- The new article has Article, Dataset and breadcrumb markup, a dedicated social image, contextual links from the learning centre, Yelp service and existing statistics article, plus sitemap and RSS entries.
+- All 27 indexable pages are reachable through static links within two clicks of the homepage. The new article is two clicks away. Metadata and dates were not refreshed across unchanged articles.
+
+## Retired article
+
+The broad `google-business-profile-local-seo.html` checklist was the weakest fit for the removal-focused resource library and overlaps the FAQ's local visibility section. Its useful profile, service-area and measurement guidance now lives at `google-reviews-faq.html#seo`. The old article body is preserved in the build-excluded `_retired` directory, replaced publicly by an immediate HTML redirect with noindex and a canonical to the destination page. Internal links point directly to the consolidated material, and the retired URL is absent from the sitemap, feed and learning-centre list.
+
+This is content consolidation, not pruning for an algorithmic activity signal. Google explicitly says adding or removing content merely to make a site seem fresh does not help. [Helpful-content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content). The French annotations follow Google's [localized-version guidance](https://developers.google.com/search/docs/specialty/international/localized-versions).
+
+## Hosting follow-up
+
+Read-only checks on September 9 still returned 200 for both `http://reviewsboost.ca/` and `https://reviewsboost.ca/index.html`. The HTTPS root and French page also returned 200. Apply the HTTPS and index redirect settings documented below at the hosting/CDN layer. Add a permanent redirect for `/google-business-profile-local-seo.html` to `https://reviewsboost.ca/google-reviews-faq.html#seo`; the HTML redirect is a static-host fallback and is not an HTTP 301.
+
+After publishing, submit the updated sitemap through the site's existing Search Console account and inspect the new article. No Search Console connection was available here. Evaluate Canadian qualified enquiries and search performance after recrawling; rankings or citations are not guaranteed by these changes.
+
+## Validation
+
+Site-wide SEO and HTML validation passed. Browser checks covered the new article, resource index, consolidated FAQ, Yelp service and French page on desktop and mobile, including download availability and absence of horizontal page overflow. Chart, table, downloads and static French service links are accessible without JavaScript. Published CSV matches the executable calculation source, shares total 100%, grouped arithmetic is verified, and sitemap/RSS/SVG XML parses successfully.
+
+A single local mobile Lighthouse run on the new article scored 96 performance, 100 accessibility, 100 best practices and 100 SEO. These are local lab results, not field Core Web Vitals or evidence of search rankings. The Python preview server does not implement production caching or text compression.
+
 # SEO improvements — September 7, 2026
 
 Implemented in the local site. This pass did not publish the site or change Cloudflare settings. Ranking and traffic changes cannot be measured from this workspace; Search Console data was not available.

@@ -38,7 +38,7 @@ Do not look for the former Search Console country-targeting setting; Google remo
 
 ## Further work requiring business information
 
-French-language service pages are a worthwhile next experiment if French enquiries can be handled. Publish actual translated service and form content on separate URLs with matching alternate-language annotations; the existing English pages should not be labelled French. French support has not been confirmed, so it has not been advertised. [Google multilingual-site guidance](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites).
+Update, September 9: the user-requested French Google service and form are now at `/suppression-avis-google.html`, paired reciprocally with the English homepage using `en-CA`, `fr-CA` and `x-default` annotations. The learning centre and platform footers link to that page in static HTML. Other platform pages remain English and are not falsely labelled as French translations. The audit checks the pair and matching sitemap annotations. [Google multilingual-site guidance](https://developers.google.com/search/docs/specialty/international/managing-multi-regional-sites).
 
 A future city page should earn its existence through real local material: a consented client case, dated evidence and an outcome, or a genuinely different service process. Another practical distribution angle is offering the existing evidence worksheet or rating study to Canadian business associations whose resources it complements. No customer stories, office addresses, affiliations or outreach have been invented or published.
 

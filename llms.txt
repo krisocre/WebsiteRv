@@ -22,6 +22,8 @@ Services are exclusively for business locations in Canada. Online support covers
 
 ## Guides and tools
 
+- [Yelp review removal statistics](https://reviewsboost.ca/yelp-review-removal-statistics.html): Original calculations from rounded 2025 global review-status shares, filtered-versus-removed distinctions and Canadian geographic limitations. Includes CSV, chart, code and an outcome ledger.
+
 - [Review removal checker and evidence builder](https://reviewsboost.ca/google-review-removal-checker.html): A private concern-specific evidence checklist with report-stage guidance and a downloadable case worksheet.
 
 - [How to get more Google reviews](https://reviewsboost.ca/get-more-google-reviews.html): Authentic, incentive-free customer request process.
@@ -32,7 +34,6 @@ Services are exclusively for business locations in Canada. Online support covers
 - [How to report a fake Google review](https://reviewsboost.ca/remove-fake-google-review.html): Assessment, evidence, official reporting and follow-up.
 - [Google review link and QR code](https://reviewsboost.ca/google-review-link-qr-code.html): Setup, testing, placement and accessibility.
 - [Google review policy for Canadian businesses](https://reviewsboost.ca/google-review-policy-canada.html): Platform rules and Canadian context.
-- [Google Business Profile local SEO checklist](https://reviewsboost.ca/google-business-profile-local-seo.html): Profile, website, reviews and measurement.
 - [Google reviews FAQ](https://reviewsboost.ca/google-reviews-faq.html): Forty-one detailed questions and answers.
 - [Review rating calculator](https://reviewsboost.ca/google-review-calculator.html): Weighted-average calculator with feasible integer-star ranges for rounded public ratings, exact targets and shareable scenarios.
 
