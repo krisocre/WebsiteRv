@@ -6,7 +6,7 @@ const cases = [
   { url: 'https://www.reviewsboost.ca/', redirect: origin + '/' },
   { url: origin + '/index.html', redirect: origin + '/' },
   { url: origin + '/index.html?utm_source=seo-check', redirect: origin + '/?utm_source=seo-check' },
-  { url: origin + '/remove-google-reviews.html', status: 200 },
+  { url: origin + '/remove-google-reviews.html', status: 200, type: 'text/html', canonical: origin + '/', robots: /\bnoindex\b/i },
   { url: origin + '/sitemap.xml', status: 200, type: /(?:application|text)\/xml/ },
   { url: origin + '/robots.txt', status: 200, type: 'text/plain' },
   { url: origin + '/reviewsboost-missing-page-check', status: 404, type: 'text/html' },
@@ -25,11 +25,19 @@ const results = await Promise.all(cases.map(async check => {
     const response = await fetch(check.url, { redirect: 'manual', signal: AbortSignal.timeout(15000) });
     const location = response.headers.get('location');
     const type = response.headers.get('content-type') || '';
+    let body = '';
+    if (check.canonical || check.robots) body = await response.text();
+    else await response.body?.cancel();
     const statusOK = check.redirect ? [301, 308].includes(response.status) &&
       location && new URL(location, check.url).href === check.redirect : response.status === check.status;
     const typeOK = !check.type || (check.type instanceof RegExp ? check.type.test(type) : type.includes(check.type));
-    await response.body?.cancel();
-    return { passed: Boolean(statusOK && typeOK), message: `${check.url}: ${response.status}${location ? ' → ' + location : ''}${check.type ? ' (' + type + ')' : ''}` };
+    const canonical = body.match(/<link\b[^>]*\brel=["']canonical["'][^>]*\bhref=["']([^"']+)/i)?.[1] ||
+      body.match(/<link\b[^>]*\bhref=["']([^"']+)["'][^>]*\brel=["']canonical["']/i)?.[1];
+    const robots = body.match(/<meta\b[^>]*\bname=["']robots["'][^>]*\bcontent=["']([^"']+)/i)?.[1] ||
+      body.match(/<meta\b[^>]*\bcontent=["']([^"']+)["'][^>]*\bname=["']robots["']/i)?.[1] || '';
+    const canonicalOK = !check.canonical || canonical === check.canonical;
+    const robotsOK = !check.robots || check.robots.test(robots);
+    return { passed: Boolean(statusOK && typeOK && canonicalOK && robotsOK), message: `${check.url}: ${response.status}${location ? ' → ' + location : ''}${check.type ? ' (' + type + ')' : ''}${check.canonical ? ' canonical=' + (canonical || 'missing') : ''}${check.robots ? ' robots=' + (robots || 'missing') : ''}` };
   } catch (error) {
     return { passed: false, message: `${check.url}: ${error.message}` };
   }

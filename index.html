@@ -601,6 +601,7 @@
     <a class="btn btn-primary" href="#review-count">Choose Quantity <i class="fa-solid fa-arrow-down"></i></a>
 </div>
 
+<script src="form-submission.js"></script>
 <script>
     (function () {
         var navbar = document.getElementById('navbar');
@@ -757,11 +758,7 @@
             submitButton.textContent = 'Sending...';
             var removalPayload = new FormData(removalForm);
             removalPayload.set('contact_detail', document.getElementById('email').value.trim());
-            fetch('https://script.google.com/macros/s/AKfycby4mQu0BJFu8Jmbw_zZPzrBb9TF_YRw4j0Ayu3PFvwgicSN5vtzynX0ASet2utzxtlnMw/exec', {
-                method: 'POST',
-                mode: 'no-cors',
-                body: removalPayload
-            }).then(function () {
+            ReviewSubmission.send(removalPayload).then(function () {
                 removalForm.reset();
                 updatePrice();
                 submitButton.disabled = false;

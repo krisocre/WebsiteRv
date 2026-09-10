@@ -259,7 +259,13 @@
   });
   document.querySelectorAll('[data-focus-form]').forEach(function (link) {
     link.addEventListener('click', function (event) {
-      if (usePopupForm) {
+      if (usePopupForm && link.closest('.platform-hero')) {
+        event.preventDefault();
+        pricingCalc.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'center'
+        });
+      } else if (usePopupForm) {
         event.preventDefault();
         openModal(link);
       } else {
@@ -277,9 +283,7 @@
     status.classList.remove('error');
     var payload = new FormData(form);
     payload.set('contact_detail', document.getElementById('email').value.trim());
-    fetch('https://script.google.com/macros/s/AKfycby4mQu0BJFu8Jmbw_zZPzrBb9TF_YRw4j0Ayu3PFvwgicSN5vtzynX0ASet2utzxtlnMw/exec', {
-      method: 'POST', mode: 'no-cors', body: payload
-    }).then(function () {
+    ReviewSubmission.send(payload).then(function () {
       form.reset();
       quantity.value = 1;
       update();
