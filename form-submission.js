@@ -13,26 +13,31 @@
 
   function send(formData) {
     var body = encode(formData);
-
-    // Beacon queues the small form payload without waiting for Apps Script's
-    // spreadsheet and email work to finish. A queued request survives page exit.
-    if (navigator.sendBeacon) {
-      try {
-        if (navigator.sendBeacon(endpoint, body)) {
-          return Promise.resolve({ transport: 'beacon' });
-        }
-      } catch (error) {
-        // Older browsers can reject URLSearchParams here; use fetch below.
-      }
+    if (navigator.onLine === false) {
+      return Promise.reject(Object.assign(new Error('offline'), { code: 'offline' }));
     }
-
+    var controller = new AbortController();
+    var timer = window.setTimeout(function () { controller.abort(); }, 20000);
+    // A simple CORS request avoids preflight. Only an explicit server success
+    // confirms storage. Never resend an ambiguous request automatically.
     return fetch(endpoint, {
       method: 'POST',
-      mode: 'no-cors',
-      keepalive: true,
+      mode: 'cors',
+      credentials: 'omit',
+      keepalive: new Blob([body.toString()]).size < 60000,
+      signal: controller.signal,
       body: body
-    }).then(function () {
-      return { transport: 'fetch' };
+    }).then(function (response) {
+      if (!response.ok) throw new Error('unconfirmed');
+      return response.json();
+    }).then(function (result) {
+      if (result.result !== 'success') throw new Error('unconfirmed');
+      return result;
+    }).catch(function (error) {
+      // Native AbortError has a read-only code property; wrap it consistently.
+      throw Object.assign(new Error('unconfirmed'), { code: 'unconfirmed', cause: error });
+    }).finally(function () {
+      window.clearTimeout(timer);
     });
   }
 

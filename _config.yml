@@ -1,2 +1,4 @@
 exclude:
   - _retired
+  - tests
+  - CONVERSION-IMPROVEMENTS.md

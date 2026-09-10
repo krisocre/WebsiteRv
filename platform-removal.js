@@ -13,7 +13,6 @@
   var selectedPlan = document.getElementById('selectedPlan');
   var form = document.getElementById('platformRemovalForm');
   var submit = document.getElementById('platformSubmit');
-  var status = document.getElementById('platformStatus');
   var success = document.getElementById('platformSuccess');
   var successClose = document.getElementById('platformSuccessClose');
   var requestSection = document.getElementById('request');
@@ -23,11 +22,6 @@
   var servicesMenu = document.getElementById('servicesMenu');
   var servicesMenuButton = document.getElementById('servicesMenuButton');
   var servicesMenuFooter = document.querySelector('.services-dropdown-footer');
-  var submitDefaultText = isFrench ? 'Envoyer la demande de suppression' : 'Submit Removal Request';
-  function restoreSubmitLabel() {
-    if (isFrench) submit.textContent = submitDefaultText;
-    else submit.innerHTML = 'Submit Removal Request <span aria-hidden="true">&#8594;</span>';
-  }
   var serviceOptions = [
     { name: 'Google', label: 'Google Review Removal', frLabel: 'Suppression d’avis Google', mark: 'G', fee: '$30 upfront + $40 after removal', frFee: '30 $ au départ + 40 $ après suppression', href: '/', color: '#4285f4' },
     { name: 'Facebook', label: 'Facebook Review Removal', frLabel: 'Suppression d’avis Facebook', mark: 'FB', fee: '$30 upfront + $45 after removal', frFee: '30 $ au départ + 45 $ après suppression', href: 'remove-facebook-reviews.html', color: '#1b63b7' },
@@ -103,7 +97,8 @@
     requestSection.classList.add('open');
     requestSection.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
-    window.setTimeout(function () { document.getElementById('fullName').focus(); }, 60);
+    if (window.ReviewEnquiry) ReviewEnquiry.focus();
+    else document.addEventListener('DOMContentLoaded', function () { ReviewEnquiry.focus(); }, { once: true });
   }
   function closeModal() {
     if (!usePopupForm) return;
@@ -133,7 +128,7 @@
     var introCopy = intro.querySelector(':scope > p:not(.eyebrow):not(.callout)');
     intro.querySelector('.eyebrow').textContent = 'Review removal request';
     intro.querySelector('h2').textContent = 'Start the Removal Process';
-    introCopy.textContent = 'For business locations in Canada. Enter the ' + platform + ' profile and review details below; include your city and province in the case details. All fees are in CAD.';
+    introCopy.textContent = 'For Canadian businesses. Share the ' + platform + ' review first, then your contact details. No card or account password needed.';
     intro.querySelector('.callout').remove();
 
     var labels = {
@@ -259,45 +254,12 @@
   });
   document.querySelectorAll('[data-focus-form]').forEach(function (link) {
     link.addEventListener('click', function (event) {
-      if (usePopupForm && link.closest('.platform-hero')) {
-        event.preventDefault();
-        pricingCalc.scrollIntoView({
-          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
-          block: 'center'
-        });
-      } else if (usePopupForm) {
+      if (usePopupForm) {
         event.preventDefault();
         openModal(link);
       } else {
-        window.setTimeout(function () { document.getElementById('fullName').focus(); }, 250);
+        ReviewEnquiry.focus();
       }
-    });
-  });
-  form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    quantity.value = formQuantity.value;
-    update();
-    submit.disabled = true;
-    submit.textContent = isFrench ? 'Envoi en cours...' : 'Sending...';
-    status.hidden = true;
-    status.classList.remove('error');
-    var payload = new FormData(form);
-    payload.set('contact_detail', document.getElementById('email').value.trim());
-    ReviewSubmission.send(payload).then(function () {
-      form.reset();
-      quantity.value = 1;
-      update();
-      submit.disabled = false;
-      restoreSubmitLabel();
-      form.hidden = true;
-      success.hidden = false;
-      success.focus();
-    }).catch(function () {
-      status.textContent = isFrench ? 'La demande n’a pas pu être envoyée. Écrivez à support@reviewsboost.ca.' : 'The request could not be sent. Please email support@reviewsboost.ca.';
-      status.classList.add('error');
-      status.hidden = false;
-      submit.disabled = false;
-      restoreSubmitLabel();
     });
   });
   successClose.addEventListener('click', function () {
@@ -305,7 +267,7 @@
     else {
       success.hidden = true;
       form.hidden = false;
-      document.getElementById('fullName').focus();
+      ReviewEnquiry.focus();
     }
   });
   update();

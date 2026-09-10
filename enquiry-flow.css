@@ -1,0 +1,47 @@
+.enquiry-note { margin: 14px 0; color: #44536a; font-size: 13px; line-height: 1.65; }
+.enquiry-note strong { color: #15243b; }
+.fee-total { border-top: 2px solid #d8e0e9; font-weight: 700; }
+.fee-scenarios { margin-top: 24px; padding: 24px; border: 1px solid #d8e0e9; border-radius: 12px; background: #f7f9fc; text-align: left; color: #27374c; }
+.fee-scenarios h3 { margin: 0 0 14px; font-size: 20px; }
+.fee-scenarios dl { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 20px; margin: 0; }
+.fee-scenarios dt { margin: 0; }
+.fee-scenarios dd { margin: 0; font-weight: 700; text-align: right; }
+.fee-scenarios p { margin: 15px 0 0; font-size: 13px; line-height: 1.65; }
+.fee-scenarios a, .enquiry-note a { color: #164f8c; text-decoration: underline; }
+.enquiry-form [hidden] { display: none !important; }
+.enquiry-progress { display: flex; gap: 16px; margin: 0 0 20px; padding: 0; list-style: none; counter-reset: enquiry-step; }
+.enquiry-progress li { flex: 1; padding: 10px 0; border-bottom: 3px solid #dce2e9; color: #596577; font-size: 13px; }
+.enquiry-progress li[aria-current="step"] { color: #172c47; border-color: #245d92; font-weight: 700; }
+.enquiry-progress li::before { counter-increment: enquiry-step; content: counter(enquiry-step) '. '; }
+.enquiry-form .enquiry-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.enquiry-form .enquiry-grid > .field, .enquiry-form .enquiry-grid > .form-group { margin: 0; padding: 0; min-width: 0; }
+.enquiry-form label { display: block; margin-bottom: 6px; color: #303d4f; font-size: 13px; font-weight: 600; }
+.enquiry-form :is(input:not([type="hidden"]), select, textarea) { box-sizing: border-box; width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #aebbc9; border-radius: 7px; background: #fff; color: #172438; font: inherit; font-size: 16px; }
+.enquiry-form textarea { min-height: 85px; resize: vertical; }
+.enquiry-form :is(input, select, textarea):focus { outline: 2px solid #245d92; outline-offset: 2px; }
+body[data-platform] #request.platform-modal { background: rgba(11, 15, 24, .67); border: 0; }
+.platform-modal .form-layout > div:first-of-type { padding: 0; }
+.platform-modal .form-layout > div:first-of-type h2 { margin: 0 32px 5px 0; font-size: 25px; }
+.platform-modal .form-layout > div:first-of-type > p:not(.eyebrow) { margin: 0 0 20px; color: #596577; font-size: 12.5px; line-height: 1.55; }
+.platform-modal .enquiry-form .field label { font-size: 13px; color: #303d4f; }
+.platform-modal .enquiry-form .field :is(input, select, textarea) { min-height: 44px; font-size: 16px; }
+.platform-modal .enquiry-form .field :is(input, select, textarea):focus { border-color: #245d92; box-shadow: none; }
+.enquiry-form .enquiry-extra { margin: 2px 0 0; border: 1px solid #dce2e9; border-radius: 8px; padding: 12px; }
+.enquiry-form .enquiry-extra summary { cursor: pointer; color: #24547f; font-size: 13px; font-weight: 600; }
+.enquiry-form .enquiry-extra[open] summary { margin-bottom: 15px; }
+.enquiry-form .enquiry-extra .enquiry-grid { margin-top: 10px; }
+.enquiry-summary { margin: 18px 0; padding: 15px; border: 1px solid #d8e3ee; border-radius: 9px; background: #f2f7fc; color: #253f5e; font-size: 13px; line-height: 1.65; }
+.enquiry-actions { display: flex; align-items: center; gap: 12px; margin-top: 20px; }
+.enquiry-actions > button { flex: 1; min-height: 46px; }
+.enquiry-form .enquiry-back { flex: 0 0 auto; width: auto; padding: 12px 15px; border: 1px solid #bdc8d5; border-radius: 7px; background: #fff; color: #263a52; box-shadow: none; cursor: pointer; }
+.enquiry-form .enquiry-back:hover { background: #edf3f8; }
+.enquiry-form .form-status { display: block; margin-top: 14px; color: #42536a; font-size: 14px; font-weight: 400; }
+.enquiry-form .form-status.error { color: #a11925; }
+.enquiry-form .form-privacy, .enquiry-form .platform-disclaimer { color: #596577; font-size: 12px; }
+.enquiry-form button:disabled { opacity: .65; cursor: wait; }
+.enquiry-receipt { overflow-wrap: anywhere; }
+.enquiry-receipt pre { white-space: pre-wrap; text-align: left; padding: 16px; border-radius: 8px; background: #f2f7fc; color: #263a52; font: inherit; font-size: 13px; line-height: 1.7; }
+.enquiry-receipt a { color: #164f8c; text-decoration: underline; }
+.enquiry-receipt button { margin: 14px 0; }
+#review-count { scroll-margin-top: 96px; }
+@media (max-width: 480px) { .fee-scenarios { padding: 18px; } .fee-scenarios dl { grid-template-columns: 1fr; gap: 5px; } .fee-scenarios dd { text-align: left; margin-bottom: 12px; } }

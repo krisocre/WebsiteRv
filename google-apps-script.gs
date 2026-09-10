@@ -4,6 +4,8 @@ var SPREADSHEET_ID = '';
 var SHEET_NAME = '';
 // Deploy the web app to execute as you. Leave blank to notify the deploying user.
 var NOTIFICATION_EMAIL = '';
+// Transactional acknowledgements only; never marketing or quoted review content.
+var SEND_CUSTOMER_RECEIPTS = true;
 
 function doPost(e) {
   try {
@@ -47,6 +49,10 @@ function doPost(e) {
     var reviewCount = field('review_count', 'reviews_to_remove', 'review_quantity') || 'N/A';
     var reviewLinks = field('review_links') || 'N/A';
     var reason = field('reason') || 'None Provided';
+    var requestId = field('request_id');
+    if (!/^RB-[a-z0-9-]{10,60}$/i.test(requestId)) requestId = 'RB-' + Utilities.getUuid();
+    var referenceLine = 'Request reference: ' + requestId;
+    if (reason.indexOf(referenceLine) === -1) reason += '\n' + referenceLine;
     var formType = field('form_type');
 
     // Reject retired or unexpected forms instead of silently accepting stale submissions.
@@ -77,13 +83,29 @@ function doPost(e) {
     if (!sheet) throw new Error('The configured submissions sheet tab was not found.');
     var row = [timestamp, selectedPlan, fullName, businessName, email, phone,
       contactMethod, contactInfo, businessUrl, reviewCount, reviewLinks, reason];
-    sheet.appendRow(row.map(function (value) {
-      // Store submitted text literally instead of executing a spreadsheet formula.
-      return typeof value === 'string' && value.charAt(0) === '=' ? "'" + value : value;
-    }));
+    var lock = LockService.getScriptLock();
+    lock.waitLock(5000);
+    try {
+      // The existing Reason column holds the reference, preserving 12 columns.
+      // A repeated request ID cannot create another row or another email.
+      var lastRow = sheet.getLastRow();
+      if (lastRow > 1 && sheet.getRange(2, 12, lastRow - 1, 1).createTextFinder(referenceLine)
+          .matchCase(true).useRegularExpression(false).findNext()) {
+        return ContentService.createTextOutput(JSON.stringify({ result: 'success', request_id: requestId }))
+          .setMimeType(ContentService.MimeType.JSON);
+      }
+      sheet.appendRow(row.map(function (value) {
+        // Store submitted text literally instead of executing a spreadsheet formula.
+        return typeof value === 'string' && value.charAt(0) === '=' ? "'" + value : value;
+      }));
+      SpreadsheetApp.flush();
+    } finally {
+      lock.releaseLock();
+    }
 
     var subject = formLabel + ' from ' + fullName;
     var body = 'You received a new submission!\n\n' +
+      referenceLine + '\n' +
       'Form Type: ' + formLabel + '\n' +
       '----------------------------------------\n' +
       'Full Name: ' + fullName + '\n' +
@@ -107,9 +129,27 @@ function doPost(e) {
     }
 
     var myEmail = NOTIFICATION_EMAIL || Session.getEffectiveUser().getEmail();
-    MailApp.sendEmail(myEmail, subject, body);
+    // A mail failure must not turn an already-saved lead into an error response.
+    try { MailApp.sendEmail(myEmail, subject, body); }
+    catch (notificationError) { console.error('Owner notification failed for ' + requestId); }
+    if (SEND_CUSTOMER_RECEIPTS && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254) {
+      try {
+        // Limit acknowledgements to one per address per five minutes. The receipt
+        // contains no submitted URLs or free text that could be used for spam.
+        var cache = CacheService.getScriptCache();
+        var emailKey = 'receipt-' + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, email.toLowerCase()));
+        if (!cache.get(emailKey) && MailApp.getRemainingDailyQuota() > 0) {
+          var french = field('locale') === 'fr-CA';
+          var receiptBody = french
+            ? 'Nous avons reçu votre demande ReviewsBoost.\n\nRéférence : ' + requestId + '\n\nAucun paiement n’a été effectué par le formulaire. Nous vous contacterons au sujet de votre demande et des modalités écrites avant toute commande. Conservez les liens, captures et dates des avis.\n\nQuestions : support@reviewsboost.ca\n\nSi vous n’avez pas envoyé cette demande, vous pouvez ignorer ce message.'
+            : 'We received your ReviewsBoost request.\n\nReference: ' + requestId + '\n\nNo payment was taken by the form. We will contact you about your request and the written terms before you place an order. Keep any review links, screenshots and dates for your case.\n\nQuestions: support@reviewsboost.ca\n\nIf you did not make this request, you can ignore this message.';
+          MailApp.sendEmail({ to: email, subject: french ? 'Votre demande ReviewsBoost' : 'Your ReviewsBoost request', body: receiptBody, name: 'ReviewsBoost', replyTo: 'support@reviewsboost.ca' });
+          cache.put(emailKey, 'sent', 300);
+        }
+      } catch (receiptError) { console.error('Customer acknowledgement failed for ' + requestId); }
+    }
 
-    return ContentService.createTextOutput(JSON.stringify({ result: 'success' }))
+    return ContentService.createTextOutput(JSON.stringify({ result: 'success', request_id: requestId }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
     console.error(error.toString());
