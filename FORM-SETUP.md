@@ -28,7 +28,7 @@ All forms send `email_address` and/or `phone_number` in their own fields and cop
 ## Update the Apps Script deployment
 
 1. Open the submissions spreadsheet and its bound project through **Extensions > Apps Script**.
-2. Replace the existing handler with the contents of `google-apps-script.gs`. Set `SPREADSHEET_ID` to the ID between `/d/` and `/edit` in the spreadsheet URL, and `SHEET_NAME` to the exact destination tab name. Optionally set `NOTIFICATION_EMAIL`; otherwise notifications go to the account deploying the app.
+2. Replace the existing handler with the contents of `google-apps-script.gs`. Because the project is opened from the submissions spreadsheet, `SPREADSHEET_ID` and `SHEET_NAME` can stay blank to use that bound spreadsheet and its active tab. For an unbound project, set the ID between `/d/` and `/edit` in the spreadsheet URL and the exact tab name. `NOTIFICATION_EMAIL` is set to `support@reviewsboost.ca`; change it only if submissions should reach another monitored inbox.
 3. Keep the destination sheet's first row in this exact order (the script preserves the original 12 columns):
 
    ```text
@@ -44,9 +44,11 @@ The handler opens the spreadsheet and tab explicitly because the bound script's 
 
 ## Confirmation and recovery
 
-The browser uses a simple URL-encoded CORS POST and shows **Request received** only after reading `{ "result": "success" }`. Queueing a beacon, an opaque response or a failed request does not prove receipt. There is no automatic retry. An offline attempt can be retried after reconnection; a timeout, unreadable response or other ambiguous result preserves the answers, displays a reference and offers a local download plus support email. The form locks resubmission for that attempt to avoid duplicates. Check the reference in the sheet before requesting a fresh submission. Reloading the page clears unsent form answers, so save the request first.
+The browser uses a simple URL-encoded CORS POST and normally shows **Request received** only after reading `{ "result": "success" }`. Queueing a beacon, an opaque response or a failed request does not prove receipt. The one compatibility exception is the old deployment's exact `Failed to send email: no recipient` response: that handler appends the row before attempting email, so the browser identifies the request as saved and warns that its internal notification failed. Deploying the updated handler, with `NOTIFICATION_EMAIL` set to `support@reviewsboost.ca`, removes that warning and restores owner notification.
 
-There is an explanatory status after four seconds and a 20-second request timeout. Google can continue processing after a browser timeout. This is why an unconfirmed result does not claim failure or resend automatically. Live Apps Script latency and CORS behavior still require verification after deployment.
+There is no automatic retry. An offline attempt can be retried after reconnection; a timeout, unreadable response or other ambiguous result preserves the answers, displays a reference and offers a local download plus support email. The form locks resubmission for that attempt to avoid duplicates. Check the reference in the sheet before requesting a fresh submission. An explicit server rejection remains retryable. Reloading the page clears unsent form answers, so save the request first.
+
+There is an explanatory status after four seconds and a 60-second request timeout. Google can continue processing after a browser timeout. This is why an unconfirmed result does not claim failure or resend automatically. Live Apps Script latency and CORS behavior still require verification after deployment.
 
 The updated handler saves and flushes the row before confirming. A script lock and reference lookup in the existing Reason column prevent repeated request IDs from appending twice. Notification failures are logged and do not turn a saved row into a failed submission. With `SEND_CUSTOMER_RECEIPTS = true`, it also attempts a fixed transactional acknowledgement in the form's language, throttled through the Apps Script cache per email address. The acknowledgement includes the reference and next steps, never user-submitted URLs or free text. Email delivery remains subject to MailApp quotas; check the sheet even if a notification is absent.
 

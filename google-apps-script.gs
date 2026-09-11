@@ -1,16 +1,16 @@
 // Paste this file into the Apps Script project bound to your submissions sheet.
-// Set the spreadsheet ID (from its URL) and the exact destination tab name.
+// Optional: set these to target a specific spreadsheet and tab. When this
+// project is bound to the submissions sheet, the blank defaults use that sheet.
 var SPREADSHEET_ID = '';
 var SHEET_NAME = '';
 // Deploy the web app to execute as you. Leave blank to notify the deploying user.
-var NOTIFICATION_EMAIL = '';
+var NOTIFICATION_EMAIL = 'support@reviewsboost.ca';
 // Transactional acknowledgements only; never marketing or quoted review content.
 var SEND_CUSTOMER_RECEIPTS = true;
 
 function doPost(e) {
   try {
     if (!e || !e.parameter) throw new Error('Submit this handler through the website form.');
-    if (!SPREADSHEET_ID || !SHEET_NAME) throw new Error('Set SPREADSHEET_ID and SHEET_NAME before deploying.');
     var data = e.parameter;
 
     function field() {
@@ -78,8 +78,11 @@ function doPost(e) {
     // Keep the existing 12-column sheet layout:
     // Timestamp | Selected Plan | Full Name | Business Name | Email | Phone |
     // Preferred Contact | Contact Detail | Profile URL | Review Count | Review Links | Reason
-    var spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
-    var sheet = spreadsheet.getSheetByName(SHEET_NAME);
+    var spreadsheet = SPREADSHEET_ID
+      ? SpreadsheetApp.openById(SPREADSHEET_ID)
+      : SpreadsheetApp.getActiveSpreadsheet();
+    if (!spreadsheet) throw new Error('Bind this project to the submissions spreadsheet or set SPREADSHEET_ID.');
+    var sheet = SHEET_NAME ? spreadsheet.getSheetByName(SHEET_NAME) : spreadsheet.getActiveSheet();
     if (!sheet) throw new Error('The configured submissions sheet tab was not found.');
     var row = [timestamp, selectedPlan, fullName, businessName, email, phone,
       contactMethod, contactInfo, businessUrl, reviewCount, reviewLinks, reason];

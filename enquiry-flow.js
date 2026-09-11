@@ -208,11 +208,13 @@
     message(fr ? 'Envoi sécurisé de votre demande…' : 'Sending your request securely…');
     emit('submission_started');
     var slow = setTimeout(function () { message(fr ? 'L’envoi prend un peu plus de temps. Gardez cette page ouverte; aucune nouvelle demande n’est nécessaire.' : 'This is taking a little longer. Keep this page open; there is no need to submit again.'); }, 4000);
-    ReviewSubmission.send(payload).then(function () {
+    ReviewSubmission.send(payload).then(function (result) {
       emit('submission_confirmed');
       receipt(payload, true);
       success.querySelector('h2').textContent = fr ? 'Demande reçue' : 'Request received';
-      success.querySelector('p').textContent = fr ? 'Aucun paiement n’a été effectué. Nous examinerons vos renseignements et vous contacterons au sujet de l’admissibilité et des modalités avant toute commande. Conservez les liens et captures des avis.' : 'No payment has been taken. We will review your details and contact you about eligibility and written terms before you place an order. Keep the review links and screenshots for your case.';
+      success.querySelector('p').textContent = result.warning === 'owner_notification_failed'
+        ? (fr ? 'Votre demande a été enregistrée. Le courriel de notification interne n’a pas pu être envoyé; conservez la référence ci-dessous. Aucun paiement n’a été effectué.' : 'Your request was saved. The internal notification email could not be sent; keep the reference below. No payment has been taken.')
+        : (fr ? 'Aucun paiement n’a été effectué. Nous examinerons vos renseignements et vous contacterons au sujet de l’admissibilité et des modalités avant toute commande. Conservez les liens et captures des avis.' : 'No payment has been taken. We will review your details and contact you about eligibility and written terms before you place an order. Keep the review links and screenshots for your case.');
       form.hidden = true; success.hidden = false; success.focus();
       var intro = document.getElementById('removalFormIntro'); if (intro) intro.hidden = true;
       var modal = document.getElementById('orderModal'); if (modal) modal.setAttribute('aria-labelledby', 'removalSuccessTitle');
@@ -221,10 +223,13 @@
       if (!reputation) { document.getElementById('reviewQuantity').value = 1; document.getElementById('reviewQuantity').dispatchEvent(new Event('input')); }
     }).catch(function (error) {
       var offline = error.code === 'offline';
-      locked = !offline;
+      var rejected = error.code === 'server_rejected';
+      locked = !offline && !rejected;
       message(offline
         ? (fr ? 'Vous êtes hors ligne. Vos réponses sont conservées dans ce formulaire. Reconnectez-vous, puis réessayez.' : 'You appear to be offline. Your answers are still in this form. Reconnect, then try again.')
-        : (fr ? 'Nous ne pouvons pas confirmer la réception. Vos réponses sont conservées. Enregistrez votre demande et contactez-nous avec la référence ci-dessous avant de la renvoyer.' : 'We could not confirm receipt. Your answers are still here. Save your request and email us with the reference below before sending it again.'), true);
+        : rejected
+          ? (fr ? 'Le serveur n’a pas accepté la demande. Vos réponses sont conservées; corrigez-les ou réessayez.' : 'The server did not accept the request. Your answers are preserved; correct them or try again.')
+          : (fr ? 'Nous ne pouvons pas confirmer la réception. Vos réponses sont conservées. Enregistrez votre demande et contactez-nous avec la référence ci-dessous avant de la renvoyer.' : 'We could not confirm receipt. Your answers are still here. Save your request and email us with the reference below before sending it again.'), true);
       receipt(payload, false); emit('submission_unconfirmed', { offline: offline });
     }).finally(function () {
       clearTimeout(slow); busy = false; submit.disabled = locked; back.disabled = false;

@@ -91,13 +91,29 @@ const server = http.createServer((req,res) => {
       assert.equal(await form.locator('[name="full_name"]').inputValue(),'Élodie Test');
       assert.equal(await page.locator('#removalSuccess').isVisible(),false);
       if(mode==='offline') { assert.equal(posts,0); assert.equal(await form.locator('[type="submit"]').isDisabled(),false); }
-      else { assert.equal(posts,1); assert.equal(await form.locator('[type="submit"]').isDisabled(),true); }
+      else {
+        assert.equal(posts,1);
+        assert.equal(await form.locator('[type="submit"]').isDisabled(),mode==='server-error'?false:true);
+      }
       await page.keyboard.press('Escape');
       await page.locator('.open-order').first().click();
       assert.equal(await form.locator('[role="status"]').isVisible(),true,'Reopening must preserve error explanation');
       await form.locator('.enquiry-back').click();
       await form.locator('.enquiry-actions button').filter({hasText:'Continue to My Details'}).click();
       assert.equal(await form.locator('[name="full_name"]').isVisible(),true,'Answers must remain reachable after failure');
+      await page.close();
+    }
+    {
+      const page=await browser.newPage({reducedMotion:'reduce'}); let posts=0;
+      await page.route('https://script.google.com/**',async route=>{
+        posts++;
+        await route.fulfill({headers:{'Access-Control-Allow-Origin':'*'},contentType:'application/json',body:'{"result":"error","error":"Exception: Failed to send email: no recipient"}'});
+      });
+      const form=await prepare(page,'index.html');
+      await form.evaluate(n=>n.requestSubmit());
+      await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
+      assert.equal(posts,1,'Legacy notification failure sent more than once');
+      assert.match(await page.locator('#removalSuccess').textContent(),/request was saved/i);
       await page.close();
     }
     const page=await browser.newPage({reducedMotion:'reduce'});
