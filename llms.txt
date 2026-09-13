@@ -9,13 +9,13 @@ Services are exclusively for business locations in Canada. Online support covers
 ## Primary pages
 
 - [Google review removal](https://reviewsboost.ca/): Fully managed Google review removal for Toronto, Montréal, Vancouver and business locations across Canada, with pricing, tracked results and a removal request form.
-- [Suppression d’avis Google en français](https://reviewsboost.ca/suppression-avis-google.html): Service canadien entièrement géré de suppression d’avis Google, avec tarifs et formulaire en français.
-- [Facebook review removal](https://reviewsboost.ca/remove-facebook-reviews.html): Fully managed bad Facebook review removal, $30 upfront and $45 after removal.
-- [Yelp review removal](https://reviewsboost.ca/remove-yelp-reviews.html): Fully managed bad Yelp review removal, $30 upfront and $55 after removal.
-- [Tripadvisor review removal](https://reviewsboost.ca/remove-tripadvisor-reviews.html): Fully managed bad Tripadvisor review removal, $30 upfront and $65 after removal.
-- [Trustpilot review removal](https://reviewsboost.ca/remove-trustpilot-reviews.html): Fully managed bad Trustpilot review removal, $30 upfront and $75 after removal.
-- [Glassdoor review removal](https://reviewsboost.ca/remove-glassdoor-reviews.html): Fully managed bad Glassdoor review removal, $30 upfront and $95 after removal.
-- [Online reputation management](https://reviewsboost.ca/online-reputation-management.html): Canada-wide assessment, response planning, monitoring and recovery resources.
+- [Suppression d’avis Google en français](https://reviewsboost.ca/suppression-avis-google.html): Service géré de suppression d’avis Google à Toronto, Montréal, Vancouver et partout au Canada, avec tarifs et formulaire en français.
+- [Facebook review removal](https://reviewsboost.ca/remove-facebook-reviews.html): Managed Facebook review removal for Toronto, Montreal, Vancouver and all Canada, $30 upfront and $45 after removal.
+- [Yelp review removal](https://reviewsboost.ca/remove-yelp-reviews.html): Managed Yelp review removal for Toronto, Montreal, Vancouver and all Canada, $30 upfront and $55 after removal.
+- [Tripadvisor review removal](https://reviewsboost.ca/remove-tripadvisor-reviews.html): Managed Tripadvisor review removal for Toronto, Montreal, Vancouver and all Canada, $30 upfront and $65 after removal.
+- [Trustpilot review removal](https://reviewsboost.ca/remove-trustpilot-reviews.html): Managed Trustpilot review removal for Toronto, Montreal, Vancouver and all Canada, $30 upfront and $75 after removal.
+- [Glassdoor review removal](https://reviewsboost.ca/remove-glassdoor-reviews.html): Managed Glassdoor review removal for Toronto, Montreal, Vancouver and all Canada, $30 upfront and $95 after removal.
+- [Online reputation management](https://reviewsboost.ca/online-reputation-management.html): Bad-review removal, monitoring, response planning and recovery for Toronto, Montreal, Vancouver and businesses across Canada.
 - [Learning Centre](https://reviewsboost.ca/blog.html): Index of all educational resources.
 - [About](https://reviewsboost.ca/about.html): Scope, principles, contact information and independence statement.
 - [Editorial policy](https://reviewsboost.ca/editorial-policy.html): Sourcing, authorship, corrections and content standards.
