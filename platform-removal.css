@@ -195,7 +195,8 @@ body {
 .performance-rating { background: linear-gradient(145deg, #fff 20%, #fff7e6); }
 .performance-rating::before { background: linear-gradient(90deg, #f59e0b, #fbc34e); }
 .performance-stat strong, .performance-stat span, .performance-stat small { display: block; }
-.performance-stat strong { color: var(--urgent); font-family: Georgia, "Times New Roman", serif; font-size: 29px; line-height: 1; }
+.performance-stat strong, .performance-stat .performance-rate { color: var(--urgent); font-family: Georgia, "Times New Roman", serif; font-size: 29px; line-height: 1; }
+.performance-stat .performance-rate { margin-top: 0; font-weight: 400; }
 .performance-rating strong { color: #b45309; }
 .performance-stat span { margin-top: 5px; color: var(--navy); font-size: 10.5px; font-weight: 800; }
 .performance-stat small { margin-top: 5px; color: #746d70; font-size: 9px; line-height: 1.35; }
@@ -419,7 +420,7 @@ body[data-platform]:not([data-platform="Google"]) #request.open { display: flex;
   .client-rating { gap: 5px; }
   .client-rating span { font-size: 14px; }
   .performance-stat { padding-inline: 7px; }
-  .performance-stat strong { font-size: 26px; }
+  .performance-stat strong, .performance-stat .performance-rate { font-size: 26px; }
   .price-line strong { font-size: 46px; }
   .platform-navbar .container { height: 60px; }
   .platform-navbar .nav-links.open { top: 60px; max-height: calc(100vh - 60px); }
