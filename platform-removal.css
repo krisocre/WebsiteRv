@@ -247,9 +247,6 @@ body {
 .pricing-calc .platform-disclaimer { position: relative; z-index: 1; margin-bottom: 0; }
 .pricing-note { margin-top: 22px; padding: 17px; border-left: 4px solid var(--urgent); background: var(--urgent-soft); color: #69401c; }
 .evidence-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
-.evidence-visual { max-width: 1040px; margin: 30px auto 28px; text-align: left; }
-.evidence-visual img { display: block; width: 100%; height: clamp(250px, 34vw, 390px); object-fit: cover; object-position: center 42%; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 18px 42px rgba(17, 26, 44, .12); }
-.evidence-visual figcaption { margin-top: 10px; color: var(--muted); font-size: 13px; line-height: 1.55; }
 .evidence-panel { padding: 27px; border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(160deg, #fff 72%, var(--accent-soft)); box-shadow: 0 8px 24px rgba(22, 34, 59, .05); transition: transform .22s ease, box-shadow .22s ease; }
 .evidence-panel:hover { box-shadow: 0 17px 38px rgba(22, 34, 59, .1); transform: translateY(-3px); }
 .evidence-panel h3 { margin-top: 0; }
@@ -413,7 +410,6 @@ body[data-platform]:not([data-platform="Google"]) #request.open { display: flex;
 @media (max-width: 620px) {
   .platform-hero { padding-top: 48px; }
   .signal-grid, .steps-grid, .evidence-grid, .field-grid { grid-template-columns: 1fr; }
-  .evidence-visual img { height: auto; aspect-ratio: 16 / 10; object-position: center; }
   .hero-actions .button { width: 100%; }
   .field.full { grid-column: auto; }
   .case-price { grid-template-columns: 1fr; }
