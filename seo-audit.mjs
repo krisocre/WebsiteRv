@@ -96,13 +96,14 @@ for (const file of files) {
   const headings = [...markup.matchAll(/<h([1-6])\b[^>]*>([\s\S]*?)<\/h\1\s*>/gi)];
   const h1Count = headings.filter(heading => heading[1] === '1').length;
   const wordCount = plainText(html).split(/\s+/).filter(Boolean).length;
-  const isIndexable = !metaValues('robots').some(value => /\bnoindex\b/i.test(value));
+  const refresh = metaValues('refresh', 'http-equiv')[0];
+  const redirectTarget = refresh?.match(/\burl\s*=\s*(.+)$/i)?.[1];
+  const isImmediateRedirect = /^\s*0\s*;\s*url\s*=/i.test(refresh ?? '');
+  const isIndexable = !isImmediateRedirect && !metaValues('robots').some(value => /\bnoindex\b/i.test(value));
   const alternates = new Map(tags(markup, 'link')
     .filter(tag => attribute(tag, 'rel') === 'alternate' && attribute(tag, 'hreflang'))
     .map(tag => [attribute(tag, 'hreflang').toLowerCase(), attribute(tag, 'href')]));
   if (isIndexable) localePages.set(canonical, { file, isIndexable, alternates, language: attribute(tags(markup, 'html')[0] || '', 'lang')?.toLowerCase() });
-  const refresh = metaValues('refresh', 'http-equiv')[0];
-  const redirectTarget = refresh?.match(/\burl\s*=\s*(.+)$/i)?.[1];
   const structuredTypes = new Set();
 
   if (titleMatches.length !== 1 || !title.trim()) errors.push(`${file}: expected one nonempty title; found ${titleMatches.length}`);
