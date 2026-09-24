@@ -197,8 +197,8 @@
 
         .guarantee{background:var(--navy);color:#fff;border-top:5px solid var(--red)}
         .guarantee-grid{display:grid;grid-template-columns:.75fr 1.25fr;gap:62px;align-items:center}
-        .seal{width:230px;margin:auto;border-radius:8px;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;border:1px solid rgba(255,255,255,.7);padding:34px 24px}
-        .seal i{font-size:27px;margin-bottom:7px}.seal strong,.seal .metric-rate{font-size:58px;line-height:.95;letter-spacing:-.05em}.seal span{font-size:11px;line-height:1.3;text-transform:uppercase;letter-spacing:.1em;font-weight:900;margin-top:8px}.seal .metric-rate{margin-top:0;font-weight:400;text-transform:none}
+        .seal{width:min(100%,270px);min-height:168px;margin:auto;border-radius:8px;background:#fff;color:var(--red);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;text-align:center;border:1px solid rgba(255,255,255,.7);padding:26px 22px}
+        .seal i{font-size:28px;margin:0}.seal strong,.seal .metric-rate{font-size:46px;line-height:1;letter-spacing:-.035em}.seal span{font-size:11px;line-height:1.3;text-transform:uppercase;letter-spacing:.1em;font-weight:900;margin-top:8px}.seal .metric-rate{margin:0;font-weight:400;text-transform:none;white-space:nowrap}
         .guarantee .section-tag{color:#ff9b9f}
         .guarantee h2{font-family:'Merriweather',Georgia,serif;font-size:39px;line-height:1.18;margin-bottom:16px;letter-spacing:-.025em}.guarantee-copy{font-size:16px;color:#d5dce8;max-width:640px;line-height:1.7;margin-bottom:21px}
         .guarantee-points{display:flex;flex-wrap:wrap;gap:12px 24px;margin-bottom:27px}.guarantee-points li{font-size:13px;font-weight:900}.guarantee-points i{margin-right:7px;color:#fff}
@@ -269,7 +269,7 @@
             .trust-grid{grid-template-columns:1fr}.trust-item{border-right:0;border-bottom:1px solid #e7eaf0!important;padding:17px 8px}.trust-item:last-child{border-bottom:0!important}
             .city-focus-head h2{font-size:28px}.city-focus-grid{grid-template-columns:1fr}.city-card-toronto{grid-column:auto}.city-card{padding:23px 20px}
             .eligibility-grid{grid-template-columns:1fr}.price-shell{grid-template-columns:1fr}.price-main{padding:30px 23px}.calculator{padding:28px 23px}.included{grid-template-columns:1fr}.price-line strong{font-size:49px}
-            .policy-grid{grid-template-columns:1fr}.seal{width:100%;max-width:250px}.seal strong,.seal .metric-rate{font-size:54px}.guarantee h2{font-size:29px}.guarantee-points{flex-direction:column;gap:8px}
+            .policy-grid{grid-template-columns:1fr}.seal{width:100%;max-width:270px;min-height:150px}.seal strong,.seal .metric-rate{font-size:42px}.guarantee h2{font-size:29px}.guarantee-points{flex-direction:column;gap:8px}
             .cta-box{padding:35px 25px;flex-direction:column;align-items:flex-start}.cta-copy h2{font-size:25px}.cta-box .btn{width:100%}
             .footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}.footer-bottom{flex-direction:column;text-align:center}.form-row{grid-template-columns:1fr}.modal{padding:26px 20px}
             .mobile-cta{display:flex;position:fixed;z-index:1200;bottom:0;left:0;right:0;height:68px;background:#fff;border-top:1px solid #dfe3e9;padding:9px 12px;gap:10px;box-shadow:0 -8px 24px rgba(22,34,59,.08)}.mobile-price{display:flex;flex-direction:column;justify-content:center;min-width:112px}.mobile-price strong{font-size:17px;color:var(--red);line-height:1}.mobile-price span{font-size:9.5px;color:#8b8586;margin-top:4px}.mobile-cta .btn{flex:1;padding:10px}
@@ -515,7 +515,7 @@
 
     <section class="guarantee section-pad" id="guarantee">
         <div class="container guarantee-grid">
-            <div class="seal"><i class="fa-solid fa-shield-halved"></i><span class="metric-rate">1–2 weeks</span><span>Typical removal<br>timeline</span></div>
+            <div class="seal" role="img" aria-label="Typical removal timeline: one to two weeks"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span class="metric-rate">1–2 weeks</span></div>
             <div>
                 <span class="section-tag">Clear timing</span>
                 <h2>Removal Work Built Around a 1–2 Week Timeline</h2>
