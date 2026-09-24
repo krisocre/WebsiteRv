@@ -84,6 +84,13 @@ for (const file of files) {
   if (/\b(?:href|src)\s*=\s*["'][^"']*_retired(?:\/|\\)/i.test(markup)) {
     errors.push(`${file}: public markup links to the retired source archive`);
   }
+  for (const match of html.matchAll(/<a\b(?=[^>]*\bhref=["']mailto:)[^>]*>[\s\S]*?<\/a\s*>/gi)) {
+    const before = html.slice(0, match.index).trimEnd();
+    const after = html.slice(match.index + match[0].length).trimStart();
+    if (!before.endsWith('<!--email_off-->') || !after.startsWith('<!--/email_off-->')) {
+      errors.push(`${file}: mailto link must opt out of Cloudflare email obfuscation`);
+    }
+  }
   const metas = tags(markup, 'meta');
   const metaValues = (key, attr = 'name') => metas.filter(tag => attribute(tag, attr) === key).map(tag => attribute(tag, 'content') ?? '');
   const titleMatches = [...html.matchAll(/<title>([\s\S]*?)<\/title>/gi)];
@@ -210,6 +217,9 @@ for (const file of files) {
 }
 
 const sitemap = fs.readFileSync("sitemap.xml", "utf8");
+if (/<image:image\b/i.test(sitemap) && !/xmlns:image=["']http:\/\/www\.google\.com\/schemas\/sitemap-image\/1\.1["']/i.test(sitemap)) {
+  errors.push('sitemap.xml: image elements require the Google image sitemap namespace');
+}
 // Language variants must point to indexable canonical pages and return the same links.
 // This catches mismatched French/English pairs even when each page passes metadata checks.
 for (const [canonical, page] of localePages) {
