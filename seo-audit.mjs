@@ -271,8 +271,12 @@ for (const sitemapUrl of sitemapUrls) {
 const robots = fs.readFileSync('robots.txt', 'utf8');
 if (!/^Sitemap:[\t ]*https:\/\/reviewsboost\.ca\/sitemap\.xml[\t \r]*$/im.test(robots)) errors.push('robots.txt: missing canonical sitemap declaration');
 if (!/^User-agent:[\t ]*\*[\t \r]*$/im.test(robots)) errors.push('robots.txt: missing general crawler group');
-// The published site intentionally permits crawling all public content and assets.
-if (!/^Allow:[\t ]*\/[\t \r]*$/im.test(robots) || /^Disallow:[\t ]*\S+/im.test(robots)) errors.push('robots.txt: review crawler restrictions against public pages and assets');
+// Public content stays crawlable; Cloudflare recommends excluding its internal
+// /cdn-cgi/ endpoints because audit crawlers can mistake them for site content.
+const disallowRules = [...robots.matchAll(/^Disallow:[\t ]*(\S+)[\t \r]*$/gim)].map((match) => match[1]);
+if (!/^Allow:[\t ]*\/[\t \r]*$/im.test(robots) || disallowRules.length !== 1 || disallowRules[0] !== '/cdn-cgi/') {
+  errors.push('robots.txt: expected public crawling with only /cdn-cgi/ excluded');
+}
 
 if (errors.length) {
   console.error("\nSEO audit errors:");

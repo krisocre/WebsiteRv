@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://reviewsboost.ca/</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://reviewsboost.ca/"/>
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://reviewsboost.ca/suppression-avis-google.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reviewsboost.ca/"/>
   </url>
   <url>
     <loc>https://reviewsboost.ca/suppression-avis-google.html</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://reviewsboost.ca/"/>
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://reviewsboost.ca/suppression-avis-google.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reviewsboost.ca/"/>
   </url>
   <url>
     <loc>https://reviewsboost.ca/online-reputation-management.html</loc>
-    <lastmod>2026-09-14</lastmod>
+    <lastmod>2026-09-23</lastmod>
   </url>
-  <url><loc>https://reviewsboost.ca/remove-facebook-reviews.html</loc><lastmod>2026-09-14</lastmod></url>
-  <url><loc>https://reviewsboost.ca/remove-yelp-reviews.html</loc><lastmod>2026-09-14</lastmod></url>
-  <url><loc>https://reviewsboost.ca/remove-tripadvisor-reviews.html</loc><lastmod>2026-09-14</lastmod></url>
-  <url><loc>https://reviewsboost.ca/remove-trustpilot-reviews.html</loc><lastmod>2026-09-14</lastmod></url>
-  <url><loc>https://reviewsboost.ca/remove-glassdoor-reviews.html</loc><lastmod>2026-09-14</lastmod></url>
+  <url><loc>https://reviewsboost.ca/remove-facebook-reviews.html</loc><lastmod>2026-09-23</lastmod></url>
+  <url><loc>https://reviewsboost.ca/remove-yelp-reviews.html</loc><lastmod>2026-09-23</lastmod></url>
+  <url><loc>https://reviewsboost.ca/remove-tripadvisor-reviews.html</loc><lastmod>2026-09-23</lastmod></url>
+  <url><loc>https://reviewsboost.ca/remove-trustpilot-reviews.html</loc><lastmod>2026-09-23</lastmod></url>
+  <url><loc>https://reviewsboost.ca/remove-glassdoor-reviews.html</loc><lastmod>2026-09-23</lastmod></url>
   <url><loc>https://reviewsboost.ca/blog.html</loc><lastmod>2026-09-13</lastmod></url>
-  <url><loc>https://reviewsboost.ca/google-review-removal-cost-canada.html</loc><lastmod>2026-09-14</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-review-removal-cost-canada.html</loc><lastmod>2026-09-23</lastmod></url>
   <url>
     <loc>https://reviewsboost.ca/fake-review-statistics.html</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-23</lastmod>
     <image:image><image:loc>https://reviewsboost.ca/google-maps-review-moderation-2019-2025.svg</image:loc></image:image>
   </url>
   <url>
@@ -40,7 +40,7 @@
     <lastmod>2026-09-06</lastmod>
     <image:image><image:loc>https://reviewsboost.ca/authentic-google-review-request-workflow.svg</image:loc></image:image>
   </url>
-  <url><loc>https://reviewsboost.ca/google-reviews-not-showing.html</loc><lastmod>2026-09-06</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-reviews-not-showing.html</loc><lastmod>2026-09-23</lastmod></url>
   <url>
     <loc>https://reviewsboost.ca/respond-to-google-reviews.html</loc>
     <lastmod>2026-09-13</lastmod>
