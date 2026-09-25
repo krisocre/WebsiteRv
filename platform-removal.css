@@ -179,7 +179,7 @@ body {
 .client-rating span { color: #e68a00; font-size: 16px; letter-spacing: 1px; }
 .client-review-body { padding: 20px; }
 .client-profile { display: flex; align-items: center; gap: 12px; }
-.client-avatar { width: 46px; height: 46px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; background: var(--navy); color: #fff; box-shadow: 0 0 0 4px #edf1f7; font-size: 13px; font-weight: 800; }
+.client-avatar { width: 46px; height: 46px; display: block; flex: 0 0 auto; border-radius: 50%; object-fit: cover; object-position: center; box-shadow: 0 0 0 4px #edf1f7; }
 .client-profile strong, .client-profile small { display: block; }
 .client-profile strong { color: var(--navy); font-size: 14px; }
 .client-profile small { margin-top: 2px; color: var(--muted); font-size: 11px; }
