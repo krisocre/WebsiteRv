@@ -1,0 +1,248 @@
+{
+  "title": "Google fake business profiles: a seven-year data audit",
+  "version": "1.0",
+  "published": "2026-10-06",
+  "creator": "ReviewsBoost Editorial Team",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "geographic_scope": "Google Maps platform-wide disclosures; not a Canada-specific series",
+  "missing_value": "null means not disclosed in the selected annual announcement, never zero",
+  "qualifier_notes": {
+    "reported_rounded": "Published headline number; not treated as an exact count. For 2019 the sentence places more than before the review count; we preserve 4 million profiles without inferring a separate bound.",
+    "nearly": "Approximate figure below the named number; no exact count is implied.",
+    "more_than": "Strict lower threshold, not the actual count.",
+    "not_disclosed": "No number for this metric in the selected source."
+  },
+  "rows": [
+    {
+      "activity_year": 2019,
+      "metric": "fake_profile_actions",
+      "reported_number": 4000000,
+      "qualifier": "reported_rounded",
+      "action": "removed",
+      "unit": "profiles",
+      "source_published": "2020-02-19",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-101-how-contributed-content-makes-maps-helpful/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2019,
+      "metric": "fake_profile_creation_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2020-02-19",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-101-how-contributed-content-makes-maps-helpful/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2019,
+      "metric": "unauthorized_ownership_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2020-02-19",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-101-how-contributed-content-makes-maps-helpful/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2020,
+      "metric": "fake_profile_actions",
+      "reported_number": 3000000,
+      "qualifier": "nearly",
+      "action": "blocked_or_removed",
+      "unit": "profiles",
+      "source_published": "2021-02-18",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-101-how-we-tackle-fake-and-fraudulent-contributed-content/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2020,
+      "metric": "fake_profile_creation_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2021-02-18",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-101-how-we-tackle-fake-and-fraudulent-contributed-content/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2020,
+      "metric": "unauthorized_ownership_attempts",
+      "reported_number": 3000000,
+      "qualifier": "more_than",
+      "action": "stopped_verification_attempts",
+      "unit": "attempts",
+      "source_published": "2021-02-18",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-101-how-we-tackle-fake-and-fraudulent-contributed-content/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2021,
+      "metric": "fake_profile_actions",
+      "reported_number": 7000000,
+      "qualifier": "more_than",
+      "action": "removed",
+      "unit": "profiles",
+      "source_published": "2022-03-24",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/how-we-kept-maps-reliable-2021/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2021,
+      "metric": "fake_profile_creation_attempts",
+      "reported_number": 12000000,
+      "qualifier": "more_than",
+      "action": "stopped_creation_attempts",
+      "unit": "attempts",
+      "source_published": "2022-03-24",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/how-we-kept-maps-reliable-2021/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2021,
+      "metric": "unauthorized_ownership_attempts",
+      "reported_number": 8000000,
+      "qualifier": "nearly",
+      "action": "stopped_claim_attempts",
+      "unit": "attempts",
+      "source_published": "2022-03-24",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/how-we-kept-maps-reliable-2021/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2022,
+      "metric": "fake_profile_actions",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "profiles",
+      "source_published": "2023-03-31",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-fake-contributions-ai-machine-learning/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2022,
+      "metric": "fake_profile_creation_attempts",
+      "reported_number": 20000000,
+      "qualifier": "reported_rounded",
+      "action": "stopped_creation_attempts",
+      "unit": "attempts",
+      "source_published": "2023-03-31",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-fake-contributions-ai-machine-learning/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2022,
+      "metric": "unauthorized_ownership_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2023-03-31",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-maps-fake-contributions-ai-machine-learning/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2023,
+      "metric": "fake_profile_actions",
+      "reported_number": 12000000,
+      "qualifier": "more_than",
+      "action": "removed_or_blocked",
+      "unit": "profiles",
+      "source_published": "2024-02-13",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/how-machine-learning-keeps-contributed-content-helpful/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2023,
+      "metric": "fake_profile_creation_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2024-02-13",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/how-machine-learning-keeps-contributed-content-helpful/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2023,
+      "metric": "unauthorized_ownership_attempts",
+      "reported_number": 2000000,
+      "qualifier": "more_than",
+      "action": "protected_from_claim_attempts",
+      "unit": "attempts",
+      "source_published": "2024-02-13",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/how-machine-learning-keeps-contributed-content-helpful/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2024,
+      "metric": "fake_profile_actions",
+      "reported_number": 12000000,
+      "qualifier": "more_than",
+      "action": "removed_or_blocked",
+      "unit": "profiles",
+      "source_published": "2025-04-07",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-business-profiles-ai-fake-reviews/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2024,
+      "metric": "fake_profile_creation_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2025-04-07",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-business-profiles-ai-fake-reviews/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2024,
+      "metric": "unauthorized_ownership_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2025-04-07",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/google-business-profiles-ai-fake-reviews/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2025,
+      "metric": "fake_profile_actions",
+      "reported_number": 13000000,
+      "qualifier": "more_than",
+      "action": "removed",
+      "unit": "profiles",
+      "source_published": "2026-04-16",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/new-ways-were-protecting-businesses-on-maps/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2025,
+      "metric": "fake_profile_creation_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2026-04-16",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/new-ways-were-protecting-businesses-on-maps/",
+      "accessed": "2026-10-06"
+    },
+    {
+      "activity_year": 2025,
+      "metric": "unauthorized_ownership_attempts",
+      "reported_number": null,
+      "qualifier": "not_disclosed",
+      "action": "not_disclosed",
+      "unit": "attempts",
+      "source_published": "2026-04-16",
+      "source_url": "https://blog.google/products-and-platforms/products/maps/new-ways-were-protecting-businesses-on-maps/",
+      "accessed": "2026-10-06"
+    }
+  ]
+}

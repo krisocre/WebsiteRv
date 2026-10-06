@@ -1,0 +1,63 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "google-fake-business-profile-data.csv",
+  "dc:title": "Google fake business profiles: a seven-year data audit",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "activity_year",
+        "datatype": "integer",
+        "required": true
+      },
+      {
+        "name": "metric",
+        "datatype": "string",
+        "required": true
+      },
+      {
+        "name": "reported_number",
+        "datatype": "integer",
+        "required": false
+      },
+      {
+        "name": "qualifier",
+        "datatype": "string",
+        "required": true
+      },
+      {
+        "name": "action",
+        "datatype": "string",
+        "required": true
+      },
+      {
+        "name": "unit",
+        "datatype": "string",
+        "required": true
+      },
+      {
+        "name": "source_published",
+        "datatype": "string",
+        "required": true
+      },
+      {
+        "name": "source_url",
+        "datatype": "string",
+        "required": true
+      },
+      {
+        "name": "accessed",
+        "datatype": "string",
+        "required": true
+      }
+    ],
+    "primaryKey": [
+      "activity_year",
+      "metric"
+    ]
+  },
+  "notes": [
+    "Blank reported_number is missing, not zero. Always read qualifier, unit and action together.",
+    "Compilation and original analysis CC BY 4.0; underlying source material remains subject to its own rights."
+  ]
+}

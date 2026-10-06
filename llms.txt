@@ -53,3 +53,5 @@ Services are exclusively for business locations in Canada. Online support covers
 - Google controls its platforms, search results and moderation decisions.
 - Educational content is general information, not legal advice or a guarantee of rankings, ratings or outcomes.
 - Primary-source links and visible review dates should be used to verify time-sensitive policy claims.
+
+- [Google fake business profile data audit](https://reviewsboost.ca/google-fake-business-profile-statistics.html): Original 21-row classification of 2019–2025 Google disclosures; profiles, creation attempts and ownership attempts are separate units.
