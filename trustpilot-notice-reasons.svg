@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="561.6pt" viewBox="0 0 864 561.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>ReviewsBoost</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 561.6
+L 864 561.6
+L 864 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 259.2 415.584
+L 803.52 415.584
+L 803.52 157.248
+L 259.2 157.248
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 259.2 415.584
+L 259.2 157.248
+" clip-path="url(#p102576e1cd)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m041409da58" d="M 0 0
+L 0 3.5
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m041409da58" x="259.2" y="415.584" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="259.2" y="431.702125" transform="rotate(-0 259.2 431.702125)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 408.328767 415.584
+L 408.328767 157.248
+" clip-path="url(#p102576e1cd)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m041409da58" x="408.328767" y="415.584" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="408.328767" y="431.702125" transform="rotate(-0 408.328767 431.702125)">100k</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 557.457534 415.584
+L 557.457534 157.248
+" clip-path="url(#p102576e1cd)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m041409da58" x="557.457534" y="415.584" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="557.457534" y="431.702125" transform="rotate(-0 557.457534 431.702125)">200k</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 706.586301 415.584
+L 706.586301 157.248
+" clip-path="url(#p102576e1cd)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m041409da58" x="706.586301" y="415.584" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="706.586301" y="431.702125" transform="rotate(-0 706.586301 431.702125)">300k</text>
+     </g>
+    </g>
+    <g id="text_5">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="531.36" y="455.315875" transform="rotate(-0 531.36 455.315875)">Notices received</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_9"/>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="247.2" y="187.743894" transform="rotate(-0 247.2 187.743894)">Inauthentic user reviews</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_10"/>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="247.2" y="239.359478" transform="rotate(-0 247.2 239.359478)">Defamation</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_11"/>
+     <g id="text_8">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="247.2" y="290.975063" transform="rotate(-0 247.2 290.975063)">Hidden advertisement</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_12"/>
+     <g id="text_9">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="247.2" y="342.590647" transform="rotate(-0 247.2 342.590647)">Discrimination</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_13"/>
+     <g id="text_10">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="247.2" y="394.206231" transform="rotate(-0 247.2 394.206231)">Personal information</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 259.2 168.990545
+L 659.527228 168.990545
+L 659.527228 197.379117
+L 259.2 197.379117
+z
+" clip-path="url(#p102576e1cd)" style="fill: #087fe8"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 259.2 220.60613
+L 360.488259 220.60613
+L 360.488259 248.994701
+L 259.2 248.994701
+z
+" clip-path="url(#p102576e1cd)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 259.2 272.221714
+L 330.816108 272.221714
+L 330.816108 300.610286
+L 259.2 300.610286
+z
+" clip-path="url(#p102576e1cd)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 259.2 323.837299
+L 281.032452 323.837299
+L 281.032452 352.22587
+L 259.2 352.22587
+z
+" clip-path="url(#p102576e1cd)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 259.2 375.452883
+L 279.556077 375.452883
+L 279.556077 403.841455
+L 259.2 403.841455
+z
+" clip-path="url(#p102576e1cd)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 259.2 415.584
+L 803.52 415.584
+" style="fill: none; stroke: #cad8e2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="666.238022" y="186.496081" transform="rotate(-0 666.238022 186.496081)">268,444  (63.35%)</text>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="367.199053" y="238.111666" transform="rotate(-0 367.199053 238.111666)">67,920  (16.03%)</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="337.526902" y="289.72725" transform="rotate(-0 337.526902 289.72725)">48,023  (11.33%)</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="287.743246" y="341.342834" transform="rotate(-0 287.743246 341.342834)">14,640  (3.45%)</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="286.266871" y="392.958419" transform="rotate(-0 286.266871 392.958419)">13,650  (3.22%)</text>
+   </g>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087fe8" x="56.16" y="29.2032" transform="rotate(-0 56.16 29.2032)">REVIEWSBOOST / SOURCE-TABLE AUDIT / VERSION 1.0</text>
+  </g>
+  <g id="text_17">
+   <text style="font-weight: 700; font-size: 24px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="56.16" y="69.0768" transform="rotate(-0 56.16 69.0768)">Which reported concerns account for most notices?</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="102.7728" transform="rotate(-0 56.16 102.7728)">These are reported reasons, not verified violation counts. Each share uses 423,762 notices.</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="516.1104" transform="rotate(-0 56.16 516.1104)">Scope: reviews involving EU users or EU businesses; 17 February–31 December 2025. Not a Canadian sample.</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="536.8896" transform="rotate(-0 56.16 536.8896)">Source: Trustpilot DSA report, published 28 February 2026. Original analysis: ReviewsBoost, 8 October 2026 / CC BY 4.0.</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="472.8672" transform="rotate(-0 56.16 472.8672)">The five listed reasons total 412,677 notices; other reported reasons account for 11,085. They are not added to parent rows.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p102576e1cd">
+   <rect x="259.2" y="157.248" width="544.32" height="258.336"/>
+  </clipPath>
+ </defs>
+</svg>

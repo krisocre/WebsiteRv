@@ -1,0 +1,139 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/trustpilot-notices-2025.csv",
+  "dc:title": "Trustpilot review reporting statistics: a 2025 notice-table audit",
+  "dc:description": "EU businesses reviewed by EU users; EU businesses reviewed by non-EU users; non-EU businesses reviewed by EU users. This is an EU-related subset, not a Canadian business sample.",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "source_record",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Logical record number in the source CSV; the header is record 1. Not a physical line number."
+      },
+      {
+        "name": "row_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "total, category or subcategory. Parent and subcategory rows must not be added together."
+      },
+      {
+        "name": "category_code",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Original source taxonomy code; KEYWORD_OTHER repeats under different parent categories."
+      },
+      {
+        "name": "parent_category",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Original parent-category code for a subcategory; null for totals and parent rows."
+      },
+      {
+        "name": "subcategory_description",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Original source label, including any source spelling errors; blank labels remain null."
+      },
+      {
+        "name": "reporting_period_original",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Original source period string, including the preserved invalid 2025-12-32 end date in one row."
+      },
+      {
+        "name": "notices",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported count of notices received; not a count of confirmed fake reviews."
+      },
+      {
+        "name": "trusted_notices",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported trusted-flagger notice count, kept separate from the ordinary fields."
+      },
+      {
+        "name": "items",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported count of specific items of information; parent/subcategory totals do not all reconcile."
+      },
+      {
+        "name": "trusted_items",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported trusted-flagger item count; source total differs from the category field."
+      },
+      {
+        "name": "median_hours",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported median time to take action, in hours; not an arithmetic mean or a deadline."
+      },
+      {
+        "name": "trusted_median_hours",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported median action time for trusted-flagger notices, in hours."
+      },
+      {
+        "name": "law_actions",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported count of actions taken on the basis of law."
+      },
+      {
+        "name": "trusted_law_actions",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported law-basis action count for trusted-flagger notices."
+      },
+      {
+        "name": "terms_actions",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported terms-based action count; not matched notice-level removal outcomes."
+      },
+      {
+        "name": "trusted_terms_actions",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported terms-based action count for trusted-flagger notices; source total differs from category field."
+      }
+    ]
+  }
+}

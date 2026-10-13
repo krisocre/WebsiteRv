@@ -22,6 +22,8 @@ Services are exclusively for business locations in Canada. Online support covers
 
 ## Guides and tools
 
+- [Trustpilot review reporting statistics](https://reviewsboost.ca/trustpilot-review-reporting-statistics.html): Original 92-record audit of EU-related 2025 notices, items and actions, including a 1,639-item category reconciliation, four graphs and explicitly labelled count ratios. Not a Canadian client-outcome study.
+
 - [Google review removal cost in Canada](https://reviewsboost.ca/google-review-removal-cost-canada.html): Canadian pricing guide covering Google reporting, ReviewsBoost fees, sample totals, provider selection and tracked success-rate methodology.
 
 - [Yelp review removal statistics](https://reviewsboost.ca/yelp-review-removal-statistics.html): Original calculations from rounded 2025 global review-status shares, filtered-versus-removed distinctions and Canadian geographic limitations. Includes CSV, chart, code and an outcome ledger.
@@ -40,6 +42,9 @@ Services are exclusively for business locations in Canada. Online support covers
 - [Review rating calculator](https://reviewsboost.ca/google-review-calculator.html): Weighted-average calculator with feasible integer-star ranges for rounded public ratings, exact targets and shareable scenarios.
 
 ## Open data and citation files
+
+- [Trustpilot notice-table data](https://reviewsboost.ca/trustpilot-notices-2025.csv): Complete nullable 92-record extraction with CSVW metadata; source fingerprints and calculations in the companion JSON.
+- [Trustpilot research citation](https://reviewsboost.ca/trustpilot-review-reporting-statistics.cff): Citation metadata for the original compilation and reconciliation.
 
 - [Cross-platform review disclosure data](https://reviewsboost.ca/fake-review-statistics.csv): Source-labelled CSV with W3C CSVW metadata.
 - [Google Maps moderation series, 2019-2025](https://reviewsboost.ca/google-maps-review-moderation-2019-2025.csv): Seven-year first-party disclosure series with W3C CSVW metadata.

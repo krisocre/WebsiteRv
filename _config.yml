@@ -1,4 +1,5 @@
 exclude:
   - _retired
   - tests
+  - research-sources
   - CONVERSION-IMPROVEMENTS.md

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="561.6pt" viewBox="0 0 864 561.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>ReviewsBoost</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 561.6
+L 864 561.6
+L 864 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 311.04 370.656
+L 786.24 370.656
+L 786.24 179.712
+L 311.04 179.712
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 311.04 370.656
+L 311.04 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m041409da58" d="M 0 0
+L 0 3.5
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m041409da58" x="311.04" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="311.04" y="386.774125" transform="rotate(-0 311.04 386.774125)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 366.945882 370.656
+L 366.945882 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m041409da58" x="366.945882" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="366.945882" y="386.774125" transform="rotate(-0 366.945882 386.774125)">200</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 422.851765 370.656
+L 422.851765 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m041409da58" x="422.851765" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="422.851765" y="386.774125" transform="rotate(-0 422.851765 386.774125)">400</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 478.757647 370.656
+L 478.757647 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m041409da58" x="478.757647" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="478.757647" y="386.774125" transform="rotate(-0 478.757647 386.774125)">600</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 534.663529 370.656
+L 534.663529 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m041409da58" x="534.663529" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="534.663529" y="386.774125" transform="rotate(-0 534.663529 386.774125)">800</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 590.569412 370.656
+L 590.569412 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m041409da58" x="590.569412" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="590.569412" y="386.774125" transform="rotate(-0 590.569412 386.774125)">1000</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_13">
+      <path d="M 646.475294 370.656
+L 646.475294 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_14">
+      <g>
+       <use xlink:href="#m041409da58" x="646.475294" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="646.475294" y="386.774125" transform="rotate(-0 646.475294 386.774125)">1200</text>
+     </g>
+    </g>
+    <g id="xtick_8">
+     <g id="line2d_15">
+      <path d="M 702.381176 370.656
+L 702.381176 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_16">
+      <g>
+       <use xlink:href="#m041409da58" x="702.381176" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_8">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="702.381176" y="386.774125" transform="rotate(-0 702.381176 386.774125)">1400</text>
+     </g>
+    </g>
+    <g id="xtick_9">
+     <g id="line2d_17">
+      <path d="M 758.287059 370.656
+L 758.287059 179.712
+" clip-path="url(#p946ca221ab)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.13; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_18">
+      <g>
+       <use xlink:href="#m041409da58" x="758.287059" y="370.656" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_9">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="758.287059" y="386.774125" transform="rotate(-0 758.287059 386.774125)">1600</text>
+     </g>
+    </g>
+    <g id="text_10">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="548.64" y="410.387875" transform="rotate(-0 548.64 410.387875)">Subcategory item sum minus parent-category item count</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_19"/>
+     <g id="text_11">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="299.04" y="218.621424" transform="rotate(-0 299.04 218.621424)">Illegal or harmful speech</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_20"/>
+     <g id="text_12">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="299.04" y="340.864701" transform="rotate(-0 299.04 340.864701)">Scams and fraud</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 311.04 188.391273
+L 697.070118 188.391273
+L 697.070118 239.733449
+L 311.04 239.733449
+z
+" clip-path="url(#p946ca221ab)" style="fill: #087fe8"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 311.04 310.634551
+L 383.158588 310.634551
+L 383.158588 361.976727
+L 311.04 361.976727
+z
+" clip-path="url(#p946ca221ab)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 311.04 370.656
+L 786.24 370.656
+" style="fill: none; stroke: #cad8e2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_13">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="704.058353" y="219.029236" transform="rotate(-0 704.058353 219.029236)">+1,381</text>
+   </g>
+   <g id="text_14">
+    <text style="font-weight: 700; font-size: 18px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="390.146824" y="341.272514" transform="rotate(-0 390.146824 341.272514)">+258</text>
+   </g>
+  </g>
+  <g id="text_15">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087fe8" x="56.16" y="29.2032" transform="rotate(-0 56.16 29.2032)">REVIEWSBOOST / SOURCE-TABLE AUDIT / VERSION 1.0</text>
+  </g>
+  <g id="text_16">
+   <text style="font-weight: 700; font-size: 24px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="56.16" y="69.0768" transform="rotate(-0 56.16 69.0768)">The 1,639-item arithmetic residual, located.</text>
+  </g>
+  <g id="text_17">
+   <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="102.7728" transform="rotate(-0 56.16 102.7728)">Two parent-category item counts are lower than their numeric subcategory sums.</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="516.1104" transform="rotate(-0 56.16 516.1104)">Scope: reviews involving EU users or EU businesses; 17 February–31 December 2025. Not a Canadian sample.</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="536.8896" transform="rotate(-0 56.16 536.8896)">Source: Trustpilot DSA report, published 28 February 2026. Original analysis: ReviewsBoost, 8 October 2026 / CC BY 4.0.</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="56.16" y="452.088" transform="rotate(-0 56.16 452.088)">1,381 + 258 = 1,639 = 397,199 total items − 395,560 summed numeric parent-category items.</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="477.9216" transform="rotate(-0 56.16 477.9216)">This locates the numerical difference. It does not establish missing reviews, duplicated records or the operational cause.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p946ca221ab">
+   <rect x="311.04" y="179.712" width="475.2" height="190.944"/>
+  </clipPath>
+ </defs>
+</svg>

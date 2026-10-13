@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Cite this original source-table audit; attribute the underlying counts to Trustpilot."
+title: "Trustpilot review reporting statistics: a 2025 notice-table audit"
+version: "1.0"
+date-released: "2026-10-08"
+type: dataset
+url: "https://reviewsboost.ca/trustpilot-review-reporting-statistics.html"
+authors:
+  - name: "ReviewsBoost Editorial Team"
+license: CC-BY-4.0

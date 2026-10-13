@@ -354,6 +354,9 @@ h1 {
 .prose p {
   margin: 0 0 1.2em;
 }
+.prose code {
+  overflow-wrap: anywhere;
+}
 .prose ul,
 .prose ol {
   margin: 0 0 1.4em;

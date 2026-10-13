@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en-CA"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Trustpilot Review Reporting Statistics: 2025 Data Audit</title><meta name="description" content="Original audit of Trustpilot’s 2025 review reports: counts, action times and a 1,639-item reconciliation, with four graphs and downloadable source data."><meta name="author" content="ReviewsBoost Editorial Team">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1"><meta name="theme-color" content="#0885fe">
+<link rel="canonical" href="https://reviewsboost.ca/trustpilot-review-reporting-statistics.html"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="manifest" href="site.webmanifest"><link rel="stylesheet" href="content.css">
+<link rel="alternate" type="application/rss+xml" title="ReviewsBoost learning centre" href="https://reviewsboost.ca/feed.xml">
+<link rel="alternate" type="text/csv" title="Trustpilot 2025 notice-table extraction" href="trustpilot-notices-2025.csv"><link rel="license" href="https://creativecommons.org/licenses/by/4.0/">
+<meta name="citation_title" content="Trustpilot review reporting statistics: a 2025 notice-table audit"><meta name="citation_author" content="ReviewsBoost Editorial Team"><meta name="citation_publication_date" content="2026/10/08"><meta name="citation_fulltext_html_url" content="https://reviewsboost.ca/trustpilot-review-reporting-statistics.html">
+<meta property="og:type" content="article"><meta property="og:locale" content="en_CA"><meta property="og:site_name" content="ReviewsBoost">
+<meta property="og:title" content="Trustpilot review reports: what 423,762 notices actually measure"><meta property="og:description" content="Original audit of Trustpilot’s 2025 review reports: counts, action times and a 1,639-item reconciliation, with four graphs and downloadable source data."><meta property="og:url" content="https://reviewsboost.ca/trustpilot-review-reporting-statistics.html">
+<meta property="og:image" content="https://reviewsboost.ca/trustpilot-notices-counting-units.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="780"><meta property="og:image:alt" content="Trustpilot 2025 notices, reported items and terms-based actions are separate counts">
+<meta property="article:published_time" content="2026-10-08"><meta property="article:modified_time" content="2026-10-08">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Trustpilot review reports: what 423,762 notices actually measure"><meta name="twitter:description" content="Original audit of Trustpilot’s 2025 review reports: counts, action times and a 1,639-item reconciliation, with four graphs and downloadable source data."><meta name="twitter:image" content="https://reviewsboost.ca/trustpilot-notices-counting-units.png">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://reviewsboost.ca/#organization",
+      "name": "ReviewsBoost",
+      "url": "https://reviewsboost.ca/"
+    },
+    {
+      "@type": "Article",
+      "@id": "https://reviewsboost.ca/trustpilot-review-reporting-statistics.html#article",
+      "headline": "Trustpilot review reports: what 423,762 notices actually measure",
+      "description": "Original audit of Trustpilot’s 2025 review reports: counts, action times and a 1,639-item reconciliation, with four graphs and downloadable source data.",
+      "datePublished": "2026-10-08",
+      "dateModified": "2026-10-08",
+      "author": {
+        "@type": "Organization",
+        "name": "ReviewsBoost Editorial Team",
+        "url": "https://reviewsboost.ca/editorial-policy.html#authorship"
+      },
+      "publisher": {
+        "@id": "https://reviewsboost.ca/#organization"
+      },
+      "mainEntityOfPage": "https://reviewsboost.ca/trustpilot-review-reporting-statistics.html",
+      "image": "https://reviewsboost.ca/trustpilot-notices-counting-units.png",
+      "isAccessibleForFree": true,
+      "articleSection": "Original research",
+      "inLanguage": "en-CA",
+      "citation": [
+        "https://corporate.trustpilot.com/legal",
+        "https://assets.ctfassets.net/wonkqgvit51x/43veQxX63SCvDEmqXyHqQi/bf51839da2bdb697209a16ceabb18434/Trustpilot_DSA_Transparency_Report.zip",
+        "https://business.trustpilot.com/blog/releases-and-updates/changes-to-flagged-review-emails",
+        "https://help.trustpilot.com/s/article/What-happens-after-businesses-flag-reviews?language=en_US"
+      ]
+    },
+    {
+      "@type": "Dataset",
+      "@id": "https://reviewsboost.ca/trustpilot-review-reporting-statistics.html#dataset",
+      "name": "Trustpilot review reporting statistics: a 2025 notice-table audit",
+      "description": "92 normalized source-table records with nullable fields, hierarchy labels, logical record references and an original category reconciliation. Platform-reported EU-related counts; not Canadian client outcomes.",
+      "url": "https://reviewsboost.ca/trustpilot-review-reporting-statistics.html",
+      "version": "1.0",
+      "datePublished": "2026-10-08",
+      "dateModified": "2026-10-08",
+      "creator": {
+        "@id": "https://reviewsboost.ca/#organization"
+      },
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "temporalCoverage": "2025-02-17/2025-12-31",
+      "spatialCoverage": "EU businesses reviewed by EU users; EU businesses reviewed by non-EU users; non-EU businesses reviewed by EU users. This is an EU-related subset, not a Canadian business sample.",
+      "measurementTechnique": "Pinned-source CSV extraction, parent/subcategory reconciliation and explicitly labelled arithmetic count ratios",
+      "variableMeasured": [
+        "notices",
+        "specific items of information",
+        "terms-based actions",
+        "trusted-flagger fields",
+        "median time to action in hours"
+      ],
+      "citation": [
+        "https://corporate.trustpilot.com/legal",
+        "https://assets.ctfassets.net/wonkqgvit51x/43veQxX63SCvDEmqXyHqQi/bf51839da2bdb697209a16ceabb18434/Trustpilot_DSA_Transparency_Report.zip"
+      ],
+      "distribution": [
+        {
+          "@type": "DataDownload",
+          "contentUrl": "https://reviewsboost.ca/trustpilot-notices-2025.csv",
+          "encodingFormat": "text/csv"
+        },
+        {
+          "@type": "DataDownload",
+          "contentUrl": "https://reviewsboost.ca/trustpilot-notices-2025.json",
+          "encodingFormat": "application/json"
+        },
+        {
+          "@type": "DataDownload",
+          "contentUrl": "https://reviewsboost.ca/trustpilot-notice-reconciliation-2025.csv",
+          "encodingFormat": "text/csv"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://reviewsboost.ca/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Learning Centre",
+          "item": "https://reviewsboost.ca/blog.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Trustpilot notice research",
+          "item": "https://reviewsboost.ca/trustpilot-review-reporting-statistics.html"
+        }
+      ]
+    }
+  ]
+}</script>
+</head><body><a class="skip-link" href="#article">Skip to main content</a><header class="site-header">
+      <nav class="nav container" aria-label="Primary navigation">
+        <a class="brand" href="/"
+          ><span class="brand-mark" aria-hidden="true">&#9733;</span>ReviewsBoost</a
+        >
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li class="nav-optional">
+            <a href="blog.html" aria-current="page">Learning Centre</a>
+          </li>
+          <li><a href="google-reviews-faq.html">FAQ</a></li>
+          <li class="nav-optional"><a href="about.html">About</a></li>
+          <li class="nav-contact"><a href="online-reputation-management.html#contact">Contact</a></li>
+          <li><a class="nav-service nav-service-primary" href="online-reputation-management.html#reputation-management">Reputation Management</a></li>
+          <li>
+            <a
+              class="nav-service nav-service-secondary"
+              href="/"
+              >Review Removal</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+<nav class="breadcrumb" aria-label="Breadcrumb"><ol class="container"><li><a href="/">Home</a></li><li><a href="blog.html">Learning Centre</a></li><li aria-current="page">Trustpilot notice research</li></ol></nav>
+<main id="article"><header class="hero article-hero"><div class="container"><p class="eyebrow">Original source-table audit · Version 1.0</p><h1>Trustpilot review reports: what 423,762 notices actually measure</h1><p class="lede">A report is not a review, an action is not a matched removal outcome, and a median is not a deadline. We reconstruct Trustpilot’s notice table and publish the numbers behind those distinctions.</p><div class="meta-row"><span>By <a href="editorial-policy.html#authorship" rel="author">ReviewsBoost Editorial Team</a></span><span>Published <time datetime="2026-10-08">October 8, 2026</time></span><span>Sources checked October 8, 2026</span></div></div></header>
+<div class="container article-shell"><article class="prose">
+<p>Trustpilot’s February–December 2025 transparency table reports <strong>423,762 notices, 397,199 specific items of information and 160,359 actions under its service terms</strong>. Those are three different measures. Turning them into a headline such as “423,762 fake reviews reported” or “a 37.84% removal success rate” would claim more than this source establishes. <a href="https://assets.ctfassets.net/wonkqgvit51x/43veQxX63SCvDEmqXyHqQi/bf51839da2bdb697209a16ceabb18434/Trustpilot_DSA_Transparency_Report.zip">Download Trustpilot’s report</a></p>
+<p>We extracted all <strong>92 source records</strong>, preserved blanks and original category labels, and audited the arithmetic across parent categories and their subcategories. Our new contribution is a reproducible compilation with four original graphs, explicit denominators and a reconciliation that locates a <strong>1,639-item difference</strong>. It gives business owners and writers a precise reference for questions that a single moderation headline cannot answer.</p>
+<div class="callout"><strong>Quick answer: what is the Trustpilot removal success rate?</strong><p>This report does not provide a matched case-level removal success rate. It supplies notice, item and action counts for an EU-related reporting subset. We show their arithmetic ratios below without treating them as the probability that a Canadian business’s report will succeed.</p></div>
+<h2 id="findings">Five findings from the 92-record audit</h2>
+<ol><li><strong>26,563 more notices than reported items.</strong> The source explains that multiple users can flag the same review. The difference is a count gap, not a count of repeat reporters or fabricated reviews.</li><li><strong>63.35% of notices</strong> fall under the inauthentic-user-review subcategory: 268,444 ÷ 423,762. These are reported concerns, not confirmed fake reviews.</li><li><strong>73.62% of terms-based actions</strong> sit in that same subcategory: 118,056 ÷ 160,359. The denominator is all reported terms-based actions, not all reviews or all notices.</li><li><strong>1,639 items separate two ways of summing the table.</strong> The total item count is 397,199; the sum of numeric parent-category item cells is 395,560. Two subcategory reconciliations account arithmetically for the gap.</li><li><strong>The overall reported median time to action is 18 hours.</strong> That is a report-period median, not a removal guarantee. Five common reported reasons range from 15 to 43 hours in the source.</li></ol>
+<p>Underlying counts and times are Trustpilot’s disclosures. Shares and reconciliation calculations are our analysis. Every numerator, denominator and source field is included in the <a href="trustpilot-notices-2025.json">versioned dataset and provenance notes</a>.</p>
+<h2 id="scope">What period and geography do these statistics cover?</h2>
+<p>The identification file gives <strong>February 17–December 31, 2025</strong> as the reporting period and <strong>February 28, 2026</strong> as publication. The cover includes EU businesses reviewed by EU users, EU businesses reviewed by non-EU users, and non-EU businesses reviewed by EU users. January and the first part of February are outside this window. <a href="https://assets.ctfassets.net/wonkqgvit51x/43veQxX63SCvDEmqXyHqQi/bf51839da2bdb697209a16ceabb18434/Trustpilot_DSA_Transparency_Report.zip">Source ZIP, identification and cover files</a></p>
+<p>This is not a global count of every Trustpilot report. A Canadian business can fall within the stated scope when an EU user reviews it, but the report does not provide a Canadian subset. It cannot establish Toronto, Montréal, Vancouver or Ontario-specific flagging rates, action times or outcomes.</p>
+<h2 id="units">Notices, items and actions: three units to keep separate</h2>
+<p><strong>Notices</strong> count reports. <strong>Specific items of information</strong> describe the reported content items in the table. <strong>Actions under service terms</strong> count the reported responses under Trustpilot’s rules. The source notes that one review can receive flags from multiple users; it also includes a small subcategory involving usernames and profile pictures, so the entire table should not be relabelled “review-text deletions.”</p>
+<figure class="data-figure"><a href="trustpilot-notices-counting-units.svg"><img src="trustpilot-notices-counting-units.svg" width="1200" height="780" loading="lazy" alt="Trustpilot reports 423,762 notices, 397,199 specific items and 160,359 terms-based actions in its EU-related February to December 2025 table. These are different counting units."></a><figcaption>Figure 1. Three independently reported measures. This chart is not a matched report-to-removal funnel. The 26,563 gap is notices minus reported items. <a href="trustpilot-notices-counting-units.svg" download>Download the SVG graph</a> · <a href="trustpilot-notices-counting-units.png" download>Download the PNG graph</a>.</figcaption></figure>
+<div class="table-scroll" role="region" aria-label="Different denominators for the same action count" tabindex="0"><table class="comparison"><caption>Two reproducible count ratios; neither is a case-level removal success rate</caption><thead><tr><th scope="col">Calculation</th><th scope="col">Result</th><th scope="col">Meaning</th></tr></thead><tbody><tr><th scope="row">160,359 actions ÷ 423,762 notices × 100</th><td>37.84</td><td>Actions per 100 notices in the reported totals</td></tr><tr><th scope="row">160,359 actions ÷ 397,199 items × 100</th><td>40.37</td><td>Actions per 100 reported items in the totals</td></tr></tbody></table></div>
+<p>Changing the denominator produces a different value using the same action count. Without linked case records, unique final outcomes, report timing and a defined eligible population, neither ratio answers “What is my chance of having this review removed?” The source total reports zero actions in its law-basis field; terms-based action does not establish that a court found the content unlawful.</p>
+<h2 id="reasons">What kinds of review concerns were reported?</h2>
+<p>The five high-volume reasons below account for 412,677 notices. Other reported reasons account for another 11,085, bringing the total to 423,762. We use subcategory rows for this comparison and do not add them to their parent-category counts.</p>
+<figure class="data-figure"><a href="trustpilot-notice-reasons.svg"><img src="trustpilot-notice-reasons.svg" width="1200" height="780" loading="lazy" alt="Five high-volume reported reasons: inauthentic user reviews 268,444 notices; defamation 67,920; hidden advertisement 48,023; discrimination 14,640; personal information 13,650. Shares use 423,762 total notices."></a><figcaption>Figure 2. Reported reason counts. A notice labelled inauthentic or defamatory is an allegation or flagging category, not a verified finding about every affected item. <a href="trustpilot-notice-reasons.svg" download>Download the SVG graph</a> · <a href="trustpilot-notice-reasons.png" download>Download the PNG graph</a>.</figcaption></figure>
+<div class="table-scroll" role="region" aria-label="High-volume Trustpilot notice subcategories" tabindex="0"><table class="comparison"><caption>Selected subcategory counts and reported median hours; source blanks remain blank in the download</caption><thead><tr><th scope="col">Reported reason</th><th scope="col">Notices</th><th scope="col">Reported items</th><th scope="col">Terms-based actions</th><th scope="col">Median hours</th></tr></thead><tbody><tr><th scope="row">Inauthentic user reviews</th><td>268,444</td><td>258,664</td><td>118,056</td><td>18</td></tr><tr><th scope="row">Defamation</th><td>67,920</td><td>66,769</td><td>13,685</td><td>43</td></tr><tr><th scope="row">Hidden advertisement</th><td>48,023</td><td>41,059</td><td>19,474</td><td>18</td></tr><tr><th scope="row">Discrimination</th><td>14,640</td><td>9,906</td><td>1,185</td><td>23</td></tr><tr><th scope="row">Personal information</th><td>13,650</td><td>11,557</td><td>5,457</td><td>15</td></tr></tbody></table></div>
+<p>The inauthentic-user-review row alone illustrates the denominator problem: 118,056 ÷ 268,444 gives <strong>43.98 actions per 100 notices</strong>; dividing by its 258,664 reported items gives <strong>45.64 per 100 items</strong>. We preserve those as count ratios, with no claim that either predicts an individual complaint’s result.</p>
+<h2 id="reconciliation">Where the 1,639-item difference appears</h2>
+<p>The parent-category notice cells sum to the published notice total. Their terms-action cells also sum to the published terms-action total. <strong>The numeric parent-category item cells do not sum to the published item total.</strong> Their sum is 395,560, leaving a 1,639 difference from 397,199.</p>
+<div class="table-scroll" role="region" aria-label="Parent-category source counts" tabindex="0"><table class="comparison"><caption>Parent categories with numeric ordinary-notice counts; intellectual-property ordinary-notice/item cells are blank and appear only in the separate trusted-flagger fields</caption><thead><tr><th scope="col">Parent category</th><th scope="col">Notices</th><th scope="col">Reported items</th><th scope="col">Terms-based actions</th><th scope="col">Median hours</th></tr></thead><tbody><tr><th scope="row">Consumer information</th><td>48,025</td><td>41,061</td><td>19,476</td><td>18</td></tr><tr><th scope="row">Data protection and privacy</th><td>13,650</td><td>11,557</td><td>5,457</td><td>15</td></tr><tr><th scope="row">Illegal or harmful speech</th><td>86,789</td><td>79,088</td><td>15,530</td><td>37</td></tr><tr><th scope="row">Protection of minors</th><td>1</td><td>1</td><td>1</td><td>2</td></tr><tr><th scope="row">Public security</th><td>858</td><td>505</td><td>47</td><td>7</td></tr><tr><th scope="row">Scams and fraud</th><td>270,491</td><td>260,431</td><td>119,474</td><td>19</td></tr><tr><th scope="row">Violence</th><td>3,898</td><td>2,867</td><td>324</td><td>6</td></tr><tr><th scope="row">Not specified</th><td>50</td><td>50</td><td>50</td><td>356</td></tr></tbody></table></div>
+<p>Within illegal or harmful speech, the four numeric subcategory item counts total <strong>80,469</strong>, compared with <strong>79,088</strong> in the parent row. Within scams and fraud, the four subcategories total <strong>260,689</strong>, compared with <strong>260,431</strong> in the parent. The differences, 1,381 and 258, add to 1,639.</p>
+<div class="table-scroll" role="region" aria-label="Two category reconciliations" tabindex="0"><table class="comparison"><caption>Our arithmetic reconciliation; operational cause is not established by the source</caption><thead><tr><th scope="col">Category</th><th scope="col">Parent items</th><th scope="col">Subcategory item sum</th><th scope="col">Difference</th></tr></thead><tbody><tr><th scope="row">Illegal or harmful speech</th><td>79,088</td><td>80,469</td><td>+1,381</td></tr><tr><th scope="row">Scams and fraud</th><td>260,431</td><td>260,689</td><td>+258</td></tr></tbody></table></div>
+<figure class="data-figure"><a href="trustpilot-notice-reconciliation.svg"><img src="trustpilot-notice-reconciliation.svg" width="1200" height="780" loading="lazy" alt="The speech subcategory item sum exceeds its parent by 1,381; the scams-and-fraud subcategory sum exceeds its parent by 258. Together they equal the 1,639 difference between the total and the sum of numeric parent item cells."></a><figcaption>Figure 3. Location of the arithmetic difference. The chart does not establish that reviews are missing, that records were duplicated, or that the report’s total is incorrect. <a href="trustpilot-notice-reconciliation.svg" download>Download the SVG graph</a> · <a href="trustpilot-notice-reconciliation.png" download>Download the PNG graph</a>.</figcaption></figure>
+<p>If we use numeric terminal subcategories and the stand-alone “not specified” category exactly once, the item sum is 397,199. This explains how the reported total can be reconstructed from the table. It does not explain why those two parent rows use smaller figures. Possible overlap rules or reporting processes cannot be established from the supplied aggregated cells.</p>
+<h2 id="source-quality">Two other details a clean-looking spreadsheet can hide</h2>
+<h3>The trusted-flagger fields do not fully reconcile</h3>
+<p>The total row reports one trusted-flagger notice, zero trusted-flagger items and zero trusted-flagger terms actions. The intellectual-property parent row and copyright child row each show one notice, one item and one terms action in their trusted-flagger columns. Parent and child describe a hierarchy, so they must not be counted twice. Even at the parent level, the item and action sums are one while their grand totals are zero. We keep both source values and flag the difference.</p>
+<h3>A subcategory preserves an invalid date</h3>
+<p>The username/profile-picture subcategory labelled “Harmful and ilegal content” contains the source interval <code>2025-02-17/2025-12-32</code>. Its median action-time cell is blank. The accompanying source note says its system cannot calculate the time from the dates retained for those notices. Our extraction keeps the original date string and null time; the report’s scope follows the valid identification and cover dates.</p>
+<p>Blank fields elsewhere remain <strong>not reported</strong>, rather than becoming zero. Treating every empty template category as a measured zero or silently fixing the date would remove evidence that another analyst needs to evaluate the source.</p>
+<h2 id="time">How long does Trustpilot take to act on a report?</h2>
+<p>This source reports an 18-hour overall median. For the five common reasons plotted below, the source gives 18 hours for inauthentic reviews, 43 for defamation, 18 for hidden advertisement, 23 for discrimination and 15 for personal information. The total-row context specifies hours as the unit. <a href="https://assets.ctfassets.net/wonkqgvit51x/43veQxX63SCvDEmqXyHqQi/bf51839da2bdb697209a16ceabb18434/Trustpilot_DSA_Transparency_Report.zip">Source table and time-unit note</a></p>
+<figure class="data-figure"><a href="trustpilot-notice-action-times.svg"><img src="trustpilot-notice-action-times.svg" width="1200" height="780" loading="lazy" alt="Reported median action times in hours: inauthentic reviews 18; defamation 43; hidden advertisement 18; discrimination 23; personal information 15. Overall source median: 18 hours."></a><figcaption>Figure 4. Report-period medians in hours. They do not identify a maximum wait, a Canadian service deadline or the time to permanent deletion. Medians across categories cannot be averaged to recover the overall median. <a href="trustpilot-notice-action-times.svg" download>Download the SVG graph</a> · <a href="trustpilot-notice-action-times.png" download>Download the PNG graph</a>.</figcaption></figure>
+<p>A median describes the middle of the observations used for a reported measure. It is not an arithmetic mean, a guarantee for the next case, or proof that unresolved cases are represented in the same way. The table does not publish an end-to-end timeline for every business complaint. Compare reason categories as disclosed, with their counts and scope alongside the time figures.</p>
+<h2 id="businesses">How Canadian businesses can use the findings</h2>
+<p>A Toronto retailer, a Montréal subscription company or a Vancouver travel operator can use this audit to ask better questions about its own case. The counts do not supply local success rates. The useful lesson is to keep the review, each report, the platform’s action and any later status change in separate records.</p>
+<ol><li><strong>Save the public review URL and observed status.</strong> Record the date, content concern and evidence that can be shared appropriately.</li><li><strong>Track each report without creating a new review record.</strong> Two people flagging one review creates two reports about one item. This is a tracking distinction, not a recommendation to coordinate multiple flags.</li><li><strong>Record the actual decision and action.</strong> “Reported,” “under investigation,” “taken offline” and “reinstated” are different observations. Do not call a report submission a completed removal.</li><li><strong>Check later status before closing the case.</strong> Trustpilot’s help guidance explains that taking a review offline can be reversed after new documentation or edits. <a href="https://help.trustpilot.com/s/article/What-happens-after-businesses-flag-reviews?language=en_US">Trustpilot’s flagged-review process</a>.</li></ol>
+<div class="callout"><strong>New workflow information: decision emails changed in April 2026</strong><p>Trustpilot’s April 23, 2026 update says businesses can no longer reply directly to flagged-review decision emails. Use the appeal link in the decision message, explain the disputed assessment and attach supporting documents. This current workflow should not be replaced with older instructions to reply to the email. <a href="https://business.trustpilot.com/blog/releases-and-updates/changes-to-flagged-review-emails">Trustpilot’s decision-email update</a>.</p></div>
+<p>Our <a href="review-outcome-ledger.csv" download>blank outcome ledger</a> can help track observations without inventing a success-rate dataset. For managed assistance, <a href="remove-trustpilot-reviews.html#request">send the Trustpilot review to ReviewsBoost</a>. If the concern is on Google instead, use the <a href="google-review-removal-checker.html">Google evidence builder</a>; platform rules and reporting routes should be matched to the actual service.</p>
+<h2 id="faq">Questions about Trustpilot review reporting statistics</h2>
+<h3>Were all 423,762 notices reports of fake reviews?</h3><p>No. The inauthentic-user-review subcategory contains 268,444 notices. Other reasons include advertising, defamation, discrimination and personal information. The report also covers some usernames/profile pictures. The category labels do not establish which allegations were substantiated.</p>
+<h3>Were 160,359 reviews permanently deleted?</h3><p>The table labels 160,359 as actions on the basis of service terms. That field does not establish a count of unique permanently deleted reviews. Trustpilot describes taking reviews offline and possible later reinstatement in its <a href="https://help.trustpilot.com/s/article/What-happens-after-businesses-flag-reviews?language=en_US">flagged-review guidance</a>.</p>
+<h3>Is 37.84% the chance that my Trustpilot flag will succeed?</h3><p>No. It is the total action count divided by the total notice count, multiplied by 100. Notices can concern the same item, and the table has no linked record of the outcome for each notice. Your evidence, reporting reason and the platform’s decision require a case-specific assessment.</p>
+<h3>Are the median times Canadian removal timelines?</h3><p>No. They cover the stated EU-related subset and past reporting period. The source supplies no separate Canadian median, no maximum response time and no removal deadline for Toronto, Ontario or another region.</p>
+<h3>Does the 1,639-item difference prove Trustpilot lost reviews?</h3><p>No. It is the difference between aggregate cells and can be located in two parent-versus-subcategory comparisons. The source does not provide an operational explanation or underlying records. A discrepancy in arithmetic should not be promoted into a claim about missing customer reviews.</p>
+<h3>Can I report a review just because it is negative?</h3><p>A report should identify a relevant guideline concern and supporting evidence. Trustpilot’s <a href="https://help.trustpilot.com/s/article/What-happens-after-businesses-flag-reviews?language=en_US">published process</a> assesses whether a review violates its rules and explains that a review can remain online when no breach is established. A negative star rating alone is not a substitute for that evidence.</p>
+<h2 id="method">Method, originality and limits</h2>
+<ol><li><strong>Select the source.</strong> Use the downloadable DSA report linked from Trustpilot’s legal page on October 8, 2026. Extract the notice, report-identification and cover CSVs. Pin the original file hashes so a changed source requires a fresh audit.</li><li><strong>Preserve the hierarchy.</strong> The notice CSV supplies 92 records: a total, 15 parent categories and their subcategories. Keep source codes, logical record numbers, nullable fields and original period strings. Parent and child rows are not additive.</li><li><strong>Separate metrics.</strong> Keep ordinary notice/item/action fields apart from trusted-flagger fields. Do not combine law-basis and terms-basis counts or infer that the same columns represent disjoint events.</li><li><strong>Calculate only labelled measures.</strong> Shares identify their numerator and denominator. Reconciliation subtracts sums of numeric cells; it does not turn blanks into observations of zero. A terminal-row sum is checked separately.</li><li><strong>Expose discrepancies.</strong> Retain the item hierarchy difference, trusted-flagger mismatch and invalid source date. Do not revise source values merely to make every total add up.</li><li><strong>Verify the artifacts.</strong> The downloadable Node audit checks every exported CSV cell against JSON, source fingerprints when the raw cache is present, terminal sums, the reconciliation and the preserved anomalies. The Python builder reproduces the extraction from the official ZIP.</li></ol>
+<p>Trustpilot produced the underlying disclosures. ReviewsBoost contributed the normalized extraction, original category reconciliation, denominator analysis, figures and reproduction code. This is secondary analysis of a platform self-report. We did not survey Canadian businesses, inspect internal moderation records, independently establish report accuracy or measure client outcomes.</p>
+<p>We do not claim these source numbers first appeared here. The particular compilation and reconciliation are our work; a limited search for the reported totals cannot establish that no other publication has analysed them. Reports with different periods, scope or field definitions should not be pooled into a year-over-year success-rate comparison.</p>
+<p><strong>Commercial interest:</strong> ReviewsBoost provides review-removal and reputation-management services. This dataset contains no proof of our own removal success rate, no client-performance figures and no evidence of a ranking or revenue effect.</p>
+<h2 id="downloads">Download, reproduce and cite the research</h2>
+<ul><li><a href="trustpilot-notices-2025.csv" download>Complete 92-record extraction, CSV</a> · <a href="trustpilot-notices-2025.json" download>Data, assumptions, source notes and hashes, JSON</a>.</li><li><a href="trustpilot-notice-reconciliation-2025.csv" download>Parent/subcategory reconciliation, CSV</a> · <a href="trustpilot-notices-2025.csv-metadata.json" download>Machine-readable CSV column definitions</a>.</li><li><a href="build-trustpilot-notice-data.py" download>Source extraction and dataset builder</a> — Python standard library, with network access to the official source ZIP.</li><li><a href="audit-trustpilot-notices.mjs" download>Independent CSV and arithmetic audit</a> — run <code>node audit-trustpilot-notices.mjs</code> beside the downloaded CSV and JSON.</li><li><a href="plot-trustpilot-notices.py" download>Four-figure reproduction script</a> — run <code>python plot-trustpilot-notices.py</code> beside the JSON with Matplotlib installed.</li><li><a href="trustpilot-review-reporting-statistics.bib" download>BibTeX citation</a> · <a href="trustpilot-review-reporting-statistics.cff" download>Citation File Format record</a>.</li></ul>
+<p>The builder writes a raw source cache in <code>research-sources</code> for local verification; that cache is excluded from this website’s published build. Its SHA-256 fingerprint for the notice CSV is <code>dbaf2d134b76e450dbeaca791fa0f8cfcde21e5e1c9471ec832508a4a4a16882</code>. The public extraction preserves numeric fields and source labels, while the original ZIP remains available from Trustpilot.</p>
+<div class="callout"><strong>Suggested citation</strong><p>ReviewsBoost Editorial Team. (2026, October 8). <em>Trustpilot review reporting statistics: a 2025 notice-table audit</em> (Version 1.0). ReviewsBoost. <a href="https://reviewsboost.ca/trustpilot-review-reporting-statistics.html">Permanent article and dataset reference</a>. Attribute underlying counts to Trustpilot and retain the EU-related February–December 2025 scope.</p></div>
+<p>Our original compilation, calculations, scripts and figures are available under <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>. External source material retains its own rights. Identify ReviewsBoost, link this article and the licence, and note changes when reusing our work. Report corrections through the <a href="editorial-policy.html">editorial correction process</a>.</p>
+<h2 id="sources">Primary sources, checked October 8, 2026</h2>
+<ol><li><a href="https://corporate.trustpilot.com/legal">Trustpilot legal publications</a> — source landing page and downloadable DSA report link.</li><li><a href="https://assets.ctfassets.net/wonkqgvit51x/43veQxX63SCvDEmqXyHqQi/bf51839da2bdb697209a16ceabb18434/Trustpilot_DSA_Transparency_Report.zip">Trustpilot DSA Transparency Report, published February 28, 2026</a> — <code>4_notices.csv</code>, <code>1_report_identification.csv</code> and cover CSV inside the archive; February 17–December 31, 2025 scope.</li><li><a href="https://help.trustpilot.com/s/article/What-happens-after-businesses-flag-reviews?language=en_US">Trustpilot Help: what happens after businesses flag reviews?</a> — reporting, investigation, offline status and reinstatement distinctions.</li><li><a href="https://business.trustpilot.com/blog/releases-and-updates/changes-to-flagged-review-emails">Trustpilot: changes to flagged-review emails, April 23, 2026</a> — current appeal link and decision-email workflow.</li></ol>
+</article><aside class="toc" aria-label="On this page"><strong>On this page</strong><ol><li><a href="#findings">Key findings</a></li><li><a href="#scope">Period and geography</a></li><li><a href="#units">Three counting units</a></li><li><a href="#reasons">Reported reasons</a></li><li><a href="#reconciliation">The 1,639-item difference</a></li><li><a href="#source-quality">Other source anomalies</a></li><li><a href="#time">Time to action</a></li><li><a href="#businesses">For Canadian businesses</a></li><li><a href="#faq">Common questions</a></li><li><a href="#method">Method and limitations</a></li><li><a href="#downloads">Data and citation files</a></li><li><a href="#sources">Primary sources</a></li></ol><p><a href="trustpilot-notices-2025.csv" download>Download the source extraction</a></p><p><a href="remove-trustpilot-reviews.html#request">Get Trustpilot review help</a></p></aside></div>
+<section class="section alt" aria-labelledby="related-research"><div class="container"><h2 id="related-research">Related research and practical resources</h2><div class="card-grid"><article class="card"><h3>Yelp review reporting statistics</h3><p>Keep recommended, filtered and removed reviews separate.</p><a href="yelp-review-removal-statistics.html">Explore the Yelp source audit →</a></article><article class="card"><h3>Google fake-profile enforcement</h3><p>Separate profile actions, creation attempts and ownership attempts.</p><a href="google-fake-business-profile-statistics.html">Read the seven-year Google profile audit →</a></article><article class="card"><h3>Review reporting evidence</h3><p>Prepare an issue-specific worksheet for a Google review.</p><a href="google-review-removal-checker.html">Use the Google evidence builder →</a></article></div></div></section>
+</main><footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <h2>ReviewsBoost</h2>
+            <p>Online reputation management and Google review resources for Canadian businesses.</p>
+          </div>
+          <div>
+            <h3>Guides</h3>
+            <a href="blog.html">Learning Centre</a
+            ><a href="google-reviews-faq.html">Detailed FAQ</a
+            ><a href="google-review-calculator.html">Rating calculator</a>
+          </div>
+          <div>
+            <h3>Company</h3>
+            <a href="about.html">About</a
+            ><a href="editorial-policy.html">Editorial policy</a
+            ><a href="online-reputation-management.html#contact">Contact</a>
+          </div>
+          <div>
+            <h3>Policies</h3>
+            <a href="privacy-policy.html">Privacy</a
+            ><a href="terms-of-service.html">Terms</a
+            ><a href="refund-policy.html">Refunds</a
+            ><a href="accessibility.html">Accessibility</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 ReviewsBoost</span
+          ><span><!--email_off--><a href="mailto:support@reviewsboost.ca">support@reviewsboost.ca</a><!--/email_off--></span>
+        </div>
+      </div>
+    </footer></body></html>
