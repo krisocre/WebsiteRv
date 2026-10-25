@@ -1,0 +1,114 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-removal-time-scenarios.csv",
+  "dc:title": "Two synthetic examples; not Google or client observations",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Identifies a reported aggregate with derived values or an entirely synthetic illustration; never an observed Canadian client outcome."
+      },
+      {
+        "name": "starting_reviews",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Constructed starting cohort size; not sampled Google reviews."
+      },
+      {
+        "name": "deleted_on_day",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Assumed elapsed event day in the synthetic example."
+      },
+      {
+        "name": "deleted_count",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Assumed deletion count in the synthetic example."
+      },
+      {
+        "name": "still_visible_at_day_30",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Constructed observations censored at day 30; no later event time is assumed."
+      },
+      {
+        "name": "follow_up_days",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Synthetic observation period in elapsed days."
+      },
+      {
+        "name": "deleted_only_median_days",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Median among constructed deleted reviews only; excludes still-visible reviews."
+      },
+      {
+        "name": "observed_deletion_fraction_percent",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Synthetic event count divided by synthetic starting reviews \u00d7 100; not a measured Google removal rate."
+      },
+      {
+        "name": "population_median_deletion_day",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Synthetic full-cohort median event day, blank when not reached during follow-up."
+      },
+      {
+        "name": "population_median_status",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Whether the constructed full cohort reaches a 50% deletion fraction within follow-up."
+      },
+      {
+        "name": "source_url",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Attribution URL for reported values; blank for original constructed examples."
+      },
+      {
+        "name": "notes",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Interpretation limits and assumptions for this row."
+      }
+    ]
+  }
+}

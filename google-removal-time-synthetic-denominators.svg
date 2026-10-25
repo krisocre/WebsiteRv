@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="561.6pt" viewBox="0 0 864 561.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>ReviewsBoost</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 561.6
+L 864 561.6
+L 864 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 181.44 387.504
+L 751.68 387.504
+L 751.68 174.096
+L 181.44 174.096
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 181.44 387.504
+L 181.44 174.096
+" clip-path="url(#p9d65d72725)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m0b65644abf" d="M 0 0
+L 0 3.5
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m0b65644abf" x="181.44" y="387.504" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="181.44" y="403.622125" transform="rotate(-0 181.44 403.622125)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 295.488 387.504
+L 295.488 174.096
+" clip-path="url(#p9d65d72725)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m0b65644abf" x="295.488" y="387.504" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="295.488" y="403.622125" transform="rotate(-0 295.488 403.622125)">20</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 409.536 387.504
+L 409.536 174.096
+" clip-path="url(#p9d65d72725)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m0b65644abf" x="409.536" y="387.504" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="409.536" y="403.622125" transform="rotate(-0 409.536 403.622125)">40</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 523.584 387.504
+L 523.584 174.096
+" clip-path="url(#p9d65d72725)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m0b65644abf" x="523.584" y="387.504" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="523.584" y="403.622125" transform="rotate(-0 523.584 403.622125)">60</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 637.632 387.504
+L 637.632 174.096
+" clip-path="url(#p9d65d72725)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m0b65644abf" x="637.632" y="387.504" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="637.632" y="403.622125" transform="rotate(-0 637.632 403.622125)">80</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_11">
+      <path d="M 751.68 387.504
+L 751.68 174.096
+" clip-path="url(#p9d65d72725)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_12">
+      <g>
+       <use xlink:href="#m0b65644abf" x="751.68" y="387.504" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_6">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="751.68" y="403.622125" transform="rotate(-0 751.68 403.622125)">100</text>
+     </g>
+    </g>
+    <g id="text_7">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="466.56" y="426.235875" transform="rotate(-0 466.56 426.235875)">Reviews in each constructed 100-review cohort</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_13"/>
+     <g id="text_8">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="167.44" y="217.995426" transform="rotate(-0 167.44 217.995426)">Synthetic A</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_14"/>
+     <g id="text_9">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="167.44" y="352.722699" transform="rotate(-0 167.44 352.722699)">Synthetic B</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 181.44 183.796364
+L 209.952 183.796364
+L 209.952 243.076364
+L 181.44 243.076364
+z
+" clip-path="url(#p9d65d72725)" style="fill: #087fe8"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 209.952 183.796364
+L 751.68 183.796364
+L 751.68 243.076364
+L 209.952 243.076364
+z
+" clip-path="url(#p9d65d72725)" style="fill: #b6c8d5"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 181.44 318.523636
+L 694.656 318.523636
+L 694.656 377.803636
+L 181.44 377.803636
+z
+" clip-path="url(#p9d65d72725)" style="fill: #087fe8"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 694.656 318.523636
+L 751.68 318.523636
+L 751.68 377.803636
+L 694.656 377.803636
+z
+" clip-path="url(#p9d65d72725)" style="fill: #b6c8d5"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 181.44 387.504
+L 751.68 387.504
+" style="fill: none; stroke: #cad8e2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_10">
+    <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087fe8" x="215.6544" y="170.323636" transform="rotate(-0 215.6544 170.323636)">5 deleted</text>
+   </g>
+   <g id="text_11">
+    <text style="font-size: 15px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle; fill: #16314b" x="480.816" y="217.575426" transform="rotate(-0 480.816 217.575426)">95</text>
+   </g>
+   <g id="text_12">
+    <text style="font-weight: 700; font-size: 16px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle; fill: #ffffff" x="438.048" y="352.578636" transform="rotate(-0 438.048 352.578636)">90</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 15px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle; fill: #16314b" x="723.168" y="352.302699" transform="rotate(-0 723.168 352.302699)">10</text>
+   </g>
+   <g id="legend_1">
+    <g id="patch_8">
+     <path d="M 321.362578 460.679544
+L 343.362578 460.679544
+L 343.362578 452.979544
+L 321.362578 452.979544
+z
+" style="fill: #087fe8"/>
+    </g>
+    <g id="text_14">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start" x="352.162578" y="460.679544" transform="rotate(-0 352.162578 460.679544)">Deleted at day 5</text>
+    </g>
+    <g id="patch_9">
+     <path d="M 466.064141 460.679544
+L 488.064141 460.679544
+L 488.064141 452.979544
+L 466.064141 452.979544
+z
+" style="fill: #b6c8d5"/>
+    </g>
+    <g id="text_15">
+     <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start" x="496.864141" y="460.679544" transform="rotate(-0 496.864141 460.679544)">Still visible at day 30</text>
+    </g>
+   </g>
+  </g>
+  <g id="text_16">
+   <text style="font-size: 10.5px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087fe8" x="56.16" y="28.08" transform="rotate(-0 56.16 28.08)">REVIEWSBOOST / CONSTRUCTED EXAMPLES — NOT GOOGLE OR CLIENT DATA</text>
+  </g>
+  <g id="text_17">
+   <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="56.16" y="70.2" transform="rotate(-0 56.16 70.2)">The same 5-day median can describe 5% or 90%.</text>
+  </g>
+  <g id="text_18">
+   <text style="font-size: 11.5px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="103.896" transform="rotate(-0 56.16 103.896)">Two synthetic cohorts start with 100 reviews each. Follow-up ends at day 30.</text>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="538.5744" transform="rotate(-0 56.16 538.5744)">ReviewsBoost, October 24, 2026 / CC BY 4.0. Source observations remain attributed to their original publisher.</text>
+  </g>
+  <g id="text_20">
+   <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="56.16" y="482.976" transform="rotate(-0 56.16 482.976)">Deleted-only median: 5 days in both. Population median: not reached by day 30 in A; day 5 in B.</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="508.248" transform="rotate(-0 56.16 508.248)">Remaining reviews are right-censored at day 30. Neither example is a measured Google removal rate.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p9d65d72725">
+   <rect x="181.44" y="174.096" width="570.24" height="213.408"/>
+  </clipPath>
+ </defs>
+</svg>

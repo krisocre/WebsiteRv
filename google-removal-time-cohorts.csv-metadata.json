@@ -1,0 +1,163 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-removal-time-cohorts.csv",
+  "dc:title": "Google review removal time: an observation-window sensitivity analysis",
+  "dc:description": "Multiple countries and industries in the publisher description; no separate Canadian sample or merchant-report cohort.",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Reported aggregate with conditional mathematical columns; other tables explicitly identify synthetic examples."
+      },
+      {
+        "name": "source_year_label",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Original selected creation-year label, not removal year."
+      },
+      {
+        "name": "year",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "year"
+      },
+      {
+        "name": "count",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Count in the selected source row, not all reviews created that year."
+      },
+      {
+        "name": "median_lifespan_days",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Publisher-reported median age among the selected deleted reviews; not merchant report-processing time."
+      },
+      {
+        "name": "removed_within_30_days_percent",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "Publisher\u2019s reported <=30-day measure for the selected deleted cohort; not the original-review population risk."
+      },
+      {
+        "name": "creation_start_inclusive",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "creation start inclusive"
+      },
+      {
+        "name": "creation_end_exclusive",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "creation end exclusive"
+      },
+      {
+        "name": "assumed_observation_start_inclusive",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "assumed observation start inclusive"
+      },
+      {
+        "name": "assumed_observation_end_exclusive",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "assumed observation end exclusive"
+      },
+      {
+        "name": "conditional_lifespan_lower_days",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Conditional calendar support lower bound in elapsed days. Interpret with lower_inclusive and the published timing assumption."
+      },
+      {
+        "name": "lower_inclusive",
+        "datatype": "boolean",
+        "null": [
+          ""
+        ],
+        "dc:description": "lower inclusive"
+      },
+      {
+        "name": "conditional_lifespan_upper_days",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Strict conditional calendar support upper bound; not a maximum observed lifespan or a service guarantee."
+      },
+      {
+        "name": "upper_inclusive",
+        "datatype": "boolean",
+        "null": [
+          ""
+        ],
+        "dc:description": "upper inclusive"
+      },
+      {
+        "name": "endpoint_31_days",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Model classification for <31 elapsed days; do not substitute for the separate reported <=30-day statistic."
+      },
+      {
+        "name": "source_url",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source url"
+      },
+      {
+        "name": "scope",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "scope"
+      },
+      {
+        "name": "notes",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "notes"
+      }
+    ]
+  }
+}

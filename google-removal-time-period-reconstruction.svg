@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="864pt" height="561.6pt" viewBox="0 0 864 561.6" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>ReviewsBoost</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 561.6
+L 864 561.6
+L 864 0
+L 0 0
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 207.36 398.736
+L 786.24 398.736
+L 786.24 162.864
+L 207.36 162.864
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1">
+      <path d="M 207.36 398.736
+L 207.36 162.864
+" clip-path="url(#pd570e0226c)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_2">
+      <defs>
+       <path id="m0b65644abf" d="M 0 0
+L 0 3.5
+" style="stroke: #000000; stroke-width: 0.8"/>
+      </defs>
+      <g>
+       <use xlink:href="#m0b65644abf" x="207.36" y="398.736" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_1">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="207.36" y="414.854125" transform="rotate(-0 207.36 414.854125)">0</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_3">
+      <path d="M 316.582642 398.736
+L 316.582642 162.864
+" clip-path="url(#pd570e0226c)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_4">
+      <g>
+       <use xlink:href="#m0b65644abf" x="316.582642" y="398.736" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_2">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="316.582642" y="414.854125" transform="rotate(-0 316.582642 414.854125)">50k</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_5">
+      <path d="M 425.805283 398.736
+L 425.805283 162.864
+" clip-path="url(#pd570e0226c)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_6">
+      <g>
+       <use xlink:href="#m0b65644abf" x="425.805283" y="398.736" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_3">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="425.805283" y="414.854125" transform="rotate(-0 425.805283 414.854125)">100k</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_7">
+      <path d="M 535.027925 398.736
+L 535.027925 162.864
+" clip-path="url(#pd570e0226c)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_8">
+      <g>
+       <use xlink:href="#m0b65644abf" x="535.027925" y="398.736" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_4">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="535.027925" y="414.854125" transform="rotate(-0 535.027925 414.854125)">150k</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_9">
+      <path d="M 644.250566 398.736
+L 644.250566 162.864
+" clip-path="url(#pd570e0226c)" style="fill: none; stroke: #b0b0b0; stroke-opacity: 0.14; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_10">
+      <g>
+       <use xlink:href="#m0b65644abf" x="644.250566" y="398.736" style="stroke: #000000; stroke-width: 0.8"/>
+      </g>
+     </g>
+     <g id="text_5">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="644.250566" y="414.854125" transform="rotate(-0 644.250566 414.854125)">200k</text>
+     </g>
+    </g>
+    <g id="text_6">
+     <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: middle" x="496.8" y="437.467875" transform="rotate(-0 496.8 437.467875)">Approximate deletions implied by displayed means</text>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_11"/>
+     <g id="text_7">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="193.36" y="188.769382" transform="rotate(-0 193.36 188.769382)">Nov–Dec 2023 (2 months)</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_12"/>
+     <g id="text_8">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="193.36" y="227.405254" transform="rotate(-0 193.36 227.405254)">Jan–Jun 2024 (6 months)</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_13"/>
+     <g id="text_9">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="193.36" y="266.041126" transform="rotate(-0 193.36 266.041126)">Jul–Dec 2024 (6 months)</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_14"/>
+     <g id="text_10">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="193.36" y="304.676999" transform="rotate(-0 193.36 304.676999)">Jan–Jun 2025 (6 months)</text>
+     </g>
+    </g>
+    <g id="ytick_5">
+     <g id="line2d_15"/>
+     <g id="text_11">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="193.36" y="343.312871" transform="rotate(-0 193.36 343.312871)">Jul–Dec 2025 (6 months)</text>
+     </g>
+    </g>
+    <g id="ytick_6">
+     <g id="line2d_16"/>
+     <g id="text_12">
+      <text style="font-size: 12px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: end" x="193.36" y="381.948743" transform="rotate(-0 193.36 381.948743)">Jan 2026 (1 month)</text>
+     </g>
+    </g>
+   </g>
+   <g id="patch_3">
+    <path d="M 207.36 173.585455
+L 219.440024 173.585455
+L 219.440024 194.835184
+L 207.36 194.835184
+z
+" clip-path="url(#pd570e0226c)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 207.36 212.221327
+L 228.448708 212.221327
+L 228.448708 233.471057
+L 207.36 233.471057
+z
+" clip-path="url(#pd570e0226c)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 207.36 250.857199
+L 259.865508 250.857199
+L 259.865508 272.106929
+L 207.36 272.106929
+z
+" clip-path="url(#pd570e0226c)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 207.36 289.493071
+L 304.926401 289.493071
+L 304.926401 310.742801
+L 207.36 310.742801
+z
+" clip-path="url(#pd570e0226c)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 207.36 328.128943
+L 662.792202 328.128943
+L 662.792202 349.378673
+L 207.36 349.378673
+z
+" clip-path="url(#pd570e0226c)" style="fill: #087fe8"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 207.36 366.764816
+L 301.59948 366.764816
+L 301.59948 388.014545
+L 207.36 388.014545
+z
+" clip-path="url(#pd570e0226c)" style="fill: #16314b"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 207.36 398.736
+L 786.24 398.736
+" style="fill: none; stroke: #cad8e2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="227.085609" y="187.245632" transform="rotate(-0 227.085609 187.245632)">≈5,530</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="236.094293" y="225.881504" transform="rotate(-0 236.094293 225.881504)">≈9,654</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="267.511093" y="264.517376" transform="rotate(-0 267.511093 264.517376)">≈24,036</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="312.571986" y="303.153249" transform="rotate(-0 312.571986 303.153249)">≈44,664</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="670.437787" y="341.789121" transform="rotate(-0 670.437787 341.789121)">≈208,488</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 11px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="309.245064" y="380.424993" transform="rotate(-0 309.245064 380.424993)">≈43,141</text>
+   </g>
+  </g>
+  <g id="text_19">
+   <text style="font-size: 10.5px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #087fe8" x="56.16" y="28.08" transform="rotate(-0 56.16 28.08)">REVIEWSBOOST / ORIGINAL OBSERVATION-WINDOW ANALYSIS / VERSION 1.0</text>
+  </g>
+  <g id="text_20">
+   <text style="font-weight: 700; font-size: 23px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="56.16" y="70.2" transform="rotate(-0 56.16 70.2)">Monthly averages need the right time weights.</text>
+  </g>
+  <g id="text_21">
+   <text style="font-size: 11.5px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="103.896" transform="rotate(-0 56.16 103.896)">Published monthly averages × months reconstruct approximate period totals, not exact counts.</text>
+  </g>
+  <g id="text_22">
+   <text style="font-size: 9px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="538.5744" transform="rotate(-0 56.16 538.5744)">ReviewsBoost, October 24, 2026 / CC BY 4.0. Source observations remain attributed to their original publisher.</text>
+  </g>
+  <g id="text_23">
+   <text style="font-size: 10.5px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #16314b" x="56.16" y="469.4976" transform="rotate(-0 56.16 469.4976)">Reconstructed: 335,513. Reported study total: 335,520. Difference: 7; no missing-review claim is inferred.</text>
+  </g>
+  <g id="text_24">
+   <text style="font-size: 10px; font-family: 'DejaVu Sans', Arial, sans-serif; text-anchor: start; fill: #556b7c" x="56.16" y="498.7008" transform="rotate(-0 56.16 498.7008)">Source: Localo’s period table. Compatibility with rounding is a sensitivity illustration; its rounding rule is not stated.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pd570e0226c">
+   <rect x="207.36" y="162.864" width="578.88" height="235.872"/>
+  </clipPath>
+ </defs>
+</svg>

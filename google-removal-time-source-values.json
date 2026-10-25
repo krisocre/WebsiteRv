@@ -1,0 +1,115 @@
+{
+  "title": "Google review removal time: source table inputs",
+  "checked": "2026-10-24",
+  "source_url": "https://localo.com/blog/review-velocity-study",
+  "source_published": "2026-05-29",
+  "source_publisher": "Localo",
+  "source_total_deleted_reviews": 335520,
+  "source_business_profiles": 22292,
+  "source_tracking_window_label": "November 2023 to January 2026",
+  "source_capture_sha256": "3a4f5051be6e999f87168b151bb13b17e23162134cde4f08e5857f71f1b7a273",
+  "cohort_population": "Published five-star, no-text deleted-review rows; selected creation-year bins, not all reviews or all deletion events.",
+  "cohorts": [
+    {
+      "source_year_label": "2017",
+      "year": 2017,
+      "count": 336,
+      "median_lifespan_days": 2902,
+      "removed_within_30_days_percent": 0.0
+    },
+    {
+      "source_year_label": "2019",
+      "year": 2019,
+      "count": 1167,
+      "median_lifespan_days": 2200,
+      "removed_within_30_days_percent": 0.0
+    },
+    {
+      "source_year_label": "2021",
+      "year": 2021,
+      "count": 1735,
+      "median_lifespan_days": 1529,
+      "removed_within_30_days_percent": 0.0
+    },
+    {
+      "source_year_label": "2023",
+      "year": 2023,
+      "count": 5212,
+      "median_lifespan_days": 782,
+      "removed_within_30_days_percent": 0.7
+    },
+    {
+      "source_year_label": "2024",
+      "year": 2024,
+      "count": 10617,
+      "median_lifespan_days": 360,
+      "removed_within_30_days_percent": 18.9
+    },
+    {
+      "source_year_label": "2025",
+      "year": 2025,
+      "count": 29384,
+      "median_lifespan_days": 13,
+      "removed_within_30_days_percent": 58.1
+    },
+    {
+      "source_year_label": "2026 (Jan)",
+      "year": 2026,
+      "count": 2450,
+      "median_lifespan_days": 5,
+      "removed_within_30_days_percent": 100.0
+    }
+  ],
+  "periods": [
+    {
+      "label": "Late 2023 (Nov-Dec)",
+      "displayed_average_monthly_deletions": 2765,
+      "start": "2023-11-01",
+      "end_exclusive": "2024-01-01",
+      "months": 2
+    },
+    {
+      "label": "H1 2024 (Jan-Jun)",
+      "displayed_average_monthly_deletions": 1609,
+      "start": "2024-01-01",
+      "end_exclusive": "2024-07-01",
+      "months": 6
+    },
+    {
+      "label": "H2 2024 (Jul-Dec)",
+      "displayed_average_monthly_deletions": 4006,
+      "start": "2024-07-01",
+      "end_exclusive": "2025-01-01",
+      "months": 6
+    },
+    {
+      "label": "H1 2025 (Jan-Jun)",
+      "displayed_average_monthly_deletions": 7444,
+      "start": "2025-01-01",
+      "end_exclusive": "2025-07-01",
+      "months": 6
+    },
+    {
+      "label": "H2 2025 (Jul-Dec)",
+      "displayed_average_monthly_deletions": 34748,
+      "start": "2025-07-01",
+      "end_exclusive": "2026-01-01",
+      "months": 6
+    },
+    {
+      "label": "Jan 2026",
+      "displayed_average_monthly_deletions": 43141,
+      "start": "2026-01-01",
+      "end_exclusive": "2026-02-01",
+      "months": 1
+    }
+  ],
+  "analysis_assumptions": {
+    "observation_start_inclusive": "2023-11-01",
+    "observation_end_exclusive": "2026-02-01",
+    "creation_year_intervals": "January 1 inclusive to January 1 of next year exclusive; January 2026 ends February 1 exclusive.",
+    "timing_condition": "Calendar support applies if the deletions represented in each cohort occurred within the stated tracking window. Public aggregate tables do not independently verify row-level event dates.",
+    "duration_resolution": "Elapsed days with half-open timestamp bounds. Upper bounds are strict; positive lower bounds are strict. No equivalence between <31 elapsed days and <=30 elapsed days is assumed.",
+    "rounding_compatibility_model": "For a sensitivity illustration only, treat each displayed monthly average as nearest-integer rounded, with errors in [-0.5,+0.5). The publisher does not document its rounding rule."
+  }
+}

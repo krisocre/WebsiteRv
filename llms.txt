@@ -22,6 +22,8 @@ Services are exclusively for business locations in Canada. Online support covers
 
 ## Guides and tools
 
+- [Google review removal timing study](https://reviewsboost.ca/google-review-removal-time-study.html): Original observation-window sensitivity analysis of seven attributed deleted-review cohorts and six period averages, with two separate synthetic scenarios. Creation-to-deletion age is different from report processing time.
+
 - [Trustpilot review reporting statistics](https://reviewsboost.ca/trustpilot-review-reporting-statistics.html): Original 92-record audit of EU-related 2025 notices, items and actions, including a 1,639-item category reconciliation, four graphs and explicitly labelled count ratios. Not a Canadian client-outcome study.
 
 - [Google review removal cost in Canada](https://reviewsboost.ca/google-review-removal-cost-canada.html): Canadian pricing guide covering Google reporting, ReviewsBoost fees, sample totals, provider selection and tracked success-rate methodology.
@@ -42,6 +44,9 @@ Services are exclusively for business locations in Canada. Online support covers
 - [Review rating calculator](https://reviewsboost.ca/google-review-calculator.html): Weighted-average calculator with feasible integer-star ranges for rounded public ratings, exact targets and shareable scenarios.
 
 ## Open data and citation files
+
+- [Google removal timing analysis](https://reviewsboost.ca/google-removal-time-analysis.json): Cohort inputs, conditional calendar bounds, weighted period reconstruction, assumptions and separate synthetic examples; not Canadian case outcomes.
+- [Timing study citation](https://reviewsboost.ca/google-review-removal-time-study.cff): Versioned citation record for the original ReviewsBoost analysis.
 
 - [Trustpilot notice-table data](https://reviewsboost.ca/trustpilot-notices-2025.csv): Complete nullable 92-record extraction with CSVW metadata; source fingerprints and calculations in the companion JSON.
 - [Trustpilot research citation](https://reviewsboost.ca/trustpilot-review-reporting-statistics.cff): Citation metadata for the original compilation and reconciliation.

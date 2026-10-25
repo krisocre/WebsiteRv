@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Cite ReviewsBoost for this analysis and Localo for underlying observations."
+title: "Google review removal time: an observation-window sensitivity analysis"
+version: "1.0"
+date-released: "2026-10-24"
+type: dataset
+authors:
+  - name: "ReviewsBoost Editorial Team"
+url: "https://reviewsboost.ca/google-review-removal-time-study.html"
+license: CC-BY-4.0

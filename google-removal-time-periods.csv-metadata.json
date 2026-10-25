@@ -1,0 +1,90 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-removal-time-periods.csv",
+  "dc:title": "Six reported monthly averages with approximate weighted totals",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Identifies a reported aggregate with derived values or an entirely synthetic illustration; never an observed Canadian client outcome."
+      },
+      {
+        "name": "label",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "label"
+      },
+      {
+        "name": "displayed_average_monthly_deletions",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Publisher-displayed monthly mean for this period; source rounding rule is not known."
+      },
+      {
+        "name": "start",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "First included calendar date of the period."
+      },
+      {
+        "name": "end_exclusive",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "First excluded calendar date of the period."
+      },
+      {
+        "name": "months",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Number of months used to weight the reported monthly mean."
+      },
+      {
+        "name": "implied_deletions_from_displayed_mean",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Monthly mean \u00d7 months; approximate reconstruction, not an exact observed event count."
+      },
+      {
+        "name": "source_url",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Attribution URL for reported values; blank for original constructed examples."
+      },
+      {
+        "name": "notes",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Interpretation limits and assumptions for this row."
+      }
+    ]
+  }
+}
