@@ -1,0 +1,74 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-reply-time-eligibility.csv",
+  "dc:title": "Google review replies and removal: a time-order and rounding audit \u2014 google-reply-time-eligibility.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Distinguishes attributed source aggregates from conditional mathematical cells."
+      },
+      {
+        "name": "source_row",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source row"
+      },
+      {
+        "name": "reply_label",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "reply label"
+      },
+      {
+        "name": "horizon_days",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "horizon days"
+      },
+      {
+        "name": "horizon_seconds",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "horizon seconds"
+      },
+      {
+        "name": "state",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Temporal compatibility under R < T; never a probability or evidence of causation."
+      },
+      {
+        "name": "condition",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "condition"
+      }
+    ]
+  }
+}

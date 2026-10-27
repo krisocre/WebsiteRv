@@ -60,6 +60,11 @@ const server = http.createServer((req,res) => {
         assert.match(await page.locator('#combinedTotal').textContent(),new RegExp(String(3*(30+fee))));
       }
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,file+' overflow');
+      const legal=form.locator('.submission-legal');
+      assert.equal(await legal.isVisible(),true,file+' terms must be visible before submitting');
+      assert.equal(await legal.locator('a').count(),2);
+      assert.equal(await form.locator('[type="checkbox"]').count(),0);
+      assert.equal(await legal.evaluate(node=>node.getBoundingClientRect().bottom<=node.parentElement.querySelector('.enquiry-actions').getBoundingClientRect().top),true,'Terms notice must precede the final action');
       await page.screenshot({path:path.join(os.tmpdir(),'conversion-'+file+'-'+width+'.png')});
       await form.evaluate(n=>{n.requestSubmit();n.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));});
       await page.waitForFunction(()=>document.querySelector('.submission-success:not([hidden]), .platform-success:not([hidden])'));
@@ -67,6 +72,12 @@ const server = http.createServer((req,res) => {
       assert.equal(requests[0].get('full_name'),'Élodie Test');
       assert.equal(requests[0].get('contact_detail'),'test+case@example.ca');
       assert.match(requests[0].get('reason'),/Request reference: RB-/);
+      assert.equal(requests[0].get('terms_version'),'2026-10-27');
+      assert.match(requests[0].get('reason'),/\[Submission acknowledgement\]/);
+      assert.match(requests[0].get('reason'),/https:\/\/reviewsboost.ca\/terms-of-service.html/);
+      assert.equal((requests[0].get('reason').match(/\[Submission acknowledgement\]/g)||[]).length,1,'Record terms once');
+      assert.equal(requests[0].get('terms_language'),file==='suppression-avis-google.html'?'fr-CA':'en-CA');
+      assert.match(requests[0].get('terms_acknowledged_at_client'),/^\d{4}-\d\d-\d\dT/);
       if (file!=='online-reputation-management.html') assert.equal(requests[0].get('review_count'),'3');
       const success=page.locator('.submission-success:not([hidden]), .platform-success:not([hidden])');
       assert.match(await success.textContent(),/RB-/);

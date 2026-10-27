@@ -3,3 +3,19 @@ exclude:
   - tests
   - research-sources
   - CONVERSION-IMPROVEMENTS.md
+  - LEGAL-SETUP.md
+  - build-legal-pages.cjs
+  - legal-settings.json
+  - CANADA-SEO.md
+  - FORM-SETUP.md
+  - GOOGLE-TIMING-RESEARCH-NOTES.md
+  - GOOGLE-REPLY-RESEARCH-NOTES.md
+  - SEO-CHECKLIST.md
+  - SEO-IMPLEMENTATION.md
+  - TRUSTPILOT-RESEARCH-NOTES.md
+  - SEO-AUDIT-2026-10-27.md
+  - audit-site.mjs
+  - seo-audit.mjs
+  - seo-live-check.mjs
+  - seo-link-check.mjs
+  - google-apps-script.gs

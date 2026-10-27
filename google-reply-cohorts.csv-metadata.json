@@ -1,0 +1,106 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-reply-cohorts.csv",
+  "dc:title": "Google review replies and removal: a time-order and rounding audit \u2014 google-reply-cohorts.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Distinguishes attributed source aggregates from conditional mathematical cells."
+      },
+      {
+        "name": "reply_label",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "reply label"
+      },
+      {
+        "name": "source_review_count",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Publisher count in a selected deleted-review row, not all posted reviews."
+      },
+      {
+        "name": "source_median_lifespan_days",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Publisher creation-to-removal median, not report turnaround time."
+      },
+      {
+        "name": "source_removed_within_7_days_percent",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "Source percentage within the selected deleted-review group."
+      },
+      {
+        "name": "model_reply_lower_seconds",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Inclusive model lower bound derived from a source label; unverified raw-time bin convention."
+      },
+      {
+        "name": "model_reply_upper_exclusive_seconds",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Exclusive model upper bound; blank for unbounded or no-reply groups."
+      },
+      {
+        "name": "conditional_7_day_count_min",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Smallest integer compatible with the explicitly assumed nearest-tenth percentage rounding. Not an observed event count."
+      },
+      {
+        "name": "conditional_7_day_count_max",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Largest integer compatible with the explicitly assumed rounding. A 0.0% display does not alone prove zero events."
+      },
+      {
+        "name": "source_url",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source url"
+      },
+      {
+        "name": "rate_population",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "rate population"
+      }
+    ]
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "source_url": "https://localo.com/blog/review-velocity-study",
+  "publisher": "Localo",
+  "source_published": "2026-05-29",
+  "checked": "2026-10-27",
+  "capture_sha256": "3a4f5051be6e999f87168b151bb13b17e23162134cde4f08e5857f71f1b7a273",
+  "study_deleted_reviews": 335520,
+  "study_profiles": 22292,
+  "source_window": "November 2023 to January 2026",
+  "rows": [
+    ["Under 1 hour",22390,49,32.4,0,3600],
+    ["1-24 hours",71196,19,36.4,3600,86400],
+    ["1-5 days",47687,50,24.0,86400,432000],
+    ["5-10 days",13142,167,2.8,432000,864000],
+    ["10+ days",38145,311,0.0,864000,null],
+    ["No reply",133664,20,38.9,null,null]
+  ],
+  "model_notes": [
+    "Reply-bin second boundaries are an explicit mathematical interpretation of the source labels, not verified raw timestamps.",
+    "For the timing model only, assume the recorded reply belongs to the same review and precedes its recorded removal strictly: R < T.",
+    "Days are modelled as 86400 elapsed seconds; source timestamp resolution and boundary convention are not supplied.",
+    "For count intervals only, assume percentages are rounded to the nearest 0.1 percentage point with half-up ties; the publisher rounding rule is unknown.",
+    "No-reply rows have no reply-time interval and are not assigned a temporal guarantee.",
+    "Counts describe selected deleted reviews, not every posted or reported review."
+  ]
+}

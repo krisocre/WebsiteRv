@@ -881,3 +881,12 @@ h1 {
     color: #000;
   }
 }
+
+/* Itemized Google fee scenarios: local calculator, no submission. */
+.cost-tool{margin:32px 0;padding:24px;border:1px solid #cfdce7;border-radius:10px;background:#f6f9fc;scroll-margin-top:90px}
+.cost-tool-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0}
+.cost-tool-grid label{display:block;margin-bottom:7px;font-size:14px;font-weight:700}
+.cost-tool-grid input{width:100%;min-height:44px;padding:10px 12px;border:1px solid #9daebb;border-radius:5px;background:#fff;color:#16223b;font:400 17px Arial,sans-serif}
+.cost-tool-totals{margin:0 0 18px}.cost-tool-totals>div{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid #dce3eb;padding:12px 0}.cost-tool-totals dd{margin:0;font-weight:700;white-space:nowrap}.cost-tool-totals>div:last-child{font-weight:700}
+.cost-tool .cost-tool-summary{font-size:14px;line-height:1.6;color:#344d66}
+@media(max-width:550px){.cost-tool{padding:18px}.cost-tool-grid{grid-template-columns:1fr}.cost-tool-totals{font-size:14px}}

@@ -59,88 +59,190 @@
       name="twitter:image"
       content="https://reviewsboost.ca/social-card.png"
     />
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@graph": [
-          {
-            "@type": "Organization",
-            "@id": "https://reviewsboost.ca/#organization",
-            "name": "ReviewsBoost",
-            "url": "https://reviewsboost.ca/",
-            "email": "support@reviewsboost.ca",
-            "areaServed": { "@type": "Country", "name": "Canada" }
-          },
-          {
-            "@type": "WebSite",
-            "@id": "https://reviewsboost.ca/#website",
-            "url": "https://reviewsboost.ca/",
-            "name": "ReviewsBoost",
-            "alternateName": "Reviews Boost",
-            "publisher": { "@id": "https://reviewsboost.ca/#organization" },
-            "inLanguage": "en-CA"
-          },
-          {
-            "@type": "CollectionPage",
-            "@id": "https://reviewsboost.ca/blog.html#webpage",
-            "url": "https://reviewsboost.ca/blog.html",
-            "name": "Online Reputation Management Guides for Canadian Businesses",
-            "description": "A learning centre covering harmful-review assessment, policy-based reporting, public responses, monitoring, recovery and local visibility.",
-            "isPartOf": { "@id": "https://reviewsboost.ca/#website" },
-            "about": [
-              { "@type": "Thing", "name": "Google reviews" },
-              { "@type": "Thing", "name": "Local search engine optimization" },
-              { "@type": "Thing", "name": "Online reputation management" }
-            ],
-            "mainEntity": { "@id": "https://reviewsboost.ca/blog.html#guide-list" },
-            "inLanguage": "en-CA",
-            "dateModified": "2026-10-24"
-          },
-          {
-            "@type": "ItemList",
-            "@id": "https://reviewsboost.ca/blog.html#guide-list",
-            "name": "ReviewsBoost online reputation management guides",
-            "numberOfItems": 16,
-            "itemListOrder": "https://schema.org/ItemListUnordered",
-            "itemListElement": [
-              { "@type": "ListItem", "position": 1, "name": "Google review removal cost in Canada", "url": "https://reviewsboost.ca/google-review-removal-cost-canada.html" },
-              { "@type": "ListItem", "position": 2, "name": "Google review removal checker and evidence builder", "url": "https://reviewsboost.ca/google-review-removal-checker.html" },
-              { "@type": "ListItem", "position": 3, "name": "How to remove a fake Google review in Canada", "url": "https://reviewsboost.ca/remove-fake-google-review.html" },
-              { "@type": "ListItem", "position": 4, "name": "How to respond to Google reviews", "url": "https://reviewsboost.ca/respond-to-google-reviews.html" },
-              { "@type": "ListItem", "position": 5, "name": "Create and use a Google review link and QR code", "url": "https://reviewsboost.ca/google-review-link-qr-code.html" },
-              { "@type": "ListItem", "position": 6, "name": "Google review policy for Canadian businesses", "url": "https://reviewsboost.ca/google-review-policy-canada.html" },
-              { "@type": "ListItem", "position": 7, "name": "Yelp review removal statistics: filtered, deleted and counted", "url": "https://reviewsboost.ca/yelp-review-removal-statistics.html" },
-              { "@type": "ListItem", "position": 8, "name": "Google review rating calculator", "url": "https://reviewsboost.ca/google-review-calculator.html" },
-              { "@type": "ListItem", "position": 9, "name": "Google reviews FAQ", "url": "https://reviewsboost.ca/google-reviews-faq.html" },
-              { "@type": "ListItem", "position": 10, "name": "Why Google reviews are not showing", "url": "https://reviewsboost.ca/google-reviews-not-showing.html" },
-              { "@type": "ListItem", "position": 11, "name": "Fake review statistics and source data", "url": "https://reviewsboost.ca/fake-review-statistics.html" },
-              { "@type": "ListItem", "position": 12, "name": "Google review rating resilience study", "url": "https://reviewsboost.ca/google-review-rating-resilience-study.html" },
-              { "@type": "ListItem", "position": 13, "name": "How to request authentic Google reviews", "url": "https://reviewsboost.ca/get-more-google-reviews.html" },
-              {"@type": "ListItem", "position": 14, "name": "Google fake business profiles: a seven-year data audit", "url": "https://reviewsboost.ca/google-fake-business-profile-statistics.html"},
-              {"@type": "ListItem", "position": 15, "name": "Trustpilot review reporting statistics: a 2025 notice-table audit", "url": "https://reviewsboost.ca/trustpilot-review-reporting-statistics.html"},
-              {"@type": "ListItem", "position": 16, "name": "Google review removal time: what a five-day median misses", "url": "https://reviewsboost.ca/google-review-removal-time-study.html"}
-            ]
-          },
-          {
-            "@type": "BreadcrumbList",
-            "itemListElement": [
-              {
-                "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://reviewsboost.ca/"
-              },
-              {
-                "@type": "ListItem",
-                "position": 2,
-                "name": "Learning Centre",
-                "item": "https://reviewsboost.ca/blog.html"
-              }
-            ]
-          }
-        ]
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://reviewsboost.ca/#organization",
+      "name": "ReviewsBoost",
+      "url": "https://reviewsboost.ca/",
+      "email": "support@reviewsboost.ca",
+      "areaServed": {
+        "@type": "Country",
+        "name": "Canada"
       }
-    </script>
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://reviewsboost.ca/#website",
+      "url": "https://reviewsboost.ca/",
+      "name": "ReviewsBoost",
+      "alternateName": "Reviews Boost",
+      "publisher": {
+        "@id": "https://reviewsboost.ca/#organization"
+      },
+      "inLanguage": "en-CA"
+    },
+    {
+      "@type": "CollectionPage",
+      "@id": "https://reviewsboost.ca/blog.html#webpage",
+      "url": "https://reviewsboost.ca/blog.html",
+      "name": "Online Reputation Management Guides for Canadian Businesses",
+      "description": "A learning centre covering harmful-review assessment, policy-based reporting, public responses, monitoring, recovery and local visibility.",
+      "isPartOf": {
+        "@id": "https://reviewsboost.ca/#website"
+      },
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Google reviews"
+        },
+        {
+          "@type": "Thing",
+          "name": "Local search engine optimization"
+        },
+        {
+          "@type": "Thing",
+          "name": "Online reputation management"
+        }
+      ],
+      "mainEntity": {
+        "@id": "https://reviewsboost.ca/blog.html#guide-list"
+      },
+      "inLanguage": "en-CA",
+      "dateModified": "2026-10-27"
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://reviewsboost.ca/blog.html#guide-list",
+      "name": "ReviewsBoost online reputation management guides",
+      "numberOfItems": 17,
+      "itemListOrder": "https://schema.org/ItemListUnordered",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Google review removal cost in Canada",
+          "url": "https://reviewsboost.ca/google-review-removal-cost-canada.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Google review removal checker and evidence builder",
+          "url": "https://reviewsboost.ca/google-review-removal-checker.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "How to remove a fake Google review in Canada",
+          "url": "https://reviewsboost.ca/remove-fake-google-review.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "How to respond to Google reviews",
+          "url": "https://reviewsboost.ca/respond-to-google-reviews.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 5,
+          "name": "Create and use a Google review link and QR code",
+          "url": "https://reviewsboost.ca/google-review-link-qr-code.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 6,
+          "name": "Google review policy for Canadian businesses",
+          "url": "https://reviewsboost.ca/google-review-policy-canada.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 7,
+          "name": "Yelp review removal statistics: filtered, deleted and counted",
+          "url": "https://reviewsboost.ca/yelp-review-removal-statistics.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 8,
+          "name": "Google review rating calculator",
+          "url": "https://reviewsboost.ca/google-review-calculator.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 9,
+          "name": "Google reviews FAQ",
+          "url": "https://reviewsboost.ca/google-reviews-faq.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 10,
+          "name": "Why Google reviews are not showing",
+          "url": "https://reviewsboost.ca/google-reviews-not-showing.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 11,
+          "name": "Fake review statistics and source data",
+          "url": "https://reviewsboost.ca/fake-review-statistics.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 12,
+          "name": "Google review rating resilience study",
+          "url": "https://reviewsboost.ca/google-review-rating-resilience-study.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 13,
+          "name": "How to request authentic Google reviews",
+          "url": "https://reviewsboost.ca/get-more-google-reviews.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 14,
+          "name": "Google fake business profiles: a seven-year data audit",
+          "url": "https://reviewsboost.ca/google-fake-business-profile-statistics.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 15,
+          "name": "Trustpilot review reporting statistics: a 2025 notice-table audit",
+          "url": "https://reviewsboost.ca/trustpilot-review-reporting-statistics.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 16,
+          "name": "Google review removal time: what a five-day median misses",
+          "url": "https://reviewsboost.ca/google-review-removal-time-study.html"
+        },
+        {
+          "@type": "ListItem",
+          "position": 17,
+          "name": "Do slow replies protect Google reviews? A timing audit",
+          "url": "https://reviewsboost.ca/google-review-replies-removal-bias-study.html"
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://reviewsboost.ca/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Learning Centre",
+          "item": "https://reviewsboost.ca/blog.html"
+        }
+      ]
+    }
+  ]
+}</script>
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to main content</a>
@@ -184,7 +286,7 @@
         </div>
       </section>
 
-      <section class="section alt" aria-labelledby="latest-research-title"><div class="container"><div class="section-head"><p class="eyebrow">New original research &middot; October 24, 2026</p><h2 id="latest-research-title">What a five-day removal median misses</h2><p>New analysis of Google review deletion timing, with conditional calendar bounds, open data and three original graphs.</p></div><div class="card-grid two-column"><article class="card"><span class="tag">Google review removal time</span><h3>Three clocks. Different questions.</h3><p>A review&rsquo;s age when it disappears is different from the wait after a business reports it. We analyse seven published cohorts, six period averages and two clearly labelled synthetic examples to explain why.</p><a href="google-review-removal-time-study.html">Read the new Google removal timing study &rarr;</a></article><figure class="guide-figure"><a href="google-review-removal-time-study.html"><img src="google-removal-time-synthetic-denominators.svg" width="1200" height="780" loading="lazy" alt="Two synthetic examples show the same five-day median among deleted reviews, with very different fractions of their starting reviews deleted. These are constructed examples, not client outcomes."></a><figcaption>Original constructed examples. Source observations and mathematical assumptions are identified separately in the study.</figcaption></figure></div></div></section>
+      <section class="section alt" aria-labelledby="latest-research-title"><div class="container"><div class="section-head"><p class="eyebrow">New original research · October 27, 2026</p><h2 id="latest-research-title">Do slow replies protect Google reviews?</h2><p>Our new analysis separates an event-order constraint from a causal claim. Six source cohorts, eighteen conditional model cells and three original graphs make the difference checkable.</p></div><div class="card-grid two-column"><article class="card"><span class="tag">Google review replies and removal</span><h3>A ten-day reply cannot explain an earlier seven-day event.</h3><p>Under an explicit reply-before-removal assumption, late-reply groups are temporally selected. Explore the timing map, count-precision audit and open dataset.</p><a href="google-review-replies-removal-bias-study.html">Read the reply/removal timing study →</a></article><figure class="guide-figure"><a href="google-review-replies-removal-bias-study.html"><img src="google-reply-time-eligibility.svg" width="1200" height="780" loading="lazy" decoding="async" alt="Conditional timing matrix: reply intervals and one-, seven- and thirty-day deletion horizons. Colours show compatibility under stated assumptions, not observed outcomes."></a><figcaption>Original conditional time-order model. No Canadian case outcomes or removal probabilities are measured.</figcaption></figure></div><p>Earlier research: <a href="google-review-removal-time-study.html">what a five-day removal median misses</a> — a separate observation-window analysis.</p></div></section>
 
       <section class="section" aria-labelledby="featured-guides">
         <div class="container">

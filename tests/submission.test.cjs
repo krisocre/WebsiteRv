@@ -93,6 +93,19 @@ function sender(fetch, online=true, timers={setTimeout,clearTimeout}) {
   const payload=new FormData();payload.set('full_name','Élodie');payload.set('email_address','test+one@example.ca');
   return ()=>sandbox.window.ReviewSubmission.send(payload);
 }
+
+test('terms record keeps client notes, policy version and snapshot without duplicating or saving URL queries',()=>{
+  const sandbox={window:{location:{origin:'https://reviewsboost.ca',pathname:'/index.html',search:'?email=private@example.ca'}},Date};
+  vm.runInNewContext(fs.readFileSync(path.join(root,'submission-terms.js'),'utf8'),sandbox);
+  const data=new FormData();
+  for(const [key,value] of Object.entries({reason:'Client context',terms_version:'2026-10-27',terms_url:'https://reviewsboost.ca/terms-of-service.html',terms_snapshot_url:'https://reviewsboost.ca/legal-versions/policies-2026-10-27.json',privacy_version:'2026-10-27',privacy_url:'https://reviewsboost.ca/privacy-policy.html',terms_language:'en-CA',terms_acknowledgement:'By submitting, you agree to the Terms of Service.'}))data.set(key,value);
+  sandbox.window.SubmissionTerms.prepare(data);sandbox.window.SubmissionTerms.prepare(data);
+  assert.ok(data.get('reason').startsWith('Client context'));
+  assert.equal((data.get('reason').match(/\[Submission acknowledgement\]/g)||[]).length,1);
+  assert.ok(data.get('reason').includes('policies-2026-10-27.json'));
+  assert.equal(data.get('submission_page'),'https://reviewsboost.ca/index.html');
+  assert.equal(data.get('reason').includes('private@example.ca'),false);
+});
 test('sender requires explicit server success and keeps encoded fields',async()=>{
   let calls=0;
   const send=sender(async(_,opts)=>{calls++;assert.equal(opts.mode,'cors');assert.equal(opts.body.get('email_address'),'test+one@example.ca');return {ok:true,json:async()=>({result:'success'})};});

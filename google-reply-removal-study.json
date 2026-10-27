@@ -1,0 +1,362 @@
+{
+  "title": "Google review replies and removal: a time-order and rounding audit",
+  "version": "1.0",
+  "published": "2026-10-27",
+  "article_url": "https://reviewsboost.ca/google-review-replies-removal-bias-study.html",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "source": {
+    "source_url": "https://localo.com/blog/review-velocity-study",
+    "publisher": "Localo",
+    "source_published": "2026-05-29",
+    "checked": "2026-10-27",
+    "capture_sha256": "3a4f5051be6e999f87168b151bb13b17e23162134cde4f08e5857f71f1b7a273",
+    "study_deleted_reviews": 335520,
+    "study_profiles": 22292,
+    "source_window": "November 2023 to January 2026",
+    "rows": [
+      [
+        "Under 1 hour",
+        22390,
+        49,
+        32.4,
+        0,
+        3600
+      ],
+      [
+        "1-24 hours",
+        71196,
+        19,
+        36.4,
+        3600,
+        86400
+      ],
+      [
+        "1-5 days",
+        47687,
+        50,
+        24.0,
+        86400,
+        432000
+      ],
+      [
+        "5-10 days",
+        13142,
+        167,
+        2.8,
+        432000,
+        864000
+      ],
+      [
+        "10+ days",
+        38145,
+        311,
+        0.0,
+        864000,
+        null
+      ],
+      [
+        "No reply",
+        133664,
+        20,
+        38.9,
+        null,
+        null
+      ]
+    ],
+    "model_notes": [
+      "Reply-bin second boundaries are an explicit mathematical interpretation of the source labels, not verified raw timestamps.",
+      "For the timing model only, assume the recorded reply belongs to the same review and precedes its recorded removal strictly: R < T.",
+      "Days are modelled as 86400 elapsed seconds; source timestamp resolution and boundary convention are not supplied.",
+      "For count intervals only, assume percentages are rounded to the nearest 0.1 percentage point with half-up ties; the publisher rounding rule is unknown.",
+      "No-reply rows have no reply-time interval and are not assigned a temporal guarantee.",
+      "Counts describe selected deleted reviews, not every posted or reported review."
+    ]
+  },
+  "summary": {
+    "source_cohorts": 6,
+    "model_cells": 18,
+    "total_records": 24,
+    "source_table_count_sum": 326224,
+    "study_deleted_total": 335520,
+    "difference_from_study_total": 9296,
+    "difference_percent_of_study_total": 2.770624701955174,
+    "conditional_count_min_sum": 96837,
+    "conditional_count_max_sum": 97138
+  },
+  "cohorts": [
+    {
+      "record_id": "R01",
+      "record_type": "source_deleted_review_aggregate_with_conditional_rounding_bounds",
+      "reply_label": "Under 1 hour",
+      "source_review_count": 22390,
+      "source_median_lifespan_days": 49,
+      "source_removed_within_7_days_percent": 32.4,
+      "model_reply_lower_seconds": 0,
+      "model_reply_upper_exclusive_seconds": 3600,
+      "conditional_7_day_count_min": 7244,
+      "conditional_7_day_count_max": 7265,
+      "source_url": "https://localo.com/blog/review-velocity-study",
+      "rate_population": "Selected deleted reviews in source row, not all submitted reviews"
+    },
+    {
+      "record_id": "R02",
+      "record_type": "source_deleted_review_aggregate_with_conditional_rounding_bounds",
+      "reply_label": "1-24 hours",
+      "source_review_count": 71196,
+      "source_median_lifespan_days": 19,
+      "source_removed_within_7_days_percent": 36.4,
+      "model_reply_lower_seconds": 3600,
+      "model_reply_upper_exclusive_seconds": 86400,
+      "conditional_7_day_count_min": 25880,
+      "conditional_7_day_count_max": 25950,
+      "source_url": "https://localo.com/blog/review-velocity-study",
+      "rate_population": "Selected deleted reviews in source row, not all submitted reviews"
+    },
+    {
+      "record_id": "R03",
+      "record_type": "source_deleted_review_aggregate_with_conditional_rounding_bounds",
+      "reply_label": "1-5 days",
+      "source_review_count": 47687,
+      "source_median_lifespan_days": 50,
+      "source_removed_within_7_days_percent": 24.0,
+      "model_reply_lower_seconds": 86400,
+      "model_reply_upper_exclusive_seconds": 432000,
+      "conditional_7_day_count_min": 11422,
+      "conditional_7_day_count_max": 11468,
+      "source_url": "https://localo.com/blog/review-velocity-study",
+      "rate_population": "Selected deleted reviews in source row, not all submitted reviews"
+    },
+    {
+      "record_id": "R04",
+      "record_type": "source_deleted_review_aggregate_with_conditional_rounding_bounds",
+      "reply_label": "5-10 days",
+      "source_review_count": 13142,
+      "source_median_lifespan_days": 167,
+      "source_removed_within_7_days_percent": 2.8,
+      "model_reply_lower_seconds": 432000,
+      "model_reply_upper_exclusive_seconds": 864000,
+      "conditional_7_day_count_min": 362,
+      "conditional_7_day_count_max": 374,
+      "source_url": "https://localo.com/blog/review-velocity-study",
+      "rate_population": "Selected deleted reviews in source row, not all submitted reviews"
+    },
+    {
+      "record_id": "R05",
+      "record_type": "source_deleted_review_aggregate_with_conditional_rounding_bounds",
+      "reply_label": "10+ days",
+      "source_review_count": 38145,
+      "source_median_lifespan_days": 311,
+      "source_removed_within_7_days_percent": 0.0,
+      "model_reply_lower_seconds": 864000,
+      "model_reply_upper_exclusive_seconds": null,
+      "conditional_7_day_count_min": 0,
+      "conditional_7_day_count_max": 19,
+      "source_url": "https://localo.com/blog/review-velocity-study",
+      "rate_population": "Selected deleted reviews in source row, not all submitted reviews"
+    },
+    {
+      "record_id": "R06",
+      "record_type": "source_deleted_review_aggregate_with_conditional_rounding_bounds",
+      "reply_label": "No reply",
+      "source_review_count": 133664,
+      "source_median_lifespan_days": 20,
+      "source_removed_within_7_days_percent": 38.9,
+      "model_reply_lower_seconds": null,
+      "model_reply_upper_exclusive_seconds": null,
+      "conditional_7_day_count_min": 51929,
+      "conditional_7_day_count_max": 52062,
+      "source_url": "https://localo.com/blog/review-velocity-study",
+      "rate_population": "Selected deleted reviews in source row, not all submitted reviews"
+    }
+  ],
+  "eligibility": [
+    {
+      "record_id": "E01-1",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R01",
+      "reply_label": "Under 1 hour",
+      "horizon_days": 1,
+      "horizon_seconds": 86400,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E01-7",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R01",
+      "reply_label": "Under 1 hour",
+      "horizon_days": 7,
+      "horizon_seconds": 604800,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E01-30",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R01",
+      "reply_label": "Under 1 hour",
+      "horizon_days": 30,
+      "horizon_seconds": 2592000,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E02-1",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R02",
+      "reply_label": "1-24 hours",
+      "horizon_days": 1,
+      "horizon_seconds": 86400,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E02-7",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R02",
+      "reply_label": "1-24 hours",
+      "horizon_days": 7,
+      "horizon_seconds": 604800,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E02-30",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R02",
+      "reply_label": "1-24 hours",
+      "horizon_days": 30,
+      "horizon_seconds": 2592000,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E03-1",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R03",
+      "reply_label": "1-5 days",
+      "horizon_days": 1,
+      "horizon_seconds": 86400,
+      "state": "incompatible_if_reply_precedes_removal",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E03-7",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R03",
+      "reply_label": "1-5 days",
+      "horizon_days": 7,
+      "horizon_seconds": 604800,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E03-30",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R03",
+      "reply_label": "1-5 days",
+      "horizon_days": 30,
+      "horizon_seconds": 2592000,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E04-1",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R04",
+      "reply_label": "5-10 days",
+      "horizon_days": 1,
+      "horizon_seconds": 86400,
+      "state": "incompatible_if_reply_precedes_removal",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E04-7",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R04",
+      "reply_label": "5-10 days",
+      "horizon_days": 7,
+      "horizon_seconds": 604800,
+      "state": "only_part_of_reply_interval_precedes_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E04-30",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R04",
+      "reply_label": "5-10 days",
+      "horizon_days": 30,
+      "horizon_seconds": 2592000,
+      "state": "all_reply_times_in_interval_precede_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E05-1",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R05",
+      "reply_label": "10+ days",
+      "horizon_days": 1,
+      "horizon_seconds": 86400,
+      "state": "incompatible_if_reply_precedes_removal",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E05-7",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R05",
+      "reply_label": "10+ days",
+      "horizon_days": 7,
+      "horizon_seconds": 604800,
+      "state": "incompatible_if_reply_precedes_removal",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E05-30",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R05",
+      "reply_label": "10+ days",
+      "horizon_days": 30,
+      "horizon_seconds": 2592000,
+      "state": "only_part_of_reply_interval_precedes_horizon",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E06-1",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R06",
+      "reply_label": "No reply",
+      "horizon_days": 1,
+      "horizon_seconds": 86400,
+      "state": "not_applicable_no_reply",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E06-7",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R06",
+      "reply_label": "No reply",
+      "horizon_days": 7,
+      "horizon_seconds": 604800,
+      "state": "not_applicable_no_reply",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    },
+    {
+      "record_id": "E06-30",
+      "record_type": "conditional_time_order_model_not_observed",
+      "source_row": "R06",
+      "reply_label": "No reply",
+      "horizon_days": 30,
+      "horizon_seconds": 2592000,
+      "state": "not_applicable_no_reply",
+      "condition": "Same review; reply strictly before removal; stated bin-boundary interpretation. No event probability implied."
+    }
+  ],
+  "limitations": [
+    "No raw review timestamps, event histories, still-visible review comparison group or causal estimate.",
+    "Source table row-count sum differs from the broader declared study total; the public table does not explain every record-level inclusion decision.",
+    "Timing classifications require the explicit R < T assumption and bin interpretation.",
+    "Rounding bounds require an unverified nearest-tenth rounding assumption.",
+    "No Canadian-specific cohort or client service outcomes were measured.",
+    "The analysis does not estimate report-processing time or removal success."
+  ]
+}

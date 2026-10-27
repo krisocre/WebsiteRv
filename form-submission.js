@@ -12,6 +12,7 @@
   }
 
   function send(formData) {
+    if (window.SubmissionTerms) window.SubmissionTerms.prepare(formData);
     var body = encode(formData);
     if (navigator.onLine === false) {
       return Promise.reject(Object.assign(new Error('offline'), { code: 'offline' }));

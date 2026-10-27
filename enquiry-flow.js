@@ -108,11 +108,14 @@
   submit.textContent = fr ? 'Envoyer ma demande' : 'Send My Request';
   stages[1].after(summary, actions);
   actions.append(back, next, submit);
+  var legalNotice = form.querySelector('.submission-legal');
+  if (legalNotice) actions.before(legalNotice);
+  form.querySelectorAll('.form-privacy, .platform-disclaimer').forEach(function (notice) { notice.remove(); });
   status.hidden = true;
   status.style.display = '';
   var note = element('p', 'enquiry-note', fr
-    ? 'Envoi gratuit. Aucune carte ni mot de passe. Cette demande ne déclenche aucun paiement. Vous approuvez les modalités écrites avant de commander.'
-    : 'Free to submit. No card or account password. This request does not take payment. Review and approve the written terms before ordering.');
+    ? 'Envoi gratuit, sans paiement. Vos renseignements servent à évaluer la demande et à vous répondre. Aucun mot de passe ni dossier client privé.'
+    : 'Free to submit. No payment now. We use your details to assess and reply. Please omit passwords and private customer records.');
   actions.after(note);
 
   function totals() {
@@ -138,6 +141,7 @@
     back.hidden = index === 0;
     next.hidden = index === 1;
     submit.hidden = index === 0;
+    if (legalNotice) legalNotice.hidden = index === 0;
     totals();
     if (focusInput) focus();
   }
@@ -201,6 +205,7 @@
       payload.set('reason', field('concern_category').value + (field('reason').value.trim() ? '\n' + field('reason').value.trim() : '') + '\nRequest reference: ' + reference);
       payload.delete('concern_category');
     } else payload.set('reason', payload.get('reason') + '\nRequest reference: ' + reference);
+    if (window.SubmissionTerms) window.SubmissionTerms.prepare(payload);
     busy = true; submit.disabled = true; back.disabled = true; form.setAttribute('aria-busy', 'true');
     var inputs = Array.from(form.querySelectorAll('input, textarea, select'));
     inputs.forEach(function (input) { input.disabled = true; });

@@ -7,6 +7,14 @@ const titleOwners = new Map();
 const descriptionOwners = new Map();
 const localePages = new Map();
 const errors = [];
+const publishConfig=fs.readFileSync('_config.yml','utf8');
+for(const file of fs.readdirSync('.').filter(name=>name.endsWith('.md'))){
+ if(!publishConfig.split(/\r?\n/).some(line=>line.trim()===`- ${file}`))errors.push(`${file}: internal notes must be excluded from publication`);
+}
+// Prevent accidental cross-brand canonicals, links, assets or schema IDs.
+for(const file of files){
+ if(/https?:\/\/(?:www\.)?reviewremoval\.ca\b/i.test(fs.readFileSync(file,'utf8')))errors.push(`${file}: foreign brand URL`);
+}
 
 const jekyllConfig = fs.existsSync("_config.yml") ? fs.readFileSync("_config.yml", "utf8") : "";
 if (!/^\s*-\s*_retired\s*$/m.test(jekyllConfig)) {

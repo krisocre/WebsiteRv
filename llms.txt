@@ -65,3 +65,6 @@ Services are exclusively for business locations in Canada. Online support covers
 - Primary-source links and visible review dates should be used to verify time-sensitive policy claims.
 
 - [Google fake business profile data audit](https://reviewsboost.ca/google-fake-business-profile-statistics.html): Original 21-row classification of 2019–2025 Google disclosures; profiles, creation attempts and ownership attempts are separate units.
+
+- [Google review replies and removal: timing audit](https://reviewsboost.ca/google-review-replies-removal-bias-study.html): Six source cohorts, 18 conditional model cells, precision checks and three graphs.
+- [Reply/removal analysis data](https://reviewsboost.ca/google-reply-removal-study.json): source attribution, assumptions and model labels.
