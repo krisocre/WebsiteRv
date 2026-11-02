@@ -1,0 +1,47 @@
+/* Homepage additions; other pages retain their existing designs. */
+.home-page{--muted:#565660}
+.home-page .skip-link{position:fixed;left:16px;top:-90px;z-index:4000;padding:12px 18px;background:#fff;color:#16223b;border:2px solid #b81722}
+.home-page .skip-link:focus{top:12px}
+.home-page :focus-visible{outline:3px solid #b81722;outline-offset:4px}
+.home-page .fa-solid{display:inline-block;flex-shrink:0;width:1em;height:1em;font-style:normal;line-height:1;vertical-align:-.125em}
+.home-page .hero{padding:118px 0 48px;background:#f7f8fb}
+.home-page .hero-grid{grid-template-columns:1.13fr .87fr;gap:64px}
+.home-page .hero-badge{margin-bottom:21px;color:#85131b;font-size:12px}
+.home-page .hero h1{font-size:clamp(37px,4.2vw,52px);line-height:1.13;max-width:620px;letter-spacing:-.035em;font-weight:700}
+.home-page .hero-desc{font-size:17px;line-height:1.7;max-width:550px;color:#4f5260}
+.home-page .hero-actions{gap:18px}
+.home-page .hero-actions .btn{min-height:50px;box-shadow:none;border-radius:5px;padding:14px 20px;font-weight:700}
+.home-page .hero-pricing{display:inline-flex;align-items:center;gap:10px;min-height:44px;text-decoration:underline;text-underline-offset:4px;color:#16223b;font-size:14px}
+.home-page .hero-note{font-size:12px;color:#555b66;max-width:480px;line-height:1.7;margin-top:17px;display:block}
+.home-page .no-script-request{margin-top:15px;font-size:14px}.home-page .no-script-request a{text-decoration:underline}
+.assessment-card{border:1px solid #dce0e7;border-top:3px solid #b81722;border-radius:6px;background:#fff;padding:29px}
+.assessment-kicker{font-size:11px;color:#85131b;text-transform:uppercase;letter-spacing:.09em;margin-bottom:12px}
+.assessment-card h2{font-family:Georgia,serif;font-size:35px;font-weight:400;line-height:1.15;letter-spacing:-.025em;color:#16223b;margin-bottom:22px}
+.assessment-card ul{margin:0 0 22px;padding-left:18px;list-style:disc;color:#4d5260;font-size:14px}
+.assessment-card li+li{margin-top:9px}
+.assessment-fees{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #dfe2e8;border-bottom:1px solid #dfe2e8;margin-bottom:16px}
+.assessment-fees>div{padding:16px 12px 16px 0}.assessment-fees>div+div{border-left:1px solid #dfe2e8;padding-left:16px}
+.assessment-fees dt{font-size:11px;line-height:1.5;color:#555b66;max-width:130px;margin-bottom:6px}.assessment-fees dd{font-size:23px;color:#16223b;font-weight:700;white-space:nowrap}
+.assessment-card>p:last-child{font-size:12px;line-height:1.65;color:#555b66}
+.home-page .section-pad{padding:60px 0}.home-page .section-title{font-size:34px}
+.home-page .price-shell{margin-top:27px;box-shadow:none}.home-page .price-main{padding:28px 32px}.home-page .calculator{padding:29px}
+.home-page .fee-scenarios{margin-top:22px}.home-page .city-focus{padding:46px 0}
+.home-page .city-areas,.home-page .city-areas strong,.home-page .price-label,.home-page .price-disclaimer{color:#60606a}
+.home-page .trust-item>div>span:last-child{color:#60606a}.home-page .city-order,.home-page .case-kicker{color:#60606a}
+.home-page .scope-layout{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:start}.home-page .scope-layout h2{font-size:32px}
+.home-page .guarantee-copy{margin-bottom:15px}.home-page .scope-direct{font-size:13px;color:#d5dce8;line-height:1.7}.home-page .scope-direct a{text-decoration:underline;text-underline-offset:3px}
+.home-page .btn:hover{transform:none}.home-page .footer a{min-height:24px}
+@media(max-width:1000px){.home-page .hero-grid{gap:30px}.assessment-card{padding:23px}.assessment-card h2{font-size:31px}}
+@media(max-width:760px){
+ .home-page .hero{padding:101px 0 33px}.home-page .hero-grid{grid-template-columns:1fr;gap:27px}
+ .home-page .hero h1{font-size:39px;line-height:1.15}.home-page .hero-desc{font-size:16px;margin-bottom:20px}
+ .home-page .hero-badge{margin-bottom:16px}.home-page .hero-note{margin-top:13px}
+ .assessment-card{padding:23px}.assessment-card h2{font-size:29px;margin-bottom:17px}
+ .assessment-card h2 br{display:none}.assessment-card ul{margin-bottom:17px}
+ .home-page .hero-actions{gap:10px 18px;justify-content:center}.home-page .hero-actions .btn{flex:1 0 auto}
+ .home-page .section-pad{padding:43px 0}.home-page .section-title{font-size:29px}
+ .home-page .trust-item{padding:15px 12px}.home-page .price-main,.home-page .calculator{padding:24px}
+ .home-page .scope-layout{grid-template-columns:1fr;gap:18px}.home-page .scope-layout h2{font-size:29px;margin-bottom:0}
+}
+@media(max-width:360px){.home-page .hero h1{font-size:34px}.home-page .hero-actions .btn{font-size:13px;width:100%}.assessment-card{padding:20px}.assessment-fees dd{font-size:20px}}
+@media(prefers-reduced-motion:reduce){.home-page *{transition:none!important}}

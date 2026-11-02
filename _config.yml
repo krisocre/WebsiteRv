@@ -19,3 +19,6 @@ exclude:
   - seo-live-check.mjs
   - seo-link-check.mjs
   - google-apps-script.gs
+  - install-measurement.cjs
+  - MEASUREMENT-SETUP.md
+  - HOMEPAGE-IMPROVEMENTS.md

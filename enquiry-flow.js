@@ -214,6 +214,11 @@
     emit('submission_started');
     var slow = setTimeout(function () { message(fr ? 'L’envoi prend un peu plus de temps. Gardez cette page ouverte; aucune nouvelle demande n’est nécessaire.' : 'This is taking a little longer. Keep this page open; there is no need to submit again.'); }, 4000);
     ReviewSubmission.send(payload).then(function (result) {
+      // Only the backend's explicit success is a measured lead. The sender's
+      // legacy notification-error accommodation remains a UI-only outcome.
+      if (result.result === 'success' && result.warning !== 'owner_notification_failed') {
+        try { window.ReviewsBoostMeasurement?.confirmedLead(form, reference); } catch (_) { /* Tracking must never block an enquiry. */ }
+      }
       emit('submission_confirmed');
       receipt(payload, true);
       success.querySelector('h2').textContent = fr ? 'Demande reçue' : 'Request received';
