@@ -1,5 +1,11 @@
 # Terms, privacy and request acknowledgements
 
+Pricing update, November 2, 2026: ReviewsBoost now uses CAD $25 upfront per accepted
+review plus CAD $50 for each successfully removed review on all supported platforms.
+The active forms link to `legal-versions/policies-2026-11-02.json`. The October 27
+snapshot is retained unchanged for earlier enquiries and orders; existing accepted
+orders keep their agreed terms. No backend redeployment is required for this update.
+
 Draft implemented October 27, 2026. This is website implementation and a researched
 contract draft, not a legal opinion or a guarantee of enforceability.
 

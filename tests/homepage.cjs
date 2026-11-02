@@ -33,7 +33,7 @@ const server=http.createServer((req,res)=>{
    if(width<700){await page.click('#hamburger');assert.equal(await page.$eval('#hamburger',e=>e.getAttribute('aria-expanded')),'true');await page.click('#hamburger');}
   }
   await page.$eval('#reviewQuantity',e=>{e.value=3;e.dispatchEvent(new Event('input',{bubbles:true}));});
-  assert.equal(await page.$eval('#combinedTotal',e=>e.textContent),'$210');assert.equal(await page.$eval('#upfrontTotal',e=>e.textContent),'$90');assert.equal(await page.$eval('#successTotal',e=>e.textContent),'$120');
+  assert.equal(await page.$eval('#combinedTotal',e=>e.textContent),'$225');assert.equal(await page.$eval('#upfrontTotal',e=>e.textContent),'$75');assert.equal(await page.$eval('#successTotal',e=>e.textContent),'$150');
   await page.setJavaScriptEnabled(false);await page.goto(base,{waitUntil:'load'});assert.ok(await page.$eval('noscript .no-script-request',e=>e.getClientRects().length>0));
   assert.deepEqual(errors,[]);assert.deepEqual(posts,[]);fs.writeFileSync(path.join(output,'layout-results.json'),JSON.stringify(layouts,null,2));
   console.log('PASS: five homepage widths, visible assessment CTA, existing modal/focus and mobile bar, pricing arithmetic, no-JavaScript email fallback, unchanged form fields and homepage canonical. No real submissions.');

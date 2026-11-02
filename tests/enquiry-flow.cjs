@@ -56,8 +56,9 @@ const server = http.createServer((req,res) => {
       assert.equal(await form.locator('[name="business_url"]').inputValue(),'https://example.ca/profile');
       await form.locator('.enquiry-actions button').filter({hasText:/Continue|Continuer/}).click();
       if (file!=='online-reputation-management.html') {
-        const fee=await page.evaluate(()=>Number(document.body.dataset.successFee||40));
-        assert.match(await page.locator('#combinedTotal').textContent(),new RegExp(String(3*(30+fee))));
+        const fee=await page.evaluate(()=>Number(document.body.dataset.successFee||50));
+        assert.equal(fee,50,'The success fee is CAD $50 for every platform');
+        assert.match(await page.locator('#combinedTotal').textContent(),new RegExp(String(3*(25+fee))));
       }
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,file+' overflow');
       const legal=form.locator('.submission-legal');
@@ -72,13 +73,16 @@ const server = http.createServer((req,res) => {
       assert.equal(requests[0].get('full_name'),'Élodie Test');
       assert.equal(requests[0].get('contact_detail'),'test+case@example.ca');
       assert.match(requests[0].get('reason'),/Request reference: RB-/);
-      assert.equal(requests[0].get('terms_version'),'2026-10-27');
+      assert.equal(requests[0].get('terms_version'),'2026-11-02');
       assert.match(requests[0].get('reason'),/\[Submission acknowledgement\]/);
       assert.match(requests[0].get('reason'),/https:\/\/reviewsboost.ca\/terms-of-service.html/);
       assert.equal((requests[0].get('reason').match(/\[Submission acknowledgement\]/g)||[]).length,1,'Record terms once');
       assert.equal(requests[0].get('terms_language'),file==='suppression-avis-google.html'?'fr-CA':'en-CA');
       assert.match(requests[0].get('terms_acknowledged_at_client'),/^\d{4}-\d\d-\d\dT/);
-      if (file!=='online-reputation-management.html') assert.equal(requests[0].get('review_count'),'3');
+      if (file!=='online-reputation-management.html') {
+        assert.equal(requests[0].get('review_count'),'3');
+        assert.match(requests[0].get('selected_plan'),/\$75 upfront \+ \$50 per successfully removed review/,'Submitted quote uses the updated per-review fees');
+      }
       const success=page.locator('.submission-success:not([hidden]), .platform-success:not([hidden])');
       assert.match(await success.textContent(),/RB-/);
       const dl=page.waitForEvent('download');
