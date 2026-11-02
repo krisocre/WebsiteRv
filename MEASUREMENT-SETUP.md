@@ -41,7 +41,7 @@ bootstrap only when configuration is enabled.
 | Event | Exact trigger after the relevant consent | Role |
 | --- | --- | --- |
 | `page_view` | Once per eligible document; automatic config page views disabled | Observation, not a conversion |
-| `quote_cta_click` | Assessment buttons, platform form openers, or local request/contact links; fixed CTA location enum | Secondary diagnostic |
+| `quote_cta_click` | Original homepage quantity links, assessment buttons, platform form openers, or local request/contact links; fixed CTA location enum | Secondary diagnostic |
 | `quote_form_start` | First trusted input/change in an existing enquiry form; focus alone excluded | Secondary diagnostic |
 | `generate_lead` | Explicit backend JSON `result: success` after submission | Primary GA4 key-event candidate |
 | `email_click` | Actual email link click; destination and subject excluded | Secondary intent, not a confirmed enquiry |

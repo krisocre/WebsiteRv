@@ -1,5 +1,7 @@
 # ReviewsBoost: homepage SEO, conversion and performance review
 
+November 2 update: the visible redesign described below has been reverted to the layout in place on October 30 (commit `04e5cc4`, October 27). Original styling, copy, testimonial layout, section order and quantity-first buttons are restored. Current metadata, nonvisual accessibility/load safeguards, form integrations, measurement preparation, legal version and approved CAD $25 upfront + $50 after removal fees are retained. The measurements below describe the earlier redesign, not the restored version. Future optimization should preserve the original appearance.
+
 November 1, 2026. Repository: C:/Users/alkhi/BarberShopRevolution/WebsiteRv. Domain: https://reviewsboost.ca/. Starting commit: 04e5cc435a253729bbb2d9ceadea8f891f723b4b; the tree was clean before this work. Source was inspected and snapshotted before production edits. No commit, push or deployment was performed.
 
 ## Prioritized evidence and actions

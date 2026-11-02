@@ -150,7 +150,7 @@
     if (/^tel:/i.test(href)) { record('phone_click', { contact_method: 'phone' }); return; }
     try {
       var url = new URL(href, window.location.href);
-      if (url.origin === window.location.origin && ['#request','#contact'].includes(url.hash)) {
+      if (url.origin === window.location.origin && ['#request','#contact','#review-count'].includes(url.hash)) {
         var targetPlatform = url.pathname === '/' || url.pathname === '/index.html' ? 'google' :
           url.pathname.match(/^\/remove-(facebook|yelp|trustpilot|tripadvisor|glassdoor)-reviews\.html$/)?.[1];
         record('quote_cta_click', { cta_location: locationFor(link), service_platform: targetPlatform || platform });
