@@ -1,0 +1,66 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "google-maps-language-pairs.csv",
+  "dc:title": "google maps language pairs",
+  "dc:description": "Historical secondary compilation and deterministic geometry of printed intervals; no individual reviews, Canadian sample or significance tests.",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "period",
+        "titles": "period",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "period"
+      },
+      {
+        "name": "language_a",
+        "titles": "language a",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "language a"
+      },
+      {
+        "name": "language_b",
+        "titles": "language b",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "language b"
+      },
+      {
+        "name": "point_gap_a_minus_b_pp",
+        "titles": "point gap a minus b pp",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "point gap a minus b pp"
+      },
+      {
+        "name": "reported_interval_relation",
+        "titles": "reported interval relation",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "Closed intervals formed from printed endpoints: positive-width intersection, touching endpoint, or separated. Not a significance/equivalence test."
+      },
+      {
+        "name": "signed_shared_width_pp",
+        "titles": "signed shared width pp",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "min(upper endpoints) minus max(lower endpoints), in percentage points. Negative means separated; zero means touching at printed precision."
+      },
+      {
+        "name": "separation_gap_pp",
+        "titles": "separation gap pp",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "If separated, distance between the two printed intervals; otherwise zero."
+      },
+      {
+        "name": "record_type",
+        "titles": "record type",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "Distinguishes source estimates from derived comparisons; derived rows are not additional observations."
+      }
+    ]
+  }
+}

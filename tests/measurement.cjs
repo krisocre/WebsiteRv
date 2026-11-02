@@ -8,7 +8,8 @@ if(!require('../install-measurement.cjs').enabled)assert.equal(require('../insta
 const moduleFixture={exports:{}},scopedRequire=name=>name==='node:fs'?{...fs,readFileSync:(file,...args)=>String(file).endsWith('measurement-config.js')?'window.ReviewsBoostMeasurementConfig='+JSON.stringify(fixtures):fs.readFileSync(file,...args)}:require(name);
 vm.runInNewContext(fs.readFileSync(path.join(root,'install-measurement.cjs'),'utf8'),{require:scopedRequire,module:moduleFixture,__dirname:root,console});
 const install=moduleFixture.exports.applyToHtml,html=fs.readFileSync(path.join(root,'index.html'),'utf8'),tagged=install(html,'index.html');
-assert.equal(install(tagged,'index.html'),tagged);assert.throws(()=>install(html.replace('</head>','<script src="https://www.googletagmanager.com/gtag/js?id=G-EXISTING"></script></head>'),'index.html'),/refusing duplication/);
+const digest=value=>require('node:crypto').createHash('sha256').update(value).digest('hex');
+assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement installer must be repeatable across Windows line endings');assert.throws(()=>install(html.replace('</head>','<script src="https://www.googletagmanager.com/gtag/js?id=G-EXISTING"></script></head>'),'index.html'),/refusing duplication/);
 (async()=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const base='http://127.0.0.1:'+server.address().port+'/';let browser;const google=[],posts=[],errors=[];
  try{

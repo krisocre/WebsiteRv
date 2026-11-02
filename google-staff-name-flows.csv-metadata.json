@@ -1,0 +1,115 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-staff-name-flows.csv",
+  "dc:title": "Staff names in Google reviews: a study-to-policy evidence audit — google-staff-name-flows.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record type"
+      },
+      {
+        "name": "source_name_share_group",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source name share group"
+      },
+      {
+        "name": "gained_prior_year",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "gained prior year"
+      },
+      {
+        "name": "lost_annualised_two_week_window",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "Published rounded group-average losses, extrapolated by the source from a two-week observation window."
+      },
+      {
+        "name": "net_source_display",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "net source display"
+      },
+      {
+        "name": "losses_per_100_gained_source_display",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "losses per 100 gained source display"
+      },
+      {
+        "name": "nominal_lost_divided_by_gained_percent",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "100*displayed rounded loss mean/displayed rounded gain mean; not an exact source percentage or cohort retention rate."
+      },
+      {
+        "name": "nominal_gained_minus_lost",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "nominal gained minus lost"
+      },
+      {
+        "name": "source_pdf_page",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "One-based physical PDF page; the selected tables use matching printed page numbers."
+      },
+      {
+        "name": "source_url",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source url"
+      },
+      {
+        "name": "time_base",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "time base"
+      },
+      {
+        "name": "interpretation",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "interpretation"
+      }
+    ],
+    "primaryKey": "record_id"
+  }
+}

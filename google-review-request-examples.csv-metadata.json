@@ -1,0 +1,67 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-review-request-examples.csv",
+  "dc:title": "Staff names in Google reviews: a study-to-policy evidence audit — google-review-request-examples.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record type"
+      },
+      {
+        "name": "example_request_or_process",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "example request or process"
+      },
+      {
+        "name": "editorial_policy_category",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "Authored category for a constructed request; not a platform decision or numerical risk score."
+      },
+      {
+        "name": "editorial_rationale",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "editorial rationale"
+      },
+      {
+        "name": "source_policy_url",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source policy url"
+      },
+      {
+        "name": "status",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "status"
+      }
+    ],
+    "primaryKey": "record_id"
+  }
+}

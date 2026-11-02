@@ -1,0 +1,91 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-staff-name-ratio-audit.csv",
+  "dc:title": "Staff names in Google reviews: a study-to-policy evidence audit — google-staff-name-ratio-audit.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record type"
+      },
+      {
+        "name": "metric",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "metric"
+      },
+      {
+        "name": "name_heavy_rounded_mean",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "name heavy rounded mean"
+      },
+      {
+        "name": "name_rare_rounded_mean",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "name rare rounded mean"
+      },
+      {
+        "name": "ratio_of_rounded_means",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "Derived ratio of displayed name-heavy and name-rare group means; not the adjusted estimate."
+      },
+      {
+        "name": "source_adjusted_summary",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "Distinct source-reported adjusted relative summary; no confidence interval invented."
+      },
+      {
+        "name": "source_adjusted_summary_pdf_page",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "source adjusted summary pdf page"
+      },
+      {
+        "name": "source_url",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source url"
+      },
+      {
+        "name": "interpretation",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "interpretation"
+      }
+    ],
+    "primaryKey": "record_id"
+  }
+}

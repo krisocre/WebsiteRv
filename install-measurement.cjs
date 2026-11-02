@@ -7,7 +7,7 @@ const enabled=/^G-[A-Z0-9]+$/.test(config.ga4MeasurementId||'')||/^AW-\d+$/.test
 const marker=/\s*<!-- ReviewsBoost measurement start -->[\s\S]*?<!-- ReviewsBoost measurement end -->/g;
 function applyToHtml(html,file){
  if(!enabled)return html; // No production placeholders or tag assets while unconfigured.
- const stripped=html.replace(marker,'');
+ const stripped=html.replace(/\r\n?/g,'\n').replace(marker,'');
  if(/googletagmanager\.com\/(?:gtag\/js|gtm\.js)/.test(stripped.split('</head>')[0]))throw Error(file+': existing Google install requires a deliberate migration; refusing duplication');
  const prefix=file==='404.html'?'/':'';
  const block=`\n<!-- ReviewsBoost measurement start -->\n<link rel="stylesheet" href="${prefix}measurement.css">\n<script src="${prefix}measurement-config.js" defer></script>\n<script src="${prefix}measurement.js" defer></script>\n<!-- ReviewsBoost measurement end -->`;

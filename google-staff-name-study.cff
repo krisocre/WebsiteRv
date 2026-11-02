@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Cite this audit and attribute the study estimates to Reviewflowz and Cartelis."
+type: dataset
+title: "Staff Names in Google Reviews: A Study-to-Policy Evidence Audit"
+authors:
+  - name: "ReviewsBoost Editorial Team"
+version: 1.0.0
+date-released: 2026-11-02
+license: CC-BY-4.0
+url: "https://reviewsboost.ca/google-reviews-staff-names-study.html"

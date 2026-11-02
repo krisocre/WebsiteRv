@@ -1,0 +1,87 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "google-maps-language-estimates.csv",
+  "dc:title": "google maps language estimates",
+  "dc:description": "Historical secondary compilation and deterministic geometry of printed intervals; no individual reviews, Canadian sample or significance tests.",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "period",
+        "titles": "period",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "period"
+      },
+      {
+        "name": "language",
+        "titles": "language",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "language"
+      },
+      {
+        "name": "accuracy_percent",
+        "titles": "accuracy percent",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "Google-reported correct automated decisions as a percentage of evaluated contributions; not a review-removal probability."
+      },
+      {
+        "name": "ci_low_percent",
+        "titles": "ci low percent",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "Lower endpoint of Google-reported 95% interval, exactly as printed at whole-percentage precision."
+      },
+      {
+        "name": "ci_high_percent",
+        "titles": "ci high percent",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "Upper endpoint of Google-reported 95% interval, exactly as printed at whole-percentage precision."
+      },
+      {
+        "name": "printed_page",
+        "titles": "printed page",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "Printed EU DSA Report page number; differs from one-based PDF page."
+      },
+      {
+        "name": "pdf_page",
+        "titles": "pdf page",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "One-based PDF page for verification."
+      },
+      {
+        "name": "source_table",
+        "titles": "source table",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "source table"
+      },
+      {
+        "name": "source_url",
+        "titles": "source url",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "source url"
+      },
+      {
+        "name": "interval_width_pp",
+        "titles": "interval width pp",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "Upper minus lower endpoint, in percentage points."
+      },
+      {
+        "name": "record_type",
+        "titles": "record type",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "Distinguishes source estimates from derived comparisons; derived rows are not additional observations."
+      }
+    ]
+  }
+}

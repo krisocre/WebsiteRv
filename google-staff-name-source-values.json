@@ -1,0 +1,60 @@
+{
+  "title": "Staff names in Google reviews: a study-to-policy evidence audit",
+  "version": "1.0.0",
+  "published": "2026-11-02",
+  "article_url": "https://reviewsboost.ca/google-reviews-staff-names-study.html",
+  "source": {
+    "authors": ["Reviewflowz", "Cartelis"],
+    "title": "Gone in 7 Days: the Google review deletion study",
+    "published": "October 2026",
+    "accessed": "2026-11-02",
+    "pdf_url": "https://www.reviewflowz.com/media/gone-in-7-days-google-review-deletion-study.pdf",
+    "landing_url": "https://www.reviewflowz.com/research/disappearing-google-reviews",
+    "pdf_sha256": "5a68384cdf60ca74b2b88da90f9b427c69654c04a9daacb13ed4c9ca1089f107",
+    "observation_start": "2026-08-11",
+    "observation_end": "2026-08-24",
+    "scope": "Selected seven-sector panel in the US and Europe excluding the UK. No Canadian cohort. Deletion means absence from successive complete daily listings, not a verified reason or a provider outcome.",
+    "name_tagged_positive_text_reviews": 2675861,
+    "methods_pdf_page": 27,
+    "limitations_pdf_page": 26,
+    "reuse": "The public landing page authorises reuse of charts and numbers with credit to Reviewflowz and Cartelis and a link. Raw report, raw reviews and source artwork are not republished here."
+  },
+  "policy": {
+    "url": "https://support.google.com/contributionpolicy/answer/7400114?hl=en",
+    "sections": ["Rating Manipulation", "Personal information"],
+    "checked": "2026-11-02",
+    "request_guidance": "https://support.google.com/business/answer/3474122?hl=en",
+    "note": "Directing review content, including requests that identify a staff member, is distinct from a customer independently naming a person. Other content/privacy rules can still apply. The study does not observe the request that produced a review."
+  },
+  "rate_rows": [
+    ["R01", "review", "All reviews, no controls", 1.32, 1.23, 1.42, 23],
+    ["R02", "review", "Same business, same age, same length (main test)", 1.01, 0.91, 1.11, 23],
+    ["R03", "review", "Same, on the cleaned study base", 1.07, 0.95, 1.21, 23],
+    ["R04", "review", "Staff-like name (recurs in 3+ reviews)", 1.09, 0.96, 1.24, 23],
+    ["R05", "review", "One-off name", 1.01, 0.85, 1.20, 23],
+    ["R06", "review", "Reviews under 30 days old, staff-like name", 1.02, 0.86, 1.21, 23],
+    ["R07", "review", "First week, same business", 1.01, 0.85, 1.21, 23],
+    ["R08", "review", "First week, staff-like name", 1.02, 0.79, 1.32, 23],
+    ["R09", "review", "United States only", 1.08, 0.94, 1.23, 23],
+    ["R10", "review", "Europe only", 1.10, 0.84, 1.46, 23],
+    ["R11", "review", "Home services and healthcare", 1.02, 0.87, 1.21, 23],
+    ["R12", "review", "Inside the four purged pest-control chains", 0.87, 0.74, 1.03, 23],
+    ["B01", "business", "All businesses (unadjusted)", 3.9, 2.7, 5.7, 3],
+    ["B02", "business", "Same industry, region and size", 2.4, 1.6, 3.8, 3],
+    ["B03", "business", "Same industry, region, size and pace", 1.26, 0.79, 2.01, 3]
+  ],
+  "flow_rows": [
+    ["F01", "Under 10%", 63, 5, 58, 8],
+    ["F02", "10% to 25%", 84, 8, 76, 10],
+    ["F03", "25% to 50%", 111, 23, 88, 20],
+    ["F04", "50% or more", 121, 16, 105, 13]
+  ],
+  "flow_source_pdf_page": 24,
+  "flow_time_bases": "Gains: preceding twelve months. Losses: observed two-week deletions scaled to a year. These are rounded group averages, not a fully observed annual cohort or cohort retention probability.",
+  "adjusted_flow_summaries": [
+    ["gained", 2.7, 4],
+    ["annualised_lost", 2.4, 4],
+    ["net", 2.0, 4]
+  ],
+  "model_notes": "Review-level comparisons and business-level regressions are distinct estimands with overlapping source data. We do not pool them, run a new significance/equivalence test or infer causal effects. Source group-boundary labels are preserved without redefining exact endpoints."
+}

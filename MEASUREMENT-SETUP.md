@@ -2,6 +2,13 @@
 
 Reviewed November 1, 2026. Configuration belongs only to reviewsboost.ca.
 
+Follow-up, November 2: inspected the latest downloaded
+`reviewsboost.ca-Performance-on-Search-2026-11-02` export. It contains Search
+Console query/page/country/device/date performance, not a GA4 installation ID,
+GTM container or Ads conversion ID/label. No destination identifier was found,
+so the disabled configuration remains unchanged. Account export data is not
+included in the public research dataset.
+
 ## What exists and what is prepared
 
 No active GA4 Measurement ID, GTM container, Google Ads tag/action label or consent

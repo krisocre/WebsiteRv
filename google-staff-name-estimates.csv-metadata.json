@@ -1,0 +1,134 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-staff-name-estimates.csv",
+  "dc:title": "Staff names in Google reviews: a study-to-policy evidence audit — google-staff-name-estimates.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "record type"
+      },
+      {
+        "name": "comparison_level",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "comparison level"
+      },
+      {
+        "name": "source_comparison",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source comparison"
+      },
+      {
+        "name": "relative_rate",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "Source-reported relative deletion rate for this specific comparison; not an absolute probability."
+      },
+      {
+        "name": "interval_low",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "interval low"
+      },
+      {
+        "name": "interval_high",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "interval high"
+      },
+      {
+        "name": "interval_level_percent",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "interval level percent"
+      },
+      {
+        "name": "relative_difference_percent",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "Derived 100*(relative_rate-1), a relative percentage difference, not percentage points."
+      },
+      {
+        "name": "difference_low_percent",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "Derived lower endpoint on the relative percentage-difference scale."
+      },
+      {
+        "name": "difference_high_percent",
+        "datatype": "number",
+        "null": [
+          ""
+        ],
+        "dc:description": "Derived upper endpoint on the relative percentage-difference scale."
+      },
+      {
+        "name": "printed_interval_includes_one",
+        "datatype": {
+          "base": "boolean",
+          "format": "True|False"
+        },
+        "null": [
+          ""
+        ],
+        "dc:description": "Geometry of the printed 95% interval; not an equivalence test or a new p-value."
+      },
+      {
+        "name": "source_pdf_page",
+        "datatype": "integer",
+        "null": [
+          ""
+        ],
+        "dc:description": "One-based physical PDF page; the selected tables use matching printed page numbers."
+      },
+      {
+        "name": "source_url",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "source url"
+      },
+      {
+        "name": "interpretation",
+        "datatype": "string",
+        "null": [
+          ""
+        ],
+        "dc:description": "interpretation"
+      }
+    ],
+    "primaryKey": "record_id"
+  }
+}

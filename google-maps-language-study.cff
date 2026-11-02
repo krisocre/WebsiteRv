@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Cite this compilation and attribute underlying estimates to Google."
+type: dataset
+title: "Google review removal and language: a historical accuracy-data audit"
+version: "1.0"
+date-released: 2026-11-02
+authors:
+  - name: "ReviewsBoost Editorial Team"
+license: CC-BY-4.0
+url: "https://reviewsboost.ca/google-review-removal-language-study.html"

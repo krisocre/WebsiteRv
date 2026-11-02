@@ -1,0 +1,66 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "google-maps-language-changes.csv",
+  "dc:title": "google maps language changes",
+  "dc:description": "Historical secondary compilation and deterministic geometry of printed intervals; no individual reviews, Canadian sample or significance tests.",
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "language",
+        "titles": "language",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "language"
+      },
+      {
+        "name": "accuracy_2024h2_percent",
+        "titles": "accuracy 2024h2 percent",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "accuracy 2024h2 percent"
+      },
+      {
+        "name": "accuracy_2025h1_percent",
+        "titles": "accuracy 2025h1 percent",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "accuracy 2025h1 percent"
+      },
+      {
+        "name": "point_change_pp",
+        "titles": "point change pp",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "2025H1 minus 2024H2 published point estimate; not an estimated causal effect."
+      },
+      {
+        "name": "point_direction",
+        "titles": "point direction",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "point direction"
+      },
+      {
+        "name": "reported_interval_relation",
+        "titles": "reported interval relation",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "Closed intervals formed from printed endpoints: positive-width intersection, touching endpoint, or separated. Not a significance/equivalence test."
+      },
+      {
+        "name": "signed_shared_width_pp",
+        "titles": "signed shared width pp",
+        "datatype": "integer",
+        "required": true,
+        "dc:description": "min(upper endpoints) minus max(lower endpoints), in percentage points. Negative means separated; zero means touching at printed precision."
+      },
+      {
+        "name": "record_type",
+        "titles": "record type",
+        "datatype": "string",
+        "required": true,
+        "dc:description": "Distinguishes source estimates from derived comparisons; derived rows are not additional observations."
+      }
+    ]
+  }
+}
