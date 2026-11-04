@@ -81,7 +81,7 @@
   } else {
     move('review_count', stages[0]);
     var categoryField = element('div', 'field full');
-    var categoryLabel = element('label', '', fr ? 'Quel est le problème? *' : 'Review concern' + (inline ? ' (optional)' : ' *'));
+    var categoryLabel = element('label', '', fr ? 'Quel est le problème? *' : inline ? 'Review concern (optional)' : 'What concerns you about the review? *');
     categoryLabel.htmlFor = 'enquiryCategory';
     var category = element('select');
     category.id = 'enquiryCategory';

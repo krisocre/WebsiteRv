@@ -40,8 +40,11 @@ const server=http.createServer((req,res)=>{
    await page.click('.hero-actions a[href="#review-count"]');await page.waitForFunction(()=>{const r=document.querySelector('#review-count').getBoundingClientRect();return r.top>=50&&r.top<innerHeight;});
    await page.click('.calculator .open-order');await page.waitForFunction(()=>{const r=document.querySelector('#assessment').getBoundingClientRect();return r.top>=50&&r.top<innerHeight;});
    assert.equal(await page.evaluate(()=>document.activeElement.id),'assessment-title','The in-page CTA focuses the assessment heading at '+width+'px');
-   for(const id of ['businessUrl','formReviewQuantity','enquiryCategory','fullName','businessName','email'])assert.equal(await page.$eval('#'+id,e=>e.getClientRects().length>0),true,id+' is visible without an extra step');
-   await page.focus('#businessUrl');await page.keyboard.down('Shift');await page.keyboard.press('Tab');await page.keyboard.up('Shift');assert.equal(await page.evaluate(()=>document.activeElement.closest('#removalForm')),null,'Keyboard users can leave the inline form');
+   for(const id of ['businessUrl','formReviewQuantity','fullName','businessName','email'])assert.equal(await page.$eval('#'+id,e=>e.getClientRects().length>0),true,id+' is visible without an extra step');
+   assert.equal(await page.$$eval('#removalForm .enquiry-extra',e=>e.length),1,'Optional details share one disclosure');
+   assert.equal(await page.$eval('#enquiryCategory',e=>e.required),false,'An assessment does not require choosing a policy category');
+   assert.equal(await page.$eval('.enquiry-extra',e=>e.open),false,'Optional fields are initially collapsed');
+   await page.focus('#fullName');await page.keyboard.down('Shift');await page.keyboard.press('Tab');await page.keyboard.up('Shift');assert.equal(await page.evaluate(()=>document.activeElement.closest('#removalForm')),null,'Keyboard users can leave the inline form');
    if(width===390){
     await page.$eval('#assessment',e=>e.scrollIntoView({behavior:'instant',block:'start'}));
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='hidden');

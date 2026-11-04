@@ -33,7 +33,7 @@ const server = http.createServer((req,res) => {
       await form.locator('[name="reason"]').fill('Review concern in Montréal');
     } else {
       await form.locator('[name="review_count"]').fill('3');
-      await form.locator('[name="concern_category"]').selectOption({index:7});
+      if(!await form.evaluate(n=>n.hasAttribute('data-inline-enquiry')))await form.locator('[name="concern_category"]').selectOption({index:7});
     }
     if(!await form.evaluate(n=>n.hasAttribute('data-inline-enquiry')))await form.locator('.enquiry-actions button').filter({hasText:/Continue|Continuer/}).click();
     await form.locator('[name="full_name"]').fill('Élodie Test');
@@ -92,6 +92,30 @@ const server = http.createServer((req,res) => {
       assert.deepEqual(errors,[],file+' JS errors');
       await page.close();
     }
+    {
+      const page=await browser.newPage({viewport:{width:320,height:844},reducedMotion:'reduce'});
+      let received;
+      await page.route('https://script.google.com/**',async route=>{
+        received=new URLSearchParams(route.request().postData());
+        await route.fulfill({headers:{'Access-Control-Allow-Origin':'*'},contentType:'application/json',body:'{"result":"success"}'});
+      });
+      const form=await prepare(page,'index.html');
+      await form.locator('.enquiry-extra>summary').click();
+      await form.locator('[name="concern_category"]').selectOption('Off-topic content');
+      await form.locator('[name="review_links"]').fill('https://example.ca/review');
+      await form.locator('[name="reason"]').fill('Additional test context');
+      await form.locator('[name="phone_number"]').fill('416-555-0100');
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,'Expanded optional fields fit at 320px');
+      await form.locator('[type="submit"]').click();
+      await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
+      assert.equal(received.get('phone_number'),'416-555-0100');
+      assert.equal(received.get('review_links'),'https://example.ca/review');
+      assert.match(received.get('reason'),/Off-topic content\nAdditional test context/);
+      await page.locator('#removalSuccessClose').click();
+      assert.equal(await form.isVisible(),true,'Another request restores the inline form');
+      assert.equal(await page.locator('#fullName').evaluate(n=>n===document.activeElement),true);
+      await page.close();
+    }
     for (const mode of ['offline','network','server-error','invalid-json']) {
       const page=await browser.newPage({reducedMotion:'reduce'}); let posts=0;
       await page.route('https://script.google.com/**',async route=>{
@@ -133,7 +157,7 @@ const server = http.createServer((req,res) => {
     const page=await browser.newPage({reducedMotion:'reduce'});
     await page.goto(base+'/index.html'); await page.locator('.open-order').first().click();
     await page.locator('#submitButton').click();
-    assert.equal(await page.locator('#businessUrl').evaluate(n=>n===document.activeElement),true,'Missing review link receives focus');
+    assert.equal(await page.locator('#fullName').evaluate(n=>n===document.activeElement),true,'First missing field receives focus');
     assert.equal(await page.locator('#fullName').isVisible(),true,'Both inline form groups remain visible');
     await page.keyboard.press('Shift+Tab');
     assert.equal(await page.evaluate(()=>document.activeElement.closest('#removalForm')===null),true,'Inline form does not trap focus');
