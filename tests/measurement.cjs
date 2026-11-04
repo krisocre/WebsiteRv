@@ -32,7 +32,10 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
   async function events(p){return (await commands(p)).filter(x=>x[0]==='event');}
   async function choose(p,choice){await p.click('#measurement-preferences [data-choice="'+choice+'"]');}
   async function submit(p,outcome='success'){
-   if(!await p.$('#orderModal.open'))await p.click('.calculator .open-order');
+   if(await p.$('#removalForm[data-inline-enquiry]')){
+    await p.$eval('[name=business_url]',e=>{e.value='https://example.ca/PRIVATE_PROFILE';});
+    await p.type('[name=business_url]','x');await p.select('[name=concern_category]','Unsure — please assess');
+   }else if(!await p.$('#orderModal.open'))await p.click('.calculator .open-order');
    if(await p.$eval('.enquiry-actions [type=submit]',e=>e.hidden)){
     await p.$eval('[name=business_url]',e=>{e.value='https://example.ca/PRIVATE_PROFILE';});await p.type('[name=business_url]','x');await p.select('[name=concern_category]','Unsure — please assess');
     await p.click('.enquiry-actions button:not(.enquiry-back):not([type=submit])');

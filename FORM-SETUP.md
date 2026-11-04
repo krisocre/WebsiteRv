@@ -23,7 +23,9 @@ The handler only defines `doPost`, so opening the endpoint in a browser may show
 
 All forms send `email_address` and/or `phone_number` in their own fields and copy the preferred address/number into `contact_detail`. Removal quantity uses `review_count`. The removal concern, optional context and request reference share `reason` to remain compatible with the original 12 sheet columns. `request_id` and `locale` are also sent separately. Name, business, email, phone, links, quantity and selected service remain in their respective columns.
 
-`enquiry-flow.js` arranges the existing fields into two steps, validates each step and preserves answers when going back. The first removal step asks for the public profile, quantity and concern (including an unsure option). Review links, extra context and phone are optional. The reputation form retains its required service and description. The second step collects contact details. None of these forms takes payment.
+The homepage now places its cost calculator and assessment form in two adjacent sections on the page. `enquiry-flow.js` detects `data-inline-enquiry` on that form and shows both field groups together. The review count, calculator totals and estimate beside the form stay synchronized at CAD $25 upfront plus $50 per successfully removed review. The existing fields, endpoint, acknowledgement, request references and receipt/error handling are retained. Assessment links scroll to `#assessment`; they do not open a popup. The form also has a native POST action for visitors without JavaScript.
+
+On the other seven pages, `enquiry-flow.js` still arranges the existing fields into two steps, validates each step and preserves answers when going back. The first removal step asks for the public profile, quantity and concern (including an unsure option). Review links, extra context and phone are optional. The reputation form retains its required service and description. The second step collects contact details. None of these forms takes payment.
 
 ## Update the Apps Script deployment
 

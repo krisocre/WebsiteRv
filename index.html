@@ -409,6 +409,96 @@
         </div>
     </section>
 
+    <section class="pricing section-pad" id="pricing" aria-labelledby="pricing-title">
+        <div class="container pricing-layout">
+            <div class="pricing-copy">
+                <span class="section-tag">01 / Work out the cost</span>
+                <h2 class="section-title" id="pricing-title">Straightforward pricing.<br><span>For every review.</span></h2>
+                <p class="section-sub">One fee to start the agreed work. One only when that review is removed. All prices are in Canadian dollars.</p>
+                <div class="service-fees">
+                    <div><span>Upfront, per review</span><strong>$25</strong><p>For the agreed assessment and reporting work.</p></div>
+                    <div><span>Only if removed</span><strong>+$50</strong><p>Charged separately for each review removed.</p></div>
+                </div>
+                <ul class="pricing-included" aria-label="What the service includes">
+                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Review assessment and report preparation</li>
+                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Agreed follow-up and clear updates</li>
+                </ul>
+                <p class="pricing-small">Sending an assessment request is free. We confirm the scope, terms and applicable taxes before any payment. Removal is not guaranteed.</p>
+                <details class="fee-examples"><summary>See a one-review example and fee terms</summary><div class="fee-scenarios"><h3>For one review</h3><dl>
+                    <dt>Sending this enquiry</dt><dd>CAD $0</dd>
+                    <dt>If you order and the review stays online</dt><dd>CAD $25 in service fees</dd>
+                    <dt>If you order and the review is removed</dt><dd>CAD $75 total service fees</dd>
+                </dl><p>The initial fee begins the agreed work. Success fees apply only to removed reviews.</p><p><a href="google-review-removal-cost-canada.html">Canadian pricing guide</a> &middot; <a href="refund-policy.html">Fee and cancellation terms</a></p></div></details>
+            </div>
+            <div class="calculator" id="review-count" aria-labelledby="estimate-title">
+                <div class="estimate-head"><h3 id="estimate-title">Your service estimate</h3><span>CAD</span></div>
+                <div class="estimate-body">
+                    <label for="reviewQuantity">How many reviews?</label>
+                    <p class="quantity-hint" id="quantity-help">Choose the number you would like us to assess.</p>
+                    <div class="quantity"><button type="button" id="decreaseQty" aria-label="Remove one review">&minus;</button><input type="number" id="reviewQuantity" value="1" min="1" max="50" inputmode="numeric" aria-describedby="quantity-help"><button type="button" id="increaseQty" aria-label="Add one review">+</button></div>
+                    <div class="total-row"><span>Upfront if you proceed<small>$25 per review</small></span><strong id="upfrontTotal">$25</strong></div>
+                    <div class="total-row"><span>Success fees if all are removed<small>$50 per review removed</small></span><strong id="successTotal">$50</strong></div>
+                    <div class="total-row fee-total"><span>Total if all are removed</span><strong id="combinedTotal">$75</strong></div>
+                    <a class="btn btn-primary open-order" href="#assessment">Continue to your assessment <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+                    <p class="estimate-note">No payment now. If only some reviews are removed, only those reviews carry a success fee.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="assessment-section section-pad" id="assessment" aria-labelledby="assessment-title">
+        <div class="container">
+            <div class="assessment-heading">
+                <div><span class="section-tag">02 / A clear next step</span><h2 class="section-title" id="assessment-title" tabindex="-1">Tell us about<br><span>the review.</span></h2></div>
+                <p>Share your public Google profile and a few details. We will assess the review and explain the next step before any paid work begins.</p>
+            </div>
+            <div class="assessment-layout">
+                <div class="inline-assessment-card">
+                    <div id="removalFormIntro" class="assessment-form-intro"><h3 id="assessment-form-title">Request your assessment</h3><p>No card or Google password needed.</p></div>
+        <form id="removalForm" data-inline-enquiry method="post" action="https://script.google.com/macros/s/AKfycby4mQu0BJFu8Jmbw_zZPzrBb9TF_YRw4j0Ayu3PFvwgicSN5vtzynX0ASet2utzxtlnMw/exec">
+            <input type="hidden" name="form_type" value="remove_reviews">
+            <input type="hidden" id="selectedPlan" name="selected_plan" value="Google Review Removal assessment - CAD $25 upfront per review + CAD $50 per successfully removed review; quantity as submitted">
+            <input type="hidden" name="contact_method" value="Email">
+            <div class="form-row">
+                <div class="form-group"><label for="fullName">Full Name *</label><input type="text" id="fullName" name="full_name" autocomplete="name" required></div>
+                <div class="form-group"><label for="businessName">Business Name *</label><input type="text" id="businessName" name="business_name" autocomplete="organization" required></div>
+            </div>
+            <div class="form-row">
+                <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email_address" autocomplete="email" required></div>
+                <div class="form-group"><label for="phone">Phone (optional)</label><input type="tel" id="phone" name="phone_number" autocomplete="tel" placeholder="555-123-4567"></div>
+            </div>
+            <div class="form-group"><label for="businessUrl">Google Business Profile URL *</label><input type="url" id="businessUrl" name="business_url" placeholder="https://maps.google.com/..." required></div>
+            <div class="form-group"><label for="formReviewQuantity">How many reviews do you want removed? *</label><input type="number" id="formReviewQuantity" name="review_count" value="1" min="1" max="50" inputmode="numeric" required></div>
+            <div class="form-group">
+                <label for="reviewLinks">Review link(s) (optional)</label>
+                <textarea id="reviewLinks" name="review_links" placeholder="Paste one review link per line, if available." aria-describedby="reviewLinksHelp"></textarea>
+                <small class="form-help" id="reviewLinksHelp"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>If no individual link is provided, we will use the latest one-star review(s) on the profile, up to the number selected, for the removal assessment.</small>
+            </div>
+            <div class="form-group"><label for="removalReason">Tell us about the reviews *</label><textarea id="removalReason" name="reason" placeholder="Add any brief details you want our review-removal team to know." required></textarea></div>
+            <!-- submission legal notice start --><input type="hidden" name="terms_version" value="2026-11-02"><input type="hidden" name="terms_url" value="https://reviewsboost.ca/terms-of-service.html"><input type="hidden" name="terms_snapshot_url" value="https://reviewsboost.ca/legal-versions/policies-2026-11-02.json"><input type="hidden" name="privacy_version" value="2026-11-02"><input type="hidden" name="privacy_url" value="https://reviewsboost.ca/privacy-policy.html"><input type="hidden" name="terms_language" value="en-CA"><input type="hidden" name="terms_acknowledgement" value="By submitting, you agree to the Terms of Service and acknowledge the Privacy Policy. Removal is not guaranteed."><p class="submission-legal" id="submission-legal" data-version="2026-11-02">By submitting, you agree to the <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and acknowledge the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>. Removal is not guaranteed.</p><!-- submission legal notice end --><button class="btn btn-primary" id="submitButton" type="submit" aria-describedby="submission-legal">Submit Removal Request <i class="fa-solid fa-arrow-right"></i></button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+            <p class="form-privacy"><i class="fa-solid fa-lock"></i> Your submission is handled according to our <a href="privacy-policy.html">privacy policy</a>.</p>
+            <noscript><p class="enquiry-note">You can send this form without JavaScript. Live estimates need JavaScript; we confirm the scope and fees before any paid work.</p></noscript>
+        </form>
+        <div class="submission-success" id="removalSuccess" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
+            <div class="submission-success-icon" aria-hidden="true">&#10003;</div>
+            <h2 id="removalSuccessTitle">Removal request submitted</h2>
+            <p>Your review details have been sent. A specialist will review them and contact you with the next step.</p>
+            <button class="btn btn-primary" id="removalSuccessClose" type="button">Send another request</button>
+        </div>
+                </div>
+                <aside class="assessment-aside" aria-labelledby="request-estimate-title">
+                    <div class="request-estimate">
+                        <div class="request-estimate-heading"><h3 id="request-estimate-title">Your estimate</h3><span data-estimate="count">1 review</span></div>
+                        <dl><div><dt>Upfront if you proceed</dt><dd data-estimate="upfront">$25</dd></div><div><dt>If all are removed</dt><dd data-estimate="success">$50</dd></div><div class="request-estimate-total"><dt>Total service fees</dt><dd data-estimate="total">$75</dd></div></dl>
+                        <p>CAD, before applicable taxes. This is an estimate, not a payment request.</p>
+                    </div>
+                    <div class="assessment-next"><h3>What happens next?</h3><ol><li><span>01</span><div><strong>We look into it.</strong><p>We assess the review and the relevant platform policies.</p></div></li><li><span>02</span><div><strong>You decide.</strong><p>We explain the scope and fees before you approve any paid work.</p></div></li><li><span>03</span><div><strong>We take it from there.</strong><p>We handle the agreed reporting and keep you informed.</p></div></li></ol><p class="assessment-contact">A question first? <!--email_off--><a href="mailto:support@reviewsboost.ca">Email our team</a><!--/email_off--></p></div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
     <section class="city-focus section-pad" id="major-cities" aria-labelledby="major-cities-title">
         <div class="container">
             <div class="city-focus-head">
@@ -480,45 +570,7 @@
         </div>
     </section>
 
-    <section class="pricing section-pad" id="pricing">
-        <div class="container text-center">
-            <span class="section-tag">Simple results-based pricing</span>
-            <h2 class="section-title">Google Review Removal Pricing: <span>$25 + $50 When Removed</span></h2>
-            <p class="section-sub">Pay $25 upfront for each review. The additional $50 success fee is charged only after that Google review is removed.</p>
-            <div class="price-shell">
-                <div class="price-main text-left">
-                    <p class="price-label">Due upfront per review</p>
-                    <div class="price-line"><strong>$25</strong><span>CAD / review</span></div>
-                    <div class="success-fee"><div><span>Success fee</span><strong>+$50</strong></div><p>Charged only after the review is removed</p></div>
-                    <ul class="included">
-                        <li><i class="fa-solid fa-check"></i> Specialist review assessment</li>
-                        <li><i class="fa-solid fa-check"></i> Fully managed removal service</li>
-                        <li><i class="fa-solid fa-check"></i> Specialist removal work</li>
-                        <li><i class="fa-solid fa-check"></i> Clear progress updates</li>
-                        <li><i class="fa-solid fa-check"></i> Escalation when available</li>
-                        <li><i class="fa-solid fa-check"></i> Personal support from start to finish</li>
-                    </ul>
-                </div>
-                <div class="calculator" id="review-count">
-                    <label for="reviewQuantity">Number of reviews</label>
-                    <div class="quantity"><button type="button" id="decreaseQty" aria-label="Remove one review">−</button><input type="number" id="reviewQuantity" value="1" min="1" max="50" inputmode="numeric"><button type="button" id="increaseQty" aria-label="Add one review">+</button></div>
-                    <div class="total-row"><span>Initial fee if you proceed</span><strong id="upfrontTotal">$25</strong></div>
-                    <div class="total-row"><span>Success fees if all are removed*</span><strong id="successTotal">$50</strong></div>
-                    <div class="total-row fee-total"><span>Total service fees if all are removed</span><strong id="combinedTotal">$75</strong></div>
-                    <button class="btn btn-primary open-order" type="button">Start Removal Process <i class="fa-solid fa-arrow-right"></i></button>
-                </div>
-            </div>
-            <p class="price-disclaimer">*The $50 success fee applies to each review that is successfully removed. Google makes the final moderation decision.</p>
-        <div class="fee-scenarios"><h3>For one review: know what you are paying for</h3><dl>
-<dt>Sending this enquiry</dt><dd>CAD $0</dd>
-<dt>If you order and the review stays online</dt><dd>CAD $25 in service fees</dd>
-<dt>If you order and the review is removed</dt><dd>CAD $75 total service fees</dd></dl>
-<p>The initial fee begins the removal service. Success fees apply only to removed reviews. Any applicable taxes and cancellation terms are confirmed before payment.</p>
-<p>Send the bad review, your Google Business Profile link and your contact details. Our specialists take it from there.</p>
-<p><a href="google-review-removal-cost-canada.html">Read the complete Canadian pricing and provider guide</a> &middot; <a href="refund-policy.html">Review fee and cancellation terms</a> &middot; <!--email_off--><a href="mailto:support@reviewsboost.ca">Ask a question before deciding</a><!--/email_off--></p></div></div>
-    </section>
-
-    <section class="guarantee section-pad" id="guarantee">
+<section class="guarantee section-pad" id="guarantee">
         <div class="container guarantee-grid">
             <div class="seal" role="img" aria-label="Typical removal timeline: one to two weeks"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span class="metric-rate">1–2 weeks</span></div>
             <div>
@@ -530,7 +582,7 @@
                     <li><i class="fa-solid fa-circle-check"></i> No hidden service add-ons</li>
                     <li><i class="fa-solid fa-circle-check"></i> Human support throughout</li>
                 </ul>
-                <button class="btn btn-primary open-order" type="button">Start Removal Process <i class="fa-solid fa-arrow-right"></i></button>
+                <a class="btn btn-primary open-order" href="#assessment">Request an assessment <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -609,7 +661,7 @@
         <div class="container">
             <div class="cta-box">
                 <div class="cta-copy"><h2>Ready to remove a harmful Google review?</h2><p>Send the bad review to our Google review removal specialists.</p></div>
-                <button class="btn btn-primary open-order" type="button">Start Removal Process <i class="fa-solid fa-arrow-right"></i></button>
+                <a class="btn btn-primary open-order" href="#assessment">Request an assessment <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
             </div>
         </div>
     </section>
@@ -621,52 +673,11 @@
             <div><div class="footer-brand"><span class="logo-icon"><i class="fa-solid fa-star"></i></span>ReviewsBoost</div><p>Google review removal and online reputation management for Canadian businesses.</p></div>
             <div><h2>Services</h2><a href="online-reputation-management.html#reputation-management">Reputation Management</a><a href="/">Remove Google Reviews</a><a href="#toronto">Toronto Google Review Removal</a><a href="#montreal">Montreal Google Review Removal</a><a href="#vancouver">Vancouver Google Review Removal</a><a href="#other-platforms">Other Review Platforms</a></div>
             <div><h2>Research &amp; Resources</h2><a href="fake-review-statistics.html">Fake Review Statistics</a><a href="google-review-rating-resilience-study.html">Rating Resilience Study</a><a href="google-review-policy-canada.html">Google Review Policy Guide</a><a href="editorial-policy.html">Editorial Standards</a><a href="https://www.designrush.com/agency/reputation-management-companies" rel="sponsored nofollow external noreferrer">Find us on Designrush</a></div>
-            <div><h2>Support</h2><a href="#" class="open-order">Contact Us</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
+            <div><h2>Support</h2><a href="#assessment" class="open-order">Contact Us</a><a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-service.html">Terms of Service</a></div>
         </div>
         <div class="footer-bottom"><span>&copy; 2026 ReviewsBoost. All rights reserved. Proudly Canadian.</span><span><a href="privacy-policy.html">Privacy</a> &middot; <a href="terms-of-service.html">Terms</a> &middot; <a href="refund-policy.html">Refunds</a> &middot; <a href="accessibility.html">Accessibility</a></span></div>
     </div>
 </footer>
-
-<div class="modal-overlay" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modal">
-        <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
-        <div id="removalFormIntro">
-            <p class="modal-tag">Review removal request</p>
-            <h2 id="modalTitle">Start the Removal Process</h2>
-            <p class="modal-sub">For Canadian businesses. Share the review first, then your contact details. No card or account password needed.</p>
-        </div>
-        <form id="removalForm">
-            <input type="hidden" name="form_type" value="remove_reviews">
-            <input type="hidden" id="selectedPlan" name="selected_plan" value="Google Review Removal - 1 review - $25 upfront + $50 after successful removal">
-            <input type="hidden" name="contact_method" value="Email">
-            <div class="form-row">
-                <div class="form-group"><label for="fullName">Full Name *</label><input type="text" id="fullName" name="full_name" autocomplete="name" required></div>
-                <div class="form-group"><label for="businessName">Business Name *</label><input type="text" id="businessName" name="business_name" autocomplete="organization" required></div>
-            </div>
-            <div class="form-row">
-                <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email_address" autocomplete="email" required></div>
-                <div class="form-group"><label for="phone">Phone (optional)</label><input type="tel" id="phone" name="phone_number" autocomplete="tel" placeholder="555-123-4567"></div>
-            </div>
-            <div class="form-group"><label for="businessUrl">Google Business Profile URL *</label><input type="url" id="businessUrl" name="business_url" placeholder="https://maps.google.com/..." required></div>
-            <div class="form-group"><label for="formReviewQuantity">How many reviews do you want removed? *</label><input type="number" id="formReviewQuantity" name="review_count" value="1" min="1" max="50" inputmode="numeric" required></div>
-            <div class="form-group">
-                <label for="reviewLinks">Review link(s) (optional)</label>
-                <textarea id="reviewLinks" name="review_links" placeholder="Paste one review link per line, if available." aria-describedby="reviewLinksHelp"></textarea>
-                <small class="form-help" id="reviewLinksHelp"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>If no individual link is provided, we will use the latest one-star review(s) on the profile, up to the number selected, for the removal assessment.</small>
-            </div>
-            <div class="form-group"><label for="removalReason">Tell us about the reviews *</label><textarea id="removalReason" name="reason" placeholder="Add any brief details you want our review-removal team to know." required></textarea></div>
-            <!-- submission legal notice start --><input type="hidden" name="terms_version" value="2026-11-02"><input type="hidden" name="terms_url" value="https://reviewsboost.ca/terms-of-service.html"><input type="hidden" name="terms_snapshot_url" value="https://reviewsboost.ca/legal-versions/policies-2026-11-02.json"><input type="hidden" name="privacy_version" value="2026-11-02"><input type="hidden" name="privacy_url" value="https://reviewsboost.ca/privacy-policy.html"><input type="hidden" name="terms_language" value="en-CA"><input type="hidden" name="terms_acknowledgement" value="By submitting, you agree to the Terms of Service and acknowledge the Privacy Policy. Removal is not guaranteed."><p class="submission-legal" id="submission-legal" data-version="2026-11-02">By submitting, you agree to the <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and acknowledge the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>. Removal is not guaranteed.</p><!-- submission legal notice end --><button class="btn btn-primary" id="submitButton" type="submit" aria-describedby="submission-legal">Submit Removal Request <i class="fa-solid fa-arrow-right"></i></button>
-            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-            <p class="form-privacy"><i class="fa-solid fa-lock"></i> Your submission is handled according to our <a href="privacy-policy.html">privacy policy</a>.</p>
-        </form>
-        <div class="submission-success" id="removalSuccess" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
-            <div class="submission-success-icon" aria-hidden="true">&#10003;</div>
-            <h2 id="removalSuccessTitle">Removal request submitted</h2>
-            <p>Your review details have been sent. A specialist will review them and contact you with the next step.</p>
-            <button class="btn btn-primary" id="removalSuccessClose" type="button">Done</button>
-        </div>
-    </div>
-</div>
 
 <div class="mobile-cta">
     <div class="mobile-price"><strong>$25 upfront</strong><span>+$50 when removed</span></div>
@@ -686,8 +697,6 @@
         var upfrontTotal = document.getElementById('upfrontTotal');
         var successTotal = document.getElementById('successTotal');
         var selectedPlan = document.getElementById('selectedPlan');
-        var modal = document.getElementById('orderModal');
-        var modalClose = document.getElementById('modalClose');
         var removalForm = document.getElementById('removalForm');
         var removalFormIntro = document.getElementById('removalFormIntro');
         var submitButton = document.getElementById('submitButton');
@@ -705,6 +714,11 @@
             formQuantity.value = count;
             upfrontTotal.textContent = '$' + (count * 25);
             successTotal.textContent = '$' + (count * 50);
+            document.getElementById('combinedTotal').textContent = '$' + (count * 75);
+            document.querySelector('[data-estimate="count"]').textContent = count + (count === 1 ? ' review' : ' reviews');
+            document.querySelector('[data-estimate="upfront"]').textContent = '$' + (count * 25);
+            document.querySelector('[data-estimate="success"]').textContent = '$' + (count * 50);
+            document.querySelector('[data-estimate="total"]').textContent = '$' + (count * 75);
             selectedPlan.value = 'Google Review Removal - ' + count + (count === 1 ? ' review' : ' reviews') + ' - $' + (count * 25) + ' upfront + $50 per successfully removed review';
         }
 
@@ -721,33 +735,18 @@
         formQuantity.addEventListener('input', function () { updatePrice(formQuantity); });
         formQuantity.addEventListener('blur', function () { updatePrice(formQuantity); });
 
-        var lastModalTrigger = null;
-        function openModal(event) {
-            if (event) event.preventDefault();
-            lastModalTrigger = event ? event.currentTarget : document.activeElement;
-            updatePrice(quantity);
-            navLinks.classList.remove('open');
-            hamburger.setAttribute('aria-expanded', 'false');
-            modal.classList.add('open');
-            modal.setAttribute('aria-labelledby', 'modalTitle');
-            document.body.classList.add('modal-open');
-            removalFormIntro.hidden = false;
-            removalForm.hidden = false;
+        document.getElementById('removalSuccessClose').addEventListener('click', function () {
             removalSuccess.hidden = true;
+            removalForm.hidden = false;
+            removalFormIntro.hidden = false;
             ReviewEnquiry.focus();
+        });
+        // Keep the phone shortcut out of the way while the assessment is visible.
+        if ('IntersectionObserver' in window) {
+            new IntersectionObserver(function (entries) {
+                document.querySelector('.mobile-cta').classList.toggle('is-assessing', entries[0].isIntersecting);
+            }).observe(document.getElementById('assessment'));
         }
-
-        function closeModal() {
-            if (!modal.classList.contains('open')) return;
-            modal.classList.remove('open');
-            document.body.classList.remove('modal-open');
-            if (lastModalTrigger && document.contains(lastModalTrigger)) lastModalTrigger.focus();
-        }
-
-        document.querySelectorAll('.open-order').forEach(function (button) { button.addEventListener('click', openModal); });
-        modalClose.addEventListener('click', closeModal);
-        document.getElementById('removalSuccessClose').addEventListener('click', closeModal);
-        modal.addEventListener('click', function (event) { if (event.target === modal) closeModal(); });
         function closeServicesMenu() {
             servicesMenu.classList.remove('open');
             servicesMenuButton.setAttribute('aria-expanded', 'false');
@@ -770,8 +769,7 @@
         document.addEventListener('click', function (event) { if (!servicesMenu.contains(event.target)) closeServicesMenu(); });
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
-                if (modal.classList.contains('open')) closeModal();
-                else if (servicesMenuButton.getAttribute('aria-expanded') === 'true') servicesMenuButton.focus();
+                if (servicesMenuButton.getAttribute('aria-expanded') === 'true') servicesMenuButton.focus();
                 closeServicesMenu();
             }
         });
@@ -811,7 +809,8 @@
                 var target = document.querySelector(href);
                 if (!target) return;
                 event.preventDefault();
-                window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 68, behavior: 'smooth' });
+                window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 82, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+                if (href === '#assessment') document.getElementById('assessment-title').focus({preventScroll:true});
             });
         });
 

@@ -35,7 +35,7 @@ const server = http.createServer((req,res) => {
       await form.locator('[name="review_count"]').fill('3');
       await form.locator('[name="concern_category"]').selectOption({index:7});
     }
-    await form.locator('.enquiry-actions button').filter({hasText:/Continue|Continuer/}).click();
+    if(!await form.evaluate(n=>n.hasAttribute('data-inline-enquiry')))await form.locator('.enquiry-actions button').filter({hasText:/Continue|Continuer/}).click();
     await form.locator('[name="full_name"]').fill('Élodie Test');
     await form.locator('[name="business_name"]').fill('Example Business — Montréal, QC');
     await form.locator('[name="email_address"]').fill('test+case@example.ca');
@@ -52,9 +52,10 @@ const server = http.createServer((req,res) => {
         await route.fulfill({status:200,headers:{'Access-Control-Allow-Origin':'*'},contentType:'application/json',body:'{"result":"success"}'});
       });
       const form=await prepare(page,file);
-      await form.locator('.enquiry-back').click();
+      const inline=await form.evaluate(n=>n.hasAttribute('data-inline-enquiry'));
+      if(!inline)await form.locator('.enquiry-back').click();
       assert.equal(await form.locator('[name="business_url"]').inputValue(),'https://example.ca/profile');
-      await form.locator('.enquiry-actions button').filter({hasText:/Continue|Continuer/}).click();
+      if(!inline)await form.locator('.enquiry-actions button').filter({hasText:/Continue|Continuer/}).click();
       if (file!=='online-reputation-management.html') {
         const fee=await page.evaluate(()=>Number(document.body.dataset.successFee||50));
         assert.equal(fee,50,'The success fee is CAD $50 for every platform');
@@ -113,8 +114,6 @@ const server = http.createServer((req,res) => {
       await page.keyboard.press('Escape');
       await page.locator('.open-order').first().click();
       assert.equal(await form.locator('[role="status"]').isVisible(),true,'Reopening must preserve error explanation');
-      await form.locator('.enquiry-back').click();
-      await form.locator('.enquiry-actions button').filter({hasText:'Continue to My Details'}).click();
       assert.equal(await form.locator('[name="full_name"]').isVisible(),true,'Answers must remain reachable after failure');
       await page.close();
     }
@@ -133,12 +132,11 @@ const server = http.createServer((req,res) => {
     }
     const page=await browser.newPage({reducedMotion:'reduce'});
     await page.goto(base+'/index.html'); await page.locator('.open-order').first().click();
-    await page.locator('.enquiry-actions button').filter({hasText:'Continue to My Details'}).click();
-    assert.equal(await page.locator('#fullName').isVisible(),false,'Empty first stage advanced');
-    await page.locator('#modalClose').focus(); await page.keyboard.press('Shift+Tab');
-    assert.equal(await page.evaluate(()=>document.activeElement.closest('#orderModal')!==null),true,'Focus left dialog');
-    await page.keyboard.press('Escape');
-    assert.equal(await page.locator('.open-order').first().evaluate(n=>n===document.activeElement),true,'Closing must restore focus to trigger');
+    await page.locator('#submitButton').click();
+    assert.equal(await page.locator('#businessUrl').evaluate(n=>n===document.activeElement),true,'Missing review link receives focus');
+    assert.equal(await page.locator('#fullName').isVisible(),true,'Both inline form groups remain visible');
+    await page.keyboard.press('Shift+Tab');
+    assert.equal(await page.evaluate(()=>document.activeElement.closest('#removalForm')===null),true,'Inline form does not trap focus');
     await page.close();
     console.log('PASS: 8 forms at desktop/mobile, quantity scroll, totals, preserved back navigation, Unicode payloads, one POST, saved receipts, failure retention and keyboard validation.');
   } finally { await browser.close();server.close(); }

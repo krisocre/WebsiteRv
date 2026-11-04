@@ -4,6 +4,7 @@
   if (!form) return;
   var fr = document.documentElement.lang === 'fr-CA';
   var reputation = form.id === 'reputationForm';
+  var inline = form.hasAttribute('data-inline-enquiry');
   var platform = reputation ? 'Reputation' : document.body.dataset.platform || 'Google';
   var fee = Number(document.body.dataset.successFee || 50);
   var submit = form.querySelector('[type="submit"]');
@@ -65,7 +66,13 @@
     stages.push(section);
   });
   form.prepend(progress);
+  progress.hidden = inline;
   progress.after(stages[0], stages[1]);
+  if (inline) {
+    stages.forEach(function (section, index) {
+      section.prepend(element('h4', 'enquiry-group-title', index ? 'Your contact details' : 'The review'));
+    });
+  }
   move('business_url', stages[0]);
   if (reputation) {
     move('selected_plan', stages[0]);
@@ -100,6 +107,7 @@
     if (child.matches('.form-row, .field-grid')) child.remove();
   });
   var summary = element('p', 'enquiry-summary');
+  summary.hidden = inline; // The inline homepage has a separate live estimate.
   var actions = element('div', 'enquiry-actions');
   var back = element('button', 'enquiry-back', fr ? 'Retour' : 'Back');
   back.type = 'button';
@@ -133,15 +141,15 @@
   }
   function show(index, focusInput) {
     step = index;
-    stages.forEach(function (section, i) { section.hidden = i !== index; });
+    stages.forEach(function (section, i) { section.hidden = !inline && i !== index; });
     Array.from(progress.children).forEach(function (li, i) {
       if (i === index) li.setAttribute('aria-current', 'step');
       else li.removeAttribute('aria-current');
     });
-    back.hidden = index === 0;
-    next.hidden = index === 1;
-    submit.hidden = index === 0;
-    if (legalNotice) legalNotice.hidden = index === 0;
+    back.hidden = inline || index === 0;
+    next.hidden = inline || index === 1;
+    submit.hidden = !inline && index === 0;
+    if (legalNotice) legalNotice.hidden = !inline && index === 0;
     totals();
     if (focusInput) focus();
   }
@@ -193,7 +201,7 @@
   form.addEventListener('submit', function (event) {
     event.preventDefault();
     if (busy || locked) return;
-    if (step === 0) { forward(); return; }
+    if (!inline && step === 0) { forward(); return; }
     if (!valid(0) || !valid(1)) return;
     totals();
     var payload = new FormData(form);
