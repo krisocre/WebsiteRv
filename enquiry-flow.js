@@ -54,6 +54,7 @@
     names.forEach(function (name) { move(name, grid); });
     details.appendChild(grid);
     parent.appendChild(details);
+    return details;
   }
   var progress = element('ol', 'enquiry-progress');
   progress.setAttribute('aria-label', fr ? 'Étapes de la demande' : 'Request steps');
@@ -69,9 +70,9 @@
   progress.hidden = inline;
   progress.after(stages[0], stages[1]);
   if (inline) {
-    stages.forEach(function (section, index) {
-      section.prepend(element('h4', 'enquiry-group-title', index ? 'Your contact details' : 'The review'));
-    });
+    stages[0].setAttribute('aria-label', 'Assessment details');
+    stages[1].setAttribute('aria-label', 'Optional information');
+    ['full_name', 'business_name', 'email_address'].forEach(function (name) { move(name, stages[0]); });
   }
   move('business_url', stages[0]);
   if (reputation) {
@@ -80,28 +81,33 @@
   } else {
     move('review_count', stages[0]);
     var categoryField = element('div', 'field full');
-    var categoryLabel = element('label', '', fr ? 'Quel est le problème? *' : 'What concerns you about the review? *');
+    var categoryLabel = element('label', '', fr ? 'Quel est le problème? *' : 'Review concern' + (inline ? ' (optional)' : ' *'));
     categoryLabel.htmlFor = 'enquiryCategory';
     var category = element('select');
     category.id = 'enquiryCategory';
     category.name = 'concern_category';
-    category.required = true;
+    category.required = !inline;
     var options = fr
       ? ['Choisissez un motif', 'Aucune expérience réelle', 'Conflit d’intérêts', 'Harcèlement ou menaces', 'Renseignements personnels', 'Pourriel ou publicité', 'Contenu hors sujet', 'Je ne sais pas — aidez-moi à évaluer']
       : ['Choose a concern', 'No genuine experience', 'Conflict of interest', 'Harassment or threats', 'Personal information', 'Spam or advertising', 'Off-topic content', 'Unsure — please assess'];
     options.forEach(function (label, index) { category.add(new Option(label, index ? label : '')); });
     categoryField.append(categoryLabel, category);
-    stages[0].appendChild(categoryField);
     var reason = field('reason');
     reason.required = false;
     reason.placeholder = fr ? 'Ajoutez du contexte utile. Aucun document privé ni mot de passe.' : 'Add useful context. Keep private records and passwords out of this form.';
     form.querySelector('label[for="' + reason.id + '"]').textContent = fr ? 'Contexte supplémentaire (facultatif)' : 'Additional context (optional)';
-    extras(stages[0], fr ? 'Ajouter des liens ou du contexte (facultatif)' : 'Add review links or context (optional)', ['review_links', 'reason']);
+    if (inline) {
+      var optional = extras(stages[1], 'Add review details or a phone number (optional)', ['review_links', 'reason', 'phone_number']);
+      optional.querySelector('.enquiry-grid').prepend(categoryField);
+    } else {
+      stages[0].appendChild(categoryField);
+      extras(stages[0], fr ? 'Ajouter des liens ou du contexte (facultatif)' : 'Add review links or context (optional)', ['review_links', 'reason']);
+    }
   }
-  ['full_name', 'business_name', 'email_address'].forEach(function (name) { move(name, stages[1]); });
-  field('business_name').placeholder = fr ? 'Entreprise — ville, province' : 'Business — city, province';
+  if (!inline) ['full_name', 'business_name', 'email_address'].forEach(function (name) { move(name, stages[1]); });
+  field('business_name').placeholder = inline ? '' : fr ? 'Entreprise — ville, province' : 'Business — city, province';
   field('email_address').maxLength = 254;
-  extras(stages[1], fr ? 'Ajouter un téléphone (facultatif)' : 'Add a phone number (optional)', ['phone_number']);
+  if (!inline) extras(stages[1], fr ? 'Ajouter un téléphone (facultatif)' : 'Add a phone number (optional)', ['phone_number']);
   // Remove empty layout wrappers after moving the existing inputs and listeners.
   Array.from(form.children).forEach(function (child) {
     if (child.matches('.form-row, .field-grid')) child.remove();
@@ -113,7 +119,8 @@
   back.type = 'button';
   var next = element('button', originalButtonClasses, fr ? 'Continuer vers mes coordonnées →' : 'Continue to My Details →');
   next.type = 'button';
-  submit.textContent = fr ? 'Envoyer ma demande' : 'Send My Request';
+  var submitLabel = fr ? 'Envoyer ma demande' : inline ? 'Request my free assessment' : 'Send My Request';
+  submit.textContent = submitLabel;
   stages[1].after(summary, actions);
   actions.append(back, next, submit);
   var legalNotice = form.querySelector('.submission-legal');
@@ -252,7 +259,7 @@
     }).finally(function () {
       clearTimeout(slow); busy = false; submit.disabled = locked; back.disabled = false;
       inputs.forEach(function (input) { input.disabled = false; });
-      form.removeAttribute('aria-busy'); submit.textContent = fr ? 'Envoyer ma demande' : 'Send My Request';
+      form.removeAttribute('aria-busy'); submit.textContent = submitLabel;
     });
   });
   // Keep keyboard users inside open dialogs, including dynamically added fields.
