@@ -5,7 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 const root = path.resolve(__dirname, '..');
-const pages = ['index.html', ...['facebook','yelp','tripadvisor','trustpilot','glassdoor'].map(p=>'remove-'+p+'-reviews.html'), 'suppression-avis-google.html', 'online-reputation-management.html'];
+const pages = require('../apply-commercial-seo.cjs').services.filter(s=>s.enabled).map(s=>s.file).concat('suppression-avis-google.html','online-reputation-management.html');
 const server = http.createServer((req,res) => {
   const file = path.resolve(root, '.' + decodeURIComponent(new URL(req.url,'http://localhost').pathname === '/' ? '/index.html' : new URL(req.url,'http://localhost').pathname));
   if (!file.startsWith(root + path.sep) || !fs.existsSync(file)) { res.writeHead(404).end(); return; }
@@ -57,9 +57,9 @@ const server = http.createServer((req,res) => {
       assert.equal(await form.locator('[name="business_url"]').inputValue(),'https://example.ca/profile');
       if(!inline)await form.locator('.enquiry-actions button').filter({hasText:/Continue|Continuer/}).click();
       if (file!=='online-reputation-management.html') {
-        const fee=await page.evaluate(()=>Number(document.body.dataset.successFee||50));
-        assert.equal(fee,50,'The success fee is CAD $50 for every platform');
-        assert.match(await page.locator('#combinedTotal').textContent(),new RegExp(String(3*(25+fee))));
+        const fee=await page.evaluate(()=>Number(document.body.dataset.successFee||90));
+        assert.equal(fee,90,'The success fee is CAD $90 for every platform');
+        assert.match(await page.locator('#combinedTotal').textContent(),new RegExp(String(3*(50+fee))));
       }
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,file+' overflow');
       const legal=form.locator('.submission-legal');
@@ -74,7 +74,7 @@ const server = http.createServer((req,res) => {
       assert.equal(requests[0].get('full_name'),'Élodie Test');
       assert.equal(requests[0].get('contact_detail'),'test+case@example.ca');
       assert.match(requests[0].get('reason'),/Request reference: RB-/);
-      assert.equal(requests[0].get('terms_version'),'2026-11-02');
+      assert.equal(requests[0].get('terms_version'),'2026-11-05');
       assert.match(requests[0].get('reason'),/\[Submission acknowledgement\]/);
       assert.match(requests[0].get('reason'),/https:\/\/reviewsboost.ca\/terms-of-service.html/);
       assert.equal((requests[0].get('reason').match(/\[Submission acknowledgement\]/g)||[]).length,1,'Record terms once');
@@ -82,7 +82,7 @@ const server = http.createServer((req,res) => {
       assert.match(requests[0].get('terms_acknowledged_at_client'),/^\d{4}-\d\d-\d\dT/);
       if (file!=='online-reputation-management.html') {
         assert.equal(requests[0].get('review_count'),'3');
-        assert.match(requests[0].get('selected_plan'),/\$75 upfront \+ \$50 per successfully removed review/,'Submitted quote uses the updated per-review fees');
+        assert.match(requests[0].get('selected_plan'),/\$150 upfront \+ \$90 per successfully removed review/,'Submitted quote uses the updated per-review fees');
       }
       const success=page.locator('.submission-success:not([hidden]), .platform-success:not([hidden])');
       assert.match(await success.textContent(),/RB-/);
@@ -162,6 +162,6 @@ const server = http.createServer((req,res) => {
     await page.keyboard.press('Shift+Tab');
     assert.equal(await page.evaluate(()=>document.activeElement.closest('#removalForm')===null),true,'Inline form does not trap focus');
     await page.close();
-    console.log('PASS: 8 forms at desktop/mobile, quantity scroll, totals, preserved back navigation, Unicode payloads, one POST, saved receipts, failure retention and keyboard validation.');
+    console.log(`PASS: ${pages.length} active forms at desktop/mobile, quantity scroll, totals, preserved back navigation, Unicode payloads, one POST, saved receipts, failure retention and keyboard validation.`);
   } finally { await browser.close();server.close(); }
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});

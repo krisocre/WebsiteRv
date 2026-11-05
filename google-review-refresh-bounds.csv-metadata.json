@@ -1,0 +1,74 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-review-refresh-bounds.csv",
+  "dc:title": "Google review snapshot coverage audit — google-review-refresh-bounds.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "dc:source": [
+    "https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places",
+    "https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list",
+    "https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews",
+    "https://support.google.com/business/answer/10313341?hl=en",
+    "https://developers.google.com/maps/documentation/places/web-service/policies?hl=en",
+    "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Hypergeometric.html",
+    "https://business.columbia.edu/sites/default/files-efs/citation_file_upload/Schoenmueller_Netzer_Stahl_2020.pdf"
+  ],
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "dc:description": "record type"
+      },
+      {
+        "name": "population_n",
+        "datatype": "integer",
+        "dc:description": "population n"
+      },
+      {
+        "name": "records_per_response",
+        "datatype": "integer",
+        "dc:description": "records per response"
+      },
+      {
+        "name": "snapshots_t",
+        "datatype": "integer",
+        "dc:description": "snapshots t"
+      },
+      {
+        "name": "minimum_unique_records",
+        "datatype": "integer",
+        "dc:description": "Distinct records if each complete response repeats the same five."
+      },
+      {
+        "name": "maximum_unique_records",
+        "datatype": "integer",
+        "dc:description": "min(N,5T), attained only when repeated responses have as little overlap as possible."
+      },
+      {
+        "name": "minimum_unique_coverage_pct",
+        "datatype": "number",
+        "dc:description": "minimum unique coverage pct"
+      },
+      {
+        "name": "maximum_unique_coverage_pct",
+        "datatype": "number",
+        "dc:description": "maximum unique coverage pct"
+      },
+      {
+        "name": "source_ids",
+        "datatype": "string",
+        "dc:description": "source ids"
+      },
+      {
+        "name": "assumptions",
+        "datatype": "string",
+        "dc:description": "assumptions"
+      }
+    ]
+  }
+}

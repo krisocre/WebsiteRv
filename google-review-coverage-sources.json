@@ -1,0 +1,159 @@
+{
+  "checked": "2026-11-05",
+  "sources": [
+    {
+      "id": "places",
+      "title": "Google Places API (New): Place resource",
+      "url": "https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places",
+      "locator": "Fields: reviews, rating and userRatingCount",
+      "sha256": "ad46f7d5fadc6d778bceadaa4f197f1fe8dd815fb87f565e7cb57268a91cf151",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "gbp-list",
+      "title": "Google Business Profile API: reviews.list",
+      "url": "https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list",
+      "locator": "Query parameters, response body and authorization scopes",
+      "sha256": "d0e23e23f791812053767f29fc45796bc2bfefb76c80559e90ccf3e4dbc9672e",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "gbp-review",
+      "title": "Google Business Profile API: Review resource",
+      "url": "https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews",
+      "locator": "Review: reviewId, createTime and updateTime",
+      "sha256": "fb1c4710ff1de258884a03f09fba4b0c039a684784f93607d1f91bf0770fde5b",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "missing",
+      "title": "Google Business Profile Help: missing or delayed reviews",
+      "url": "https://support.google.com/business/answer/10313341?hl=en",
+      "locator": "Reasons a review may be delayed or absent",
+      "sha256": "efec551984aeb845687a48d380b155e068635fd3dfd103f2a8adaa8aba59bdd2",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "places-policy",
+      "title": "Google Places API policies and attributions",
+      "url": "https://developers.google.com/maps/documentation/places/web-service/policies?hl=en",
+      "locator": "Storage and attribution requirements",
+      "sha256": "a624f22982be485a177662799e080ae194e36fd8a0622ccf98d7a1b854c6a0f8",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "hypergeometric",
+      "title": "R stats reference: Hypergeometric distribution",
+      "url": "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Hypergeometric.html",
+      "locator": "Details: sampling without replacement",
+      "sha256": "24c47cb20a51596203573212db025ecfceb5b80245640826b3dae3c5836eb675",
+      "accessed": "2026-11-05"
+    },
+    {
+      "id": "polarity",
+      "title": "Schoenmueller, Netzer and Stahl (2020): The Polarity of Online Reviews",
+      "url": "https://business.columbia.edu/sites/default/files-efs/citation_file_upload/Schoenmueller_Netzer_Stahl_2020.pdf",
+      "locator": "Abstract and discussion; Journal of Marketing Research 57(5), 853–877; DOI 10.1177/0022243720941832",
+      "sha256": "6d1c31a76b4726b65347ec7b63db4552953ff81d4278b0e308546a56a11e0455",
+      "accessed": "2026-11-05"
+    }
+  ],
+  "facts": [
+    {
+      "record_id": "F01",
+      "source_id": "places",
+      "field": "reviews",
+      "value": "5",
+      "value_type": "integer_maximum",
+      "interpretation": "At most five review records in one Places (New) response; fewer are possible."
+    },
+    {
+      "record_id": "F02",
+      "source_id": "places",
+      "field": "reviews",
+      "value": "relevance",
+      "value_type": "ordering",
+      "interpretation": "This endpoint documents relevance ordering, not uniform random sampling."
+    },
+    {
+      "record_id": "F03",
+      "source_id": "places",
+      "field": "userRatingCount",
+      "value": "with_or_without_text",
+      "value_type": "denominator_scope",
+      "interpretation": "The aggregate count includes ratings with and without written comments."
+    },
+    {
+      "record_id": "F04",
+      "source_id": "places",
+      "field": "rating",
+      "value": "aggregate_rating",
+      "value_type": "aggregate",
+      "interpretation": "A separate aggregate rating exists; do not recompute it from five excerpts."
+    },
+    {
+      "record_id": "F05",
+      "source_id": "gbp-list",
+      "field": "pageSize",
+      "value": "50",
+      "value_type": "integer_maximum",
+      "interpretation": "Maximum requested page size; this is not a 50-review cap for the entire location."
+    },
+    {
+      "record_id": "F06",
+      "source_id": "gbp-list",
+      "field": "nextPageToken",
+      "value": "pagination",
+      "value_type": "continuation",
+      "interpretation": "Use returned continuation tokens to request later pages."
+    },
+    {
+      "record_id": "F07",
+      "source_id": "gbp-list",
+      "field": "location",
+      "value": "verified",
+      "value_type": "access_condition",
+      "interpretation": "The review-list operation requires a verified location and appropriate authorization."
+    },
+    {
+      "record_id": "F08",
+      "source_id": "gbp-list",
+      "field": "orderBy",
+      "value": "updateTime desc",
+      "value_type": "default_order",
+      "interpretation": "The documented default orders by most recently modified, not necessarily most recently created."
+    },
+    {
+      "record_id": "F09",
+      "source_id": "gbp-list",
+      "field": "totalReviewCount,averageRating",
+      "value": "aggregate_fields",
+      "value_type": "aggregate",
+      "interpretation": "The response separates aggregate count/rating from review records and pagination."
+    },
+    {
+      "record_id": "F10",
+      "source_id": "gbp-review",
+      "field": "createTime,updateTime",
+      "value": "separate_timestamps",
+      "value_type": "time_semantics",
+      "interpretation": "Review creation and latest modification are distinct fields."
+    },
+    {
+      "record_id": "F11",
+      "source_id": "missing",
+      "field": "missing_reviews",
+      "value": "multiple_explanations",
+      "value_type": "interpretation_limit",
+      "interpretation": "Delay, profile changes and policy enforcement can affect visibility; widget absence is not a removal verdict."
+    },
+    {
+      "record_id": "F12",
+      "source_id": "places-policy",
+      "field": "content_use",
+      "value": "storage_and_attribution_rules",
+      "value_type": "implementation_condition",
+      "interpretation": "API availability does not grant unrestricted retention or republication of review content."
+    }
+  ]
+}

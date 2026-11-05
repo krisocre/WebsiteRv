@@ -1,4 +1,6 @@
 exclude:
+  - apply-commercial-seo.cjs
+  - COMMERCIAL-SEO-UPDATE.md
   - _retired
   - tests
   - research-sources
@@ -24,3 +26,4 @@ exclude:
   - HOMEPAGE-IMPROVEMENTS.md
   - GOOGLE-LANGUAGE-RESEARCH-NOTES.md
   - GOOGLE-STAFF-NAME-RESEARCH-NOTES.md
+  - GOOGLE-COVERAGE-RESEARCH-NOTES.md

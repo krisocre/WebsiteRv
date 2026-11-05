@@ -1,0 +1,13 @@
+record_id,source_id,field,value,value_type,interpretation
+F01,places,reviews,5,integer_maximum,At most five review records in one Places (New) response; fewer are possible.
+F02,places,reviews,relevance,ordering,"This endpoint documents relevance ordering, not uniform random sampling."
+F03,places,userRatingCount,with_or_without_text,denominator_scope,The aggregate count includes ratings with and without written comments.
+F04,places,rating,aggregate_rating,aggregate,A separate aggregate rating exists; do not recompute it from five excerpts.
+F05,gbp-list,pageSize,50,integer_maximum,Maximum requested page size; this is not a 50-review cap for the entire location.
+F06,gbp-list,nextPageToken,pagination,continuation,Use returned continuation tokens to request later pages.
+F07,gbp-list,location,verified,access_condition,The review-list operation requires a verified location and appropriate authorization.
+F08,gbp-list,orderBy,updateTime desc,default_order,"The documented default orders by most recently modified, not necessarily most recently created."
+F09,gbp-list,"totalReviewCount,averageRating",aggregate_fields,aggregate,The response separates aggregate count/rating from review records and pagination.
+F10,gbp-review,"createTime,updateTime",separate_timestamps,time_semantics,Review creation and latest modification are distinct fields.
+F11,missing,missing_reviews,multiple_explanations,interpretation_limit,"Delay, profile changes and policy enforcement can affect visibility; widget absence is not a removal verdict."
+F12,places-policy,content_use,storage_and_attribution_rules,implementation_condition,API availability does not grant unrestricted retention or republication of review content.

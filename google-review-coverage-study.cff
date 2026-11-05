@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "Cite the compilation and calculations; distinguish them from observed Google outcomes."
+type: dataset
+title: "Google review widget coverage: documentation audit and constructed reference calculations"
+authors:
+  - name: "ReviewsBoost Editorial Team"
+version: 1.0.0
+date-released: 2026-11-05
+url: https://reviewsboost.ca/google-review-widget-coverage-study.html
+license: CC-BY-4.0

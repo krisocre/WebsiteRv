@@ -55,13 +55,13 @@ const server=http.createServer((req,res)=>{
    if(width<700){await page.click('#hamburger');assert.equal(await page.$eval('#hamburger',e=>e.getAttribute('aria-expanded')),'true');await page.click('#hamburger');}
   }
   await page.$eval('#reviewQuantity',e=>{e.value=3;e.dispatchEvent(new Event('input',{bubbles:true}));});
-  assert.equal(await page.$eval('#combinedTotal',e=>e.textContent),'$225');assert.equal(await page.$eval('#upfrontTotal',e=>e.textContent),'$75');assert.equal(await page.$eval('#successTotal',e=>e.textContent),'$150');
+  assert.equal(await page.$eval('#combinedTotal',e=>e.textContent),'$420');assert.equal(await page.$eval('#upfrontTotal',e=>e.textContent),'$150');assert.equal(await page.$eval('#successTotal',e=>e.textContent),'$270');
   assert.equal(await page.$eval('#formReviewQuantity',e=>e.value),'3');
-  assert.equal(await page.$eval('[data-estimate="total"]',e=>e.textContent),'$225');
+  assert.equal(await page.$eval('[data-estimate="total"]',e=>e.textContent),'$420');
   await page.$eval('#formReviewQuantity',e=>{e.value=4;e.dispatchEvent(new Event('input',{bubbles:true}));});
   assert.equal(await page.$eval('#reviewQuantity',e=>e.value),'4');
-  assert.equal(await page.$eval('[data-estimate="total"]',e=>e.textContent),'$300');
-  assert.match(await page.$eval('#selectedPlan',e=>e.value),/\$100 upfront \+ \$50 per successfully removed review/);
+  assert.equal(await page.$eval('[data-estimate="total"]',e=>e.textContent),'$560');
+  assert.match(await page.$eval('#selectedPlan',e=>e.value),/\$200 upfront \+ \$90 per successfully removed review/);
   await page.setJavaScriptEnabled(false);await page.goto(base,{waitUntil:'load'});assert.ok(await page.$eval('noscript .no-script-request',e=>e.getClientRects().length>0));
   assert.equal(await page.$eval('#removalForm',e=>e.getClientRects().length>0&&e.method==='post'),true,'Native form remains visible and never sends personal details with GET');
   assert.deepEqual(errors,[]);assert.deepEqual(posts,[]);fs.writeFileSync(path.join(output,'layout-results.json'),JSON.stringify(layouts,null,2));

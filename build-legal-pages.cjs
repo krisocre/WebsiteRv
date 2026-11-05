@@ -3,7 +3,7 @@
    ReviewsBoost: node build-legal-pages.cjs after editing or generating form pages. */
 const fs=require('node:fs');
 const path=require('node:path');
-const VERSION='2026-11-02';
+const VERSION='2026-11-05';
 const EFFECTIVE_LABEL=new Date(VERSION+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'America/Toronto'});
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
@@ -19,8 +19,8 @@ function build(originOverride){
  const contactLinksOnly=html=>html.replace(/<a\b[^>]*href="mailto:[^"]*"[^>]*>[\s\S]*?<\/a\s*>/g,`<a href="${contactPath}">Contact us</a>`);
  const identity=legalName?`${escape(legalName)}${mailingAddress?`, ${escape(mailingAddress)}`:''}`:`the supplier identified in your written order confirmation`;
  const identityFr=legalName?`${escape(legalName)}${mailingAddress?`, ${escape(mailingAddress)}`:''}`:`le fournisseur identifié dans votre confirmation de commande écrite`;
- const fees=removal?'CAD $50 upfront per accepted review and CAD $125 for each successfully removed review':'CAD $25 upfront per accepted review and CAD $50 for each successfully removed review, across all supported review platforms';
- const feesFr=removal?'50 $ CA de frais initiaux par avis accepté et 125 $ CA par avis supprimé avec succès':'25 $ CA de frais initiaux par avis accepté et 50 $ CA par avis supprimé avec succès, pour toutes les plateformes d’avis prises en charge';
+ const fees=removal?'CAD $50 upfront per accepted review and CAD $125 for each successfully removed review':'CAD $50 upfront per accepted review and CAD $90 for each successfully removed review, across all supported review platforms';
+ const feesFr=removal?'50 $ CA de frais initiaux par avis accepté et 125 $ CA par avis supprimé avec succès':'50 $ CA de frais initiaux par avis accepté et 90 $ CA par avis supprimé avec succès, pour toutes les plateformes d’avis prises en charge';
  const section=(id,title,body)=>`<section id="${id}"><h2>${title}</h2>${body}</section>`;
  const para=text=>`<p>${text}</p>`;
  const en=[

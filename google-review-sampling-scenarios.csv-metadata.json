@@ -1,0 +1,84 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-review-sampling-scenarios.csv",
+  "dc:title": "Google review snapshot coverage audit — google-review-sampling-scenarios.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "dc:source": [
+    "https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places",
+    "https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list",
+    "https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews",
+    "https://support.google.com/business/answer/10313341?hl=en",
+    "https://developers.google.com/maps/documentation/places/web-service/policies?hl=en",
+    "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Hypergeometric.html",
+    "https://business.columbia.edu/sites/default/files-efs/citation_file_upload/Schoenmueller_Netzer_Stahl_2020.pdf"
+  ],
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "dc:description": "record type"
+      },
+      {
+        "name": "population_n",
+        "datatype": "integer",
+        "dc:description": "population n"
+      },
+      {
+        "name": "target_records_k",
+        "datatype": "integer",
+        "dc:description": "Hypothetical target records of interest; no assumption about rating, fraud or policy violation."
+      },
+      {
+        "name": "sample_size_s",
+        "datatype": "integer",
+        "dc:description": "sample size s"
+      },
+      {
+        "name": "miss_numerator",
+        "datatype": "integer",
+        "dc:description": "Exact reduced-fraction numerator; represented as a string in JSON to preserve large integers."
+      },
+      {
+        "name": "miss_denominator",
+        "datatype": "integer",
+        "dc:description": "Exact reduced-fraction denominator; represented as a string in JSON to preserve large integers."
+      },
+      {
+        "name": "miss_probability",
+        "datatype": "number",
+        "dc:description": "Exact hypergeometric miss fraction converted to decimal; not an observed Google rate."
+      },
+      {
+        "name": "detect_probability",
+        "datatype": "number",
+        "dc:description": "One minus the model miss probability; no inference about actual relevance ranking."
+      },
+      {
+        "name": "miss_pct",
+        "datatype": "number",
+        "dc:description": "miss pct"
+      },
+      {
+        "name": "detect_pct",
+        "datatype": "number",
+        "dc:description": "detect pct"
+      },
+      {
+        "name": "source_ids",
+        "datatype": "string",
+        "dc:description": "source ids"
+      },
+      {
+        "name": "assumptions",
+        "datatype": "string",
+        "dc:description": "assumptions"
+      }
+    ]
+  }
+}

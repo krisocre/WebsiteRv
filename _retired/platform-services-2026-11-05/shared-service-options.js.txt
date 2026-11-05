@@ -1,0 +1,8 @@
+  var serviceOptions = [
+    { name: 'Google', label: 'Google Review Removal', frLabel: 'Suppression d’avis Google', mark: 'G', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: '/', color: '#4285f4' },
+    { name: 'Facebook', label: 'Facebook Review Removal', frLabel: 'Suppression d’avis Facebook', mark: 'FB', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-facebook-reviews.html', color: '#1b63b7' },
+    { name: 'Yelp', label: 'Yelp Review Removal', frLabel: 'Suppression d’avis Yelp', mark: 'Y', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-yelp-reviews.html', color: '#c81e2b' },
+    { name: 'Tripadvisor', label: 'Tripadvisor Review Removal', frLabel: 'Suppression d’avis Tripadvisor', mark: 'TA', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-tripadvisor-reviews.html', color: '#006b5e' },
+    { name: 'Trustpilot', label: 'Trustpilot Review Removal', frLabel: 'Suppression d’avis Trustpilot', mark: 'TP', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-trustpilot-reviews.html', color: '#006b55' },
+    { name: 'Glassdoor', label: 'Glassdoor Review Removal', frLabel: 'Suppression d’avis Glassdoor', mark: 'GD', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-glassdoor-reviews.html', color: '#116b31' }
+  ];

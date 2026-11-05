@@ -1,0 +1,22 @@
+{
+  "remove-facebook-reviews.html": {
+    "archive": "_retired/platform-services-2026-11-05/remove-facebook-reviews.html.txt",
+    "sha256": "6c509199a6d065b2b471158f16b2094932b3d638d24b39700e2f5a1fae6fa353",
+    "enabled": false
+  },
+  "remove-tripadvisor-reviews.html": {
+    "archive": "_retired/platform-services-2026-11-05/remove-tripadvisor-reviews.html.txt",
+    "sha256": "908a26a5bb8bb5333c4f72ed5f795464b38ad0353817b9d179214c3939c04323",
+    "enabled": false
+  },
+  "remove-trustpilot-reviews.html": {
+    "archive": "_retired/platform-services-2026-11-05/remove-trustpilot-reviews.html.txt",
+    "sha256": "fce6e233bee9490a453172a80dddc7618f542cd720097515b36302ff046815ae",
+    "enabled": false
+  },
+  "remove-glassdoor-reviews.html": {
+    "archive": "_retired/platform-services-2026-11-05/remove-glassdoor-reviews.html.txt",
+    "sha256": "b8911c40dca00fe0e527c327daac290fe406258fac992f4002abc853b453962f",
+    "enabled": false
+  }
+}

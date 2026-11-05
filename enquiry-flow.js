@@ -6,7 +6,7 @@
   var reputation = form.id === 'reputationForm';
   var inline = form.hasAttribute('data-inline-enquiry');
   var platform = reputation ? 'Reputation' : document.body.dataset.platform || 'Google';
-  var fee = Number(document.body.dataset.successFee || 50);
+  var fee = Number(document.body.dataset.successFee || 90);
   var submit = form.querySelector('[type="submit"]');
   var status = form.querySelector('[role="status"]');
   var success = document.getElementById('removalSuccess') || document.getElementById('platformSuccess');
@@ -137,10 +137,10 @@
     if (reputation) { summary.textContent = 'Tell us what you need. We will discuss the scope and price before any paid work is agreed.'; return; }
     var n = Number(field('review_count').value) || 1;
     summary.textContent = fr
-      ? n + ' avis · ' + n * 25 + ' $ CA de frais initiaux si vous commandez · +' + fee + ' $ par avis supprimé · ' + n * (25 + fee) + ' $ de frais au total si tous sont supprimés.'
-      : n + (n === 1 ? ' review' : ' reviews') + ' · CAD $' + n * 25 + ' initial fee if you proceed · +$' + fee + ' per removed review · $' + n * (25 + fee) + ' total service fees if all are removed.';
+      ? n + ' avis · ' + n * 50 + ' $ CA de frais initiaux si vous commandez · +' + fee + ' $ par avis supprimé · ' + n * (50 + fee) + ' $ de frais au total si tous sont supprimés.'
+      : n + (n === 1 ? ' review' : ' reviews') + ' · CAD $' + n * 50 + ' initial fee if you proceed · +$' + fee + ' per removed review · $' + n * (50 + fee) + ' total service fees if all are removed.';
     var total = document.getElementById('combinedTotal');
-    if (total) total.textContent = fr ? n * (25 + fee) + ' $' : '$' + n * (25 + fee);
+    if (total) total.textContent = fr ? n * (50 + fee) + ' $' : '$' + n * (50 + fee);
   }
   function focus() {
     var input = stages[step].querySelector('input, select, textarea');

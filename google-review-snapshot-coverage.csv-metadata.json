@@ -1,0 +1,64 @@
+{
+  "@context": "http://www.w3.org/ns/csvw",
+  "url": "https://reviewsboost.ca/google-review-snapshot-coverage.csv",
+  "dc:title": "Google review snapshot coverage audit — google-review-snapshot-coverage.csv",
+  "dc:license": "https://creativecommons.org/licenses/by/4.0/",
+  "dc:source": [
+    "https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places",
+    "https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews/list",
+    "https://developers.google.com/my-business/reference/rest/v4/accounts.locations.reviews",
+    "https://support.google.com/business/answer/10313341?hl=en",
+    "https://developers.google.com/maps/documentation/places/web-service/policies?hl=en",
+    "https://stat.ethz.ch/R-manual/R-devel/library/stats/html/Hypergeometric.html",
+    "https://business.columbia.edu/sites/default/files-efs/citation_file_upload/Schoenmueller_Netzer_Stahl_2020.pdf"
+  ],
+  "tableSchema": {
+    "columns": [
+      {
+        "name": "record_id",
+        "datatype": "string",
+        "dc:description": "record id"
+      },
+      {
+        "name": "record_type",
+        "datatype": "string",
+        "dc:description": "record type"
+      },
+      {
+        "name": "total_ratings_n",
+        "datatype": "integer",
+        "dc:description": "Constructed aggregate count, including ratings without comments; not sampled Google businesses."
+      },
+      {
+        "name": "max_places_records",
+        "datatype": "integer",
+        "dc:description": "max places records"
+      },
+      {
+        "name": "max_count_coverage_pct",
+        "datatype": "number",
+        "dc:description": "100 × min(5,N)/N, an upper bound on record-count coverage, not text-review completeness."
+      },
+      {
+        "name": "minimum_records_not_in_response",
+        "datatype": "integer",
+        "dc:description": "minimum records not in response"
+      },
+      {
+        "name": "gbp_pages_at_50_full_records",
+        "datatype": "integer",
+        "dc:description": "Ceiling of N/50 under stable/full-page assumptions; real pagination can differ."
+      },
+      {
+        "name": "source_ids",
+        "datatype": "string",
+        "dc:description": "source ids"
+      },
+      {
+        "name": "assumptions",
+        "datatype": "string",
+        "dc:description": "assumptions"
+      }
+    ]
+  }
+}
