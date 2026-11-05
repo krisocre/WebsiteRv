@@ -21,11 +21,11 @@ for(const [file,m] of Object.entries(metadata)){
   assert.equal(data.find(s=>s['@type']==='WebPage').mainEntity['@id'],'https://reviewsboost.ca/#service');
  }
  if(['index.html','remove-yelp-reviews.html','suppression-avis-google.html'].includes(file)){
-  assert.equal(service.offers.price,'50');assert.equal(service.offers.priceCurrency,'CAD');assert.match(service.offers.description,/90/);
+  assert.equal(service.offers.price,'45');assert.equal(service.offers.priceCurrency,'CAD');assert.match(service.offers.description,/95/);
  }
  if(file==='remove-yelp-reviews.html')assert.equal(service.serviceType,'Yelp review removal assistance');
- if(file==='remove-yelp-reviews.html')assert.ok(html.includes('starting fee is $250. If three reviews are removed, the success fees add $270, for a total of $520 CAD.'));
- if(file==='suppression-avis-google.html')assert.ok(html.includes('coûtent 250 $ au départ. Si trois avis sont supprimés, les frais de réussite ajoutent 270 $, pour un total de 520 $ CA.'));
+ if(file==='remove-yelp-reviews.html')assert.ok(html.includes('starting fee is $225. If three reviews are removed, the success fees add $285, for a total of $510 CAD.'));
+ if(file==='suppression-avis-google.html')assert.ok(html.includes('coûtent 225 $ au départ. Si trois avis sont supprimés, les frais de réussite ajoutent 285 $, pour un total de 510 $ CA.'));
 }
 const archive=JSON.parse(read('_retired/platform-services-2026-11-05/manifest.json'));
 for(const service of inactive){
@@ -41,7 +41,7 @@ for(const service of inactive){
 }
 assert.match(read('_config.yml'),/\n\s*- _retired\s*\r?\n/);
 assert.ok(!/^- \[(?:Facebook|Tripadvisor|Trustpilot|Glassdoor) review removal\]/m.test(read('llms.txt')));
-assert.ok(read('llms.txt').includes('CAD $50 upfront per accepted review plus $90'));
+assert.ok(read('llms.txt').includes('CAD $45 upfront per accepted review plus $95'));
 assert.ok(!/typical 1[–-]2 week removal timeline/.test(read('llms.txt')));
 if(process.env.COMMERCIAL_SEO_BASELINE){
  const base=path.resolve(process.env.COMMERCIAL_SEO_BASELINE),manifest=JSON.parse(fs.readFileSync(path.join(base,'before-hashes.json'),'utf8'));

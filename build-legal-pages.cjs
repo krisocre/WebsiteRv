@@ -3,8 +3,9 @@
    ReviewsBoost: node build-legal-pages.cjs after editing or generating form pages. */
 const fs=require('node:fs');
 const path=require('node:path');
-const VERSION='2026-11-05';
-const EFFECTIVE_LABEL=new Date(VERSION+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'America/Toronto'});
+const VERSION='2026-11-05-v2';
+const EFFECTIVE_DATE='2026-11-05';
+const EFFECTIVE_LABEL=new Date(EFFECTIVE_DATE+'T12:00:00Z').toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric',timeZone:'America/Toronto'});
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 function build(originOverride){
@@ -19,8 +20,8 @@ function build(originOverride){
  const contactLinksOnly=html=>html.replace(/<a\b[^>]*href="mailto:[^"]*"[^>]*>[\s\S]*?<\/a\s*>/g,`<a href="${contactPath}">Contact us</a>`);
  const identity=legalName?`${escape(legalName)}${mailingAddress?`, ${escape(mailingAddress)}`:''}`:`the supplier identified in your written order confirmation`;
  const identityFr=legalName?`${escape(legalName)}${mailingAddress?`, ${escape(mailingAddress)}`:''}`:`le fournisseur identifié dans votre confirmation de commande écrite`;
- const fees=removal?'CAD $50 upfront per accepted review and CAD $125 for each successfully removed review':'CAD $50 upfront per accepted review and CAD $90 for each successfully removed review, across all supported review platforms';
- const feesFr=removal?'50 $ CA de frais initiaux par avis accepté et 125 $ CA par avis supprimé avec succès':'50 $ CA de frais initiaux par avis accepté et 90 $ CA par avis supprimé avec succès, pour toutes les plateformes d’avis prises en charge';
+ const fees=removal?'CAD $50 upfront per accepted review and CAD $125 for each successfully removed review':'CAD $45 upfront per accepted review and CAD $95 for each successfully removed review, across all supported review platforms';
+ const feesFr=removal?'50 $ CA de frais initiaux par avis accepté et 125 $ CA par avis supprimé avec succès':'45 $ CA de frais initiaux par avis accepté et 95 $ CA par avis supprimé avec succès, pour toutes les plateformes d’avis prises en charge';
  const section=(id,title,body)=>`<section id="${id}"><h2>${title}</h2>${body}</section>`;
  const para=text=>`<p>${text}</p>`;
  const en=[
@@ -76,7 +77,7 @@ function build(originOverride){
  }
  const archiveDir=path.join(root,'legal-versions');
  fs.mkdirSync(archiveDir,{recursive:true});
- const snapshot={brand,version:VERSION,effectiveDate:VERSION,origin,
+ const snapshot={brand,version:VERSION,effectiveDate:EFFECTIVE_DATE,origin,
   notice:'The submit action follows a linked notice. This snapshot is a record of published terms, not independent evidence of identity, reading or assent.',
   terms:{english:en,french:fr},privacy:{english:privacyEn,french:privacyFr}};
  fs.writeFileSync(path.join(archiveDir,`policies-${VERSION}.json`),JSON.stringify(snapshot,null,2)+'\n');
@@ -89,7 +90,7 @@ function build(originOverride){
  ]){
   const name=kind==='terms'?'Terms of service':'Privacy policy';
   const body=removal?`<section class="legal-hero"><div class="wrap"><p class="eyebrow">${brand} / Policies</p><h1>${name}</h1><p>Effective ${EFFECTIVE_LABEL} · Version ${VERSION}</p></div></section><div class="wrap legal-body">${content(kind)}</div>`:`<header class="hero"><div class="container"><p class="eyebrow">Service policy</p><h1>${name}</h1><p class="lede">${kind==='terms'?'The terms for your request and any service you approve.':'How we handle the information you share.'}</p><div class="meta-row">Effective ${EFFECTIVE_LABEL} · Version ${VERSION}</div></div></header><div class="container legal-body prose">${content(kind)}</div>`;
-  const schema={'@context':'https://schema.org','@type':'WebPage','name':brand+' '+name,'url':origin+'/'+file,'dateModified':VERSION,'inLanguage':['en-CA','fr-CA'],'publisher':{'@type':'Organization','name':brand,'url':origin+'/'}};
+  const schema={'@context':'https://schema.org','@type':'WebPage','name':brand+' '+name,'url':origin+'/'+file,'dateModified':EFFECTIVE_DATE,'inLanguage':['en-CA','fr-CA'],'publisher':{'@type':'Organization','name':brand,'url':origin+'/'}};
   const image=origin+(removal?'/assets/reviewremoval-social.png':'/social-card.png');
   const page=`<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}</title><meta name="description" content="${escape(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="${origin}/${file}"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${removal?'styles.css':'content.css'}"><link rel="stylesheet" href="legal-notice.css"><meta property="og:type" content="website"><meta property="og:site_name" content="${brand}"><meta property="og:locale" content="en_CA"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${origin}/${file}"><meta property="og:image" content="${image}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${image}"><script type="application/ld+json">${JSON.stringify(schema)}</script>${removal?'<script src="script.js" defer></script>':''}</head><body class="legal-page" id="top"><a class="skip-link" href="#main">Skip to main content</a>${header}<main id="main">${body}</main>${footer}</body></html>\n`;
   // ReviewRemoval's domain pass supplies canonical/social/robots tags once.
@@ -101,7 +102,7 @@ function build(originOverride){
   if(fs.existsSync(refundFile)){
    let refund=fs.readFileSync(refundFile,'utf8');
    const main=`<main id="main"><header class="hero"><div class="container"><p class="eyebrow">Customer information</p><h1>Fees, cancellations and refunds</h1><p class="lede">Your request is free to submit. Review the fees and cancellation rules before approving paid work.</p><div class="meta-row">Effective ${EFFECTIVE_LABEL}</div></div></header><div class="container legal-body prose"><p>These details form part of the <a href="terms-of-service.html">Terms of Service</a>. An enquiry does not authorize payment. Removal is not guaranteed.</p>${section(...en[5])}${section(...en[6])}<div class="legal-translation" lang="fr-CA"><h2>Frais, annulation et remboursement</h2><p>L’envoi de la demande est gratuit et n’autorise aucun paiement. La suppression n’est pas garantie. Consultez les <a href="terms-of-service.html#conditions-francaises">Conditions de service en français</a>.</p>${section(...fr[5])}${section(...fr[6])}</div></div></main>`;
-   refund=refund.replace(/<main\b[^>]*>[\s\S]*?<\/main>/,main).replace(/"dateModified":\s*"[0-9-]+"/g,`"dateModified":"${VERSION}"`);
+   refund=refund.replace(/<main\b[^>]*>[\s\S]*?<\/main>/,main).replace(/"dateModified":\s*"[0-9-]+"/g,`"dateModified":"${EFFECTIVE_DATE}"`);
    if(!refund.includes('href="legal-notice.css"'))refund=refund.replace('</head>','<link rel="stylesheet" href="legal-notice.css">\n</head>');
    fs.writeFileSync(refundFile,contactLinksOnly(refund));
   }
@@ -110,7 +111,7 @@ function build(originOverride){
    let sitemap=fs.readFileSync(sitemapFile,'utf8');
    for(const name of ['terms-of-service.html','privacy-policy.html','refund-policy.html']){
     const url=origin+'/'+name;
-    sitemap=sitemap.replace(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g,(entry,loc)=>loc===url?entry.replace(/<lastmod>[^<]+<\/lastmod>/,`<lastmod>${VERSION}</lastmod>`):entry);
+    sitemap=sitemap.replace(/<url>\s*<loc>([^<]+)<\/loc>([\s\S]*?)<\/url>/g,(entry,loc)=>loc===url?entry.replace(/<lastmod>[^<]+<\/lastmod>/,`<lastmod>${EFFECTIVE_DATE}</lastmod>`):entry);
    }
    fs.writeFileSync(sitemapFile,sitemap);
   }

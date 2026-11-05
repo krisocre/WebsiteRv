@@ -23,12 +23,12 @@
   var servicesMenuButton = document.getElementById('servicesMenuButton');
   var servicesMenuFooter = document.querySelector('.services-dropdown-footer');
   var serviceOptions = [
-    { name: 'Google', label: 'Google Review Removal', frLabel: 'Suppression d’avis Google', mark: 'G', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: '/', color: '#4285f4' },
-    { name: 'Facebook', label: 'Facebook Review Removal', frLabel: 'Suppression d’avis Facebook', mark: 'FB', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-facebook-reviews.html', color: '#1b63b7' },
-    { name: 'Yelp', label: 'Yelp Review Removal', frLabel: 'Suppression d’avis Yelp', mark: 'Y', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-yelp-reviews.html', color: '#c81e2b' },
-    { name: 'Tripadvisor', label: 'Tripadvisor Review Removal', frLabel: 'Suppression d’avis Tripadvisor', mark: 'TA', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-tripadvisor-reviews.html', color: '#006b5e' },
-    { name: 'Trustpilot', label: 'Trustpilot Review Removal', frLabel: 'Suppression d’avis Trustpilot', mark: 'TP', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-trustpilot-reviews.html', color: '#006b55' },
-    { name: 'Glassdoor', label: 'Glassdoor Review Removal', frLabel: 'Suppression d’avis Glassdoor', mark: 'GD', fee: '$50 upfront + $90 after removal', frFee: '50 $ au départ + 90 $ après suppression', href: 'remove-glassdoor-reviews.html', color: '#116b31' }
+    { name: 'Google', label: 'Google Review Removal', frLabel: 'Suppression d’avis Google', mark: 'G', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: '/', color: '#4285f4' },
+    { name: 'Facebook', label: 'Facebook Review Removal', frLabel: 'Suppression d’avis Facebook', mark: 'FB', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-facebook-reviews.html', color: '#1b63b7' },
+    { name: 'Yelp', label: 'Yelp Review Removal', frLabel: 'Suppression d’avis Yelp', mark: 'Y', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-yelp-reviews.html', color: '#c81e2b' },
+    { name: 'Tripadvisor', label: 'Tripadvisor Review Removal', frLabel: 'Suppression d’avis Tripadvisor', mark: 'TA', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-tripadvisor-reviews.html', color: '#006b5e' },
+    { name: 'Trustpilot', label: 'Trustpilot Review Removal', frLabel: 'Suppression d’avis Trustpilot', mark: 'TP', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-trustpilot-reviews.html', color: '#006b55' },
+    { name: 'Glassdoor', label: 'Glassdoor Review Removal', frLabel: 'Suppression d’avis Glassdoor', mark: 'GD', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-glassdoor-reviews.html', color: '#116b31' }
   ];
 
   if (!isFrench) {
@@ -71,8 +71,8 @@
   servicesSection.setAttribute('aria-labelledby', 'other-services-title');
   servicesSection.innerHTML = '<div class="container"><div class="section-head">' +
     (isFrench
-      ? '<p class="eyebrow">Autres services de suppression</p><h2 id="other-services-title">Aide pour les principales plateformes d’avis</h2><p>Choisissez la plateforme où l’avis apparaît. Les mêmes frais s’appliquent à chaque plateforme : 50 $ CA au départ et 90 $ CA après la suppression réussie de l’avis.</p>'
-      : '<p class="eyebrow">Other review-removal services</p><h2 id="other-services-title">Support for other major review platforms</h2><p>Choose the platform where the review appears. The same $50 CAD initial fee and $90 CAD after-removal fee apply to every supported platform.</p>') +
+      ? '<p class="eyebrow">Autres services de suppression</p><h2 id="other-services-title">Aide pour les principales plateformes d’avis</h2><p>Choisissez la plateforme où l’avis apparaît. Les mêmes frais s’appliquent à chaque plateforme : 45 $ CA au départ et 95 $ CA après la suppression réussie de l’avis.</p>'
+      : '<p class="eyebrow">Other review-removal services</p><h2 id="other-services-title">Support for other major review platforms</h2><p>Choose the platform where the review appears. The same $45 CAD initial fee and $95 CAD after-removal fee apply to every supported platform.</p>') +
     '</div><div class="platform-service-grid">' + serviceOptions.filter(function (service) {
       return service.name !== platform;
     }).map(function (service) {
@@ -240,9 +240,9 @@
   function update() {
     var value = count();
     quantity.value = value;
-    upfrontTotal.textContent = isFrench ? value * 50 + ' $' : '$' + value * 50;
+    upfrontTotal.textContent = isFrench ? value * 45 + ' $' : '$' + value * 45;
     successTotal.textContent = isFrench ? value * successFee + ' $' : '$' + value * successFee;
-    selectedPlan.value = platform + ' Review Removal - ' + value + (value === 1 ? ' review' : ' reviews') + ' - $' + value * 50 + ' upfront + $' + successFee + ' per successfully removed review';
+    selectedPlan.value = platform + ' Review Removal - ' + value + (value === 1 ? ' review' : ' reviews') + ' - $' + value * 45 + ' upfront + $' + successFee + ' per successfully removed review';
     document.getElementById('formReviewQuantity').value = value;
   }
   decrease.addEventListener('click', function () { quantity.value = count() - 1; update(); });
