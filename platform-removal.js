@@ -111,11 +111,11 @@
   }
   if (usePopupForm) {
     var profileLabels = {
-      Facebook: 'Facebook Business Page URL *',
-      Yelp: 'Yelp Business Listing URL *',
-      Tripadvisor: 'Tripadvisor Property or Listing URL *',
-      Trustpilot: 'Trustpilot Business Profile URL *',
-      Glassdoor: 'Glassdoor Employer Profile URL *'
+      Facebook: 'Facebook Business Page URL',
+      Yelp: 'Yelp Business Listing URL',
+      Tripadvisor: 'Tripadvisor Property or Listing URL',
+      Trustpilot: 'Trustpilot Business Profile URL',
+      Glassdoor: 'Glassdoor Employer Profile URL'
     };
     var profilePlaceholders = {
       Facebook: 'https://facebook.com/...',
@@ -138,7 +138,7 @@
       phone: 'Phone (optional)',
       businessUrl: profileLabels[platform],
       formReviewQuantity: 'How many reviews do you want removed? *',
-      reviewLinks: 'Review link(s) (optional)',
+      reviewLinks: 'Review link(s)',
       reason: 'Why should these reviews be removed? *'
     };
     Object.keys(labels).forEach(function (id) {
