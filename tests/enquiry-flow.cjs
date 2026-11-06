@@ -85,10 +85,19 @@ const server = http.createServer((req,res) => {
         assert.match(requests[0].get('selected_plan'),/\$135 upfront \+ \$95 per successfully removed review/,'Submitted quote uses the updated per-review fees');
       }
       const success=page.locator('.submission-success:not([hidden]), .platform-success:not([hidden])');
-      assert.match(await success.textContent(),/RB-/);
-      const dl=page.waitForEvent('download');
-      await success.locator('button').filter({hasText:/Save My Request|Enregistrer ma demande/}).click();
-      assert.match((await dl).suggestedFilename(),/RB-/);
+      assert.equal(await success.locator('h2').textContent(),file==='suppression-avis-google.html'?'Demande envoyée':'Request sent');
+      assert.equal(await success.locator('button').count(),1);
+      assert.equal(await success.locator('a, p, .enquiry-receipt').count(),0,'Confirmed state contains only its title, check and restart action');
+      assert.ok(!/RB-|notification|Save My Request/.test(await success.textContent()));
+      assert.equal(await success.evaluate(n=>n===document.activeElement),true,'Confirmation receives keyboard focus');
+      if(file==='remove-yelp-reviews.html'&&width===1440){
+        await page.locator('.platform-modal-close').click();
+        await page.locator('.pricing-calc [data-focus-form]').click();
+        assert.equal(await page.locator('#request').getAttribute('aria-labelledby'),'platformModalTitle','Reopening a closed confirmation restores its dialog label');
+      }else await success.locator('button').click();
+      assert.equal(await form.isVisible(),true,'Another request restores the form in place');
+      assert.equal(await form.locator('[name="full_name"]').inputValue(),'');
+      assert.equal(await page.evaluate(()=>document.querySelector('.is-submitted')===null),true,'The initial layout is restored');
       assert.deepEqual(errors,[],file+' JS errors');
       await page.close();
     }
@@ -130,6 +139,7 @@ const server = http.createServer((req,res) => {
       assert.equal(await form.locator('[role="status"]').isVisible(),true,'Error message must be visible');
       assert.equal(await form.locator('[name="full_name"]').inputValue(),'Élodie Test');
       assert.equal(await page.locator('#removalSuccess').isVisible(),false);
+      assert.equal(await page.locator('.enquiry-receipt').count(),1,'Unconfirmed requests retain recovery details');
       if(mode==='offline') { assert.equal(posts,0); assert.equal(await form.locator('[type="submit"]').isDisabled(),false); }
       else {
         assert.equal(posts,1);
@@ -151,7 +161,8 @@ const server = http.createServer((req,res) => {
       await form.evaluate(n=>n.requestSubmit());
       await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
       assert.equal(posts,1,'Legacy notification failure sent more than once');
-      assert.match(await page.locator('#removalSuccess').textContent(),/request was saved/i);
+      assert.equal(await page.locator('#removalSuccess h2').textContent(),'Request sent');
+      assert.equal(await page.locator('#removalSuccess .enquiry-receipt').count(),0);
       await page.close();
     }
     const page=await browser.newPage({reducedMotion:'reduce'});
@@ -162,6 +173,6 @@ const server = http.createServer((req,res) => {
     await page.keyboard.press('Shift+Tab');
     assert.equal(await page.evaluate(()=>document.activeElement.closest('#removalForm')===null),true,'Inline form does not trap focus');
     await page.close();
-    console.log(`PASS: ${pages.length} active forms at desktop/mobile, quantity scroll, totals, preserved back navigation, Unicode payloads, one POST, saved receipts, failure retention and keyboard validation.`);
+    console.log(`PASS: ${pages.length} active forms at desktop/mobile, concise success/reset states, quantity totals, Unicode payloads, one POST, unconfirmed-request recovery and keyboard validation.`);
   } finally { await browser.close();server.close(); }
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});

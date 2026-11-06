@@ -18,10 +18,41 @@
     success.className = 'platform-success';
     success.hidden = true; success.tabIndex = -1;
     success.setAttribute('role', 'status');
-    success.innerHTML = '<h2>Request received</h2><p></p><button type="button" class="button">Send another request</button>';
+    success.innerHTML = '<h2>Request sent</h2><button type="button" class="button">Send another request</button>';
     form.after(success);
     success.querySelector('button').addEventListener('click', function () { success.hidden = true; form.hidden = false; focus(); });
   }
+  var confirmationRegion = form.closest('.assessment-section, .form-layout, .contact-layout');
+  success.id = success.id || 'platformSuccess';
+  var confirmationDialog = form.closest('[role="dialog"]');
+  var dialogLabel = confirmationDialog?.getAttribute('aria-labelledby');
+  var successHeading = success.querySelector('h2');
+  var restartButton = success.querySelector('button');
+  var successMark = element('span', 'enquiry-success-mark');
+  successMark.setAttribute('aria-hidden', 'true');
+  successMark.innerHTML = '<svg viewBox="0 0 32 32" width="32" height="32" fill="none"><path d="m8 16 5.5 5.5L25 10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  successHeading.id = successHeading.id || 'platformSuccessTitle';
+  successHeading.classList.add('enquiry-success-title');
+  successHeading.textContent = fr ? 'Demande envoyée' : 'Request sent';
+  restartButton.classList.add('enquiry-success-reset');
+  restartButton.textContent = fr ? 'Envoyer une autre demande' : 'Send another request';
+  success.replaceChildren(successMark, successHeading, restartButton);
+  success.classList.add('enquiry-success');
+  success.setAttribute('role', 'status');
+  success.setAttribute('aria-live', 'polite');
+  success.setAttribute('aria-atomic', 'true');
+  success.setAttribute('aria-labelledby', successHeading.id);
+  success.tabIndex = -1;
+  restartButton.addEventListener('click', function (event) {
+    // Reopen the form in place, including the Yelp dialog, instead of closing it.
+    event.stopImmediatePropagation();
+    success.hidden = true;
+    form.hidden = false;
+    confirmationRegion?.classList.remove('is-submitted');
+    var intro = document.getElementById('removalFormIntro'); if (intro) intro.hidden = false;
+    if (confirmationDialog && dialogLabel) confirmationDialog.setAttribute('aria-labelledby', dialogLabel);
+    show(0, true);
+  }, true);
   var stages = [];
   form.classList.add('enquiry-form');
   form.noValidate = true;
@@ -143,6 +174,12 @@
     if (total) total.textContent = fr ? n * (45 + fee) + ' $' : '$' + n * (45 + fee);
   }
   function focus() {
+    // Existing modal open handlers restore the form before requesting focus.
+    if (success.hidden && !form.hidden) {
+      confirmationRegion?.classList.remove('is-submitted');
+      var intro = document.getElementById('removalFormIntro'); if (intro) intro.hidden = false;
+      if (confirmationDialog && dialogLabel) confirmationDialog.setAttribute('aria-labelledby', dialogLabel);
+    }
     var input = stages[step].querySelector('input, select, textarea');
     if (input) input.focus();
   }
@@ -202,8 +239,7 @@
     support.href = 'mailto:support@reviewsboost.ca?subject=' + encodeURIComponent('Request ' + reference);
     box.append(copy, save, element('p'));
     box.lastChild.appendChild(support);
-    if (confirmed) success.querySelector('button').before(box);
-    else status.after(box);
+    status.after(box);
   }
   form.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -235,11 +271,9 @@
         try { window.ReviewsBoostMeasurement?.confirmedLead(form, reference); } catch (_) { /* Tracking must never block an enquiry. */ }
       }
       emit('submission_confirmed');
-      receipt(payload, true);
-      success.querySelector('h2').textContent = fr ? 'Demande reçue' : 'Request received';
-      success.querySelector('p').textContent = result.warning === 'owner_notification_failed'
-        ? (fr ? 'Votre demande a été enregistrée. Le courriel de notification interne n’a pas pu être envoyé; conservez la référence ci-dessous. Aucun paiement n’a été effectué.' : 'Your request was saved. The internal notification email could not be sent; keep the reference below. No payment has been taken.')
-        : (fr ? 'Aucun paiement n’a été effectué. Nous examinerons vos renseignements et vous contacterons au sujet de l’admissibilité et des modalités avant toute commande. Conservez les liens et captures des avis.' : 'No payment has been taken. We will review your details and contact you about eligibility and written terms before you place an order. Keep the review links and screenshots for your case.');
+      form.parentElement.querySelectorAll('.enquiry-receipt').forEach(function (old) { old.remove(); });
+      confirmationRegion?.classList.add('is-submitted');
+      if (confirmationDialog) confirmationDialog.setAttribute('aria-labelledby', successHeading.id);
       form.hidden = true; success.hidden = false; success.focus();
       var intro = document.getElementById('removalFormIntro'); if (intro) intro.hidden = true;
       var modal = document.getElementById('orderModal'); if (modal) modal.setAttribute('aria-labelledby', 'removalSuccessTitle');

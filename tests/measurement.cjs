@@ -42,7 +42,7 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
    }
    await p.evaluate(outcome=>{
     const f=document.getElementById('removalForm');for(const [key,value]of Object.entries({full_name:'PRIVATE_PERSON',business_name:'PRIVATE_BUSINESS',email_address:'private.person@example.ca',review_links:'https://example.ca/PRIVATE_REVIEW',reason:'PRIVATE_REVIEW_TEXT'}))f.elements[key].value=value;
-    window.fetch=async()=>{if(outcome==='network')throw Error('test network');return {ok:outcome!=='http',json:async()=>{if(outcome==='json')throw Error('not JSON');return outcome==='legacy'?{result:'error',error:'Failed to send email: no recipient'}:outcome==='error'?{result:'error',error:'storage unavailable'}:{result:'success',notification_sent:outcome!=='notification'};}};};f.requestSubmit();
+    window.fetch=async(endpoint,options)=>{window.__submittedRequestId=options.body.get('request_id');if(outcome==='network')throw Error('test network');return {ok:outcome!=='http',json:async()=>{if(outcome==='json')throw Error('not JSON');return outcome==='legacy'?{result:'error',error:'Failed to send email: no recipient'}:outcome==='error'?{result:'error',error:'storage unavailable'}:{result:'success',notification_sent:outcome!=='notification'};}};};f.requestSubmit();
    },outcome);
    if(['network','error','http','json'].includes(outcome))await p.waitForSelector('#formStatus.error');else await p.waitForSelector('#removalSuccess:not([hidden])');
   }
@@ -54,7 +54,8 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
   await page.click('.hero-actions a[href="#review-count"]');assert.equal((await events(page)).filter(x=>x[1]==='quote_cta_click').length,1);assert.equal((await events(page)).find(x=>x[1]==='quote_cta_click')[2].cta_location,'hero');assert.equal(await page.$('#orderModal.open'),null);assert.equal((await events(page)).filter(x=>x[1]==='quote_form_start').length,0);
   await submit(page,'error');assert.equal((await events(page)).filter(x=>x[1]==='quote_form_start').length,1);assert.equal((await events(page)).filter(x=>x[1]==='generate_lead').length,0);
   await submit(page);let all=await events(page);assert.equal(all.filter(x=>x[1]==='generate_lead').length,1);assert.equal(all.filter(x=>x[1]==='conversion').length,1);
-  const reference=await page.$eval('.enquiry-receipt>p',e=>e.textContent.match(/RB-[A-Za-z0-9-]+/)[0]);
+  const reference=await page.evaluate(()=>window.__submittedRequestId);
+  assert.match(reference,/^RB-/);assert.equal(await page.$('#removalSuccess .enquiry-receipt'),null,'References stay out of the simple confirmation UI');
   await page.evaluate(key=>window.ReviewsBoostMeasurement.confirmedLead(document.getElementById('removalForm'),key),reference);assert.equal((await events(page)).filter(x=>x[1]==='generate_lead').length,1);
   assert.equal(all.find(x=>x[1]==='generate_lead')[2].send_to,fixtures.ga4MeasurementId);assert.equal(all.find(x=>x[1]==='conversion')[2].send_to,'AW-000000001/TEST_ONLY');assert.ok(!JSON.stringify(all).includes(reference));assert.ok(!/PRIVATE_|private\.person|example\.ca/.test(JSON.stringify(all)));
   await page.click('#removalSuccessClose');await submit(page);assert.equal((await events(page)).filter(x=>x[1]==='generate_lead').length,2,'A distinct enquiry on the same form is a new lead');await page.click('#removalSuccessClose');

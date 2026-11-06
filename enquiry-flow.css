@@ -43,5 +43,19 @@ body[data-platform] #request.platform-modal { background: rgba(11, 15, 24, .67);
 .enquiry-receipt pre { white-space: pre-wrap; text-align: left; padding: 16px; border-radius: 8px; background: #f2f7fc; color: #263a52; font: inherit; font-size: 13px; line-height: 1.7; }
 .enquiry-receipt a { color: #164f8c; text-decoration: underline; }
 .enquiry-receipt button { margin: 14px 0; }
+.enquiry-success[hidden] { display: none !important; }
+#removalSuccess.enquiry-success, #platformSuccess.enquiry-success { box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; width: 100%; max-width: 600px; min-height: 290px; margin: 0 auto; padding: 40px 24px; border: 0; border-radius: 12px; background: #fff; box-shadow: none; text-align: center; }
+#removalSuccess.enquiry-success:focus, #platformSuccess.enquiry-success:focus { outline: none; }
+.enquiry-success .enquiry-success-mark { display: grid; place-items: center; flex: 0 0 auto; width: 68px; height: 68px; border: 1px solid #c7e7d7; border-radius: 50%; background: #edf8f2; color: #23724f; }
+#removalSuccess.enquiry-success .enquiry-success-title, #platformSuccess.enquiry-success .enquiry-success-title { margin: 0; color: #172438; font-family: 'Merriweather', Georgia, serif; font-size: clamp(25px, 3vw, 30px); font-weight: 700; line-height: 1.3; letter-spacing: -.025em; }
+#removalSuccess.enquiry-success .enquiry-success-reset, #platformSuccess.enquiry-success .enquiry-success-reset { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: auto; max-width: 100%; min-height: 48px; margin: 0; padding: 13px 22px; border: 1px solid #d9dfe8; border-radius: 6px; background: #fff; color: #24334b; box-shadow: none; font: 700 14px/1.5 'Poppins', Arial, sans-serif; text-decoration: none; cursor: pointer; }
+#removalSuccess.enquiry-success .enquiry-success-reset:hover, #platformSuccess.enquiry-success .enquiry-success-reset:hover { border-color: #a9b6c8; background: #f6f8fb; color: #172438; transform: none; }
+.enquiry-success-reset:focus-visible { outline: 2px solid #245d92; outline-offset: 4px; }
+.form-layout.is-submitted, .contact-layout.is-submitted { grid-template-columns: minmax(0, 1fr); }
+.form-layout.is-submitted > div:first-of-type:not(.enquiry-success), .contact-layout.is-submitted > div:first-of-type:not(.enquiry-success) { display: none; }
+.home-page .assessment-section.is-submitted .assessment-heading, .home-page .assessment-section.is-submitted .assessment-aside { display: none; }
+.home-page .assessment-section.is-submitted .assessment-layout { grid-template-columns: minmax(0, 1fr); grid-template-areas: 'form'; max-width: 620px; margin-inline: auto; }
+.home-page .assessment-section.is-submitted .inline-assessment-card { width: 100%; box-sizing: border-box; padding: 22px; }
+@media (max-width: 480px) { #removalSuccess.enquiry-success, #platformSuccess.enquiry-success { min-height: 250px; padding: 30px 12px; } .home-page .assessment-section.is-submitted .inline-assessment-card { padding: 16px; } }
 #review-count { scroll-margin-top: 96px; }
 @media (max-width: 480px) { .fee-scenarios { padding: 18px; } .fee-scenarios dl { grid-template-columns: 1fr; gap: 5px; } .fee-scenarios dd { text-align: left; margin-bottom: 12px; } }
