@@ -1,0 +1,10 @@
+english_label,processed_label,review_count,english_label_denominator,row_percent,all_review_percent
+negative,negative,394,737,53.459973,5.616536
+negative,neutral,140,737,18.995929,1.995723
+negative,positive,203,737,27.544098,2.893799
+neutral,negative,18,829,2.171291,0.256593
+neutral,neutral,759,829,91.556092,10.819672
+neutral,positive,52,829,6.272618,0.741269
+positive,negative,153,5449,2.807855,2.181041
+positive,neutral,837,5449,15.360617,11.931575
+positive,positive,4459,5449,81.831529,63.563792

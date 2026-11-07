@@ -1,0 +1,143 @@
+GOOGLE REVIEW SENTIMENT: PAIRED TEXT-FIELD REANALYSIS
+ReviewsBoost Editorial Team | Version 1.0.0 | 2026-11-07
+Article: https://reviewsboost.ca/google-review-sentiment-preprocessing-study.html
+Licence for our aggregate release, charts and reproduction scripts: CC BY 4.0
+https://creativecommons.org/licenses/by/4.0/
+
+SCOPE
+Original secondary analysis, not newly collected customer reviews or a Canadian
+field survey. We rescore two stored text fields from the same 7,015 review
+records, representing 86 academic-library profiles worldwide. The result is
+model sensitivity, not authenticity, accuracy, policy eligibility or removal
+probability. No personal review data or library identifiers are exported.
+
+SOURCE AND ATTRIBUTION
+Ioannis C. Drivas, Academic Libraries User Perception: A VADER-Enhanced Corpus
+of 7,605 Google Maps Reviews, version v1. DOI: 10.5281/zenodo.18594870.
+https://zenodo.org/records/18594870
+CC BY 4.0 (verified from repository API metadata).
+Declared publication 2025-09-10; repository record created 2026-02-10.
+Source describes worldwide libraries, collection March-July 2025, machine
+translation and duplicate/rating-only removal. Its title count is not the
+denominator observed in its downloadable file.
+
+Workbook MD5: 07a6f254b04b1bb821cc3ec304067fb1
+Workbook SHA256:
+62337cb2b304f7fbdbdd5ce646fa817eea3bb830ab37a872a29c1b45cde8bc8f
+NLTK lexicon TXT SHA256:
+0aabac74cd95def2dbedc04ce55e39698d91113ffadb6d86b87dd337c4d2184d
+Additional source URLs, model hashes and CSV checksums are in the JSON release.
+
+METHOD
+Python 3.12.0; NLTK 3.9.4, sentiment.vader.SentimentIntensityAnalyzer.
+Input A: source "Google Translation". Input B: source "Processed Text".
+Only surrounding whitespace is stripped. No new translation, custom cleaning
+or fitting is applied. The supplied "Sentiment Score Compound" is NOT reused.
+The author’s original scoring/preprocessing pipeline is not reproduced here.
+The individual-star column is "review_rating", not the business "rating".
+Unique (google_id, review_id) pairs must have integer 1-5 stars and non-empty
+values for both text fields. Unexpected exclusions stop the builder.
+41 score-only rows have no review IDs/profile IDs/stars and are excluded.
+There are 7,056 XML worksheet rows after the header and 7,015 eligible pairs.
+The 590 difference from the 7,605 title count remains unreconciled; do not
+interpret that difference as missing, removed or fake reviews.
+
+Positive: compound >= +0.05. Negative: compound <= -0.05. Neutral: between.
+The same thresholds and fixed lexicon apply to both fields.
+"Changed": different categorical labels for the paired inputs.
+"Direct opposite": one positive and one negative, in either direction.
+No human-labelled benchmark or Google moderation outcomes are available.
+
+DATA DICTIONARY (all CSV percentages are on a 0-100 scale)
+1. google-sentiment-polarity-transitions.csv | 9 rows
+   english_label, processed_label: model category for each input.
+   review_count: number of paired records in that cell.
+   english_label_denominator: sum across the English-label row.
+   row_percent: cell count / English-label denominator * 100.
+   all_review_percent: cell count / 7,015 * 100.
+
+2. google-sentiment-rating-strata.csv | 5 rows
+   stars: individual review rating, 1-5.
+   reviews: eligible records within the star group.
+   changed_labels, changed_percent: paired differences within that group.
+   direct_opposite_labels: direct positive/negative changes within the group.
+   english_negative/neutral/positive and processed_negative/neutral/positive:
+   model-label counts for each input within the star group.
+
+3. google-sentiment-threshold-sensitivity.csv | 50 rows
+   absolute_cutoff: symmetric threshold t, 0.01 to 0.50 in 0.01 increments.
+   Positive >= +t, negative <= -t, neutral strictly between.
+   reviews: the SAME 7,015 paired observations at every cutoff.
+   changed_labels, changed_percent, direct_opposite_labels,
+   direct_opposite_percent: as above, using cutoff t.
+   These are sensitivity scenarios, not independent samples or accuracy tests.
+
+4. google-sentiment-library-weights.csv | 8 rows
+   scope: all, each star group, combined 1_2_stars or combined 4_5_stars.
+   reviews, changed_labels: pooled counts within the scope.
+   eligible_libraries: profiles with at least one review in that scope.
+   review_weighted_percent: sum(changes) / sum(reviews) * 100.
+   equal_library_mean_percent: arithmetic mean of eligible within-profile
+   percentages. Each eligible profile has equal weight.
+   library_median_percent: median of eligible within-profile percentages.
+   Groups are not independent. Small denominators can produce unstable rates.
+   No profiles or institution identifiers are exported.
+
+5. google-sentiment-data-audit.csv | 11 rows
+   metric, value, unit, definition: source-title count, physical worksheet
+   rows, score-only exclusions, eligible pairs, unreconciled gap, libraries,
+   model evaluations, first/last review years, smallest/largest profile groups.
+   Units differ. Do not sum these measures as a sample size.
+
+6. google-review-sentiment-study.json
+   Complete aggregate release: provenance, methods, summary, five data tables
+   and SHA256 checksums of the CSV files. No reviewer text or identifiers.
+
+RESULT CHECKS
+7,015 reviews; 86 libraries; 14,030 scorer evaluations.
+1,403 changed labels (20.0%); 5,612 unchanged.
+356 direct positive/negative changes (5.074839629...%).
+1,047 changes to or from neutral.
+Review-weighted change rate 20.0%; equal-library mean 18.212939%.
+Percentages in CSV files are rounded to 6 decimal places.
+Displayed article/figure percentages are generally rounded to 1 decimal place.
+
+REPRODUCE
+Use a fresh folder containing the two scripts and the dependency file.
+Python 3.12.0 was used. The dependencies are research-only; no site runtime
+or production server changes are needed.
+
+python -m pip install -r google-sentiment-requirements.txt
+python build-google-sentiment-study.py --download
+python plot-google-sentiment-study.py
+
+The --download flag retrieves checksum-pinned public workbook/lexicon sources
+into .seo-private/google-star-text-study-2026-11-07/ next to the scripts.
+Source hashes are checked before use. Later runs can omit --download.
+The workbook contains public review records. Keep this cache private and out
+of your website/repository output; our release does not republish it.
+Only aggregate CSV/JSON tables and SVG/PNG figures are written to the output.
+No accounts, passwords, API keys, customer systems or network scraping are used.
+Do not upgrade the model or replace the source file and still call it v1.0.0.
+This script uses the NLTK implementation, not the separate vaderSentiment pip
+package. Outputs from another implementation need not be identical.
+Matplotlib 3.10.7 is used for figures, with system DejaVu Sans fonts.
+Plots can also be rebuilt directly from the supplied JSON without the workbook.
+
+LIMITATIONS
+Convenience/clustered corpus; one sector; source-provided translations; no
+independent human labels; original preprocessing steps not fully known; no
+fraud or removal outcomes; no Canadian prevalence estimate. No causal claim,
+population confidence interval or optimal-classification claim is made.
+NLTK/VADER retain their own licences. Their source code is not redistributed.
+
+CITE
+ReviewsBoost Editorial Team. (2026, November 7). Google review sentiment:
+a paired text-field reanalysis (Version 1.0.0).
+https://reviewsboost.ca/google-review-sentiment-preprocessing-study.html
+Based on Drivas, I. C., doi:10.5281/zenodo.18594870.
+
+When quoting 20.0%, specify 1,403/7,015 paired records in a worldwide
+academic-library corpus, comparing two stored inputs with NLTK VADER at
+the +/-0.05 cutoff. It is not a fake-review, accuracy or removal rate.
+Corrections: https://reviewsboost.ca/editorial-policy.html

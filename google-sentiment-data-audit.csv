@@ -1,0 +1,12 @@
+metric,value,unit,definition
+source_title_count,7605,title-declared reviews,Repository title; not used as the observed denominator.
+worksheet_rows_after_header,7056,worksheet rows,"All XML row elements after the header, including score-only rows."
+score_only_rows_excluded,41,worksheet rows,No review/business ID or review star rating; only the sentiment field is populated.
+paired_review_records,7015,reviews,Unique business/review keys with integer 1-5 stars and both non-empty text fields.
+title_minus_paired_records,590,records difference,Unreconciled title/sample gap; not labelled as removed or fake reviews.
+distinct_libraries,86,library profiles,Distinct source google_id values; no institution or reviewer identifiers exported.
+model_evaluations,14030,deterministic model evaluations,Two stored text representations per eligible review; not twice as many reviews.
+first_review_year,2008,source year,From the source Year column.
+last_review_year,2025,source year,From the source Year column.
+smallest_library_sample,1,review records,Smallest eligible source library group.
+largest_library_sample,1103,review records,Largest eligible source library group.

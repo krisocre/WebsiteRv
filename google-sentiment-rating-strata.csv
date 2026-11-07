@@ -1,0 +1,6 @@
+stars,reviews,changed_labels,changed_percent,direct_opposite_labels,english_negative,english_neutral,english_positive,processed_negative,processed_neutral,processed_positive
+1,536,184,34.328358,97,326,60,150,236,125,175
+2,231,79,34.199134,49,105,36,90,62,50,119
+3,353,96,27.195467,47,104,62,187,58,103,192
+4,937,178,18.996798,56,97,109,731,65,221,651
+5,4958,866,17.46672,107,105,562,4291,144,1237,3577

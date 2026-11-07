@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "Cite ReviewsBoost for this paired aggregate reanalysis and Drivas for the underlying corpus. This is not a fake-review or removal-rate estimate."
+type: dataset
+title: "Google review sentiment: a paired text-field reanalysis"
+authors:
+  - name: "ReviewsBoost Editorial Team"
+version: 1.0.0
+date-released: 2026-11-07
+url: "https://reviewsboost.ca/google-review-sentiment-preprocessing-study.html"
+license: CC-BY-4.0
+abstract: "Aggregate reanalysis of 7,015 Google Maps review records from 86 academic-library profiles worldwide. Two stored text fields are rescored using fixed NLTK VADER; 1,403 pairs change polarity class. No authenticity, Canadian prevalence or removal outcomes are measured. Source corpus: Drivas, doi:10.5281/zenodo.18594870."
+references:
+  - type: data
+    authors:
+      - family-names: Drivas
+        given-names: "Ioannis C."
+    title: "Academic Libraries User Perception: A VADER-Enhanced Corpus of 7,605 Google Maps Reviews"
+    doi: 10.5281/zenodo.18594870
+    url: "https://zenodo.org/records/18594870"
+    version: v1
+    year: 2025
