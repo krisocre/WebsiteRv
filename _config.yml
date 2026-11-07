@@ -1,4 +1,5 @@
 exclude:
+  - apps-script-input-validation.gs
   - apply-commercial-seo.cjs
   - COMMERCIAL-SEO-UPDATE.md
   - _retired

@@ -29,6 +29,54 @@ function backend(options = {}) {
   const data={form_type:'remove_reviews',full_name:'Élodie',business_name:'=HYPERLINK("bad")',email_address:'test@example.ca',phone_number:'514-555-0100',selected_plan:'Yelp Review Removal - 3 reviews',review_count:'3',business_url:'https://example.ca',reason:'Unsure',request_id:'RB-00000000-0000-4000-8000-000000000001',locale:'fr-CA'};
   return {rows,mails,data,run: override => JSON.parse(api.doPost({parameter:{...data,...override}}).text),released:()=>released};
 }
+
+test('browser and backend use identical input rules',()=>{
+  const extract=value=>value.match(/\/\/ BEGIN LEAD INPUT RULES[\s\S]*?\/\/ END LEAD INPUT RULES/)[0];
+  assert.equal(extract(fs.readFileSync(path.join(root,'enquiry-flow.js'),'utf8')),extract(fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8')));
+  assert.equal(extract(fs.readFileSync(path.join(root,'apps-script-input-validation.gs'),'utf8')),extract(fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8')));
+});
+
+test('the additive backend guard works without replacing an existing submit handler',()=>{
+  const api={ContentService:{MimeType:{JSON:'json'},createTextOutput:text=>({text,setMimeType(){return this;}})}};
+  vm.runInNewContext(fs.readFileSync(path.join(root,'apps-script-input-validation.gs'),'utf8'),api);
+  const data=backend().data;
+  assert.equal(api.rejectInvalidLeadInput({parameter:data}),null);
+  assert.equal(JSON.parse(api.rejectInvalidLeadInput({parameter:{...data,email_address:'bot@fldubai.com'}}).text).code,'invalid_input');
+  assert.equal(api.rejectInvalidLeadInput({parameter:{...data,form_type:'quote_request',review_count:''}}),null);
+  assert.equal(JSON.parse(api.rejectInvalidLeadInput({parameter:{...data,form_type:'',review_count:'rbka80'}}).text).field,'review_count');
+});
+
+test('spam patterns and malformed input are rejected before saving or emailing',()=>{
+  const cases=[
+    [{full_name:'$4,000 PROMO https://www.google.com/share.google?q=TEST'},'full_name'],
+    [{full_name:'\uFF04 Bonus'},'full_name'], [{full_name:'\uFE69 Bonus'},'full_name'],
+    [{full_name:'https://example.invalid'},'full_name'], [{full_name:'www.example.invalid'},'full_name'],
+    [{full_name:'John\nSmith'},'full_name'], [{full_name:'12345'},'full_name'],
+    [{full_name:'A'.repeat(151)},'full_name'], [{full_name:' '},'full_name'],
+    [{business_name:'https://example.invalid'},'business_name'], [{business_name:'Shop\nName'},'business_name'],
+    [{business_name:' '},'business_name'], [{business_name:'A'.repeat(251)},'business_name'],
+    [{email_address:'bot@fldubai.com'},'email_address'], [{email_address:' BOT@FLDUBAI.COM '},'email_address'],
+    [{email_address:'bot@sub.fldubai.com'},'email_address'], [{contact_detail:'bot@fldubai.com'},'email_address'],
+    [{email_address:'a\u0000b@example.ca'},'email_address'], [{email_address:'invalid-email'},'email_address'],
+    ...['rbka80','2.5','0','51',''].map(review_count=>[{review_count},'review_count']),
+    [{business_url:'https://www.google.com/share.google?q=TEST'},'business_url'],
+    [{business_url:'https://google.com/%73hare.google?q=TEST'},'business_url'],
+    [{business_url:'javascript:alert(1)'},'business_url'], [{business_url:'https://user:pass@example.ca'},'business_url'],
+    [{business_url:'https://example.ca/'+ 'a'.repeat(2048)},'business_url'],
+    [{reason:'a'.repeat(20001)},'reason'], [{review_links:'a'.repeat(12001)},'review_links'],
+    [{phone_number:'1'.repeat(81)},'phone_number']
+  ];
+  for(const [values,field]of cases){
+    const b=backend(),result=b.run(values);assert.equal(result.code,'invalid_input',JSON.stringify(values));assert.equal(result.field,field);assert.equal(b.rows.length,0);assert.equal(b.mails.length,0);
+  }
+});
+
+test('normal international names, company punctuation and quoted spam evidence remain valid',()=>{
+  for(const full_name of ["\u00c9lodie O'Neill",'Jean-Luc St. Pierre','\u674e','\u9648\u4f1f','\u0645\u062d\u0645\u062f \u0639\u0644\u064a','\u0906\u0930\u0935 \u0936\u0930\u094d\u092e\u093e','A. Com']){
+    const b=backend();assert.equal(b.run({full_name,business_name:'$5 Pizza & Caf\u00e9 Inc.',email_address:'owner+quote@gmail.com',business_url:'',review_links:'',reason:'The review contains $4,000 casino bonus text and https://www.google.com/share.google?q=EVIDENCE'}).result,'success',full_name);assert.equal(b.rows.length,1);
+  }
+  for(const email_address of ['owner@notfldubai.com','owner@fldubai.com.example.ca','owner+case@outlook.com'])assert.equal(backend().run({email_address,business_url:'https://share.google/real-profile'}).result,'success');
+});
 test('saves all 12 original columns and acknowledges a French request without echoing submitted URLs',()=>{
   const b=backend(); assert.equal(b.run().result,'success');
   assert.equal(b.rows[0].length,12); assert.equal(b.rows[0][4],'test@example.ca'); assert.equal(b.rows[0][5],'514-555-0100');
@@ -110,6 +158,11 @@ test('sender requires explicit server success and keeps encoded fields',async()=
   let calls=0;
   const send=sender(async(_,opts)=>{calls++;assert.equal(opts.mode,'cors');assert.equal(opts.body.get('email_address'),'test+one@example.ca');return {ok:true,json:async()=>({result:'success'})};});
   assert.equal((await send()).result,'success');assert.equal(calls,1);
+});
+
+test('a definitive input rejection stays correctable rather than becoming an ambiguous send',async()=>{
+  let calls=0;const send=sender(async()=>{calls++;return {ok:true,json:async()=>({result:'error',code:'invalid_input',field:'email_address'})};});
+  await assert.rejects(send(),{code:'invalid_input',field:'email_address'});assert.equal(calls,1);
 });
 test('sender does not resubmit network errors or declare opaque errors successful',async()=>{
   for(const fetch of [async()=>{throw Error('network');},async()=>({ok:false})]) {

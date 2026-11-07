@@ -52,6 +52,17 @@ const server = http.createServer((req,res) => {
         await route.fulfill({status:200,headers:{'Access-Control-Allow-Origin':'*'},contentType:'application/json',body:'{"result":"success"}'});
       });
       const form=await prepare(page,file);
+      if(width===1440){
+        for(const [name,bad]of [['full_name','$4,000 PROMO https://example.invalid'],['email_address','bot@sub.fldubai.com']]){
+          const input=form.locator('[name="'+name+'"]'),original=await input.inputValue();
+          await input.fill(bad);await form.evaluate(n=>n.requestSubmit());
+          assert.equal(requests.length,0,file+' blocked input must not send a request');
+          assert.equal(await input.evaluate(n=>n.checkValidity()),false);
+          assert.equal(await input.inputValue(),bad,'Keep answers available to correct');
+          if(name==='email_address')assert.match(await input.evaluate(n=>n.validationMessage),/different email|autre adresse courriel/);
+          await input.fill(original);
+        }
+      }
       const inline=await form.evaluate(n=>n.hasAttribute('data-inline-enquiry'));
       if(!inline)await form.locator('.enquiry-back').click();
       assert.equal(await form.locator('[name="business_url"]').inputValue(),'https://example.ca/profile');
@@ -124,6 +135,20 @@ const server = http.createServer((req,res) => {
       assert.equal(await form.isVisible(),true,'Another request restores the inline form');
       assert.equal(await page.locator('#fullName').evaluate(n=>n===document.activeElement),true);
       await page.close();
+    }
+    {
+      const page=await browser.newPage({reducedMotion:'reduce'});let posts=0;
+      await page.route('https://script.google.com/**',async route=>{
+        posts++;await route.fulfill({headers:{'Access-Control-Allow-Origin':'*'},contentType:'application/json',body:posts===1?'{"result":"error","code":"invalid_input","field":"email_address"}':'{"result":"success"}'});
+      });
+      const form=await prepare(page,'index.html');await form.evaluate(n=>n.requestSubmit());
+      await page.waitForFunction(()=>document.querySelector('#email').validationMessage.length>0&&!document.querySelector('#submitButton').disabled);
+      assert.equal(posts,1);assert.equal(await form.isVisible(),true);
+      assert.equal(await page.locator('.enquiry-receipt').count(),0,'A definitive input rejection needs correction, not recovery details');
+      assert.equal(await page.locator('#removalSuccess').isVisible(),false);
+      await form.locator('[name="email_address"]').fill('corrected@example.ca');
+      await form.evaluate(n=>n.requestSubmit());await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
+      assert.equal(posts,2,'A corrected rejection can be submitted once');await page.close();
     }
     for (const mode of ['offline','network','server-error','invalid-json']) {
       const page=await browser.newPage({reducedMotion:'reduce'}); let posts=0;

@@ -1,5 +1,33 @@
 # Forms and Google Sheets
 
+## November 6: targeted input validation
+
+The four active forms now use refreshed `enquiry-flow.js` and `form-submission.js` URLs with version `20261106-input-validation`. English/French field errors keep answers available for correction. Core names, email and quantity checks are enforced in both prepared backend code and the frontend; blank profile/review links remain valid. Blocked email domain: `fldubai.com`, including subdomains and case variants. The dollar-sign rule applies to the person's name; legitimate business names such as `$5 Pizza` and free-text evidence quoting spam/money remain allowed. Accented and other international names, apostrophes, hyphens, plus-addressed email and normal profile links are retained.
+
+### Apply only the spam guard to the existing live backend
+
+The current deployed Apps Script source cannot be read from this workspace. To preserve its actual notification handler and settings, use this additive update instead of replacing the live handler with an unrelated prepared version:
+
+1. Open the EXISTING ReviewsBoost Apps Script project used by `form-submission.js`. Keep its spreadsheet configuration, email settings and existing deployment URL. This is separate from ReviewRemoval's Turnstile project.
+2. Add a script file named `InputValidation.gs` and paste the full contents of [apps-script-input-validation.gs](apps-script-input-validation.gs). It requires no keys, properties or services. Keep one copy of `leadInputErrors`; if the current Code.gs already has that function and the `invalid_input` gate from this release, the rules are already included.
+3. At the beginning of the existing `doPost(e)` handler, inside its `try` block and BEFORE it accesses Sheets or sends mail, add:
+
+   ```js
+   var rejectedInput = rejectInvalidLeadInput(e);
+   if (rejectedInput) return rejectedInput;
+   ```
+
+4. Save, then **Deploy > Manage deployments > Edit the existing web app > New version > Deploy**. Updating that deployment preserves the site's endpoint. Do not add the ReviewRemoval Turnstile requirement to this project.
+5. Verify ordinary submissions, owner notifications and input rejection after this deliberate backend update. Do not send an invalid-input HTTP probe to the old backend before updating it: that version may save the test as a lead or email it. The agent's tests use mocked storage/mail only.
+
+The repository's full `google-apps-script.gs` also contains the same rules and gate, for projects already maintained from that full source. The additive path above preserves a different live handler's receipt/notification behaviour. Both bundles are tested for identical validation rules. Backend files are excluded from website publication.
+
+Rules: personal names reject `$`, full-width dollar variants, Web links, line breaks, no letters and length over 150; business names allow punctuation/currency but reject Web schemes, embedded line breaks and length over 250. Email is capped at 254 characters; removal quantities must be whole numbers 1-50. Optional profile URLs must be HTTP(S), at most 2048 characters and have no embedded credentials; the observed google.com/share.google redirect path is rejected only in that profile field. Genuine share.google short links remain valid. Phone, review-detail and additional-context lengths have generous caps. Other quote requests do not require a review count.
+
+The backend returns a fixed `invalid_input` field/message before saving or emailing. Rejected input is not a conversion. No endpoint, pricing, normal layout, cookie consent or measurement identifiers were changed. No Apps Script deployment, website release, live email or lead was performed by the agent.
+
+## Existing full-handler setup reference
+
 The English and French Google removal forms, five other platform-removal forms and reputation assessment form are configured to post to this Google Apps Script deployment:
 
 ```text
@@ -58,6 +86,6 @@ Local code changes do not deploy the script, fill in the private spreadsheet con
 
 ## Local regression checks
 
-Run `node --test tests/submission.test.cjs` for mocked storage, deduplication, notifications and transport checks. Run `node tests/enquiry-flow.cjs` with Playwright available to check all eight forms at desktop and phone widths. The browser test uses installed Chrome by default; `BROWSER_CHANNEL` can override that choice and `PLAYWRIGHT_MODULE` can point to an existing Playwright installation. All Google submission requests in these tests are intercepted; they do not contact the live endpoint or send email.
+Run `node --test tests/submission.test.cjs` for mocked storage, deduplication, notifications and transport checks. Run `node tests/enquiry-flow.cjs` with Playwright available to check all four active forms at desktop and phone widths. The browser test uses installed Chrome by default; `BROWSER_CHANNEL` can override that choice and `PLAYWRIGHT_MODULE` can point to an existing Playwright installation. All Google submission requests in these tests are intercepted; they do not contact the live endpoint or send email.
 
 Google references: [web app parameters and execution settings](https://developers.google.com/apps-script/guides/web), [deployment versions](https://developers.google.com/apps-script/concepts/deployments), and [effective versus active user](https://developers.google.com/apps-script/reference/base/session).

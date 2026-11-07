@@ -35,6 +35,9 @@
       return response.json();
     }).then(function (result) {
       if (result.result === 'success') return result;
+      if (result.code === 'invalid_input') {
+        throw Object.assign(new Error('invalid_input'), { code: 'invalid_input', field: result.field });
+      }
       // The currently deployed legacy handler writes the sheet row before it
       // attempts its owner email. Its empty-recipient error therefore means the
       // request was stored even though that notification failed. This branch can
@@ -46,7 +49,7 @@
       serverError.code = 'server_rejected';
       throw serverError;
     }).catch(function (error) {
-      if (error.code === 'server_rejected') throw error;
+      if (error.code === 'server_rejected' || error.code === 'invalid_input') throw error;
       // Native AbortError has a read-only code property; wrap it consistently.
       throw Object.assign(new Error('unconfirmed'), { code: 'unconfirmed', cause: error });
     }).finally(function () {

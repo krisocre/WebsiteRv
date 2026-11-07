@@ -1,5 +1,54 @@
 (function () {
   'use strict';
+
+// BEGIN LEAD INPUT RULES
+// Keep this pure validation function identical in the browser and Apps Script.
+// It uses no browser/Node APIs; Apps Script's V8 runtime can execute it directly.
+function leadInputErrors(data, requireReviewCount) {
+  var errors = {};
+  function text(name) { return typeof data[name] === 'string' ? data[name].trim() : ''; }
+  function blockedEmail(address) {
+    var domain = address.toLowerCase().split('@').pop().replace(/\.+$/, '');
+    return domain === 'fldubai.com' || domain.slice(-12) === '.fldubai.com';
+  }
+  var name = text('full_name');
+  if (!name) errors.full_name = 'Enter your name.';
+  else if (name.length > 150) errors.full_name = 'Keep your name to 150 characters or fewer.';
+  else if (/[$\uFE69\uFF04\u0000-\u001F\u007F]|https?:\/\/|www\./i.test(name) || !/\p{L}/u.test(name)) {
+    errors.full_name = 'Enter your name without links, dollar signs or line breaks.';
+  }
+  var business = text('business_name');
+  if (!business) errors.business_name = 'Enter your business name.';
+  else if (business.length > 250) errors.business_name = 'Keep the business name to 250 characters or fewer.';
+  else if (/[\u0000-\u001F\u007F]|https?:\/\//i.test(business)) errors.business_name = 'Enter a business name without web links or line breaks.';
+
+  var contact = text('contact_detail');
+  var email = text('email_address') || text('email') || ((/^Email\b/i.test(text('contact_method')) || contact.indexOf('@') !== -1) ? contact : '');
+  if (!email || email.length > 254 || /[\u0000-\u0020\u007F]/.test(email) || !/^[^\s@<>]+@[^\s@<>.]+(?:\.[^\s@<>.]+)+$/.test(email)) errors.email_address = 'Enter a valid email address.';
+  else if (blockedEmail(email) || (contact.indexOf('@') !== -1 && blockedEmail(contact))) errors.email_address = 'Please use a different email address.';
+
+  var count = text('review_count') || text('reviews_to_remove') || text('review_quantity');
+  if ((requireReviewCount || count) && (!/^\d+$/.test(count) || Number(count) < 1 || Number(count) > 50)) {
+    errors.review_count = 'Enter a whole number of reviews from 1 to 50.';
+  }
+  var profile = text('business_url');
+  if (profile) {
+    var parts = profile.match(/^https?:\/\/([^\s/?#]+)(?:[/?#][^\s]*)?$/i);
+    if (profile.length > 2048 || !parts || /[@<>"\\]/.test(parts[1])) errors.business_url = 'Enter a valid public profile URL.';
+    else {
+      var decoded = profile;
+      try { decoded = decodeURIComponent(profile); } catch (_) { /* Format checks above still apply. */ }
+      if (/^https?:\/\/(?:www\.)?google\.com\/share\.google(?:[/?#]|$)/i.test(decoded)) {
+        errors.business_url = 'Use a direct business profile or review link instead of this redirect link.';
+      }
+    }
+  }
+  if (text('phone_number').length > 80 || text('phone').length > 80) errors.phone_number = 'Keep the phone number to 80 characters or fewer.';
+  if (text('review_links').length > 12000) errors.review_links = 'Keep review details to 12,000 characters or fewer.';
+  if (text('reason').length > 20000) errors.reason = 'Keep additional details to 20,000 characters or fewer.';
+  return errors;
+}
+// END LEAD INPUT RULES
   var form = document.querySelector('#removalForm, #platformRemovalForm, #reputationForm');
   if (!form) return;
   var fr = document.documentElement.lang === 'fr-CA';
@@ -197,7 +246,41 @@
     totals();
     if (focusInput) focus();
   }
+  var leadFields = ['full_name', 'business_name', 'email_address', 'phone_number', 'business_url', 'review_count', 'review_links', 'reason'];
+  function leadMessage(value) {
+    if (!fr) return value;
+    var messages = {
+      'Enter your name.': 'Indiquez votre nom.',
+      'Keep your name to 150 characters or fewer.': 'Limitez votre nom à 150 caractères.',
+      'Enter your name without links, dollar signs or line breaks.': 'Indiquez votre nom sans lien, signe dollar ni saut de ligne.',
+      'Enter your business name.': 'Indiquez le nom de votre entreprise.',
+      'Keep the business name to 250 characters or fewer.': 'Limitez le nom de votre entreprise à 250 caractères.',
+      'Enter a business name without web links or line breaks.': 'Indiquez un nom d’entreprise sans lien Web ni saut de ligne.',
+      'Enter a valid email address.': 'Indiquez une adresse courriel valide.',
+      'Please use a different email address.': 'Veuillez utiliser une autre adresse courriel.',
+      'Enter a whole number of reviews from 1 to 50.': 'Indiquez un nombre entier d’avis de 1 à 50.',
+      'Enter a valid public profile URL.': 'Indiquez une URL valide de la fiche publique.',
+      'Use a direct business profile or review link instead of this redirect link.': 'Utilisez un lien direct vers la fiche ou l’avis plutôt que ce lien de redirection.',
+      'Keep the phone number to 80 characters or fewer.': 'Limitez le numéro de téléphone à 80 caractères.',
+      'Keep review details to 12,000 characters or fewer.': 'Limitez les détails des avis à 12 000 caractères.',
+      'Keep additional details to 20,000 characters or fewer.': 'Limitez les renseignements supplémentaires à 20 000 caractères.'
+    };
+    return messages[value] || 'Vérifiez les renseignements indiqués et réessayez.';
+  }
+  function refreshLeadInputValidity() {
+    var values = {};
+    Array.from(form.elements).forEach(function (input) { if (input.name) values[input.name] = input.value; });
+    var errors = leadInputErrors(values, !reputation);
+    leadFields.forEach(function (name) {
+      var input = field(name);
+      if (input) input.setCustomValidity(errors[name] ? leadMessage(errors[name]) : '');
+    });
+    return errors;
+  }
+  form.addEventListener('input', refreshLeadInputValidity);
+  form.addEventListener('change', refreshLeadInputValidity);
   function valid(index) {
+    refreshLeadInputValidity();
     var invalid = Array.from(stages[index].querySelectorAll('input, select, textarea')).find(function (input) {
       if (input.required && typeof input.value === 'string') input.value = input.value.trim();
       return !input.checkValidity();
@@ -257,6 +340,7 @@
       payload.delete('concern_category');
     } else payload.set('reason', payload.get('reason') + '\nRequest reference: ' + reference);
     if (window.SubmissionTerms) window.SubmissionTerms.prepare(payload);
+    var rejectedInput = null;
     busy = true; submit.disabled = true; back.disabled = true; form.setAttribute('aria-busy', 'true');
     var inputs = Array.from(form.querySelectorAll('input, textarea, select'));
     inputs.forEach(function (input) { input.disabled = true; });
@@ -281,6 +365,16 @@
       form.reset(); show(0, false); started = false; reference = '';
       if (!reputation) { document.getElementById('reviewQuantity').value = 1; document.getElementById('reviewQuantity').dispatchEvent(new Event('input')); }
     }).catch(function (error) {
+      if (error.code === 'invalid_input') {
+        locked = false;
+        message(fr ? 'Vérifiez vos renseignements et réessayez. Vos réponses sont conservées.' : 'Please check your details and try again. Your answers are still here.', true);
+        rejectedInput = leadFields.indexOf(error.field) !== -1 ? field(error.field) : null;
+        if (rejectedInput) {
+          var errors = refreshLeadInputValidity();
+          rejectedInput.setCustomValidity(errors[error.field] ? leadMessage(errors[error.field]) : status.textContent);
+        }
+        return;
+      }
       var offline = error.code === 'offline';
       var rejected = error.code === 'server_rejected';
       locked = !offline && !rejected;
@@ -294,6 +388,11 @@
       clearTimeout(slow); busy = false; submit.disabled = locked; back.disabled = false;
       inputs.forEach(function (input) { input.disabled = false; });
       form.removeAttribute('aria-busy'); submit.textContent = submitLabel;
+      if (rejectedInput) {
+        show(Math.max(0, stages.findIndex(function (stage) { return stage.contains(rejectedInput); })), false);
+        var details = rejectedInput.closest('details'); if (details) details.open = true;
+        rejectedInput.reportValidity();
+      }
     });
   });
   // Keep keyboard users inside open dialogs, including dynamically added fields.
