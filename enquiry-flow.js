@@ -1,6 +1,47 @@
 (function () {
   'use strict';
 
+// BEGIN LEAD TRAFFIC SOURCE
+// Request context only: no cookies, storage, raw click IDs or analytics events.
+function leadSourceDetails() {
+  var source = 'unknown';
+  function hostIs(host, domain) { return host === domain || host.endsWith('.' + domain); }
+  try {
+    var url = new URL(window.location.href), params = url.searchParams;
+    var click = ['gclid', 'dclid', 'gbraid', 'wbraid'].find(function (key) { return params.has(key); });
+    var medium = String(params.get('utm_medium') || '').trim().toLowerCase();
+    var campaignSource = String(params.get('utm_source') || '').trim().toLowerCase();
+    if (click) {
+      if (/^[A-Za-z0-9_-]{1,256}$/.test(params.get(click) || '')) source = click === 'dclid' ? 'paid_other' : 'paid_google';
+    } else if (params.has('utm_medium')) {
+      if (['cpc', 'ppc', 'paid', 'paidsearch', 'paid_search', 'paid-social', 'paid_social', 'paidsocial', 'display', 'cpm', 'cpv'].includes(medium)) source = campaignSource === 'google' ? 'paid_google' : 'paid_other';
+      else if (medium === 'organic') source = campaignSource === 'google' ? 'organic_google' : campaignSource === 'bing' ? 'organic_bing' : ['yahoo', 'duckduckgo', 'ecosia', 'brave'].includes(campaignSource) ? 'organic_other' : 'unknown';
+      else if (['referral', 'email', 'social'].includes(medium)) source = 'referral';
+    } else if (!['utm_source', 'utm_campaign', 'gad_source', 'gad_campaignid'].some(function (key) { return params.has(key); }) && document.referrer) {
+      var referrer = new URL(document.referrer), host = referrer.hostname.toLowerCase();
+      var own = ['reviewsboost.ca', 'www.reviewsboost.ca'];
+      if (['http:', 'https:'].includes(referrer.protocol) && referrer.origin !== url.origin && !(own.includes(host) && own.includes(url.hostname))) {
+        if (hostIs(host, 'googleadservices.com') || hostIs(host, 'googleads.g.doubleclick.net')) source = 'paid_google';
+        else if (/(^|\.)google\.(com|ca|co\.uk|com\.au|fr|de|ie|co\.nz|co\.in)$/.test(host)) source = 'organic_google';
+        else if (hostIs(host, 'bing.com')) source = 'organic_bing';
+        else if (['search.yahoo.com', 'duckduckgo.com', 'ecosia.org', 'search.brave.com'].some(function (domain) { return hostIs(host, domain); })) source = 'organic_other';
+        else source = 'referral';
+      }
+    }
+    var consent = window.ReviewsBoostMeasurement?.status();
+    // Honour existing choices whenever optional measurement is installed.
+    if (window.navigator.globalPrivacyControl === true || (consent &&
+        !(source.startsWith('paid_') ? consent.advertisingConsent === true : consent.analyticsConsent === true))) source = 'unknown';
+  } catch (_) { source = 'unknown'; }
+  var labels = {
+    paid_google: 'Paid - Google Ads', paid_other: 'Paid - Other campaign',
+    organic_google: 'Organic - Google', organic_bing: 'Organic - Bing',
+    organic_other: 'Organic - Other search', referral: 'Referral / other'
+  };
+  return { source: source, label: Object.prototype.hasOwnProperty.call(labels, source) ? labels[source] : 'Direct / unknown' };
+}
+// END LEAD TRAFFIC SOURCE
+
 // BEGIN LEAD INPUT RULES
 // Keep this pure validation function identical in the browser and Apps Script.
 // It uses no browser/Node APIs; Apps Script's V8 runtime can execute it directly.
@@ -415,6 +456,10 @@ function leadInputErrors(data, requireReviewCount) {
       payload.delete('concern_category');
     } else payload.set('reason', payload.get('reason') + '\nRequest reference: ' + reference);
     if (window.SubmissionTerms) window.SubmissionTerms.prepare(payload);
+    var visitSource = leadSourceDetails();
+    payload.set('traffic_source', visitSource.source);
+    // Compatible with existing handlers: Reason already reaches Sheets and email.
+    payload.set('reason', '[Traffic Source: ' + visitSource.label + ']\n' + String(payload.get('reason') || ''));
     var rejectedInput = null;
     busy = true; submit.disabled = true; back.disabled = true; form.setAttribute('aria-busy', 'true');
     var inputs = Array.from(form.querySelectorAll('input, textarea, select'));

@@ -96,8 +96,10 @@ const server = http.createServer((req,res) => {
       assert.equal(requests[0].get('full_name'),'Élodie Test');
       assert.equal(requests[0].get('contact_detail'),'test+case@example.ca');
       assert.equal(requests[0].get('business_url'),profileText,'Free text survives each active form unchanged');
+      assert.equal(requests[0].get('traffic_source'),'unknown');
+      assert.ok(requests[0].get('reason').startsWith('[Traffic Source: Direct / unknown]\n'));
       assert.match(requests[0].get('reason'),/Request reference: RB-/);
-      assert.equal(requests[0].get('terms_version'),'2026-11-07-turnstile');
+      assert.equal(requests[0].get('terms_version'),'2026-11-07-lead-source');
       assert.match(requests[0].get('reason'),/\[Submission acknowledgement\]/);
       assert.match(requests[0].get('reason'),/https:\/\/reviewsboost.ca\/terms-of-service.html/);
       assert.equal((requests[0].get('reason').match(/\[Submission acknowledgement\]/g)||[]).length,1,'Record terms once');

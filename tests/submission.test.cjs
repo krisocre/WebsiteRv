@@ -97,6 +97,32 @@ test('profile accepts blank values, free text, any URL format and long text with
   }
 });
 
+test('owner email shows only fixed source labels and the existing Reason retains the compatible source note',()=>{
+  for(const [traffic_source,label] of [['paid_google','Paid - Google Ads'],['organic_google','Organic - Google'],['organic_bing','Organic - Bing'],['PRIVATE_EMAIL','Direct / unknown'],['toString','Direct / unknown']]){
+    const b=backend();const reason='[Traffic Source: '+label+']\nCustomer context';
+    assert.equal(b.run({traffic_source,reason}).result,'success');
+    assert.ok(b.mails[0][2].includes('Traffic Source: '+label+'\n'));
+    assert.equal(b.rows[0].length,12);assert.ok(b.rows[0][11].startsWith(reason));
+    assert.ok(!b.mails[0][2].includes('PRIVATE_EMAIL'));
+  }
+});
+
+test('notification removes only the generated acknowledgement, preserving notes, source and the stored record',()=>{
+  const record=['[Submission acknowledgement]','Notice: By submitting, you agree to the Terms of Service.','Terms: https://reviewsboost.ca/terms-of-service.html | version 2026-10-27','Policy snapshot: https://reviewsboost.ca/legal-versions/policies-2026-10-27.json','Privacy: https://reviewsboost.ca/privacy-policy.html | version 2026-10-27','Language: en-CA','Method: submission after linked notice; not a claim of document reading','Client-device time: 2026-10-28T03:32:44.853Z'].join('\n');
+  const reason='[Traffic Source: Paid - Google Ads]\nKeep all customer notes.\n\n'+record+'\nSubmission page: https://reviewsboost.ca/\nKeep this trailing customer detail.';
+  const b=backend();assert.equal(b.run({reason,traffic_source:'paid_google'}).result,'success');
+  assert.ok(b.rows[0][11].includes(record),'Full acknowledgement remains in the private sheet record');
+  const body=b.mails[0][2];assert.ok(!body.includes('[Submission acknowledgement]'));assert.ok(!body.includes('Client-device time:'));
+  for(const text of ['Keep all customer notes.','Keep this trailing customer detail.','Traffic Source: Paid - Google Ads','Request reference: RB-'])assert.ok(body.includes(text),text);
+  const scope={};vm.runInNewContext(fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8'),scope);
+  const clean=scope.notificationBodyWithoutAcknowledgement;
+  assert.equal(clean('before\n'+record+'\nafter'),'before\n\nafter','Legacy record without Submission page');
+  assert.equal(clean('Reason: '+record.replace(/\n/g,'\r\n')),'Reason: ','CRLF and an inline Reason prefix');
+  assert.equal(clean(record+'\n'+record),'\n','Multiple complete legacy blocks');
+  const literal='Customer wrote [Submission acknowledgement] but supplied no generated metadata. Keep this.';
+  assert.equal(clean(literal),literal,'Do not delete unrelated customer wording');
+});
+
 test('normal international names, company punctuation and quoted spam evidence remain valid',()=>{
   for(const full_name of ["\u00c9lodie O'Neill",'Jean-Luc St. Pierre','\u674e','\u9648\u4f1f','\u0645\u062d\u0645\u062f \u0639\u0644\u064a','\u0906\u0930\u0935 \u0936\u0930\u094d\u092e\u093e','A. Com']){
     const b=backend();assert.equal(b.run({full_name,business_name:'$5 Pizza & Caf\u00e9 Inc.',email_address:'owner+quote@gmail.com',business_url:'',review_links:'',reason:'The review contains $4,000 casino bonus text and https://www.google.com/share.google?q=EVIDENCE'}).result,'success',full_name);assert.equal(b.rows.length,1);

@@ -11,6 +11,105 @@
 // Optional fixed transactional customer receipts can be enabled deliberately.
 var SEND_CUSTOMER_RECEIPTS = false;
 
+// BEGIN ACKNOWLEDGEMENT STORAGE
+function submissionAcknowledgements(value) {
+  var text = String(value == null ? '' : value);
+  var record = /\[Submission acknowledgement\]\r?\nNotice:[^\r\n]*\r?\nTerms:[^\r\n]*\r?\nPolicy snapshot:[^\r\n]*\r?\nPrivacy:[^\r\n]*\r?\nLanguage:[^\r\n]*\r?\nMethod:[^\r\n]*\r?\nClient-device time:[^\r\n]*(?:\r?\nSubmission page:[^\r\n]*)?/g;
+  return { text: text.replace(record, ''), records: text.match(record) || [] };
+}
+
+// Hide generated metadata in emails; customer notes/source/references remain.
+function notificationBodyWithoutAcknowledgement(body) {
+  return submissionAcknowledgements(body).text;
+}
+
+// Caller holds the script lock. Archive first; clear only the matching cell.
+function archiveAcknowledgementRow(spreadsheet, leadSheet, rowNumber, brand) {
+  try {
+    if (['ReviewRemoval', 'ReviewsBoost'].indexOf(brand) === -1) throw new Error('Unknown acknowledgement brand.');
+    var cell = leadSheet.getRange(rowNumber, 12);
+    var originalValue = cell.getValue();
+    var original = String(originalValue == null ? '' : originalValue);
+    var parts = submissionAcknowledgements(original);
+    if (!parts.records.length) return true;
+    var record = parts.records.join('\n\n');
+    var auditName = brand + ' Acknowledgements';
+    if (leadSheet.getName() === auditName) throw new Error('The audit tab must differ from the leads tab.');
+    var headers = ['Audit ID', 'Archived at', 'Lead sheet', 'Lead row', 'Request reference', 'Acknowledgement'];
+    var audit = spreadsheet.getSheetByName(auditName);
+    if (!audit) {
+      audit = spreadsheet.insertSheet(auditName);
+      audit.appendRow(headers);
+      audit.hideSheet();
+    } else {
+      var actual = audit.getRange(1, 1, 1, headers.length).getValues()[0];
+      if (headers.some(function (header, index) { return actual[index] !== header; })) {
+        throw new Error('The existing audit tab has unexpected headers.');
+      }
+    }
+    // Stable for an unchanged row, so retries cannot duplicate an archived record.
+    var digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256,
+      brand + '\n' + leadSheet.getSheetId() + '\n' + rowNumber + '\n' + record, Utilities.Charset.UTF_8);
+    var id = 'ACK-' + digest.map(function (byte) { return ('0' + ((byte + 256) % 256).toString(16)).slice(-2); }).join('');
+    var last = audit.getLastRow(), previous = null;
+    if (last > 1) previous = audit.getRange(2, 1, last - 1, 1).createTextFinder(id)
+      .matchCase(true).matchEntireCell(true).useRegularExpression(false).findNext();
+    if (previous) {
+      if (String(audit.getRange(previous.getRow(), 6).getValue()) !== record) throw new Error('The audit record does not match.');
+    } else {
+      var reference = original.match(/Request reference:\s*(RB-[a-z0-9-]{10,60})/i);
+      audit.appendRow([id, new Date(), leadSheet.getName(), rowNumber, reference ? reference[1] : '', record].map(function (value) {
+        return typeof value === 'string' && /^[=+\-@]/.test(value) ? "'" + value : value;
+      }));
+      SpreadsheetApp.flush();
+    }
+    // Do not overwrite notes that changed while the archive was being written.
+    var currentValue = cell.getValue();
+    if (String(currentValue == null ? '' : currentValue) !== original) return false;
+    var cleaned = parts.text.trim();
+    cell.setValue(/^[=+\-@]/.test(cleaned) ? "'" + cleaned : cleaned);
+    SpreadsheetApp.flush();
+    return true;
+  } catch (_) {
+    // Keep the saved lead and original acknowledgement intact on archive failure.
+    console.error('Acknowledgement cleanup pending; the original sheet record was retained.');
+    return false;
+  }
+}
+
+// Owner-operated, bounded migration. No emails, tokens or form submissions.
+function processExistingAcknowledgements(brand, dryRun) {
+  var properties = PropertiesService.getScriptProperties();
+  var id = (properties.getProperty('SPREADSHEET_ID') || '').trim();
+  var name = properties.getProperty('SHEET_NAME') || '';
+  if (!id || !name) throw new Error('Set this project\'s SPREADSHEET_ID and SHEET_NAME first.');
+  var spreadsheet = SpreadsheetApp.openById(id), sheet = spreadsheet.getSheetByName(name);
+  if (!sheet || sheet.getRange(1, 12).getValue() !== 'Reason') {
+    throw new Error('The configured leads tab must have Reason in L1. No cells changed.');
+  }
+  var lock = null;
+  if (!dryRun) { lock = LockService.getScriptLock(); lock.waitLock(10000); }
+  try {
+    var last = sheet.getLastRow(), values = last > 1 ? sheet.getRange(2, 12, last - 1, 1).getValues() : [];
+    var matching = 0, cleaned = 0, failed = 0, attempted = 0;
+    values.forEach(function (row, index) {
+      if (!submissionAcknowledgements(row[0]).records.length) return;
+      matching++;
+      if (dryRun || attempted >= 50) return;
+      attempted++;
+      if (archiveAcknowledgementRow(spreadsheet, sheet, index + 2, brand)) cleaned++; else failed++;
+    });
+    var result = { dry_run: dryRun, scanned: values.length, matching: matching,
+      cleaned: cleaned, failed: failed, remaining: matching - cleaned, batch_limit: 50 };
+    console.log(JSON.stringify(result));
+    return result;
+  } finally { if (lock) lock.releaseLock(); }
+}
+// END ACKNOWLEDGEMENT STORAGE
+
+function previewAcknowledgementCleanup() { return processExistingAcknowledgements('ReviewsBoost', true); }
+function cleanExistingAcknowledgements() { return processExistingAcknowledgements('ReviewsBoost', false); }
+
 function doPost(e) {
   try {
     // The guard runs before Sheets, mail, customer receipts or input handling.
@@ -55,6 +154,7 @@ function doPost(e) {
     var reviewCount = field('review_count', 'reviews_to_remove', 'review_quantity') || 'N/A';
     var reviewLinks = field('review_links') || 'N/A';
     var reason = field('reason') || 'None Provided';
+    var trafficSource = reviewsBoostTrafficSource(data.traffic_source);
     var requestId = field('request_id');
     if (!/^RB-[a-z0-9-]{10,60}$/i.test(requestId)) requestId = 'RB-' + Utilities.getUuid();
     var referenceLine = 'Request reference: ' + requestId;
@@ -98,6 +198,7 @@ function doPost(e) {
     var sheet = reviewsBoostSubmissionSheet(settings);
     var row = [timestamp, selectedPlan, fullName, businessName, email, phone,
       contactMethod, contactInfo, businessUrl, reviewCount, reviewLinks, reason];
+    var acknowledgementArchived = true;
     var lock = LockService.getScriptLock();
     lock.waitLock(5000);
     try {
@@ -114,6 +215,9 @@ function doPost(e) {
         return typeof value === 'string' && value.charAt(0) === '=' ? "'" + value : value;
       }));
       SpreadsheetApp.flush();
+      if (submissionAcknowledgements(reason).records.length) {
+        acknowledgementArchived = archiveAcknowledgementRow(sheet.getParent(), sheet, sheet.getLastRow(), 'ReviewsBoost');
+      }
     } finally {
       lock.releaseLock();
     }
@@ -122,6 +226,7 @@ function doPost(e) {
     var body = 'You received a new submission!\n\n' +
       referenceLine + '\n' +
       'Form Type: ' + formLabel + '\n' +
+      'Traffic Source: ' + trafficSource + '\n' +
       '----------------------------------------\n' +
       'Full Name: ' + fullName + '\n' +
       'Business Name: ' + businessName + '\n' +
@@ -146,7 +251,7 @@ function doPost(e) {
     var myEmail = settings.notificationEmail;
     var notificationSent = false;
     // A mail failure must not turn an already-saved lead into an error response.
-    try { MailApp.sendEmail(myEmail, subject, body); notificationSent = true; }
+    try { MailApp.sendEmail(myEmail, subject, notificationBodyWithoutAcknowledgement(body)); notificationSent = true; }
     catch (notificationError) { console.error('Owner notification failed for ' + requestId); }
     if (SEND_CUSTOMER_RECEIPTS && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 254) {
       try {
@@ -165,13 +270,23 @@ function doPost(e) {
       } catch (receiptError) { console.error('Customer acknowledgement failed for ' + requestId); }
     }
 
-    return ContentService.createTextOutput(JSON.stringify({ result: 'success', request_id: requestId, notification_sent: notificationSent }))
+    return ContentService.createTextOutput(JSON.stringify({ result: 'success', request_id: requestId, notification_sent: notificationSent, acknowledgement_archived: acknowledgementArchived }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
     console.error(error.toString());
     return ContentService.createTextOutput(JSON.stringify({ result: 'error', error: error.toString() }))
       .setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+// Fixed CRM labels only; never echo raw URL, UTM, referrer or click ID values.
+function reviewsBoostTrafficSource(value) {
+  var labels = {
+    paid_google: 'Paid - Google Ads', paid_other: 'Paid - Other campaign',
+    organic_google: 'Organic - Google', organic_bing: 'Organic - Bing',
+    organic_other: 'Organic - Other search', referral: 'Referral / other'
+  };
+  return typeof value === 'string' && Object.prototype.hasOwnProperty.call(labels, value) ? labels[value] : 'Direct / unknown';
 }
 
 function reviewsBoostFormSettings() {

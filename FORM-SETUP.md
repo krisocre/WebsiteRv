@@ -1,11 +1,56 @@
 # ReviewsBoost forms and Google Sheets
 
+## November 7: concise owner notification
+
+The prepared backend now filters the generated `[Submission acknowledgement]`
+block from the owner notification email only. Customer notes, source labels,
+request references and all other email details remain. Full acknowledgement
+metadata stays in the private sheet record; hidden payload fields and the
+short linked website notice are unchanged. The current frontend does not put
+this generated block into the editable textarea.
+
+To update the existing standalone project without replacing unrelated code,
+add the function in `.seo-private/clean-notification-2026-11-07/email-helper.txt`.
+In the OWNER `MailApp.sendEmail` call change only its third argument from
+`body` to `notificationBodyWithoutAcknowledgement(body)`. Keep the existing
+recipient, subject, notification handling and receipt settings. Save and
+deploy a New version of the SAME ReviewsBoost deployment. Do not change the
+shared project or ReviewRemoval project from this editor. No website release,
+new project, property, endpoint or sheet column is needed for this edit.
+No deployment was performed by the agent.
+
+## November 7: paid/organic label in notifications
+
+All four active forms now attach a fixed `traffic_source` enum and prefix the
+existing Reason with a readable label, such as
+`[Traffic Source: Paid - Google Ads]` or `[Traffic Source: Organic - Google]`.
+Existing handlers already save/email Reason, so these labels need no new
+project, deployment, property, column or account ID. Publish the updated
+website files, including `enquiry-flow.js?v=20261107-source-email` and the
+current policy release. The prepared backend also adds a separate top email
+line if deliberately redeployed, while preserving twelve sheet columns.
+
+This is inferred request context, not verified ad billing or GA4 attribution.
+Valid click indicators/paid UTM tags take precedence over a search referrer.
+Unknown/direct/ambiguous signals remain `Direct / unknown`. The classifier
+runs at submission, sets no cookies and uses no browser storage; it records
+no raw click ID, search term, full URL or campaign value. Existing optional
+measurement choices and Global Privacy Control suppress classification where
+applicable. Without an optional measurement install, only the coarse current
+page context is included; no Google tag or account is enabled. Original source
+is not carried across page navigation, so an internal/direct visit can remain
+unknown. Previous leads are not backfilled or guessed.
+
+The bilingual privacy release `2026-11-07-lead-source` describes this context.
+Earlier archived releases remain unchanged. No visual form question or new
+checkbox was added. A declined/unknown source never prevents submitting.
+
 ## November 7: profile/review field accepts any text
 
 All four active forms now use a non-required text input for `business_url`.
 There are no URL format, scheme, redirect or length checks on this field.
 Labels, design, pricing, field names and the tested endpoint are unchanged.
-The form pages use `enquiry-flow.js?v=20261107-profile-text`; sender and CSS
+The form pages now use `enquiry-flow.js?v=20261107-source-email`; sender and CSS
 versions remain unchanged.
 
 The frontend, full backend and input-validation helper have matching rules.
@@ -60,7 +105,7 @@ to either the old shared project or ReviewRemoval's project.
 
 Other retired platform pages do not have active forms. The four current
 pages use sender version `20261107-turnstile-endpoint`, enquiry-flow JS version
-`20261107-profile-text` and CSS version `20261107-turnstile`. The ReviewsBoost
+`20261107-source-email` and CSS version `20261107-turnstile`. The ReviewsBoost
 widget is `0x4AAAAAAFy2a5sutqdFxytB`; it is unrelated to ReviewRemoval's key.
 JavaScript is needed for security verification. The no-JavaScript homepage
 notice provides the existing email contact alternative.
