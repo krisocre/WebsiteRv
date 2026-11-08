@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),puppeteer=require('puppeteer');
 const {fixture,isApi,completePuppeteer}=require('./turnstile-fixture.cjs');
 const root=path.resolve(__dirname,'..');
-const testedEndpoint='https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
+const testedEndpoint='https://script.google.com/macros/s/AKfycbx9nM4hs4qVE6pzwMFsQcFE_pgJC0FRp0KqTbozzNuL5m-77RHj7kZtK1FSuQBhHqT5UA/exec';
 const server=http.createServer((req,res)=>{
  if(req.method!=='GET'){res.writeHead(405).end();return;}
  const relative=new URL(req.url,'http://local').pathname;

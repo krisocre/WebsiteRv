@@ -6,7 +6,7 @@ const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const {backendServices}=require('./turnstile-fixture.cjs');
 const {workbookFixture}=require('./acknowledgement-sheet-fixture.cjs');
-const testedEndpoint='https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
+const testedEndpoint='https://script.google.com/macros/s/AKfycbx9nM4hs4qVE6pzwMFsQcFE_pgJC0FRp0KqTbozzNuL5m-77RHj7kZtK1FSuQBhHqT5UA/exec';
 function backend(options = {}) {
   const security=backendServices();let tokenNumber=0;
   Object.entries(options.properties||{}).forEach(([key,value])=>security.PropertiesService.getScriptProperties().setProperty(key,value));
@@ -37,7 +37,7 @@ test('all active forms use the tested separate ReviewsBoost endpoint without sha
   assert.ok(!runtime.includes(retired)&&!runtime.includes(otherBrand));
   for(const file of ['index.html','suppression-avis-google.html','remove-yelp-reviews.html','online-reputation-management.html']){
     const html=fs.readFileSync(path.join(root,file),'utf8');
-    assert.deepEqual([...html.matchAll(/<script\b[^>]*\bsrc="(form-submission\.js(?:\?[^"]*)?)"/g)].map(x=>x[1]),['form-submission.js?v=20261107-turnstile-endpoint'],file);
+    assert.deepEqual([...html.matchAll(/<script\b[^>]*\bsrc="(form-submission\.js(?:\?[^"]*)?)"/g)].map(x=>x[1]),['form-submission.js?v=20261108-backend'],file);
     assert.ok(!html.includes(retired)&&!html.includes(otherBrand),file);
     const profile=html.match(/<input\b[^>]*\bname="business_url"[^>]*>/)[0];
     assert.match(profile,/\btype="text"/);

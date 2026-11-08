@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 const root = path.resolve(__dirname, '..');
-const testedEndpoint='https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
+const testedEndpoint='https://script.google.com/macros/s/AKfycbx9nM4hs4qVE6pzwMFsQcFE_pgJC0FRp0KqTbozzNuL5m-77RHj7kZtK1FSuQBhHqT5UA/exec';
 const profileText='Find our shop on King Street, Toronto. '+ 'x'.repeat(2200);
 const pages = require('../apply-commercial-seo.cjs').services.filter(s=>s.enabled).map(s=>s.file).concat('suppression-avis-google.html','online-reputation-management.html');
 const server = http.createServer((req,res) => {

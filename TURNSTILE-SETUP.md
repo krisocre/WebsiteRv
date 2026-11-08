@@ -1,4 +1,32 @@
-# ReviewsBoost: a NEW standalone Turnstile backend
+# ReviewsBoost standalone Turnstile backend
+
+## Current deployment: November 8, 2026
+
+The standalone project already exists. After installing the updated Code.gs,
+the owner chose New deployment and supplied this replacement Web app URL:
+
+```text
+https://script.google.com/macros/s/AKfycbx9nM4hs4qVE6pzwMFsQcFE_pgJC0FRp0KqTbozzNuL5m-77RHj7kZtK1FSuQBhHqT5UA/exec
+```
+
+The LOCAL shared sender and homepage action now use this URL; all four form
+pages load sender version `20261108-backend`. Publish those website files
+together to apply the change. The agent has not published them. ReviewRemoval
+kept its existing URL and has no source changes from this endpoint update.
+
+Live checks against the replacement URL rejected both missing and invalid
+tokens with JSON `result: error`, `code: verification_failed`. These probes
+sent no customer fields or valid token. The new endpoint has not been tested
+with a real-token lead, sheet write or notification by the agent. The six
+owner-reported checks in the historical setup below apply to the earlier URL.
+
+Keep the existing project's Script Properties and Code.gs. Future code
+updates should use Manage deployments > Edit > New version on the deployment
+with the URL above. The initial project-creation steps below are historical
+onboarding instructions; do not create another project or change the old
+shared/ReviewRemoval projects.
+
+## Original setup and November 7 verification record
 
 Updated November 7, 2026 after the owner confirmed that the old project is
 shared. This guide SUPERSEDES the earlier additive/shared-project instructions.

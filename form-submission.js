@@ -1,7 +1,7 @@
 (function (window) {
   'use strict';
 
-  var endpoint = 'https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
+  var endpoint = 'https://script.google.com/macros/s/AKfycbx9nM4hs4qVE6pzwMFsQcFE_pgJC0FRp0KqTbozzNuL5m-77RHj7kZtK1FSuQBhHqT5UA/exec';
 
   function encode(formData) {
     var body = new URLSearchParams();

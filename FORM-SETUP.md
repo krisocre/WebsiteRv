@@ -1,5 +1,28 @@
 # ReviewsBoost forms and Google Sheets
 
+## November 8: replacement Web app deployment URL
+
+The owner chose New deployment for ReviewsBoost after copying the updated
+Code.gs. The current endpoint in the LOCAL website source is now:
+
+```text
+https://script.google.com/macros/s/AKfycbx9nM4hs4qVE6pzwMFsQcFE_pgJC0FRp0KqTbozzNuL5m-77RHj7kZtK1FSuQBhHqT5UA/exec
+```
+
+Both the shared sender and native homepage action match this URL. All four
+active form pages use `form-submission.js?v=20261108-backend` to refresh the
+cached sender. Publish the five changed website files together; this edit
+has not published the website or created another Apps Script deployment.
+ReviewRemoval's URL is unchanged and its website was not edited.
+
+Live probes to this replacement endpoint returned `verification_failed`
+for missing and invalid tokens. No customer fields or valid token were sent.
+Real-token storage, new notification formatting, the hidden audit tab and
+inbox delivery have not been independently verified on this deployment.
+Earlier six-check results below apply to the prior November 7 deployment.
+Use the existing ReviewsBoost project/properties for future updates; choose
+Edit > New version on the deployment matching the current URL above.
+
 ## November 8: concise emails and main sheet notes
 
 This replaces the November 7 email-only instructions. The prepared backend
@@ -92,7 +115,8 @@ acceptance, wrong-action rejection and same-token replay rejection. The agent
 submitted no valid lead. Inbox delivery and the sheet row count still need
 the owner's manual confirmation.
 
-The local frontend now points to the tested ReviewsBoost-only URL:
+At the November 7 cutover, the local frontend used this tested URL (superseded
+by the replacement deployment above):
 
 ```text
 https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec
@@ -115,7 +139,7 @@ to either the old shared project or ReviewRemoval's project.
 | `online-reputation-management.html` | `reputationForm` | `quote_request`, reputation |
 
 Other retired platform pages do not have active forms. The four current
-pages use sender version `20261107-turnstile-endpoint`, enquiry-flow JS version
+pages use sender version `20261108-backend`, enquiry-flow JS version
 `20261107-source-email` and CSS version `20261107-turnstile`. The ReviewsBoost
 widget is `0x4AAAAAAFy2a5sutqdFxytB`; it is unrelated to ReviewRemoval's key.
 JavaScript is needed for security verification. The no-JavaScript homepage
