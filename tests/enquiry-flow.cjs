@@ -7,6 +7,7 @@ const path = require('node:path');
 const os = require('node:os');
 const root = path.resolve(__dirname, '..');
 const testedEndpoint='https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
+const profileText='Find our shop on King Street, Toronto. '+ 'x'.repeat(2200);
 const pages = require('../apply-commercial-seo.cjs').services.filter(s=>s.enabled).map(s=>s.file).concat('suppression-avis-google.html','online-reputation-management.html');
 const server = http.createServer((req,res) => {
   const file = path.resolve(root, '.' + decodeURIComponent(new URL(req.url,'http://localhost').pathname === '/' ? '/index.html' : new URL(req.url,'http://localhost').pathname));
@@ -35,7 +36,8 @@ const server = http.createServer((req,res) => {
       await page.locator('.pricing-calc [data-focus-form]').click();
     }
     const form=page.locator('.enquiry-form');
-    await form.locator('[name="business_url"]').fill('https://example.ca/profile');
+    await form.locator('[name="business_url"]').fill(profileText);
+    assert.deepEqual(await form.locator('[name="business_url"]').evaluate(n=>({type:n.type,required:n.required,maxLength:n.maxLength,valid:n.checkValidity()})),{type:'text',required:false,maxLength:-1,valid:true});
     if (file==='online-reputation-management.html') {
       await form.locator('[name="selected_plan"]').selectOption({index:1});
       await form.locator('[name="reason"]').fill('Review concern in Montréal');
@@ -74,7 +76,7 @@ const server = http.createServer((req,res) => {
       }
       const inline=await form.evaluate(n=>n.hasAttribute('data-inline-enquiry'));
       if(!inline)await form.locator('.enquiry-back').click();
-      assert.equal(await form.locator('[name="business_url"]').inputValue(),'https://example.ca/profile');
+      assert.equal(await form.locator('[name="business_url"]').inputValue(),profileText);
       if(!inline)await form.locator('.enquiry-actions button').filter({hasText:/Continue|Continuer/}).click();
       if (file!=='online-reputation-management.html') {
         const fee=await page.evaluate(()=>Number(document.body.dataset.successFee||95));
@@ -93,6 +95,7 @@ const server = http.createServer((req,res) => {
       assert.equal(requests.length,1,file+' duplicate POST');
       assert.equal(requests[0].get('full_name'),'Élodie Test');
       assert.equal(requests[0].get('contact_detail'),'test+case@example.ca');
+      assert.equal(requests[0].get('business_url'),profileText,'Free text survives each active form unchanged');
       assert.match(requests[0].get('reason'),/Request reference: RB-/);
       assert.equal(requests[0].get('terms_version'),'2026-11-07-turnstile');
       assert.match(requests[0].get('reason'),/\[Submission acknowledgement\]/);

@@ -1,5 +1,22 @@
 # ReviewsBoost forms and Google Sheets
 
+## November 7: profile/review field accepts any text
+
+All four active forms now use a non-required text input for `business_url`.
+There are no URL format, scheme, redirect or length checks on this field.
+Labels, design, pricing, field names and the tested endpoint are unchanged.
+The form pages use `enquiry-flow.js?v=20261107-profile-text`; sender and CSS
+versions remain unchanged.
+
+The frontend, full backend and input-validation helper have matching rules.
+For the deployed backend, replace ONLY the existing `leadInputErrors`
+function with `.seo-private/profile-text-2026-11-07/AppsScript-validation-replacement.txt`,
+save and deploy a New version of the SAME standalone ReviewsBoost web app.
+Keep its URL, Script Properties, Turnstile, notifications and sheet columns.
+Apply the identical replacement separately in ReviewRemoval's own project;
+leave the old shared project untouched. Publish the website files separately.
+No website or Apps Script deployment was performed by the agent.
+
 ## November 7: standalone project required
 
 The owner confirmed that the legacy endpoint belongs to a SHARED Apps Script
@@ -42,8 +59,8 @@ to either the old shared project or ReviewRemoval's project.
 | `online-reputation-management.html` | `reputationForm` | `quote_request`, reputation |
 
 Other retired platform pages do not have active forms. The four current
-pages use sender version `20261107-turnstile-endpoint`; their existing
-enquiry-flow JS/CSS keep version `20261107-turnstile`. The ReviewsBoost
+pages use sender version `20261107-turnstile-endpoint`, enquiry-flow JS version
+`20261107-profile-text` and CSS version `20261107-turnstile`. The ReviewsBoost
 widget is `0x4AAAAAAFy2a5sutqdFxytB`; it is unrelated to ReviewRemoval's key.
 JavaScript is needed for security verification. The no-JavaScript homepage
 notice provides the existing email contact alternative.

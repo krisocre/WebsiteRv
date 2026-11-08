@@ -45,6 +45,9 @@ test('all active forms use the tested separate ReviewsBoost endpoint without sha
     const html=fs.readFileSync(path.join(root,file),'utf8');
     assert.deepEqual([...html.matchAll(/<script\b[^>]*\bsrc="(form-submission\.js(?:\?[^"]*)?)"/g)].map(x=>x[1]),['form-submission.js?v=20261107-turnstile-endpoint'],file);
     assert.ok(!html.includes(retired)&&!html.includes(otherBrand),file);
+    const profile=html.match(/<input\b[^>]*\bname="business_url"[^>]*>/)[0];
+    assert.match(profile,/\btype="text"/);
+    assert.doesNotMatch(profile,/\brequired\b|\b(?:maxlength|minlength|pattern)=/);
     if(file==='index.html')assert.ok(html.includes('method="post" action="'+testedEndpoint+'"'));
   }
 });
@@ -78,15 +81,19 @@ test('spam patterns and malformed input are rejected before saving or emailing',
     [{email_address:'bot@sub.fldubai.com'},'email_address'], [{contact_detail:'bot@fldubai.com'},'email_address'],
     [{email_address:'a\u0000b@example.ca'},'email_address'], [{email_address:'invalid-email'},'email_address'],
     ...['rbka80','2.5','0','51',''].map(review_count=>[{review_count},'review_count']),
-    [{business_url:'https://www.google.com/share.google?q=TEST'},'business_url'],
-    [{business_url:'https://google.com/%73hare.google?q=TEST'},'business_url'],
-    [{business_url:'javascript:alert(1)'},'business_url'], [{business_url:'https://user:pass@example.ca'},'business_url'],
-    [{business_url:'https://example.ca/'+ 'a'.repeat(2048)},'business_url'],
     [{reason:'a'.repeat(20001)},'reason'], [{review_links:'a'.repeat(12001)},'review_links'],
     [{phone_number:'1'.repeat(81)},'phone_number']
   ];
   for(const [values,field]of cases){
     const b=backend(),result=b.run(values);assert.equal(result.code,'invalid_input',JSON.stringify(values));assert.equal(result.field,field);assert.equal(b.rows.length,0);assert.equal(b.mails.length,0);
+  }
+});
+
+test('profile accepts blank values, free text, any URL format and long text without executing formulas',()=>{
+  for(const business_url of ['', 'Find our shop on King Street, Toronto', 'www.example.ca', 'https://www.google.com/share.google?q=TEST', 'https://google.com/%73hare.google?q=TEST', 'javascript:void(0)', 'https://user:pass@example.ca', 'x'.repeat(2500), '=not a link']){
+    const b=backend(),result=b.run({business_url});
+    assert.equal(result.result,'success');assert.equal(b.rows.length,1);
+    assert.equal(b.rows[0][8],business_url.startsWith('=')?"'"+business_url:business_url||'N/A');
   }
 });
 

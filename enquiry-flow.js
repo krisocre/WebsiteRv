@@ -31,18 +31,7 @@ function leadInputErrors(data, requireReviewCount) {
   if ((requireReviewCount || count) && (!/^\d+$/.test(count) || Number(count) < 1 || Number(count) > 50)) {
     errors.review_count = 'Enter a whole number of reviews from 1 to 50.';
   }
-  var profile = text('business_url');
-  if (profile) {
-    var parts = profile.match(/^https?:\/\/([^\s/?#]+)(?:[/?#][^\s]*)?$/i);
-    if (profile.length > 2048 || !parts || /[@<>"\\]/.test(parts[1])) errors.business_url = 'Enter a valid public profile URL.';
-    else {
-      var decoded = profile;
-      try { decoded = decodeURIComponent(profile); } catch (_) { /* Format checks above still apply. */ }
-      if (/^https?:\/\/(?:www\.)?google\.com\/share\.google(?:[/?#]|$)/i.test(decoded)) {
-        errors.business_url = 'Use a direct business profile or review link instead of this redirect link.';
-      }
-    }
-  }
+  // business_url is optional free text; do not validate its format or length.
   if (text('phone_number').length > 80 || text('phone').length > 80) errors.phone_number = 'Keep the phone number to 80 characters or fewer.';
   if (text('review_links').length > 12000) errors.review_links = 'Keep review details to 12,000 characters or fewer.';
   if (text('reason').length > 20000) errors.reason = 'Keep additional details to 20,000 characters or fewer.';
@@ -123,8 +112,7 @@ function leadInputErrors(data, requireReviewCount) {
     var input = field(name);
     if (!input) return;
     parent.appendChild(input.closest('.field, .form-group'));
-    if (input.type === 'text') input.maxLength = 250;
-    if (input.type === 'url') input.maxLength = 2048;
+    if (name !== 'business_url' && input.type === 'text') input.maxLength = 250;
     if (input.tagName === 'TEXTAREA') input.maxLength = 4000;
   }
   function extras(parent, label, names) {
@@ -345,8 +333,6 @@ function leadInputErrors(data, requireReviewCount) {
       'Enter a valid email address.': 'Indiquez une adresse courriel valide.',
       'Please use a different email address.': 'Veuillez utiliser une autre adresse courriel.',
       'Enter a whole number of reviews from 1 to 50.': 'Indiquez un nombre entier d’avis de 1 à 50.',
-      'Enter a valid public profile URL.': 'Indiquez une URL valide de la fiche publique.',
-      'Use a direct business profile or review link instead of this redirect link.': 'Utilisez un lien direct vers la fiche ou l’avis plutôt que ce lien de redirection.',
       'Keep the phone number to 80 characters or fewer.': 'Limitez le numéro de téléphone à 80 caractères.',
       'Keep review details to 12,000 characters or fewer.': 'Limitez les détails des avis à 12 000 caractères.',
       'Keep additional details to 20,000 characters or fewer.': 'Limitez les renseignements supplémentaires à 20 000 caractères.'
