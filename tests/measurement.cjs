@@ -1,3 +1,4 @@
+const {fixture:turnstileFixture,isApi,completePuppeteer}=require('./turnstile-fixture.cjs');
 // Synthetic IDs are isolated test fixtures. Google and form requests never reach providers.
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),puppeteer=require('puppeteer'),vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
@@ -16,7 +17,7 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
   browser=await puppeteer.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
   async function open({config=fixtures,query='',gpc=false,blockedStorage=false,language='en-CA'}={}){
    const context=await browser.createBrowserContext(),page=await context.newPage();await page.setViewport({width:390,height:844});await page.setRequestInterception(true);page.on('pageerror',e=>errors.push(e.message));
-   page.on('request',r=>{
+   page.on('request',r=>{if(isApi(r.url())){r.respond({status:200,contentType:'text/javascript',body:turnstileFixture});return;}
     if(r.method()!=='GET'){posts.push(r.url());r.abort();return;}
     if(r.url().includes('googletagmanager.com/gtag/js')){google.push(r.url());r.respond({status:200,contentType:'text/javascript',body:'/* test loader: no collection */'});return;}
     if(r.resourceType()==='document'&&r.url().startsWith(base)){r.respond({status:200,contentType:'text/html;charset=utf-8',body:tagged});return;}
@@ -40,6 +41,7 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
     await p.$eval('[name=business_url]',e=>{e.value='https://example.ca/PRIVATE_PROFILE';});await p.type('[name=business_url]','x');await p.select('[name=concern_category]','Unsure — please assess');
     await p.click('.enquiry-actions button:not(.enquiry-back):not([type=submit])');
    }
+   await completePuppeteer(p);
    await p.evaluate(outcome=>{
     const f=document.getElementById('removalForm');for(const [key,value]of Object.entries({full_name:'PRIVATE_PERSON',business_name:'PRIVATE_BUSINESS',email_address:'private.person@example.ca',review_links:'https://example.ca/PRIVATE_REVIEW',reason:'PRIVATE_REVIEW_TEXT'}))f.elements[key].value=value;
     window.fetch=async(endpoint,options)=>{window.__submittedRequestId=options.body.get('request_id');if(outcome==='network')throw Error('test network');return {ok:outcome!=='http',json:async()=>{if(outcome==='json')throw Error('not JSON');return outcome==='legacy'?{result:'error',error:'Failed to send email: no recipient'}:outcome==='error'?{result:'error',error:'storage unavailable'}:{result:'success',notification_sent:outcome!=='notification'};}};};f.requestSubmit();

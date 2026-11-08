@@ -1,4 +1,6 @@
 exclude:
+  - apps-script-turnstile.gs
+  - TURNSTILE-SETUP.md
   - apps-script-input-validation.gs
   - apply-commercial-seo.cjs
   - COMMERCIAL-SEO-UPDATE.md

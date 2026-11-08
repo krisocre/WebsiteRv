@@ -4,7 +4,10 @@ const vm = require('node:vm');
 const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
+const {backendServices}=require('./turnstile-fixture.cjs');
 function backend(options = {}) {
+  const security=backendServices();let tokenNumber=0;
+  Object.entries(options.properties||{}).forEach(([key,value])=>security.PropertiesService.getScriptProperties().setProperty(key,value));
   const rows = [], mails = [], cache = new Map(); let released = 0;
   const sheet = {
     getLastRow: () => rows.length + 1,
@@ -16,22 +19,23 @@ function backend(options = {}) {
   };
   const api = {
     console: { error() {} },
-    SpreadsheetApp: { openById: () => ({ getSheetByName: () => sheet }), getActiveSpreadsheet: () => ({getActiveSheet:()=>sheet}), flush() {} },
-    LockService: { getScriptLock: () => ({waitLock() {},releaseLock() {released++;}}) },
+    SpreadsheetApp: { openById: id => {assert.equal(id,'LOCAL_SHEET');return { getSheetByName: name => {assert.equal(name,'Leads');return sheet;} };}, getActiveSpreadsheet: () => {throw Error('Standalone handlers must never use active spreadsheets');}, flush() {} },
+    LockService: { getScriptLock: () => {let business=false;return {waitLock() {business=true;},tryLock(){return true;},releaseLock() {if(business)released++;}};} },
     MailApp: { sendEmail(...args) { if(options.mailError) throw Error('quota'); mails.push(args); }, getRemainingDailyQuota: () => 10 },
     Session: { getEffectiveUser: () => ({ getEmail: () => 'owner@example.ca' }) },
     CacheService: { getScriptCache: () => ({ get: key => cache.get(key), put: (key,value) => cache.set(key,value) }) },
-    Utilities: { getUuid: () => '00000000-0000-4000-8000-000000000000', DigestAlgorithm: {SHA_256:'sha'}, computeDigest: (_,value) => value, base64EncodeWebSafe: value => Buffer.from(value).toString('base64') },
+    Utilities: { getUuid: () => '00000000-0000-4000-8000-000000000000', DigestAlgorithm: {SHA_256:'sha'}, Charset:{UTF_8:'utf-8'},computeDigest: security.computeDigest, base64EncodeWebSafe: value => Buffer.from(value).toString('base64') },
+    PropertiesService:security.PropertiesService,UrlFetchApp:security.UrlFetchApp,
     ContentService: { MimeType:{JSON:'json'}, createTextOutput: text => ({text,setMimeType(){return this;}}) }
   };
   vm.runInNewContext(fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8'),api);
-  api.SPREADSHEET_ID='test'; api.SHEET_NAME='test'; api.NOTIFICATION_EMAIL='support@reviewsboost.ca';
-  const data={form_type:'remove_reviews',full_name:'Élodie',business_name:'=HYPERLINK("bad")',email_address:'test@example.ca',phone_number:'514-555-0100',selected_plan:'Yelp Review Removal - 3 reviews',review_count:'3',business_url:'https://example.ca',reason:'Unsure',request_id:'RB-00000000-0000-4000-8000-000000000001',locale:'fr-CA'};
-  return {rows,mails,data,run: override => JSON.parse(api.doPost({parameter:{...data,...override}}).text),released:()=>released};
+  api.SEND_CUSTOMER_RECEIPTS=options.customerReceipts!==false;
+  const data={form_type:'remove_reviews',full_name:'Élodie',business_name:'=HYPERLINK("bad")',email_address:'test@example.ca',phone_number:'514-555-0100',selected_plan:'Yelp Review Removal - 3 reviews',review_count:'3',business_url:'https://example.ca',reason:'Unsure',request_id:'RB-00000000-0000-4000-8000-000000000001',locale:'fr-CA','cf-turnstile-response':'LOCAL_TOKEN'};
+  return {rows,mails,data,run: override => JSON.parse(api.doPost({parameter:{...data,'cf-turnstile-response':'LOCAL_TOKEN_'+tokenNumber++,...override}}).text),released:()=>released};
 }
 
 test('browser and backend use identical input rules',()=>{
-  const extract=value=>value.match(/\/\/ BEGIN LEAD INPUT RULES[\s\S]*?\/\/ END LEAD INPUT RULES/)[0];
+  const extract=value=>value.replace(/\r\n/g,'\n').match(/\/\/ BEGIN LEAD INPUT RULES[\s\S]*?\/\/ END LEAD INPUT RULES/)[0];
   assert.equal(extract(fs.readFileSync(path.join(root,'enquiry-flow.js'),'utf8')),extract(fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8')));
   assert.equal(extract(fs.readFileSync(path.join(root,'apps-script-input-validation.gs'),'utf8')),extract(fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8')));
 });
@@ -125,20 +129,18 @@ test('every service creates the correct owner email and a customer acknowledgeme
 test('unsupported forms are rejected before saving',()=>{
   const b=backend(); assert.equal(b.run({form_type:'retired'}).result,'error'); assert.equal(b.rows.length,0);
 });
-test('bound spreadsheet fallback works when IDs are left blank',()=>{
-  const b=backend();
-  // The production constants can remain blank in a spreadsheet-bound project.
-  const source=fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8');
-  const rows=[],sheet={getLastRow:()=>1,appendRow:r=>rows.push(r)};
-  const api={console:{error(){}},SpreadsheetApp:{getActiveSpreadsheet:()=>({getActiveSheet:()=>sheet}),flush(){}},LockService:{getScriptLock:()=>({waitLock(){},releaseLock(){}})},MailApp:{sendEmail(){},getRemainingDailyQuota:()=>0},Session:{getEffectiveUser:()=>({getEmail:()=>''})},CacheService:{getScriptCache:()=>({get:()=>null,put(){}})},Utilities:{getUuid:()=> '00000000-0000-4000-8000-000000000000'},ContentService:{MimeType:{JSON:'json'},createTextOutput:text=>({text,setMimeType(){return this;}})}};
-  vm.runInNewContext(source,api);
-  assert.equal(JSON.parse(api.doPost({parameter:b.data}).text).result,'success');
-  assert.equal(rows.length,1);
+test('standalone storage and notification settings are mandatory; no shared or active fallback',()=>{
+  for(const key of ['SPREADSHEET_ID','SHEET_NAME','NOTIFICATION_EMAIL']){
+    const b=backend({properties:{[key]:''}});
+    assert.equal(b.run().result,'error');assert.equal(b.rows.length,0);assert.equal(b.mails.length,0);
+  }
+  const b=backend({properties:{NOTIFICATION_EMAIL:'not an email'}});
+  assert.equal(b.run().result,'error');assert.equal(b.rows.length,0);assert.equal(b.mails.length,0);
 });
 function sender(fetch, online=true, timers={setTimeout,clearTimeout}) {
   const sandbox={window:timers, navigator:{onLine:online},URLSearchParams,Blob,AbortController,Promise,fetch};
   vm.runInNewContext(fs.readFileSync(path.join(root,'form-submission.js'),'utf8'),sandbox);
-  const payload=new FormData();payload.set('full_name','Élodie');payload.set('email_address','test+one@example.ca');
+  const payload=new FormData();payload.set('full_name','Élodie');payload.set('email_address','test+one@example.ca');payload.set('cf-turnstile-response','LOCAL_TOKEN');
   return ()=>sandbox.window.ReviewSubmission.send(payload);
 }
 
@@ -163,6 +165,19 @@ test('sender requires explicit server success and keeps encoded fields',async()=
 test('a definitive input rejection stays correctable rather than becoming an ambiguous send',async()=>{
   let calls=0;const send=sender(async()=>{calls++;return {ok:true,json:async()=>({result:'error',code:'invalid_input',field:'email_address'})};});
   await assert.rejects(send(),{code:'invalid_input',field:'email_address'});assert.equal(calls,1);
+});
+
+test('verification rejection is explicit and retryable, not an ambiguous send',async()=>{
+  const send=sender(async()=>({ok:true,json:async()=>({result:'error',code:'verification_failed'})}));
+  await assert.rejects(send(),{code:'verification_failed'});
+});
+
+test('sender never posts a missing verification token',async()=>{
+  let calls=0;
+  const sandbox={window:{setTimeout,clearTimeout},navigator:{onLine:true},URLSearchParams,Blob,AbortController,Promise,fetch:()=>{calls++;}};
+  vm.runInNewContext(fs.readFileSync(path.join(root,'form-submission.js'),'utf8'),sandbox);
+  await assert.rejects(sandbox.window.ReviewSubmission.send(new FormData()),{code:'verification_failed'});
+  assert.equal(calls,0);
 });
 test('sender does not resubmit network errors or declare opaque errors successful',async()=>{
   for(const fetch of [async()=>{throw Error('network');},async()=>({ok:false})]) {

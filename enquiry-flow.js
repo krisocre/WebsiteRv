@@ -203,6 +203,7 @@ function leadInputErrors(data, requireReviewCount) {
   submit.textContent = submitLabel;
   stages[1].after(summary, actions);
   actions.append(back, next, submit);
+  var security = setupTurnstile();
   var legalNotice = form.querySelector('.submission-legal');
   if (legalNotice) actions.before(legalNotice);
   form.querySelectorAll('.form-privacy, .platform-disclaimer').forEach(function (notice) { notice.remove(); });
@@ -243,8 +244,93 @@ function leadInputErrors(data, requireReviewCount) {
     next.hidden = inline || index === 1;
     submit.hidden = !inline && index === 0;
     if (legalNotice) legalNotice.hidden = !inline && index === 0;
+    security.show(!form.hidden && (inline || index === 1));
     totals();
     if (focusInput) focus();
+  }
+  function setupTurnstile() {
+    var wrap = element('div', 'enquiry-security');
+    var container = element('div', 'enquiry-challenge');
+    container.dataset.sitekey = '0x4AAAAAAFy2a5sutqdFxytB';
+    container.tabIndex = -1;
+    var state = element('p', 'enquiry-security-status');
+    state.setAttribute('role', 'status'); state.setAttribute('aria-live', 'polite');
+    var retry = element('button', 'enquiry-security-retry', fr ? 'Réessayer la vérification' : 'Retry security check');
+    retry.type = 'button'; retry.hidden = true;
+    wrap.append(container, state, retry); actions.before(wrap);
+    var widget = null, token = '', issued = 0, loader = null, timer = 0, size = '', visible = false;
+    function status(text, failed) { state.textContent = text; retry.hidden = !failed; }
+    function failed() {
+      token = ''; issued = 0;
+      status(fr ? 'La vérification n’a pas abouti. Veuillez réessayer.' : 'The security check could not finish. Please retry.', true);
+    }
+    function render() {
+      if (!visible || form.hidden || widget !== null || !window.turnstile || !container.clientWidth) return;
+      size = container.clientWidth < 300 ? 'compact' : 'flexible';
+      container.style.minHeight = size === 'compact' ? '140px' : '65px';
+      try {
+        widget = window.turnstile.render(container, {
+          sitekey: container.dataset.sitekey, action: 'quote_request', theme: 'light', size: size,
+          language: fr ? 'fr' : 'en', 'response-field': false,
+          callback: function (value) {
+            if (typeof value !== 'string' || !value.trim() || value.length > 2048) { failed(); return; }
+            token = value; issued = Date.now();
+            status(fr ? 'Vérification terminée.' : 'Security check complete.', false);
+          },
+          'expired-callback': function () { token = ''; issued = 0; status(fr ? 'La vérification a expiré. Réessayez.' : 'Security check expired. Please retry.', true); },
+          'error-callback': function () { failed(); return true; },
+          'timeout-callback': failed, 'unsupported-callback': failed
+        });
+      } catch (_) { failed(); }
+    }
+    function load() {
+      if (!visible || form.hidden) return;
+      if (window.turnstile) { render(); return; }
+      if (loader) return;
+      status(fr ? 'Vérification sécurisée du navigateur…' : 'Checking your browser securely…', false);
+      loader = document.createElement('script');
+      loader.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      loader.async = true; loader.defer = true;
+      loader.onload = function () {
+        clearTimeout(timer);
+        if (typeof window.turnstile?.render !== 'function') { failed(); return; }
+        if (window.turnstile.ready) window.turnstile.ready(render); else render();
+      };
+      loader.onerror = function () { clearTimeout(timer); loader.remove(); loader = null; failed(); };
+      timer = window.setTimeout(failed, 15000); document.head.appendChild(loader);
+    }
+    function reset() {
+      token = ''; issued = 0;
+      if (widget !== null && window.turnstile) {
+        if (!visible || form.hidden || (container.clientWidth < 300 ? 'compact' : 'flexible') !== size) {
+          try { window.turnstile.remove(widget); } catch (_) { /* Already removed. */ }
+          widget = null; if (visible && !form.hidden) render();
+        } else {
+          status(fr ? 'Vérification sécurisée du navigateur…' : 'Checking your browser securely…', false);
+          try { window.turnstile.reset(widget); } catch (_) { failed(); }
+        }
+      }
+    }
+    retry.addEventListener('click', function () {
+      if (busy) return;
+      if (loader && !window.turnstile) { clearTimeout(timer); loader.remove(); loader = null; }
+      reset(); load();
+    });
+    var observer = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
+      if (entries.some(function (entry) { return entry.isIntersecting; })) load();
+    }, { rootMargin: '250px' }) : null;
+    if (observer) observer.observe(wrap);
+    form.addEventListener('focusin', function () { if (visible) load(); });
+    if ('ResizeObserver' in window) new ResizeObserver(function () {
+      if (!visible || busy || !container.clientWidth || widget === null) return;
+      if ((container.clientWidth < 300 ? 'compact' : 'flexible') !== size) reset();
+    }).observe(container);
+    return {
+      show: function (value) { visible = value; wrap.hidden = !value; if (value && !observer) load(); if (value && window.turnstile) render(); },
+      token: function () { if (token && Date.now() - issued >= 300000) reset(); return token; },
+      reset: reset,
+      prompt: function () { visible = true; wrap.hidden = false; load(); container.focus(); message(fr ? 'Terminez la vérification de sécurité avant d’envoyer.' : 'Please complete the security check before sending.', true); }
+    };
   }
   var leadFields = ['full_name', 'business_name', 'email_address', 'phone_number', 'business_url', 'review_count', 'review_links', 'reason'];
   function leadMessage(value) {
@@ -302,7 +388,7 @@ function leadInputErrors(data, requireReviewCount) {
   function record(payload, confirmed) {
     var lines = [fr ? 'Demande ReviewsBoost' : 'ReviewsBoost request', 'Reference: ' + reference,
       (fr ? 'État : ' : 'Status: ') + (confirmed ? (fr ? 'Réception confirmée' : 'Receipt confirmed') : (fr ? 'Réception non confirmée' : 'Receipt not confirmed'))];
-    payload.forEach(function (value, key) { if (key !== 'request_id') lines.push(key + ': ' + value); });
+    payload.forEach(function (value, key) { if (key !== 'request_id' && key !== 'cf-turnstile-response') lines.push(key + ': ' + value); });
     return lines.join('\n');
   }
   function download(text, id) {
@@ -329,8 +415,11 @@ function leadInputErrors(data, requireReviewCount) {
     if (busy || locked) return;
     if (!inline && step === 0) { forward(); return; }
     if (!valid(0) || !valid(1)) return;
+    var verificationToken = security.token();
+    if (!verificationToken) { security.prompt(); return; }
     totals();
     var payload = new FormData(form);
+    payload.set('cf-turnstile-response', verificationToken);
     if (!reference) reference = 'RB-' + (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36) + '-' + Math.random().toString(36).slice(2));
     payload.set('request_id', reference);
     payload.set('locale', fr ? 'fr-CA' : 'en-CA');
@@ -365,6 +454,11 @@ function leadInputErrors(data, requireReviewCount) {
       form.reset(); show(0, false); started = false; reference = '';
       if (!reputation) { document.getElementById('reviewQuantity').value = 1; document.getElementById('reviewQuantity').dispatchEvent(new Event('input')); }
     }).catch(function (error) {
+      if (error.code === 'verification_failed') {
+        locked = false;
+        security.prompt();
+        return;
+      }
       if (error.code === 'invalid_input') {
         locked = false;
         message(fr ? 'Vérifiez vos renseignements et réessayez. Vos réponses sont conservées.' : 'Please check your details and try again. Your answers are still here.', true);
@@ -388,6 +482,7 @@ function leadInputErrors(data, requireReviewCount) {
       clearTimeout(slow); busy = false; submit.disabled = locked; back.disabled = false;
       inputs.forEach(function (input) { input.disabled = false; });
       form.removeAttribute('aria-busy'); submit.textContent = submitLabel;
+      security.reset();
       if (rejectedInput) {
         show(Math.max(0, stages.findIndex(function (stage) { return stage.contains(rejectedInput); })), false);
         var details = rejectedInput.closest('details'); if (details) details.open = true;

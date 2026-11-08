@@ -320,8 +320,8 @@
         @media(max-width:600px){.navbar .container{height:60px}.nav-links.open{top:60px;max-height:calc(100vh - 60px)}}
         @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}}
     </style>
-<link rel="stylesheet" href="enquiry-flow.css" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="enquiry-flow.css"></noscript>
+<link rel="stylesheet" href="enquiry-flow.css?v=20261107-turnstile" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="enquiry-flow.css?v=20261107-turnstile"></noscript>
 <link rel="stylesheet" href="legal-notice.css">
 <script src="submission-terms.js" defer></script>
 <link rel="stylesheet" href="home.css?v=20261103-simple-assessment">
@@ -470,11 +470,10 @@
                 <small class="form-help" id="reviewLinksHelp"><i class="fa-solid fa-circle-info" aria-hidden="true"></i>If no individual link is provided, we will use the latest one-star review(s) on the profile, up to the number selected, for the removal assessment.</small>
             </div>
             <div class="form-group"><label for="removalReason">Additional context (optional)</label><textarea id="removalReason" name="reason" rows="2" placeholder="A short explanation is enough. Please leave out passwords and private records."></textarea></div>
-            <!-- submission legal notice start --><input type="hidden" name="terms_version" value="2026-11-05-v2"><input type="hidden" name="terms_url" value="https://reviewsboost.ca/terms-of-service.html"><input type="hidden" name="terms_snapshot_url" value="https://reviewsboost.ca/legal-versions/policies-2026-11-05-v2.json"><input type="hidden" name="privacy_version" value="2026-11-05-v2"><input type="hidden" name="privacy_url" value="https://reviewsboost.ca/privacy-policy.html"><input type="hidden" name="terms_language" value="en-CA"><input type="hidden" name="terms_acknowledgement" value="By submitting, you agree to the Terms of Service and acknowledge the Privacy Policy. Removal is not guaranteed."><p class="submission-legal" id="submission-legal" data-version="2026-11-05-v2">By submitting, you agree to the <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and acknowledge the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>. Removal is not guaranteed.</p><!-- submission legal notice end --><button class="btn btn-primary" id="submitButton" type="submit" aria-describedby="submission-legal">Submit Removal Request <i class="fa-solid fa-arrow-right"></i></button>
+            <!-- submission legal notice start --><input type="hidden" name="terms_version" value="2026-11-07-turnstile"><input type="hidden" name="terms_url" value="https://reviewsboost.ca/terms-of-service.html"><input type="hidden" name="terms_snapshot_url" value="https://reviewsboost.ca/legal-versions/policies-2026-11-07-turnstile.json"><input type="hidden" name="privacy_version" value="2026-11-07-turnstile"><input type="hidden" name="privacy_url" value="https://reviewsboost.ca/privacy-policy.html"><input type="hidden" name="terms_language" value="en-CA"><input type="hidden" name="terms_acknowledgement" value="By submitting, you agree to the Terms of Service and acknowledge the Privacy Policy. Removal is not guaranteed."><p class="submission-legal" id="submission-legal" data-version="2026-11-07-turnstile">By submitting, you agree to the <a href="terms-of-service.html" target="_blank" rel="noopener">Terms of Service</a> and acknowledge the <a href="privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>. Removal is not guaranteed.</p><!-- submission legal notice end --><button class="btn btn-primary" id="submitButton" type="submit" aria-describedby="submission-legal">Submit Removal Request <i class="fa-solid fa-arrow-right"></i></button>
             <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
             <p class="form-privacy"><i class="fa-solid fa-lock"></i> Your submission is handled according to our <a href="privacy-policy.html">privacy policy</a>.</p>
-            <noscript><p class="enquiry-note">You can send this form without JavaScript. Live estimates need JavaScript; we confirm the scope and fees before any paid work.</p></noscript>
-        </form>
+        <noscript><p class="turnstile-noscript">Enable JavaScript to complete the security check and send your request.</p></noscript></form>
         <div class="submission-success" id="removalSuccess" role="status" aria-live="polite" aria-atomic="true" tabindex="-1" hidden>
             <div class="submission-success-icon" aria-hidden="true">&#10003;</div>
             <h2 id="removalSuccessTitle">Removal request submitted</h2>
@@ -679,7 +678,7 @@
     <a class="btn btn-primary" href="#review-count" data-measurement-location="mobile">Choose Quantity <i class="fa-solid fa-arrow-down"></i></a>
 </div>
 
-<script src="form-submission.js?v=20261106-input-validation"></script>
+<script src="form-submission.js?v=20261107-turnstile"></script>
 <script>
     (function () {
         var navbar = document.getElementById('navbar');
@@ -823,6 +822,6 @@
         updatePrice();
     })();
 </script>
-<script src="enquiry-flow.js?v=20261106-input-validation"></script>
+<script src="enquiry-flow.js?v=20261107-turnstile"></script>
 </body>
 </html>

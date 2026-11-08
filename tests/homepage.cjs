@@ -1,3 +1,4 @@
+const {fixture:turnstileFixture,isApi}=require('./turnstile-fixture.cjs');
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),puppeteer=require('puppeteer'),cp=require('node:child_process');
 const root=path.resolve(__dirname,'..'),output=path.join(root,'.seo-private/inline-assessment-2026-11-03');fs.mkdirSync(output,{recursive:true});
 const original=cp.execFileSync('git',['show','HEAD:index.html'],{cwd:root,encoding:'utf8'}),home=fs.readFileSync(path.join(root,'index.html'),'utf8');
@@ -16,7 +17,7 @@ const server=http.createServer((req,res)=>{
  try{
   browser=await puppeteer.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});const page=await browser.newPage(),errors=[],posts=[];
   await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
-  await page.setRequestInterception(true);page.on('request',r=>{if(r.method()!=='GET'){posts.push(r.url());r.abort();}else if(r.url().startsWith(base)||r.url().startsWith('data:'))r.continue();else r.abort();});page.on('pageerror',e=>errors.push(e.message));
+  await page.setRequestInterception(true);page.on('request',r=>{if(isApi(r.url())){r.respond({status:200,contentType:'text/javascript',body:turnstileFixture});return;}if(r.method()!=='GET'){posts.push(r.url());r.abort();}else if(r.url().startsWith(base)||r.url().startsWith('data:'))r.continue();else r.abort();});page.on('pageerror',e=>errors.push(e.message));
   const layouts=[];
   for(const width of [1440,1024,768,390,320]){
    await page.setViewport({width,height:width<700?844:900});await page.goto(base,{waitUntil:'networkidle0'});
@@ -63,8 +64,10 @@ const server=http.createServer((req,res)=>{
   assert.equal(await page.$eval('[data-estimate="total"]',e=>e.textContent),'$560');
   assert.match(await page.$eval('#selectedPlan',e=>e.value),/\$180 upfront \+ \$95 per successfully removed review/);
   await page.setJavaScriptEnabled(false);await page.goto(base,{waitUntil:'load'});assert.ok(await page.$eval('noscript .no-script-request',e=>e.getClientRects().length>0));
+  assert.match(await page.$eval('noscript .turnstile-noscript',e=>e.textContent),/Enable JavaScript to complete the security check/);
+  assert.doesNotMatch(await page.$eval('#removalForm',e=>e.textContent),/You can send this form without JavaScript/);
   assert.equal(await page.$eval('#removalForm',e=>e.getClientRects().length>0&&e.method==='post'),true,'Native form remains visible and never sends personal details with GET');
   assert.deepEqual(errors,[]);assert.deepEqual(posts,[]);fs.writeFileSync(path.join(output,'layout-results.json'),JSON.stringify(layouts,null,2));
-  console.log('PASS: five homepage widths, pricing/inline form section order, quantity-first hero/mobile actions, accessible in-page CTA, visible form groups, no focus trap, synchronized estimates, native POST/email fallback, unchanged form fields and canonical. No real submissions.');
+  console.log('PASS: five homepage widths, pricing/inline form section order, quantity-first hero/mobile actions, accessible in-page CTA, visible form groups, no focus trap, synchronized estimates, native endpoint and no-JS security notice, unchanged form fields and canonical. No real submissions.');
  }finally{if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

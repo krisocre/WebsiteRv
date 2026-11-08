@@ -1,3 +1,4 @@
+const {fixture:turnstileFixture,complete}=require('./turnstile-fixture.cjs');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const assert = require('node:assert/strict');
 const http = require('node:http');
@@ -17,6 +18,11 @@ const server = http.createServer((req,res) => {
   await new Promise(r=>server.listen(0,'127.0.0.1',r));
   const base='http://127.0.0.1:'+server.address().port;
   const browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL || 'chrome'});
+  async function newTestPage(options){
+    const page=await browser.newPage(options);
+    await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js*',route=>route.fulfill({status:200,contentType:'text/javascript',body:turnstileFixture}));
+    return page;
+  }
   async function prepare(page, file) {
     await page.goto(base+'/'+file);
     if (file==='index.html') await page.locator('.open-order').first().click();
@@ -39,11 +45,12 @@ const server = http.createServer((req,res) => {
     await form.locator('[name="full_name"]').fill('Élodie Test');
     await form.locator('[name="business_name"]').fill('Example Business — Montréal, QC');
     await form.locator('[name="email_address"]').fill('test+case@example.ca');
+    await complete(page);
     return form;
   }
   try {
     for (const width of [1440,390]) for (const file of pages) {
-      const page=await browser.newPage({viewport:{width,height:950},reducedMotion:'reduce'});
+      const page=await newTestPage({viewport:{width,height:950},reducedMotion:'reduce'});
       const errors=[];page.on('pageerror',e=>errors.push(e.message));
       const requests=[];
       await page.route('https://script.google.com/**',async route=>{
@@ -55,7 +62,7 @@ const server = http.createServer((req,res) => {
       if(width===1440){
         for(const [name,bad]of [['full_name','$4,000 PROMO https://example.invalid'],['email_address','bot@sub.fldubai.com']]){
           const input=form.locator('[name="'+name+'"]'),original=await input.inputValue();
-          await input.fill(bad);await form.evaluate(n=>n.requestSubmit());
+          await input.fill(bad);await complete(page);await form.evaluate(n=>n.requestSubmit());
           assert.equal(requests.length,0,file+' blocked input must not send a request');
           assert.equal(await input.evaluate(n=>n.checkValidity()),false);
           assert.equal(await input.inputValue(),bad,'Keep answers available to correct');
@@ -79,13 +86,13 @@ const server = http.createServer((req,res) => {
       assert.equal(await form.locator('[type="checkbox"]').count(),0);
       assert.equal(await legal.evaluate(node=>node.getBoundingClientRect().bottom<=node.parentElement.querySelector('.enquiry-actions').getBoundingClientRect().top),true,'Terms notice must precede the final action');
       await page.screenshot({path:path.join(os.tmpdir(),'conversion-'+file+'-'+width+'.png')});
-      await form.evaluate(n=>{n.requestSubmit();n.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));});
+      await complete(page);await form.evaluate(n=>{n.requestSubmit();n.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));});
       await page.waitForFunction(()=>document.querySelector('.submission-success:not([hidden]), .platform-success:not([hidden])'));
       assert.equal(requests.length,1,file+' duplicate POST');
       assert.equal(requests[0].get('full_name'),'Élodie Test');
       assert.equal(requests[0].get('contact_detail'),'test+case@example.ca');
       assert.match(requests[0].get('reason'),/Request reference: RB-/);
-      assert.equal(requests[0].get('terms_version'),'2026-11-05-v2');
+      assert.equal(requests[0].get('terms_version'),'2026-11-07-turnstile');
       assert.match(requests[0].get('reason'),/\[Submission acknowledgement\]/);
       assert.match(requests[0].get('reason'),/https:\/\/reviewsboost.ca\/terms-of-service.html/);
       assert.equal((requests[0].get('reason').match(/\[Submission acknowledgement\]/g)||[]).length,1,'Record terms once');
@@ -113,7 +120,7 @@ const server = http.createServer((req,res) => {
       await page.close();
     }
     {
-      const page=await browser.newPage({viewport:{width:320,height:844},reducedMotion:'reduce'});
+      const page=await newTestPage({viewport:{width:320,height:844},reducedMotion:'reduce'});
       let received;
       await page.route('https://script.google.com/**',async route=>{
         received=new URLSearchParams(route.request().postData());
@@ -126,7 +133,7 @@ const server = http.createServer((req,res) => {
       await form.locator('[name="reason"]').fill('Additional test context');
       await form.locator('[name="phone_number"]').fill('416-555-0100');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,'Expanded optional fields fit at 320px');
-      await form.locator('[type="submit"]').click();
+      await complete(page);await form.locator('[type="submit"]').click();
       await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
       assert.equal(received.get('phone_number'),'416-555-0100');
       assert.equal(received.get('review_links'),'https://example.ca/review');
@@ -137,21 +144,21 @@ const server = http.createServer((req,res) => {
       await page.close();
     }
     {
-      const page=await browser.newPage({reducedMotion:'reduce'});let posts=0;
+      const page=await newTestPage({reducedMotion:'reduce'});let posts=0;
       await page.route('https://script.google.com/**',async route=>{
         posts++;await route.fulfill({headers:{'Access-Control-Allow-Origin':'*'},contentType:'application/json',body:posts===1?'{"result":"error","code":"invalid_input","field":"email_address"}':'{"result":"success"}'});
       });
-      const form=await prepare(page,'index.html');await form.evaluate(n=>n.requestSubmit());
+      const form=await prepare(page,'index.html');await complete(page);await form.evaluate(n=>n.requestSubmit());
       await page.waitForFunction(()=>document.querySelector('#email').validationMessage.length>0&&!document.querySelector('#submitButton').disabled);
       assert.equal(posts,1);assert.equal(await form.isVisible(),true);
       assert.equal(await page.locator('.enquiry-receipt').count(),0,'A definitive input rejection needs correction, not recovery details');
       assert.equal(await page.locator('#removalSuccess').isVisible(),false);
       await form.locator('[name="email_address"]').fill('corrected@example.ca');
-      await form.evaluate(n=>n.requestSubmit());await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
+      await complete(page);await form.evaluate(n=>n.requestSubmit());await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
       assert.equal(posts,2,'A corrected rejection can be submitted once');await page.close();
     }
     for (const mode of ['offline','network','server-error','invalid-json']) {
-      const page=await browser.newPage({reducedMotion:'reduce'}); let posts=0;
+      const page=await newTestPage({reducedMotion:'reduce'}); let posts=0;
       await page.route('https://script.google.com/**',async route=>{
         posts++;
         if(mode==='network') return route.abort();
@@ -159,9 +166,9 @@ const server = http.createServer((req,res) => {
       });
       const form=await prepare(page,'index.html');
       if(mode==='offline') await page.context().setOffline(true);
-      await form.evaluate(n=>n.requestSubmit());
+      await complete(page);await form.evaluate(n=>n.requestSubmit());
       await page.waitForFunction(()=>document.querySelector('.form-status.error:not([hidden])'));
-      assert.equal(await form.locator('[role="status"]').isVisible(),true,'Error message must be visible');
+      assert.equal(await form.locator('[role="status"]:not(.enquiry-security-status)').isVisible(),true,'Error message must be visible');
       assert.equal(await form.locator('[name="full_name"]').inputValue(),'Élodie Test');
       assert.equal(await page.locator('#removalSuccess').isVisible(),false);
       assert.equal(await page.locator('.enquiry-receipt').count(),1,'Unconfirmed requests retain recovery details');
@@ -172,25 +179,25 @@ const server = http.createServer((req,res) => {
       }
       await page.keyboard.press('Escape');
       await page.locator('.open-order').first().click();
-      assert.equal(await form.locator('[role="status"]').isVisible(),true,'Reopening must preserve error explanation');
+      assert.equal(await form.locator('[role="status"]:not(.enquiry-security-status)').isVisible(),true,'Reopening must preserve error explanation');
       assert.equal(await form.locator('[name="full_name"]').isVisible(),true,'Answers must remain reachable after failure');
       await page.close();
     }
     {
-      const page=await browser.newPage({reducedMotion:'reduce'}); let posts=0;
+      const page=await newTestPage({reducedMotion:'reduce'}); let posts=0;
       await page.route('https://script.google.com/**',async route=>{
         posts++;
         await route.fulfill({headers:{'Access-Control-Allow-Origin':'*'},contentType:'application/json',body:'{"result":"error","error":"Exception: Failed to send email: no recipient"}'});
       });
       const form=await prepare(page,'index.html');
-      await form.evaluate(n=>n.requestSubmit());
+      await complete(page);await form.evaluate(n=>n.requestSubmit());
       await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
       assert.equal(posts,1,'Legacy notification failure sent more than once');
       assert.equal(await page.locator('#removalSuccess h2').textContent(),'Request sent');
       assert.equal(await page.locator('#removalSuccess .enquiry-receipt').count(),0);
       await page.close();
     }
-    const page=await browser.newPage({reducedMotion:'reduce'});
+    const page=await newTestPage({reducedMotion:'reduce'});
     await page.goto(base+'/index.html'); await page.locator('.open-order').first().click();
     await page.locator('#submitButton').click();
     assert.equal(await page.locator('#fullName').evaluate(n=>n===document.activeElement),true,'First missing field receives focus');

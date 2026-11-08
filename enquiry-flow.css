@@ -59,3 +59,9 @@ body[data-platform] #request.platform-modal { background: rgba(11, 15, 24, .67);
 @media (max-width: 480px) { #removalSuccess.enquiry-success, #platformSuccess.enquiry-success { min-height: 250px; padding: 30px 12px; } .home-page .assessment-section.is-submitted .inline-assessment-card { padding: 16px; } }
 #review-count { scroll-margin-top: 96px; }
 @media (max-width: 480px) { .fee-scenarios { padding: 18px; } .fee-scenarios dl { grid-template-columns: 1fr; gap: 5px; } .fee-scenarios dd { text-align: left; margin-bottom: 12px; } }
+.enquiry-security{margin:18px 0;width:100%;min-width:0}
+.enquiry-security[hidden]{display:none!important}
+.enquiry-challenge{max-width:100%;outline-offset:4px}
+.enquiry-security-status{margin:8px 0 4px;font-size:13px;line-height:1.5;color:#52606c}
+.enquiry-security-retry{font:inherit;font-size:13px;padding:8px 0;border:0;background:none;color:#0568c0;text-decoration:underline;cursor:pointer}
+.enquiry-security-retry[hidden]{display:none!important}

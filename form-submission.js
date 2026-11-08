@@ -12,6 +12,10 @@
   }
 
   function send(formData) {
+    var token = formData.get('cf-turnstile-response');
+    if (typeof token !== 'string' || !token.trim() || token.length > 2048) {
+      return Promise.reject(Object.assign(new Error('verification_failed'), { code: 'verification_failed' }));
+    }
     if (window.SubmissionTerms) window.SubmissionTerms.prepare(formData);
     var body = encode(formData);
     if (navigator.onLine === false) {
@@ -35,6 +39,9 @@
       return response.json();
     }).then(function (result) {
       if (result.result === 'success') return result;
+      if (result.code === 'verification_failed') {
+        throw Object.assign(new Error('verification_failed'), { code: 'verification_failed' });
+      }
       if (result.code === 'invalid_input') {
         throw Object.assign(new Error('invalid_input'), { code: 'invalid_input', field: result.field });
       }
@@ -49,7 +56,7 @@
       serverError.code = 'server_rejected';
       throw serverError;
     }).catch(function (error) {
-      if (error.code === 'server_rejected' || error.code === 'invalid_input') throw error;
+      if (error.code === 'server_rejected' || error.code === 'invalid_input' || error.code === 'verification_failed') throw error;
       // Native AbortError has a read-only code property; wrap it consistently.
       throw Object.assign(new Error('unconfirmed'), { code: 'unconfirmed', cause: error });
     }).finally(function () {
