@@ -42,6 +42,9 @@ const server=http.createServer((req,res)=>{
    await page.click('.calculator .open-order');await page.waitForFunction(()=>{const r=document.querySelector('#assessment').getBoundingClientRect();return r.top>=50&&r.top<innerHeight;});
    assert.equal(await page.evaluate(()=>document.activeElement.id),'assessment-title','The in-page CTA focuses the assessment heading at '+width+'px');
    for(const id of ['businessUrl','formReviewQuantity','fullName','businessName','email'])assert.equal(await page.$eval('#'+id,e=>e.getClientRects().length>0),true,id+' is visible without an extra step');
+   const profileSize=await page.$eval('#businessUrl',e=>({width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height,group:e.closest('.enquiry-grid').getBoundingClientRect().width}));
+   assert.ok(Math.abs(profileSize.width-profileSize.group)<2,'Profile input spans the form row at '+width+'px');
+   assert.ok(profileSize.height>=46,'Profile input matches the other input heights');
    assert.equal(await page.$$eval('#removalForm .enquiry-extra',e=>e.length),1,'Optional details share one disclosure');
    assert.equal(await page.$eval('#enquiryCategory',e=>e.required),false,'An assessment does not require choosing a policy category');
    assert.equal(await page.$eval('.enquiry-extra',e=>e.open),false,'Optional fields are initially collapsed');

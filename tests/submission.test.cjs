@@ -5,22 +5,16 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const {backendServices}=require('./turnstile-fixture.cjs');
+const {workbookFixture}=require('./acknowledgement-sheet-fixture.cjs');
 const testedEndpoint='https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
 function backend(options = {}) {
   const security=backendServices();let tokenNumber=0;
   Object.entries(options.properties||{}).forEach(([key,value])=>security.PropertiesService.getScriptProperties().setProperty(key,value));
   const rows = [], mails = [], cache = new Map(); let released = 0;
-  const sheet = {
-    getLastRow: () => rows.length + 1,
-    getRange: () => ({ createTextFinder: text => {
-      const finder = { matchCase: () => finder, useRegularExpression: () => finder, findNext: () => rows.find(r=>r[11].includes(text)) };
-      return finder;
-    }}),
-    appendRow: row => { if(options.saveError) throw Error('storage unavailable'); rows.push(row); }
-  };
+  const book=workbookFixture({brand:'ReviewsBoost',rows,options});
   const api = {
     console: { error() {} },
-    SpreadsheetApp: { openById: id => {assert.equal(id,'LOCAL_SHEET');return { getSheetByName: name => {assert.equal(name,'Leads');return sheet;} };}, getActiveSpreadsheet: () => {throw Error('Standalone handlers must never use active spreadsheets');}, flush() {} },
+    SpreadsheetApp: { openById: id => {assert.equal(id,'LOCAL_SHEET');return book.spreadsheet;}, getActiveSpreadsheet: () => {throw Error('Standalone handlers must never use active spreadsheets');}, flush() {} },
     LockService: { getScriptLock: () => {let business=false;return {waitLock() {business=true;},tryLock(){return true;},releaseLock() {if(business)released++;}};} },
     MailApp: { sendEmail(...args) { if(options.mailError) throw Error('quota'); mails.push(args); }, getRemainingDailyQuota: () => 10 },
     Session: { getEffectiveUser: () => ({ getEmail: () => 'owner@example.ca' }) },
@@ -32,7 +26,7 @@ function backend(options = {}) {
   vm.runInNewContext(fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8'),api);
   api.SEND_CUSTOMER_RECEIPTS=options.customerReceipts!==false;
   const data={form_type:'remove_reviews',full_name:'Élodie',business_name:'=HYPERLINK("bad")',email_address:'test@example.ca',phone_number:'514-555-0100',selected_plan:'Yelp Review Removal - 3 reviews',review_count:'3',business_url:'https://example.ca',reason:'Unsure',request_id:'RB-00000000-0000-4000-8000-000000000001',locale:'fr-CA','cf-turnstile-response':'LOCAL_TOKEN'};
-  return {rows,mails,data,run: override => JSON.parse(api.doPost({parameter:{...data,'cf-turnstile-response':'LOCAL_TOKEN_'+tokenNumber++,...override}}).text),released:()=>released};
+  return {rows,mails,data,book,run: override => JSON.parse(api.doPost({parameter:{...data,'cf-turnstile-response':'LOCAL_TOKEN_'+tokenNumber++,...override}}).text),released:()=>released};
 }
 
 test('all active forms use the tested separate ReviewsBoost endpoint without shared fallback',()=>{
@@ -107,13 +101,19 @@ test('owner email shows only fixed source labels and the existing Reason retains
   }
 });
 
-test('notification removes only the generated acknowledgement, preserving notes, source and the stored record',()=>{
+test('email and main sheet notes exclude generated acknowledgement; hidden audit retains it and references still deduplicate',()=>{
   const record=['[Submission acknowledgement]','Notice: By submitting, you agree to the Terms of Service.','Terms: https://reviewsboost.ca/terms-of-service.html | version 2026-10-27','Policy snapshot: https://reviewsboost.ca/legal-versions/policies-2026-10-27.json','Privacy: https://reviewsboost.ca/privacy-policy.html | version 2026-10-27','Language: en-CA','Method: submission after linked notice; not a claim of document reading','Client-device time: 2026-10-28T03:32:44.853Z'].join('\n');
   const reason='[Traffic Source: Paid - Google Ads]\nKeep all customer notes.\n\n'+record+'\nSubmission page: https://reviewsboost.ca/\nKeep this trailing customer detail.';
-  const b=backend();assert.equal(b.run({reason,traffic_source:'paid_google'}).result,'success');
-  assert.ok(b.rows[0][11].includes(record),'Full acknowledgement remains in the private sheet record');
+  const b=backend();const result=b.run({reason,traffic_source:'paid_google'});
+  assert.equal(result.result,'success');assert.equal(result.acknowledgement_archived,true);
+  assert.ok(!b.rows[0][11].includes(record),'Main sheet notes exclude generated metadata');
+  assert.equal(b.book.audit().hidden,true);assert.ok(b.book.audit().rows[0][5].includes(record));
   const body=b.mails[0][2];assert.ok(!body.includes('[Submission acknowledgement]'));assert.ok(!body.includes('Client-device time:'));
-  for(const text of ['Keep all customer notes.','Keep this trailing customer detail.','Traffic Source: Paid - Google Ads','Request reference: RB-'])assert.ok(body.includes(text),text);
+  for(const text of ['Keep all customer notes.','Keep this trailing customer detail.','Traffic Source: Paid - Google Ads','Request reference: RB-']){
+    assert.ok(body.includes(text),text);assert.ok(b.rows[0][11].includes(text),text);
+  }
+  const emailCount=b.mails.length;assert.equal(b.run({reason}).result,'success');
+  assert.equal(b.rows.length,1);assert.equal(b.mails.length,emailCount);assert.equal(b.book.audit().rows.length,1);
   const scope={};vm.runInNewContext(fs.readFileSync(path.join(root,'google-apps-script.gs'),'utf8'),scope);
   const clean=scope.notificationBodyWithoutAcknowledgement;
   assert.equal(clean('before\n'+record+'\nafter'),'before\n\nafter','Legacy record without Submission page');

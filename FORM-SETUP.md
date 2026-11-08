@@ -1,23 +1,34 @@
 # ReviewsBoost forms and Google Sheets
 
-## November 7: concise owner notification
+## November 8: concise emails and main sheet notes
 
-The prepared backend now filters the generated `[Submission acknowledgement]`
-block from the owner notification email only. Customer notes, source labels,
-request references and all other email details remain. Full acknowledgement
-metadata stays in the private sheet record; hidden payload fields and the
-short linked website notice are unchanged. The current frontend does not put
-this generated block into the editable textarea.
+This replaces the November 7 email-only instructions. The prepared backend
+removes the generated `[Submission acknowledgement]` block from owner emails
+and the main sheet's Reason column. Customer notes, traffic-source labels,
+request references, deduplication and the twelve-column layout remain. The
+full block is archived first in a hidden `ReviewsBoost Acknowledgements` tab
+in the same spreadsheet. Spreadsheet editors can unhide that tab; hiding is
+an organisational separation, not access control.
 
-To update the existing standalone project without replacing unrelated code,
-add the function in `.seo-private/clean-notification-2026-11-07/email-helper.txt`.
-In the OWNER `MailApp.sendEmail` call change only its third argument from
-`body` to `notificationBodyWithoutAcknowledgement(body)`. Keep the existing
-recipient, subject, notification handling and receipt settings. Save and
-deploy a New version of the SAME ReviewsBoost deployment. Do not change the
-shared project or ReviewRemoval project from this editor. No website release,
-new project, property, endpoint or sheet column is needed for this edit.
-No deployment was performed by the agent.
+Use this site's complete `google-apps-script.gs` in the EXISTING separate
+ReviewsBoost project, preserving its Script Properties and current /exec URL.
+Save and deploy a New version of that same deployment. Leave the old shared
+project and ReviewRemoval project unchanged. No new properties, keys or main
+sheet columns are needed. Keep any deliberately enabled receipt setting;
+the prepared file defaults to the existing owner-notification-only behaviour.
+
+For existing rows, first run `previewAcknowledgementCleanup` and review its
+counts; then run `cleanExistingAcknowledgements`, up to fifty matching rows
+per run. Repeat until `remaining` is zero. Neither function submits forms
+or sends emails. Previously delivered emails cannot be edited retroactively.
+Instructions: `.seo-private/sheet-ack-cleanup-2026-11-08/INSTALL.md`.
+
+The public profile field remains optional, unrestricted text. The homepage
+CSS now sizes that field by its name rather than its former URL input type,
+so it spans the form row and uses the same height as neighbouring inputs.
+Publish `index.html` and `home.css` to apply that sizing change. The short
+website notice and hidden acknowledgement payload remain intact.
+No deployment or live sheet cleanup was performed by the agent.
 
 ## November 7: paid/organic label in notifications
 

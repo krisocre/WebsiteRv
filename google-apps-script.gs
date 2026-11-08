@@ -1,6 +1,6 @@
 /**
- * Complete ReviewsBoost-only endpoint: paste this ENTIRE file into Code.gs
- * in a NEW standalone project named ReviewsBoost Forms - Turnstile.
+ * Complete ReviewsBoost-only endpoint: maintain this ENTIRE file as Code.gs
+ * in the EXISTING separate ReviewsBoost Forms - Turnstile project.
  * Do NOT change the old shared project or the separate ReviewRemoval project.
  * Do NOT install a second copy of the helpers from apps-script-turnstile.gs.
  * Required Script Properties: SPREADSHEET_ID, SHEET_NAME, NOTIFICATION_EMAIL,
@@ -24,12 +24,13 @@ function notificationBodyWithoutAcknowledgement(body) {
 }
 
 // Caller holds the script lock. Archive first; clear only the matching cell.
-function archiveAcknowledgementRow(spreadsheet, leadSheet, rowNumber, brand) {
+function archiveAcknowledgementRow(spreadsheet, leadSheet, rowNumber, brand, expectedReason) {
   try {
     if (['ReviewRemoval', 'ReviewsBoost'].indexOf(brand) === -1) throw new Error('Unknown acknowledgement brand.');
     var cell = leadSheet.getRange(rowNumber, 12);
     var originalValue = cell.getValue();
     var original = String(originalValue == null ? '' : originalValue);
+    if (expectedReason !== undefined && original !== expectedReason) return false;
     var parts = submissionAcknowledgements(original);
     if (!parts.records.length) return true;
     var record = parts.records.join('\n\n');
@@ -72,7 +73,7 @@ function archiveAcknowledgementRow(spreadsheet, leadSheet, rowNumber, brand) {
     return true;
   } catch (_) {
     // Keep the saved lead and original acknowledgement intact on archive failure.
-    console.error('Acknowledgement cleanup pending; the original sheet record was retained.');
+    console.error('Acknowledgement cleanup incomplete; check the lead and acknowledgement tabs.');
     return false;
   }
 }
@@ -216,7 +217,12 @@ function doPost(e) {
       }));
       SpreadsheetApp.flush();
       if (submissionAcknowledgements(reason).records.length) {
-        acknowledgementArchived = archiveAcknowledgementRow(sheet.getParent(), sheet, sheet.getLastRow(), 'ReviewsBoost');
+        try {
+          acknowledgementArchived = archiveAcknowledgementRow(sheet.getParent(), sheet, sheet.getLastRow(), 'ReviewsBoost', reason);
+        } catch (_) {
+          acknowledgementArchived = false;
+          console.error('Lead saved; acknowledgement cleanup pending.');
+        }
       }
     } finally {
       lock.releaseLock();

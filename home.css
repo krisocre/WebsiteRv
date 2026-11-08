@@ -72,7 +72,7 @@
 .home-page .inline-assessment-card .enquiry-grid[role=group]{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px 16px}
 .home-page .inline-assessment-card .enquiry-grid>.form-group{margin:0}
 .home-page .inline-assessment-card .enquiry-grid[role=group]+.enquiry-grid[role=group]{margin-top:18px}
-.home-page .inline-assessment-card .enquiry-extra,.home-page .inline-assessment-card .form-group:has(input[type=url]),.home-page .inline-assessment-card .form-group:has(input[type=email]),.home-page .inline-assessment-card .form-review-count{grid-column:1/-1}
+.home-page .inline-assessment-card .enquiry-extra,.home-page .inline-assessment-card .form-group:has(input[name=business_url]),.home-page .inline-assessment-card .form-group:has(input[type=email]),.home-page .inline-assessment-card .form-review-count{grid-column:1/-1}
 .home-page .inline-assessment-card label{display:block;font-size:13px;color:#353f50;font-weight:700;line-height:1.5;margin-bottom:7px}
 .home-page .inline-assessment-card :is(input:not([type=hidden]),select,textarea){min-height:46px;font-size:16px;border:1px solid #c7cbd3;border-radius:5px;color:var(--navy);background:#fff;box-sizing:border-box;width:100%;padding:10px 12px}
 .home-page .inline-assessment-card :is(input,select,textarea):focus{outline:2px solid var(--red-dark);outline-offset:2px;box-shadow:none}
