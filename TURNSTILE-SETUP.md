@@ -99,8 +99,9 @@ browser may report `doGet` not found; that is not a POST submission test.
 
 ## 6. Test before changing any website endpoint
 
-The owner supplied this candidate on November 7. It is recorded for testing,
-not installed as the website's destination:
+The owner supplied this deployment on November 7 and reported all six
+browser checks passed. It is now the destination in the LOCAL website code;
+the coding agent has not published the website:
 
 ```text
 https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec
@@ -109,8 +110,11 @@ https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgI
 Agent live checks: anonymous GET reached the expected POST-only app message;
 missing-token and invalid-token POST probes both returned `result: error`,
 `code: verification_failed`. Those probes contained no customer fields or
-valid token. Real-token/action/replay validation and owner mail delivery are
-still pending. The setup probe result has not been supplied by the owner.
+valid token. The owner then supplied the six passing browser results:
+missing token, invalid token, wrong action, fresh real token, owner notification
+acceptance and replay of the same token. These are owner-reported real-token
+results, not an agent-run real submission. MailApp acceptance does not prove
+inbox delivery; the owner should still confirm one test row and owner email.
 
 The local owner-operated utility is
 `.seo-private/reviewsboost-standalone-2026-11-07/test-new-endpoint.js`.
@@ -141,18 +145,17 @@ Enable it deliberately only if customer acknowledgement emails are wanted.
 
 ## 7. Cut over ReviewsBoost only, after successful testing
 
-The candidate URL has been received. Send the setup/real-token test results
-to the coding agent before cutover. The prepared frontend still uses the OLD
-shared URL until this controlled cutover. It must not fall back to the shared
-URL after migration.
+The six passing results have been received. Local source has been updated:
 
-The later cutover must update the destination in `form-submission.js` and
-the homepage's native `action`, preserve existing script/form functionality,
-and bump the `form-submission.js` cache version on all four active form pages.
-No website endpoint was changed in this preparation. No new URL is guessed.
+- `form-submission.js` uses the tested ReviewsBoost-only endpoint above.
+- `index.html` has the matching native form action.
+- All four active form pages use sender version `20261107-turnstile-endpoint`.
+- No fallback to the shared endpoint is present. Form fields, widget key,
+  pricing, consent, tracking and all other client behaviour remain unchanged.
 
-Release the tested frontend and verify the normal form flow against the new
-endpoint. Leave ReviewRemoval files, project, properties and deployments
+Release these changed website files together and verify the normal form flow
+against the new endpoint. No automatic publication was performed. Leave
+ReviewRemoval files, project, properties and deployments
 untouched. Keep the old shared project unchanged until any remaining uses
 have been audited; do not disable it as part of this task.
 

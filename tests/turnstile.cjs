@@ -2,6 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),puppeteer=require('puppeteer');
 const {fixture,isApi,completePuppeteer}=require('./turnstile-fixture.cjs');
 const root=path.resolve(__dirname,'..');
+const testedEndpoint='https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
 const server=http.createServer((req,res)=>{
  if(req.method!=='GET'){res.writeHead(405).end();return;}
  const relative=new URL(req.url,'http://local').pathname;
@@ -20,6 +21,7 @@ const server=http.createServer((req,res)=>{
   page.on('request',r=>{
    if(isApi(r.url())){calls.push(r.url());if(failFirst&&calls.length===1)return r.abort();return r.respond({status:200,contentType:'text/javascript',body:fixture});}
    if(r.url().startsWith('https://script.google.com/')&&r.method()==='POST'){
+    assert.equal(r.url(),testedEndpoint,'Only the tested ReviewsBoost backend may receive the token');
     posts.push(r.postData());return r.respond({status:200,contentType:'application/json',headers:{'Access-Control-Allow-Origin':'*'},body:JSON.stringify(result)});
    }
    if(r.url().startsWith(base)&&r.method()==='GET')return r.continue();r.abort();

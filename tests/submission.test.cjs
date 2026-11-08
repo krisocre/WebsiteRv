@@ -5,6 +5,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const {backendServices}=require('./turnstile-fixture.cjs');
+const testedEndpoint='https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
 function backend(options = {}) {
   const security=backendServices();let tokenNumber=0;
   Object.entries(options.properties||{}).forEach(([key,value])=>security.PropertiesService.getScriptProperties().setProperty(key,value));
@@ -33,6 +34,20 @@ function backend(options = {}) {
   const data={form_type:'remove_reviews',full_name:'Élodie',business_name:'=HYPERLINK("bad")',email_address:'test@example.ca',phone_number:'514-555-0100',selected_plan:'Yelp Review Removal - 3 reviews',review_count:'3',business_url:'https://example.ca',reason:'Unsure',request_id:'RB-00000000-0000-4000-8000-000000000001',locale:'fr-CA','cf-turnstile-response':'LOCAL_TOKEN'};
   return {rows,mails,data,run: override => JSON.parse(api.doPost({parameter:{...data,'cf-turnstile-response':'LOCAL_TOKEN_'+tokenNumber++,...override}}).text),released:()=>released};
 }
+
+test('all active forms use the tested separate ReviewsBoost endpoint without shared fallback',()=>{
+  const runtime=fs.readFileSync(path.join(root,'form-submission.js'),'utf8');
+  assert.ok(runtime.includes("var endpoint = '"+testedEndpoint+"';"));
+  const retired='AKfycby4mQu0BJFu8Jmbw_zZPzrBb9TF_YRw4j0Ayu3PFvwgicSN5vtzynX0ASet2utzxtlnMw';
+  const otherBrand='AKfycbzK_hATDZaXApgEUITdZ1kgF6VirBLCpcK1q3tmiFoWhG2AZpy_B6uOy5CFjTejVo8T';
+  assert.ok(!runtime.includes(retired)&&!runtime.includes(otherBrand));
+  for(const file of ['index.html','suppression-avis-google.html','remove-yelp-reviews.html','online-reputation-management.html']){
+    const html=fs.readFileSync(path.join(root,file),'utf8');
+    assert.deepEqual([...html.matchAll(/<script\b[^>]*\bsrc="(form-submission\.js(?:\?[^"]*)?)"/g)].map(x=>x[1]),['form-submission.js?v=20261107-turnstile-endpoint'],file);
+    assert.ok(!html.includes(retired)&&!html.includes(otherBrand),file);
+    if(file==='index.html')assert.ok(html.includes('method="post" action="'+testedEndpoint+'"'));
+  }
+});
 
 test('browser and backend use identical input rules',()=>{
   const extract=value=>value.replace(/\r\n/g,'\n').match(/\/\/ BEGIN LEAD INPUT RULES[\s\S]*?\/\/ END LEAD INPUT RULES/)[0];
@@ -138,7 +153,7 @@ test('standalone storage and notification settings are mandatory; no shared or a
   assert.equal(b.run().result,'error');assert.equal(b.rows.length,0);assert.equal(b.mails.length,0);
 });
 function sender(fetch, online=true, timers={setTimeout,clearTimeout}) {
-  const sandbox={window:timers, navigator:{onLine:online},URLSearchParams,Blob,AbortController,Promise,fetch};
+  const sandbox={window:timers, navigator:{onLine:online},URLSearchParams,Blob,AbortController,Promise,fetch:(url,options)=>{assert.equal(url,testedEndpoint);return fetch(url,options);}};
   vm.runInNewContext(fs.readFileSync(path.join(root,'form-submission.js'),'utf8'),sandbox);
   const payload=new FormData();payload.set('full_name','Élodie');payload.set('email_address','test+one@example.ca');payload.set('cf-turnstile-response','LOCAL_TOKEN');
   return ()=>sandbox.window.ReviewSubmission.send(payload);

@@ -13,20 +13,24 @@ Follow [TURNSTILE-SETUP.md](TURNSTILE-SETUP.md) for the five required Script
 Properties, twelve sheet headers, `checkReviewsBoostSetup`, a new candidate
 Web app deployment, and owner-run token/replay/email tests BEFORE cutover.
 No project or deployment was created by the coding agent. The owner has now
-provided a new candidate `/exec` URL, recorded in TURNSTILE-SETUP.md.
-Missing/invalid-token live probes were rejected; no valid lead was submitted.
-Real-token, replay and owner email checks remain pending before cutover.
+provided a new `/exec` URL and the six passing browser checks, recorded in
+TURNSTILE-SETUP.md. These include fresh-token success, owner notification
+acceptance, wrong-action rejection and same-token replay rejection. The agent
+submitted no valid lead. Inbox delivery and the sheet row count still need
+the owner's manual confirmation.
 
-The prepared frontend still points to the old shared URL, unchanged:
+The local frontend now points to the tested ReviewsBoost-only URL:
 
 ```text
-https://script.google.com/macros/s/AKfycby4mQu0BJFu8Jmbw_zZPzrBb9TF_YRw4j0Ayu3PFvwgicSN5vtzynX0ASet2utzxtlnMw/exec
+https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec
 ```
 
-Do not redeploy or add properties to that project. Once the NEW candidate
-passes the real-token and notification checks, update ReviewsBoost's
-`form-submission.js`, matching native homepage action and cache version in a
-separate deliberate cutover. There must be no fallback to the old endpoint.
+Both `form-submission.js` and the native homepage form action use this URL.
+All four active form pages request `form-submission.js?v=20261107-turnstile-endpoint`.
+There is no fallback to the shared endpoint. Publish the changed website
+files together, then check the normal form flow. No automatic website or
+Apps Script deployment has been performed. Do not redeploy or add properties
+to either the old shared project or ReviewRemoval's project.
 
 ## Active forms and behaviour
 
@@ -38,7 +42,8 @@ separate deliberate cutover. There must be no fallback to the old endpoint.
 | `online-reputation-management.html` | `reputationForm` | `quote_request`, reputation |
 
 Other retired platform pages do not have active forms. The four current
-pages use form assets version `20261107-turnstile`. The existing ReviewsBoost
+pages use sender version `20261107-turnstile-endpoint`; their existing
+enquiry-flow JS/CSS keep version `20261107-turnstile`. The ReviewsBoost
 widget is `0x4AAAAAAFy2a5sutqdFxytB`; it is unrelated to ReviewRemoval's key.
 JavaScript is needed for security verification. The no-JavaScript homepage
 notice provides the existing email contact alternative.

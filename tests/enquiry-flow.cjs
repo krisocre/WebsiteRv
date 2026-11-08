@@ -6,6 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const os = require('node:os');
 const root = path.resolve(__dirname, '..');
+const testedEndpoint='https://script.google.com/macros/s/AKfycbzKrckb1hj0Poq3NUiywydhkTl5B8CNfGNB_8wgIcCaCKaVKNv4yQdIxHgtEq9EtEtBTQ/exec';
 const pages = require('../apply-commercial-seo.cjs').services.filter(s=>s.enabled).map(s=>s.file).concat('suppression-avis-google.html','online-reputation-management.html');
 const server = http.createServer((req,res) => {
   const file = path.resolve(root, '.' + decodeURIComponent(new URL(req.url,'http://localhost').pathname === '/' ? '/index.html' : new URL(req.url,'http://localhost').pathname));
@@ -20,6 +21,7 @@ const server = http.createServer((req,res) => {
   const browser=await chromium.launch({headless:true,channel:process.env.BROWSER_CHANNEL || 'chrome'});
   async function newTestPage(options){
     const page=await browser.newPage(options);
+    page.on('request',request=>{if(request.url().startsWith('https://script.google.com/')&&request.method()==='POST')assert.equal(request.url(),testedEndpoint,'Every active form must use the tested ReviewsBoost-only endpoint');});
     await page.route('https://challenges.cloudflare.com/turnstile/v0/api.js*',route=>route.fulfill({status:200,contentType:'text/javascript',body:turnstileFixture}));
     return page;
   }
