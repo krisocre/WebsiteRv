@@ -1,6 +1,71 @@
 # ReviewsBoost conversion measurement
 
-## Current lead conversion — November 11, 2026
+## Current replacement container — November 11, 2026
+
+The owner replaced `GTM-WQSPSM5Z` with **GTM-WDPZNW9T**. The replacement was
+inspected read-only and contains GA4 destination **G-HBMLS9LBV0**, with no Ads
+destination or copy of the existing lead-action label. The old container's
+Ads base tag must not be assumed to exist in this replacement.
+
+Current local configuration:
+
+```js
+window.ReviewsBoostMeasurementConfig = Object.freeze({
+  googleTagManagerId: 'GTM-WDPZNW9T',
+  tagManagerGa4MeasurementId: 'G-HBMLS9LBV0',
+  googleAdsViaTagManager: false,
+  ga4MeasurementId: null,
+  googleAdsId: 'AW-18568327970',
+  googleAdsLeadConversionLabel: 'XARtCKC2grYdEKLmiJZF'
+});
+```
+
+The new container loads once after **analytics consent**. It owns GA4
+initialization and its base page view; the website does not configure that
+G- ID a second time. Withdrawal sets its ga-disable flag and stops the site's
+custom analytics events. The old container is not loaded by runtime code.
+
+The supplied **Ads lead action remains unchanged**. Because the replacement
+has no Ads base destination, `googleAdsViaTagManager` is false: the existing
+Google Ads loader/config runs separately after **advertising consent**.
+Only explicit backend success sends the native conversion, with the same
+label, nominal CAD $1 value, currency, random transaction ID and empty
+user_data. Analytics-only does not initialize Ads; advertising-only does
+not load the GA4 container. GPC keeps advertising off. No second container,
+unconditional Google loader, submit-click conversion or noscript consent
+bypass was pasted into HTML.
+
+The website still offers **reviewsboost_generate_lead** as a safe Custom
+Event after a confirmed request and analytics consent. To send it to GA4,
+configure a GA4 Event tag in this replacement container using that exact
+trigger and event name **generate_lead**, with G-HBMLS9LBV0. Do not add another
+GA4 page-view tag; the base tag already sends its view. Keep the native Ads
+lead action as the single primary Ads route unless deliberately migrating;
+do not also import the same GA4 lead as primary. Automatic form events in
+the published container are diagnostics, not confirmed saved requests.
+
+The replacement enables automatic user-provided-data capability and automatic
+form events in its published settings. Local empty-user_data opt-outs remain;
+turn off automatic customer-data collection and review automatic event
+detection in the new container's Google tag settings. These are account
+settings, not changes this source can make. No form fields or request IDs
+are included in site event parameters.
+
+Privacy wording now accurately describes separate Analytics/Ads routes in
+English/French, with preserved old archives and new release
+`2026-11-11-analytics-container`. The four forms reference that release with
+unchanged visible acknowledgement wording. Publish the changed website files
+together, including the new snapshot and updated policy pages, then refresh
+caches and verify the relevant consent route in Tag Assistant. Select the
+new GTM/G- destination for Analytics and AW-18568327970 for the Ads action.
+No Apps Script, payment, pricing, backend, Turnstile or other website change.
+No website push/deployment or Google account edit was performed.
+
+The sections below are historical setup records, superseded by this current
+configuration. Full changed-file list and checks are in
+`.seo-private/container-swap-2026-11-11/REPORT.md`.
+
+## Earlier lead conversion setup — November 11, 2026
 
 The owner supplied the real **Submit lead form** action:
 **AW-18568327970/XARtCKC2grYdEKLmiJZF**, nominal value **CAD $1**. The live

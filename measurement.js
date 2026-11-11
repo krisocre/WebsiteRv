@@ -3,6 +3,7 @@
   if (window.ReviewsBoostMeasurement) return;
   var config = window.ReviewsBoostMeasurementConfig || {};
   var gtm = /^GTM-[A-Z0-9]+$/.test(config.googleTagManagerId || '') ? config.googleTagManagerId : null;
+  var managerGa4 = /^G-[A-Z0-9]+$/.test(config.tagManagerGa4MeasurementId || '') ? config.tagManagerGa4MeasurementId : null;
   var ga4 = /^G-[A-Z0-9]+$/.test(config.ga4MeasurementId || '') ? config.ga4MeasurementId : null;
   var ads = /^AW-\d+$/.test(config.googleAdsId || '') ? config.googleAdsId : null;
   var adsViaTagManager = !!gtm && config.googleAdsViaTagManager === true;
@@ -68,7 +69,7 @@
   }
   function initializeDestinations() {
     if (!safeVisitorUrl()) return;
-    // The supplied GTM container already initializes this Ads destination.
+    // Reuse a container-owned Ads destination only when explicitly configured.
     var wantsAnalytics = preferences.analytics && ga4, wantsAds = preferences.advertising && ads && !adsViaTagManager;
     if (!wantsAnalytics && !wantsAds) return;
     if (!initialized) { window.gtag('js', new Date()); initialized = true; }
@@ -91,8 +92,8 @@
     }
   }
   function initializeTagManager() {
-    // The owner's published container is Ads-only; advertising consent is required.
-    if (!gtm || managerLoaded || !preferences.advertising || !safeVisitorUrl()) return;
+    // The replacement container owns GA4, so analytics consent is required.
+    if (!gtm || managerLoaded || !preferences.analytics || !safeVisitorUrl()) return;
     managerLoaded = true;
     window.gtag('set', Object.assign(baseParameters(), { user_data: '', allow_google_signals: false, allow_ad_personalization_signals: false }));
     if (!initialized) { window.gtag('js', new Date()); initialized = true; }
@@ -118,7 +119,7 @@
         window.gtag('event', name, Object.assign({}, parameters, { send_to: ga4, user_data: '' }));
       }
     }
-    if (gtm && managerLoaded && preferences.advertising && (preferences.analytics || name === 'generate_lead')) {
+    if (gtm && managerLoaded && preferences.analytics) {
       window.dataLayer.push(Object.assign({ event: 'reviewsboost_' + name }, parameters, { user_data: '' }));
     }
   }
@@ -134,6 +135,7 @@
   function applyPreferences() {
     if (privacySignal) preferences.advertising = false;
     if (ga4) window['ga-disable-' + ga4] = !preferences.analytics;
+    if (managerGa4) window['ga-disable-' + managerGa4] = !preferences.analytics;
     window.gtag('consent', 'update', consent(preferences.analytics, preferences.advertising));
     clearOptionalCookies();
     initializeDestinations();
