@@ -50,8 +50,12 @@ const server=http.createServer((req,res)=>{
   assert.equal(t.loads.length,purpose==='advertising'?1:0,purpose+'-only consent');
   await lead(t.page);let data=await layer(t.page);
   assert.equal(data.filter(e=>e.event==='reviewsboost_generate_lead').length,purpose==='advertising'?1:0);
-  assert.equal(data.filter(e=>e[0]==='event'&&e[1]==='conversion').length,0,'No invented native Ads label');
+  const conversions=data.filter(e=>e[0]==='event'&&e[1]==='conversion');
+  assert.equal(conversions.length,purpose==='advertising'?1:0,'Ads consent required for the supplied lead label');
   if(purpose==='advertising'){
+   assert.equal(conversions[0][2].send_to,'AW-18568327970/XARtCKC2grYdEKLmiJZF');
+   assert.equal(conversions[0][2].value,1);assert.equal(conversions[0][2].currency,'CAD');assert.ok(conversions[0][2].transaction_id);
+   assert.equal(conversions[0][2].user_data,'');assert.ok(!/PRIVATE_|private\.person|RB-/.test(JSON.stringify(conversions)));
    const event=data.find(e=>e.event==='reviewsboost_generate_lead');assert.equal(event.user_data,'');
    assert.ok(!/PRIVATE_|private\.person|RB-/.test(JSON.stringify(event)));
    await t.page.reload({waitUntil:'load'});await t.page.waitForSelector('#reviewsboost-tag-manager');assert.equal(t.loads.length,2,'One loader per reload with restored consent');
@@ -61,16 +65,19 @@ const server=http.createServer((req,res)=>{
  t=await open();await choose(t.page,'accept');await t.page.waitForSelector('#reviewsboost-tag-manager');
  assert.deepEqual(t.loads,['https://www.googletagmanager.com/gtm.js?id=GTM-WQSPSM5Z']);
  await lead(t.page,'error');assert.equal((await layer(t.page)).filter(e=>e.event==='reviewsboost_generate_lead').length,0);
+ assert.equal((await layer(t.page)).filter(e=>e[0]==='event'&&e[1]==='conversion').length,0,'Failed form is not a conversion');
  await lead(t.page);let data=await layer(t.page);assert.equal(data.filter(e=>e.event==='reviewsboost_generate_lead').length,1);
  const reference=await t.page.evaluate(()=>__requestId);
  await t.page.evaluate(reference=>ReviewsBoostMeasurement.confirmedLead(document.getElementById('removalForm'),reference),reference);
  assert.equal((await layer(t.page)).filter(e=>e.event==='reviewsboost_generate_lead').length,1);
+ assert.equal((await layer(t.page)).filter(e=>e[0]==='event'&&e[1]==='conversion').length,1,'One conversion per confirmed request');
  assert.equal(data.filter(e=>e.event==='gtm.js').length,1);assert.equal(data.filter(e=>e[0]==='js').length,1);
  const setIndex=data.findIndex(e=>e[0]==='set'&&e[1]==='user_data'&&e[2]==='');
  assert.ok(setIndex>=0&&setIndex<data.findIndex(e=>e.event==='gtm.js'),'Empty user_data precedes container startup');
  await t.page.click('.measurement-settings');await choose(t.page,'reject');
  await t.page.evaluate(()=>ReviewsBoostMeasurement.confirmedLead(document.getElementById('removalForm'),'RB-ANOTHER_TEST'));
  assert.equal((await layer(t.page)).filter(e=>e.event==='reviewsboost_generate_lead').length,1,'No lead event after withdrawal');
+ assert.equal((await layer(t.page)).filter(e=>e[0]==='event'&&e[1]==='conversion').length,1,'No conversion after withdrawal');
  assert.equal((await status(t.page)).advertisingConsent,false);await t.context.close();
  t=await open({gpc:true});await choose(t.page,'accept');assert.equal(t.loads.length,0);assert.equal((await status(t.page)).advertisingConsent,false);await t.context.close();
  for(const query of ['?_dbg=1','?gtm_debug=1770000000000']){
@@ -79,5 +86,5 @@ const server=http.createServer((req,res)=>{
  for(const query of ['?email=PRIVATE_EMAIL','?_dbg=PRIVATE_VALUE','?gtm_debug=PRIVATE_VALUE']){
   t=await open({query});await choose(t.page,'accept');assert.equal(t.loads.length,0);assert.equal((await status(t.page)).urlEligible,false);await t.context.close();
  }
- assert.deepEqual(errors,[]);console.log('PASS: '+pages.length+' page bootstraps, existing GTM-WQSPSM5Z once after advertising consent, reject/restore/withdrawal/GPC, safe debug URLs, no direct destinations invented, confirmed-only deduplicated lead bridge, empty user_data and no form data. No real provider collection or leads.');
+ assert.deepEqual(errors,[]);console.log('PASS: '+pages.length+' page bootstraps, existing GTM-WQSPSM5Z once after advertising consent, reject/restore/withdrawal/GPC, safe debug URLs, supplied AW-18568327970/XARtCKC2grYdEKLmiJZF once after confirmed success, no second Ads base loader, empty user_data and no form data. No real provider collection or leads.');
 }finally{if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}})().catch(error=>{console.error(error);process.exitCode=1;});

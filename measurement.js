@@ -5,6 +5,7 @@
   var gtm = /^GTM-[A-Z0-9]+$/.test(config.googleTagManagerId || '') ? config.googleTagManagerId : null;
   var ga4 = /^G-[A-Z0-9]+$/.test(config.ga4MeasurementId || '') ? config.ga4MeasurementId : null;
   var ads = /^AW-\d+$/.test(config.googleAdsId || '') ? config.googleAdsId : null;
+  var adsViaTagManager = !!gtm && config.googleAdsViaTagManager === true;
   var label = /^[A-Za-z0-9_-]+$/.test(config.googleAdsLeadConversionLabel || '') ? config.googleAdsLeadConversionLabel : null;
   if (!gtm && !ga4 && !ads) {
     window.ReviewsBoostMeasurement = Object.freeze({ confirmedLead: function () {}, recentEvents: function () { return []; },
@@ -67,7 +68,8 @@
   }
   function initializeDestinations() {
     if (!safeVisitorUrl()) return;
-    var wantsAnalytics = preferences.analytics && ga4, wantsAds = preferences.advertising && ads;
+    // The supplied GTM container already initializes this Ads destination.
+    var wantsAnalytics = preferences.analytics && ga4, wantsAds = preferences.advertising && ads && !adsViaTagManager;
     if (!wantsAnalytics && !wantsAds) return;
     if (!initialized) { window.gtag('js', new Date()); initialized = true; }
     if (wantsAnalytics && !configured.has(ga4)) {
@@ -158,8 +160,12 @@
     record('generate_lead', { form_id: form.id === 'reputationForm' ? 'reputation_enquiry' : 'review_assessment' });
     if (preferences.advertising && ads && label && safeVisitorUrl()) {
       initializeDestinations();
+      if (adsViaTagManager) initializeTagManager();
       var id = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : null;
-      if (id) window.gtag('event', 'conversion', Object.assign(baseParameters(), { send_to: ads + '/' + label, transaction_id: id, user_data: '' }));
+      // CAD $1 is the supplied nominal lead value, not payment or quoted revenue.
+      if (id) window.gtag('event', 'conversion', Object.assign(baseParameters(), {
+        send_to: ads + '/' + label, value: 1, currency: 'CAD', transaction_id: id, user_data: ''
+      }));
     }
   }
   function locationFor(link) {

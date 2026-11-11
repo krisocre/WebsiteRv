@@ -1,6 +1,63 @@
 # ReviewsBoost conversion measurement
 
-## Current installation — November 10, 2026
+## Current lead conversion — November 11, 2026
+
+The owner supplied the real **Submit lead form** action:
+**AW-18568327970/XARtCKC2grYdEKLmiJZF**, nominal value **CAD $1**. The live
+site already had the GTM bootstrap; the new action label was missing from
+the configuration and published container. The attached manual instructions
+also mixed the GTM container ID with the gtag.js/config identifiers. Keep
+`GTM-WQSPSM5Z` on the existing container loader and use `AW-18568327970` as
+the Ads destination; do not paste `gtag('config', 'GTM-WQSPSM5Z')` or add
+another base loader.
+
+The LOCAL configuration is now:
+
+```js
+window.ReviewsBoostMeasurementConfig = Object.freeze({
+  googleTagManagerId: 'GTM-WQSPSM5Z',
+  googleAdsViaTagManager: true,
+  ga4MeasurementId: null,
+  googleAdsId: 'AW-18568327970',
+  googleAdsLeadConversionLabel: 'XARtCKC2grYdEKLmiJZF'
+});
+```
+
+`googleAdsViaTagManager: true` explicitly reuses the verified container's Ads
+base destination. No second direct gtag.js loader or Ads config command is
+added. After the existing backend confirms `result: success`, advertising
+consent and the deduplication guard permit one `conversion` event to the
+exact supplied destination, with value 1, currency CAD, an independent random
+transaction ID and empty user_data. A button click, failed submission or
+backend-only test does not count as a conversion. The nominal value is not
+service pricing, a paid order or revenue.
+
+The safe `reviewsboost_generate_lead` custom event remains available, but do
+not add another GTM conversion tag for this same action: the site now sends
+its event through the existing Google tag. Choose one primary lead action in
+Google Ads and ensure the campaign uses that goal. ReviewRemoval's IDs and
+files remain separate and unchanged.
+
+Publish **measurement-config.js** and **measurement.js** together, then
+refresh hosting/browser caches. No HTML, Apps Script, form, policy-version or
+GTM-account edit is required for this update. Select AW-18568327970 in the
+Ads test, accept advertising measurement, and use that action's Tag Assistant
+flow to verify a clearly labelled test assessment. No real lead or Google
+collection was sent by the agent; no account reporting result is claimed.
+The tag-status dashboard may take time to refresh after successful detection:
+[Google troubleshooting guidance](https://support.google.com/google-ads/answer/9148089).
+
+Local tests and the isolated published-code test confirmed one conversion
+event with the requested label, one container/library and no raw/hashed test
+form data in captured requests. All collection/backend traffic was blocked
+or mocked. Full changed-file list and evidence:
+`.seo-private/ads-lead-2026-11-11/REPORT.md`.
+
+## Container installation record — November 10, 2026
+
+This records the initial base-tag installation. The current lead-action
+configuration above supersedes the earlier null Ads ID/label and the
+instruction to add a separate GTM conversion tag below.
 
 The owner supplied **GTM-WQSPSM5Z** for ReviewsBoost. The local website now
 includes one shared consent bootstrap across all forty root HTML pages.
