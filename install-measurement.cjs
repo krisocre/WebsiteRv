@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path');
 const scope={};
 require('node:vm').runInNewContext(fs.readFileSync(path.join(__dirname,'measurement-config.js'),'utf8'),{window:scope});
 const config=scope.ReviewsBoostMeasurementConfig;
-const enabled=/^G-[A-Z0-9]+$/.test(config.ga4MeasurementId||'')||/^AW-\d+$/.test(config.googleAdsId||'');
+const enabled=/^GTM-[A-Z0-9]+$/.test(config.googleTagManagerId||'')||/^G-[A-Z0-9]+$/.test(config.ga4MeasurementId||'')||/^AW-\d+$/.test(config.googleAdsId||'');
 const marker=/\s*<!-- ReviewsBoost measurement start -->[\s\S]*?<!-- ReviewsBoost measurement end -->/g;
 function applyToHtml(html,file){
  if(!enabled)return html; // No production placeholders or tag assets while unconfigured.

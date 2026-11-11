@@ -1,5 +1,63 @@
 # ReviewsBoost conversion measurement
 
+## Current installation — November 10, 2026
+
+The owner supplied **GTM-WQSPSM5Z** for ReviewsBoost. The local website now
+includes one shared consent bootstrap across all forty root HTML pages.
+The published container was inspected read-only: its destination is
+**AW-18568327970**, with no GA4 destination or manual lead-action label found.
+This is separate from ReviewRemoval's accounts and container.
+
+`measurement-config.js` holds `googleTagManagerId: 'GTM-WQSPSM5Z'`. Direct
+GA4/Ads IDs and the native lead label remain null; adding them would require
+reviewing whether they duplicate the container. The existing script now loads
+this container once after advertising consent. Analytics-only consent does
+not load this Ads container. Rejection, Global Privacy Control and unsafe URLs
+block it. Preferences stay in the existing inline footer controls; there is
+no modal, consent wall or form checkbox. Forms work without optional tracking.
+
+The runtime sets denied consent defaults before startup and empty `user_data`
+before the container and on its custom events. It does not hash or transmit
+form fields, customer references or review text. The published container has
+automatic user-provided-data capability enabled; in this container's Google
+tag settings, turn off **Allow user-provided data capabilities** and review
+**Manage automatic event detection**, especially forms, before publication.
+These account settings cannot be changed by the local code. Local opt-outs
+were tested against the actual published Google code with all collection
+blocked: no raw or hashed fixture form data appeared in captured requests.
+That check does not guarantee future container edits or account settings.
+
+After a confirmed saved request and advertising consent, the existing form
+hook pushes **reviewsboost_generate_lead** with a fixed form/page category and
+empty `user_data`. Duplicate confirmations of the same request produce no
+second event. Configure a Google Ads Conversion Tracking tag in this container
+with that exact Custom Event trigger and your real lead-action ID/label if
+lead conversions are wanted. The inspected container has its Ads base tag;
+no lead-action label was supplied or invented. A base tag installation is
+not proof of an Ads conversion action reporting successfully. Keep generic
+automatic form events as diagnostics, and choose only one primary lead route.
+
+The updated English/French privacy notice and archived policy release
+`2026-11-10-tag-manager` describe optional Google measurement. The four form
+notices point to that release, with the same visible acknowledgement wording.
+Older policy archives remain unchanged. Tag Assistant's `_dbg=1` and numeric
+10–16 digit `gtm_debug` are allowed without copying them into event data;
+unknown/private query values remain blocked.
+
+Run `node tests/gtm.cjs`, `node tests/measurement.cjs`, `node tests/homepage.cjs`,
+`node tests/build.cjs`, the existing unit suites and `node tests/enquiry-flow.cjs`.
+Providers and successful form requests in these tests are intercepted. The
+published-code check is private under `.seo-private/gtm-2026-11-10/`.
+No website, Apps Script or GTM account deployment was performed. Publish the
+changed website files together, including the new policy snapshot, then use
+Tag Assistant after granting advertising measurement. No Apps Script change
+is required. Exact changed-file list and checks are in that private report.
+
+## Historical audit — November 1–2, 2026
+
+The following records describe the earlier unconfigured implementation.
+The current container installation above supersedes those disabled defaults.
+
 Reviewed November 1, 2026. Configuration belongs only to reviewsboost.ca.
 
 Follow-up, November 2: inspected the latest downloaded
@@ -104,14 +162,14 @@ of form text does not make collection anonymous. Hosting/security logs and any
 account-injected integrations require their own review. This code is not a
 certification of every Canadian privacy obligation.
 
-## Activate only with actual account configuration
+## Optional direct GA4/Ads routes — separate future configuration
 
 1. Get ReviewsBoost's real GA4 web-stream Measurement ID and/or its actual Ads
    account conversion ID and manual lead-action label. Never copy another
    business's IDs or place credentials/tokens in public code.
-2. Before activation, update the public privacy notice and consent text for the
+2. Before enabling any additional route, review the public privacy notice and consent text for the
    actual providers/purposes, including applicable processing outside Canada.
-   The current policy describes the current untracked implementation. Version
+   The current policy includes optional Google Tag Manager/Ads measurement. Version
    any policy change and update submission notices; preserve archived releases.
 3. Disable GA4 Enhanced Measurement automatic form/outbound/site-search/history
    collection (or Enhanced Measurement entirely) so automatic events do not
@@ -128,20 +186,20 @@ certification of every Canadian privacy obligation.
    primary bidding goal. Do not make both primary for the same enquiry. Keep
    CTA, starts and contact clicks secondary. Use Count: One as appropriate for
    lead acquisition and a genuine business value, not the quoted removal fee.
-7. Verify with Tag Assistant, GA4 Realtime/DebugView and Ads diagnostics. In Tag
-   Assistant, turn off Include debug signal in the URL, since the strict URL
-   guard suppresses unknown debug queries; use its Chrome extension, grant the
-   intended consent, and retry the connection if needed.
+7. Verify with Tag Assistant, GA4 Realtime/DebugView and Ads diagnostics after
+   granting the intended consent. Validated `_dbg=1` and numeric `gtm_debug`
+   values are permitted; unknown debug/query contents remain blocked.
 
 No account settings have been changed and actual account reporting has not been
-verified. With the checked-in configuration, outbound GA4 and Ads routes remain off.
+verified. Direct GA4/native Ads routes remain unconfigured; the GTM container's
+own Ads tag loads after advertising consent.
 
 ## Verification checklist
 
-- [ ] Unconfigured production: no tag bootstrap, loader or unnecessary consent UI.
+- [ ] Unconfigured fixture: no Google loader or unnecessary consent UI.
 - [ ] Configured fresh visit/reject: no Google request; forms still work.
 - [ ] Analytics only / advertising only: only the permitted destination/events.
-- [ ] Accept both: one Google loader and one manual page view per document.
+- [ ] Accept both: one GTM container request, no duplicate direct tag or page view.
 - [ ] Assessment CTA: one event with the correct fixed location.
 - [ ] Focus alone: no start; first actual field edit: one start.
 - [ ] Invalid/offline/HTTP/network/JSON/backend/legacy-error response: no lead.

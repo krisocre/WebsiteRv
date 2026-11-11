@@ -16,7 +16,7 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
  try{
   browser=await puppeteer.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
   async function open({config=fixtures,query='',gpc=false,blockedStorage=false,language='en-CA'}={}){
-   const context=await browser.createBrowserContext(),page=await context.newPage();await page.setViewport({width:390,height:844});await page.setRequestInterception(true);page.on('pageerror',e=>errors.push(e.message));
+   const context=await browser.createBrowserContext(),page=await context.newPage();await page.setViewport({width:390,height:844});await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);await page.setRequestInterception(true);page.on('pageerror',e=>errors.push(e.message));
    page.on('request',r=>{if(isApi(r.url())){r.respond({status:200,contentType:'text/javascript',body:turnstileFixture});return;}
     if(r.method()!=='GET'){posts.push(r.url());r.abort();return;}
     if(r.url().includes('googletagmanager.com/gtag/js')){google.push(r.url());r.respond({status:200,contentType:'text/javascript',body:'/* test loader: no collection */'});return;}
@@ -68,6 +68,6 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
   test=await open({gpc:true});page=test.page;await choose(page,'accept');assert.equal((await page.evaluate(()=>ReviewsBoostMeasurement.status())).advertisingConsent,false);assert.ok(!(await commands(page)).some(x=>x[0]==='config'&&x[1]===fixtures.googleAdsId));await test.context.close();
   test=await open({query:'?email=PRIVATE_EMAIL#PRIVATE_HASH'});page=test.page;start=google.length;await choose(page,'accept');await submit(page);assert.equal(google.length,start);assert.equal((await events(page)).length,0);assert.ok(page.url().includes('PRIVATE_EMAIL'));await test.context.close();
   test=await open({blockedStorage:true,language:'fr-CA'});page=test.page;assert.equal(await page.$eval('#measurement-preferences',e=>e.lang),'fr-CA');await page.click('.measurement-language');assert.equal(await page.$eval('#measurement-preferences',e=>e.lang),'en-CA');await choose(page,'reject');await submit(page);await test.context.close();
-  assert.deepEqual(posts,[]);assert.deepEqual(errors,[]);console.log('PASS: disabled production defaults; installer duplication guard; consent/withdrawal/GPC; safe CTA/start/contact events; explicit-success-only GA4/Ads leads; request deduplication and distinct new enquiries; legacy/error exclusion; no personal data; blocked storage and bilingual controls. No real Google collection or form POST.');
+  assert.deepEqual(posts,[]);assert.deepEqual(errors,[]);console.log('PASS: unconfigured fixtures stay disabled; installer duplication guard; consent/withdrawal/GPC; safe CTA/start/contact events; explicit-success-only GA4/Ads leads; request deduplication and distinct new enquiries; legacy/error exclusion; no personal data; blocked storage and bilingual controls. No real Google collection or form POST.');
  }finally{if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

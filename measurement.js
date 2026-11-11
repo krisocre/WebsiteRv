@@ -2,18 +2,20 @@
   'use strict';
   if (window.ReviewsBoostMeasurement) return;
   var config = window.ReviewsBoostMeasurementConfig || {};
+  var gtm = /^GTM-[A-Z0-9]+$/.test(config.googleTagManagerId || '') ? config.googleTagManagerId : null;
   var ga4 = /^G-[A-Z0-9]+$/.test(config.ga4MeasurementId || '') ? config.ga4MeasurementId : null;
   var ads = /^AW-\d+$/.test(config.googleAdsId || '') ? config.googleAdsId : null;
   var label = /^[A-Za-z0-9_-]+$/.test(config.googleAdsLeadConversionLabel || '') ? config.googleAdsLeadConversionLabel : null;
-  if (!ga4 && !ads) {
+  if (!gtm && !ga4 && !ads) {
     window.ReviewsBoostMeasurement = Object.freeze({ confirmedLead: function () {}, recentEvents: function () { return []; },
-      status: function () { return { analyticsConsent: false, advertisingConsent: false, ga4Configured: false, adsLeadConfigured: false, googleTagRequested: false, urlEligible: false }; } });
+      status: function () { return { analyticsConsent: false, advertisingConsent: false, ga4Configured: false, adsLeadConfigured: false, googleTagRequested: false, tagManagerConfigured: false, tagManagerRequested: false, urlEligible: false }; } });
     return;
   }
   var key = 'reviewsboost.measurement.v1';
   var ttl = 180 * 24 * 60 * 60 * 1000;
   var preferences = { analytics: false, advertising: false };
   var remembered = false, loaded = false, initialized = false, viewed = false;
+  var managerLoaded = false;
   var configured = new Set(), started = new WeakSet(), confirmed = new Set(), recent = [];
   var privacySignal = window.navigator.globalPrivacyControl === true;
   var canonical;
@@ -32,7 +34,11 @@
     var url = new URL(window.location.href);
     if (pagePath === '/404.html' || /noindex/i.test(document.querySelector('meta[name="robots"]')?.content || '') || document.querySelector('meta[http-equiv="refresh"]')) return false;
     var allowed = ['gclid','dclid','gbraid','wbraid','gad_source','gad_campaignid'];
-    for (var entry of url.searchParams) if (!allowed.includes(entry[0]) || !/^[A-Za-z0-9_-]{1,256}$/.test(entry[1])) return false;
+    for (var entry of url.searchParams) {
+      if (entry[0] === '_dbg' && entry[1] === '1') continue;
+      if (entry[0] === 'gtm_debug' && /^\d{10,16}$/.test(entry[1])) continue;
+      if (!allowed.includes(entry[0]) || !/^[A-Za-z0-9_-]{1,256}$/.test(entry[1])) return false;
+    }
     if (url.hash && (!/^#[A-Za-z][A-Za-z0-9_-]{0,80}$/.test(url.hash) || !document.getElementById(url.hash.slice(1)))) return false;
     return canonicalSafe;
   }
@@ -44,6 +50,10 @@
   }
   window.gtag('consent', 'default', consent(false, false));
   window.gtag('set', 'ads_data_redaction', true);
+  // Do not enable enhanced conversions or derive user_data from form fields.
+  window.gtag('set', 'user_data', '');
+  window.gtag('set', 'allow_google_signals', false);
+  window.gtag('set', 'allow_ad_personalization_signals', false);
   try {
     var stored = JSON.parse(window.localStorage.getItem(key));
     if (stored && stored.version === 1 && stored.expires > Date.now() && stored.expires <= Date.now() + ttl &&
@@ -70,7 +80,7 @@
     }
     if (!loaded) {
       loaded = true;
-      // One loader serves both configured destinations. No GTM container is installed.
+      // Only explicitly configured direct destinations use this loader.
       if (!document.querySelector('script[src*="googletagmanager.com/gtag/js"]')) {
         var script = document.createElement('script'); script.id = 'reviewsboost-google-tag'; script.async = true;
         script.src = 'https://www.googletagmanager.com/gtag/js?id=' + encodeURIComponent(wantsAnalytics ? ga4 : ads);
@@ -78,15 +88,36 @@
       }
     }
   }
+  function initializeTagManager() {
+    // The owner's published container is Ads-only; advertising consent is required.
+    if (!gtm || managerLoaded || !preferences.advertising || !safeVisitorUrl()) return;
+    managerLoaded = true;
+    window.gtag('set', Object.assign(baseParameters(), { user_data: '', allow_google_signals: false, allow_ad_personalization_signals: false }));
+    if (!initialized) { window.gtag('js', new Date()); initialized = true; }
+    var existing = Array.from(document.scripts).some(function (script) {
+      try { var url = new URL(script.src); return url.hostname === 'www.googletagmanager.com' && url.pathname === '/gtm.js' && url.searchParams.get('id') === gtm; } catch (_) { return false; }
+    });
+    if (!existing) {
+      window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
+      var script = document.createElement('script'); script.id = 'reviewsboost-tag-manager'; script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(gtm);
+      document.head.appendChild(script);
+    }
+  }
   function record(name, extra) {
-    if (!preferences.analytics || !safeVisitorUrl()) return;
+    if (!safeVisitorUrl()) return;
     var parameters = Object.assign(baseParameters(), extra || {});
     // This is an in-memory verification log, not persisted visitor history.
-    recent.push(Object.freeze({ name: name, parameters: Object.freeze(parameters), sentToGA4: !!ga4 }));
-    if (recent.length > 30) recent.shift();
-    if (ga4) {
-      initializeDestinations();
-      window.gtag('event', name, Object.assign({}, parameters, { send_to: ga4 }));
+    if (preferences.analytics) {
+      recent.push(Object.freeze({ name: name, parameters: Object.freeze(parameters), sentToGA4: !!ga4 }));
+      if (recent.length > 30) recent.shift();
+      if (ga4) {
+        initializeDestinations();
+        window.gtag('event', name, Object.assign({}, parameters, { send_to: ga4, user_data: '' }));
+      }
+    }
+    if (gtm && managerLoaded && preferences.advertising && (preferences.analytics || name === 'generate_lead')) {
+      window.dataLayer.push(Object.assign({ event: 'reviewsboost_' + name }, parameters, { user_data: '' }));
     }
   }
   function clearOptionalCookies() {
@@ -104,6 +135,7 @@
     window.gtag('consent', 'update', consent(preferences.analytics, preferences.advertising));
     clearOptionalCookies();
     initializeDestinations();
+    initializeTagManager();
     if (preferences.analytics && !viewed && safeVisitorUrl()) { viewed = true; record('page_view'); }
   }
   function savePreferences(analytics, advertising) {
@@ -127,7 +159,7 @@
     if (preferences.advertising && ads && label && safeVisitorUrl()) {
       initializeDestinations();
       var id = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : null;
-      if (id) window.gtag('event', 'conversion', Object.assign(baseParameters(), { send_to: ads + '/' + label, transaction_id: id }));
+      if (id) window.gtag('event', 'conversion', Object.assign(baseParameters(), { send_to: ads + '/' + label, transaction_id: id, user_data: '' }));
     }
   }
   function locationFor(link) {
@@ -167,7 +199,8 @@
   window.ReviewsBoostMeasurement = Object.freeze({
     confirmedLead: confirmedLead,
     status: function () { return { analyticsConsent: preferences.analytics, advertisingConsent: preferences.advertising,
-      ga4Configured: !!ga4, adsLeadConfigured: !!(ads && label), googleTagRequested: loaded, urlEligible: safeVisitorUrl() }; },
+      ga4Configured: !!ga4, adsLeadConfigured: !!(ads && label), googleTagRequested: loaded,
+      tagManagerConfigured: !!gtm, tagManagerRequested: managerLoaded, urlEligible: safeVisitorUrl() }; },
     recentEvents: function () { return recent.slice(); }
   });
   applyPreferences();
