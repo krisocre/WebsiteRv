@@ -10,7 +10,7 @@ function applyToHtml(html,file){
  const stripped=html.replace(/\r\n?/g,'\n').replace(marker,'');
  if(/googletagmanager\.com\/(?:gtag\/js|gtm\.js)/.test(stripped.split('</head>')[0]))throw Error(file+': existing Google install requires a deliberate migration; refusing duplication');
  const prefix=file==='404.html'?'/':'';
- const version='20261111-pwqps7hj';
+ const version='20261111-wdpznw9t-v2';
  const container=/^GTM-[A-Z0-9]+$/.test(config.googleTagManagerId||'')?`\n<!-- Google Tag Manager ${config.googleTagManagerId}: loaded once after analytics consent. -->`:'';
  const block=`\n<!-- ReviewsBoost measurement start -->${container}\n<script src="${prefix}measurement-config.js?v=${version}" defer></script>\n<script src="${prefix}measurement.js?v=${version}" defer></script>\n<link rel="stylesheet" href="${prefix}measurement.css">\n<!-- ReviewsBoost measurement end -->`;
  // Put the shared loader first in the head, without bypassing cookie choices.

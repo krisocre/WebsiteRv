@@ -7,7 +7,7 @@ for(const file of pages){
  const html=fs.readFileSync(path.join(root,file),'utf8');
  for(const asset of ['measurement-config.js','measurement.js','measurement.css'])assert.equal((html.match(new RegExp('(?:src|href)="[^"\\s]*'+asset.replace('.','\\.')+'(?:\\?v=[A-Za-z0-9-]+)?"','g'))||[]).length,1,file+': one '+asset);
  assert.ok(/<head>\s*<!-- ReviewsBoost measurement start -->/.test(html),file+': bootstrap first in head');
- assert.ok(/measurement-config\.js\?v=20261111-pwqps7hj/.test(html)&&/measurement\.js\?v=20261111-pwqps7hj/.test(html),file+': versioned scripts');
+ assert.ok(/measurement-config\.js\?v=20261111-wdpznw9t-v2/.test(html)&&/measurement\.js\?v=20261111-wdpznw9t-v2/.test(html),file+': versioned scripts');
  assert.ok(!/googletagmanager\.com\/(?:gtm\.js|gtag\/js|ns\.html)/.test(html),file+': no consent bypass');
  assert.equal(installer.applyToHtml(html,file),html,file+': repeatable installer');
 }
@@ -50,7 +50,7 @@ const server=http.createServer((req,res)=>{
   t=await open();await choose(t.page,'customize');await t.page.click('[data-purpose="'+purpose+'"]');await choose(t.page,'save');
   await t.page.waitForSelector(purpose==='analytics'?'#reviewsboost-tag-manager':'#reviewsboost-google-tag');
   assert.equal(t.loads.length,1,purpose+'-only consent');
-  assert.ok(t.loads[0].includes(purpose==='analytics'?'/gtm.js?id=GTM-PWQPS7HJ':'/gtag/js?id=AW-18568327970'));
+  assert.ok(t.loads[0].includes(purpose==='analytics'?'/gtm.js?id=GTM-WDPZNW9T':'/gtag/js?id=AW-18568327970'));
   await lead(t.page);let data=await layer(t.page);
   assert.equal(data.filter(e=>e.event==='reviewsboost_generate_lead').length,purpose==='analytics'?1:0);
   const conversions=data.filter(e=>e[0]==='event'&&e[1]==='conversion');
@@ -69,8 +69,10 @@ const server=http.createServer((req,res)=>{
  }
  t=await open();await choose(t.page,'accept');await t.page.waitForSelector('#reviewsboost-tag-manager');
  assert.equal(await t.page.$eval('#reviewsboost-tag-manager',script=>script===document.head.firstChild),true,'Container script is first in head after consent');
- assert.deepEqual(t.loads.slice().sort(),['https://www.googletagmanager.com/gtm.js?id=GTM-PWQPS7HJ','https://www.googletagmanager.com/gtag/js?id=AW-18568327970'].sort());
- assert.ok(!(await layer(t.page)).some(e=>e[0]==='config'&&/^G-/.test(e[1])),'Do not invent an Analytics destination for an empty replacement container');
+ assert.deepEqual(t.loads,['https://www.googletagmanager.com/gtm.js?id=GTM-WDPZNW9T'],'Use the published container for its linked destinations');
+ assert.ok(!(await layer(t.page)).some(e=>e[0]==='config'&&/^G-|^AW-/.test(e[1])),'Container-owned destinations must not be configured a second time');
+ assert.equal(await t.page.$('#reviewsboost-google-tag'),null,'No redundant standalone Ads loader when both purposes use the container');
+ assert.equal(await t.page.evaluate(()=>window['ga-disable-G-HBMLS9LBV0']),false,'Verified Analytics destination is enabled after consent');
  await lead(t.page,'error');assert.equal((await layer(t.page)).filter(e=>e.event==='reviewsboost_generate_lead').length,0);
  assert.equal((await layer(t.page)).filter(e=>e[0]==='event'&&e[1]==='conversion').length,0,'Failed form is not a conversion');
  await lead(t.page);let data=await layer(t.page);assert.equal(data.filter(e=>e.event==='reviewsboost_generate_lead').length,1);
@@ -81,20 +83,29 @@ const server=http.createServer((req,res)=>{
  assert.equal(data.filter(e=>e.event==='gtm.js').length,1);assert.equal(data.filter(e=>e[0]==='js').length,1);
  const setIndex=data.findIndex(e=>e[0]==='set'&&e[1]==='user_data'&&e[2]==='');
  assert.ok(setIndex>=0&&setIndex<data.findIndex(e=>e.event==='gtm.js'),'Empty user_data precedes container startup');
+ await t.page.click('.measurement-settings');await choose(t.page,'customize');
+ await t.page.click('[data-purpose="analytics"]');await choose(t.page,'save');
+ assert.equal((await status(t.page)).analyticsConsent,false);
+ assert.equal((await status(t.page)).advertisingConsent,true);
+ await t.page.waitForSelector('#reviewsboost-google-tag');
+ assert.equal(t.loads.filter(url=>url.includes('/gtag/js?id=AW-18568327970')).length,1,'Advertising continues through the fallback after analytics withdrawal');
+ assert.equal(await t.page.evaluate(()=>window['ga-disable-G-HBMLS9LBV0']),true);
+ await t.page.click('.measurement-settings');await choose(t.page,'accept');
+ assert.equal(t.loads.filter(url=>url.includes('/gtm.js')).length,1,'Restoring analytics must not add a second container');
  await t.page.click('.measurement-settings');await choose(t.page,'reject');
  await t.page.evaluate(()=>ReviewsBoostMeasurement.confirmedLead(document.getElementById('removalForm'),'RB-ANOTHER_TEST'));
  assert.equal((await layer(t.page)).filter(e=>e.event==='reviewsboost_generate_lead').length,1,'No lead event after withdrawal');
  assert.equal((await layer(t.page)).filter(e=>e[0]==='event'&&e[1]==='conversion').length,1,'No conversion after withdrawal');
  assert.equal((await status(t.page)).advertisingConsent,false);
  assert.equal((await status(t.page)).analyticsConsent,false,'Analytics consent is withdrawn');
- assert.equal((await status(t.page)).ga4Configured,false,'No unconfirmed direct GA4 destination is configured');
+ assert.equal(await t.page.evaluate(()=>window['ga-disable-G-HBMLS9LBV0']),true,'Withdrawing analytics disables the verified destination');
  await t.context.close();
- t=await open({gpc:true});await choose(t.page,'accept');await t.page.waitForSelector('#reviewsboost-tag-manager');assert.equal(t.loads.length,1);assert.ok(t.loads[0].includes('GTM-PWQPS7HJ'));assert.equal((await status(t.page)).advertisingConsent,false);await t.context.close();
+ t=await open({gpc:true});await choose(t.page,'accept');await t.page.waitForSelector('#reviewsboost-tag-manager');assert.equal(t.loads.length,1);assert.ok(t.loads[0].includes('GTM-WDPZNW9T'));assert.equal((await status(t.page)).advertisingConsent,false);await t.context.close();
  for(const query of ['?_dbg=1','?gtm_debug=1770000000000']){
-  t=await open({query});await choose(t.page,'accept');await t.page.waitForSelector('#reviewsboost-tag-manager');assert.equal(t.loads.length,2);await t.context.close();
+  t=await open({query});await choose(t.page,'accept');await t.page.waitForSelector('#reviewsboost-tag-manager');assert.equal(t.loads.length,1);await t.context.close();
  }
  for(const query of ['?email=PRIVATE_EMAIL','?_dbg=PRIVATE_VALUE','?gtm_debug=PRIVATE_VALUE']){
   t=await open({query});await choose(t.page,'accept');assert.equal(t.loads.length,0);assert.equal((await status(t.page)).urlEligible,false);await t.context.close();
  }
- assert.deepEqual(errors,[]);console.log('PASS: '+pages.length+' page bootstraps, only GTM-PWQPS7HJ after analytics consent, one separate Ads loader after advertising consent, no invented GA4 config, reject/restore/withdrawal/GPC, safe debug URLs, unchanged supplied lead conversion once after confirmed success and no form data. No real provider collection or leads.');
+ assert.deepEqual(errors,[]);console.log('PASS: '+pages.length+' page bootstraps, only GTM-WDPZNW9T for the verified Analytics destination, no redundant linked Ads base loader, advertising-only fallback, reject/restore/withdrawal/GPC, safe debug URLs, unchanged supplied lead conversion once after confirmed success and no form data. No real provider collection or leads.');
 }finally{if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}})().catch(error=>{console.error(error);process.exitCode=1;});

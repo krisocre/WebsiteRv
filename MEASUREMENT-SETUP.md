@@ -1,5 +1,73 @@
 # ReviewsBoost conversion measurement
 
+## Active Analytics target — November 11, 2026, final correction
+
+The owner is testing **GTM-WDPZNW9T / G-HBMLS9LBV0**. The live website at
+the start of this check instead used the subsequently supplied empty
+GTM-PWQPS7HJ container. That mismatch prevented the requested Analytics
+stream from receiving visits through the installed container; successful
+Ads conversions did not establish that Analytics was connected.
+
+The local configuration now restores **GTM-WDPZNW9T**, whose published
+resource version 2 was verified to include **G-HBMLS9LBV0** and the existing
+Ads destination **AW-18568327970**, without the manual lead-action label.
+`tagManagerGa4MeasurementId` is G-HBMLS9LBV0 and `googleAdsViaTagManager`
+is true. The container owns its base destination setup; the site does not
+configure those destinations a second time when both purposes are accepted.
+Advertising-only consent retains the standalone Ads route without loading
+the Analytics container. The confirmed-lead event, label/value, consent
+checks, form behaviour and personal-data opt-outs remain unchanged.
+
+All HTML pages use `?v=20261111-wdpznw9t-v2` for the shared local scripts.
+Publish the updated HTML, measurement-config.js and measurement.js together
+before checking the live target again. No automatic deployment or account
+change was performed. Test with Tag Assistant after analytics acceptance;
+a first-visit scanner without cookie acceptance can still see no tag.
+Do not create another container or add another manual Analytics loader.
+
+The current published Google container also enables automatic customer-data
+and form-event features. Keep automatic customer-data collection disabled
+in the account settings; local empty-user_data opt-outs remain in place.
+Automatic form events are not proof that a quote was successfully saved.
+The exact lead action remains the explicit-success event described below.
+
+The container-replacement sections farther below are historical records;
+this active target supersedes them. Verification evidence and the complete
+file list are in `.seo-private/tag-target-20261111-wdp/REPORT.md`.
+
+## Homepage quote form: Google Ads event snippet
+
+The main homepage quote form is `#removalForm`; its submit button is
+`#removalForm button[type="submit"]`. The existing integration already
+reports the owner's **Submit lead form** action:
+
+- Destination: `AW-18568327970/XARtCKC2grYdEKLmiJZF`.
+- Value/currency: the supplied nominal lead value, `1` / `CAD`.
+- Trigger: the protected Apps Script sender returns explicit saved-request
+  success; a click, validation failure or unsuccessful/uncertain response is
+  not a confirmed quote. The legacy notification-error UI accommodation is
+  also excluded. A genuinely saved response with `notification_sent: false`
+  remains a lead.
+- Route: `enquiry-flow.js` calls `ReviewsBoostMeasurement.confirmedLead`;
+  `measurement.js` sends `gtag('event', 'conversion', ...)` after advertising
+  consent. That is the conversion call wrapped by Google's example
+  `gtag_report_conversion` helper; that particular function name is not an
+  additional conversion or required second integration.
+- Deduplication: the existing request key is checked in memory; the provider
+  receives a separate random transaction ID and no form contents.
+
+Do not paste a second event snippet or an onclick conversion onto this
+button, and do not create another primary GTM/GA4 conversion for the same
+saved lead. The form requests a quote and takes no payment: its estimated
+fees are not transaction revenue. No purchase conversion or dynamic quote
+value was added. Other forms retain their existing measurement.
+
+For local verification run `node tests/gtm.cjs`. The private real-provider
+check at `.seo-private/tag-bootstrap-2026-11-11/check-published.cjs` executes
+the published container/Ads libraries but blocks every Google collector and
+backend request. It confirms the expected action label is requested once
+by the website; it does not verify attribution or private Ads account status.
+
 ## Installation detection and head placement — November 11, 2026
 
 The owner explicitly selected **GTM-PWQPS7HJ** to replace GTM-WDPZNW9T.

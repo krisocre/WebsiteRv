@@ -69,8 +69,9 @@
   }
   function initializeDestinations() {
     if (!safeVisitorUrl()) return;
-    // Reuse a container-owned Ads destination only when explicitly configured.
-    var wantsAnalytics = preferences.analytics && ga4, wantsAds = preferences.advertising && ads && !adsViaTagManager;
+    // Reuse the published container's Ads destination when that container can load.
+    // Advertising-only consent still needs the standalone Ads route, without GA4.
+    var wantsAnalytics = preferences.analytics && ga4, wantsAds = preferences.advertising && ads && (!adsViaTagManager || !preferences.analytics);
     if (!wantsAnalytics && !wantsAds) return;
     if (!initialized) { window.gtag('js', new Date()); initialized = true; }
     if (wantsAnalytics && !configured.has(ga4)) {
