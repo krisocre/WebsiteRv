@@ -1,6 +1,51 @@
 # ReviewsBoost conversion measurement
 
-## Current replacement container — November 11, 2026
+## Installation detection and head placement — November 11, 2026
+
+The owner explicitly selected **GTM-PWQPS7HJ** to replace GTM-WDPZNW9T.
+Only that replacement container is now configured. Its public script
+returned HTTP 200, resource version 1, with an empty tags array and no
+published G- or AW- destination. Installing the container does not complete
+Analytics account setup: Analytics will need a Google tag configured and
+published in this container. No G- destination was invented or copied into
+it. The old container's G-HBMLS9LBV0 destination is not assumed to belong to
+the replacement. `tagManagerGa4MeasurementId` is null accordingly.
+The public script snapshot is saved privately under
+`.seo-private/tag-bootstrap-2026-11-11/`.
+
+The shared bootstrap now appears immediately after `<head>` on all 40 HTML
+pages, with the actual GTM container ID in an explanatory source comment.
+The configured container is **GTM-PWQPS7HJ**. Its script is inserted
+first in the head after analytics consent. Both local JavaScript references
+use `?v=20261111-pwqps7hj` so browsers/CDN caches do not reuse an older bootstrap
+or container configuration. The installer preserves this placement when
+pages are regenerated; it does not add a second Google installation.
+
+The existing direct Ads destination AW-18568327970 and confirmed-lead label
+XARtCKC2grYdEKLmiJZF remain unchanged and do not depend on tags inside GTM.
+The safe reviewsboost_generate_lead data-layer event remains available for
+future container configuration. No Analytics or Tag Manager account setting
+was changed here; private setup status and live collection are not verified.
+
+The site uses basic consent mode: Analytics is not loaded before analytics
+consent, and the existing Ads route requires advertising consent. A fresh
+installation check that does not accept cookies can therefore see no tag.
+For an interactive verification, connect https://reviewsboost.ca/ in
+https://tagassistant.google.com/, accept cookies in the opened website tab,
+then inspect GTM-PWQPS7HJ. A container appearing there is distinct from a
+configured Analytics destination sending events.
+Google documents this consent-related connection sequence at
+https://developers.google.com/tag-platform/security/guides/consent-debugging.
+Do not use a duplicate unconditional snippet to make a scanner pass.
+
+Publish the changed HTML files, measurement-config.js and measurement.js
+together; the shared
+installer and updated tests/documentation are source/developer files. No
+automatic publication, real customer lead or test conversion is required.
+The Ads destination/lead label, consent choices, legal notice, forms,
+Turnstile, Apps Script, pricing and page metadata remain unchanged.
+
+## Earlier replacement container — November 11, 2026 (superseded)
 
 The owner replaced `GTM-WQSPSM5Z` with **GTM-WDPZNW9T**. The replacement was
 inspected read-only and contains GA4 destination **G-HBMLS9LBV0**, with no Ads

@@ -92,7 +92,7 @@
     }
   }
   function initializeTagManager() {
-    // The replacement container owns GA4, so analytics consent is required.
+    // Optional container tags require analytics consent, including future tags.
     if (!gtm || managerLoaded || !preferences.analytics || !safeVisitorUrl()) return;
     managerLoaded = true;
     window.gtag('set', Object.assign(baseParameters(), { user_data: '', allow_google_signals: false, allow_ad_personalization_signals: false }));
@@ -104,7 +104,7 @@
       window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' });
       var script = document.createElement('script'); script.id = 'reviewsboost-tag-manager'; script.async = true;
       script.src = 'https://www.googletagmanager.com/gtm.js?id=' + encodeURIComponent(gtm);
-      document.head.appendChild(script);
+      document.head.insertBefore(script, document.head.firstChild);
     }
   }
   function record(name, extra) {

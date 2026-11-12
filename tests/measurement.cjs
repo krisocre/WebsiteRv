@@ -21,7 +21,7 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
     if(r.method()!=='GET'){posts.push(r.url());r.abort();return;}
     if(r.url().includes('googletagmanager.com/gtag/js')){google.push(r.url());r.respond({status:200,contentType:'text/javascript',body:'/* test loader: no collection */'});return;}
     if(r.resourceType()==='document'&&r.url().startsWith(base)){r.respond({status:200,contentType:'text/html;charset=utf-8',body:tagged});return;}
-    if(r.url()===base+'measurement-config.js'){r.respond({status:200,contentType:'text/javascript',body:'window.ReviewsBoostMeasurementConfig='+JSON.stringify(config)+';'});return;}
+    if(new URL(r.url()).pathname==='/measurement-config.js'){r.respond({status:200,contentType:'text/javascript',body:'window.ReviewsBoostMeasurementConfig='+JSON.stringify(config)+';'});return;}
     if(r.url().startsWith(base)||r.url().startsWith('data:'))r.continue();else r.abort();
    });
    await page.evaluateOnNewDocument((gpc,blockedStorage,language)=>{

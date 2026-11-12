@@ -26,7 +26,7 @@ const server=http.createServer((req,res)=>{
    assert.equal(await page.$$eval('h1',e=>e.length),1);assert.equal(await page.$$eval('title',e=>e.length),1);assert.equal(await page.$$eval('link[rel=canonical]',e=>e.length),1);
    assert.equal(await page.$$eval('.steps-grid>article',e=>e.length),3);assert.equal(await page.$eval('.hero-actions a[href="#review-count"]',e=>e.getBoundingClientRect().height>=44),true);
    assert.ok(await page.$eval('.hero-points',e=>e.textContent.includes('No account password needed')));
-   assert.equal(await page.evaluate(()=>!!document.querySelector('script[src="measurement.js"]')),require('../install-measurement.cjs').enabled,'Measurement bootstrap matches real configuration');
+   assert.equal(await page.evaluate(()=>Array.from(document.scripts).some(script=>new URL(script.src,location.href).pathname.endsWith('/measurement.js'))),require('../install-measurement.cjs').enabled,'Measurement bootstrap matches real configuration');
    assert.equal(await page.evaluate(()=>document.getAnimations().filter(a=>a.playState==='running').length),0);
    assert.deepEqual(await page.$$eval('main>section',e=>e.slice(0,4).map(n=>n.id||n.classList[0])),['hero','trust-strip','pricing','assessment'],'Pricing then the form follows the existing hero');
    assert.equal(await page.$$eval('[role="dialog"],.modal-overlay',e=>e.length),0,'Homepage form is part of the page');
