@@ -17,7 +17,7 @@
   var ttl = 180 * 24 * 60 * 60 * 1000;
   var preferences = { analytics: false, advertising: false };
   var remembered = false, loaded = false, initialized = false, viewed = false;
-  var managerLoaded = false;
+  var managerLoaded = false, reportingConfirmedLead = false;
   var configured = new Set(), started = new WeakSet(), confirmed = new Set(), recent = [];
   var privacySignal = window.navigator.globalPrivacyControl === true;
   var canonical;
@@ -153,6 +153,24 @@
     if (!preferences.analytics || started.has(form)) return;
     started.add(form); record('quote_form_start', { form_id: form.id === 'reputationForm' ? 'reputation_enquiry' : 'review_assessment' });
   }
+  // Google's named event helper. Only the saved-request path opens this context;
+  // a direct submit-button click must not count an invalid or failed enquiry.
+  function gtag_report_conversion(url) {
+    if (!reportingConfirmedLead || !preferences.advertising || !ads || !label || !safeVisitorUrl()) return false;
+    initializeDestinations();
+    if (adsViaTagManager) initializeTagManager();
+    var id = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : null;
+    if (!id) return false;
+    var callback = function () {
+      if (typeof url !== 'undefined') window.location = url;
+    };
+    // The supplied CAD $1 is a nominal lead value, not payment or quote revenue.
+    window.gtag('event', 'conversion', Object.assign(baseParameters(), {
+      send_to: ads + '/' + label, value: 1.0, currency: 'CAD',
+      event_callback: callback, transaction_id: id, user_data: ''
+    }));
+    return false;
+  }
   function confirmedLead(form, receiptKey) {
     if (!form || !['removalForm','platformRemovalForm','reputationForm'].includes(form.id) ||
         typeof receiptKey !== 'string' || !/^RB-[A-Za-z0-9-]{1,96}$/.test(receiptKey) || confirmed.has(receiptKey)) return;
@@ -161,15 +179,8 @@
     if (confirmed.size > 100) confirmed.delete(confirmed.values().next().value);
     started.delete(form); // A later, distinct enquiry may legitimately start again.
     record('generate_lead', { form_id: form.id === 'reputationForm' ? 'reputation_enquiry' : 'review_assessment' });
-    if (preferences.advertising && ads && label && safeVisitorUrl()) {
-      initializeDestinations();
-      if (adsViaTagManager) initializeTagManager();
-      var id = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : null;
-      // CAD $1 is the supplied nominal lead value, not payment or quoted revenue.
-      if (id) window.gtag('event', 'conversion', Object.assign(baseParameters(), {
-        send_to: ads + '/' + label, value: 1, currency: 'CAD', transaction_id: id, user_data: ''
-      }));
-    }
+    reportingConfirmedLead = true;
+    try { gtag_report_conversion(); } finally { reportingConfirmedLead = false; }
   }
   function locationFor(link) {
     if (link.closest('.hero-actions')) return 'hero';
@@ -205,6 +216,7 @@
     });
   });
   // Only the explicit backend-success branch in enquiry-flow.js calls this API. No submit-click trigger.
+  window.gtag_report_conversion = gtag_report_conversion;
   window.ReviewsBoostMeasurement = Object.freeze({
     confirmedLead: confirmedLead,
     status: function () { return { analyticsConsent: preferences.analytics, advertisingConsent: preferences.advertising,
@@ -213,10 +225,16 @@
     recentEvents: function () { return recent.slice(); }
   });
   applyPreferences();
-  // Inline footer preferences: no modal, sticky overlay, consent wall or form checkbox.
+  // Non-modal first-visit banner; saved choices can be reopened from the footer.
   var panel = document.createElement('section'); panel.id = 'measurement-preferences'; panel.setAttribute('aria-labelledby', 'measurement-title');
-  panel.innerHTML = '<div class="measurement-inner"><h2 id="measurement-title">Your measurement choices</h2><p>With your permission, Google tools can measure visits, enquiries and advertising performance using cookies and device identifiers. No form contents are sent as event data. Your assessment request works without optional tracking. <a href="https://reviewsboost.ca/privacy-policy.html">Privacy policy</a>.</p><div class="measurement-actions"><button type="button" data-choice="accept">Accept optional</button><button type="button" data-choice="reject">Reject optional</button><button type="button" data-choice="customize" aria-expanded="false" aria-controls="measurement-options">Choose settings</button></div><div id="measurement-options" hidden><label><input type="checkbox" data-purpose="analytics"> Visit and enquiry analytics</label><label><input type="checkbox" data-purpose="advertising"> Advertising measurement (no ad personalization)</label><p class="measurement-signal" hidden>Your browser privacy signal keeps advertising measurement off.</p><button type="button" data-choice="save">Save choices</button></div><p class="measurement-status" role="status" aria-live="polite"></p></div>';
-  panel.hidden = remembered; document.body.appendChild(panel);
+  panel.innerHTML = '<div class="measurement-inner"><h2 id="measurement-title">Cookie choices</h2><p>With your permission, Google tools use cookies and device identifiers to measure visits, enquiries and ads. Your request works without optional tracking. <a href="https://reviewsboost.ca/privacy-policy.html">Privacy policy</a>.</p><div class="measurement-actions"><button type="button" data-choice="accept">Accept optional</button><button type="button" data-choice="reject">Reject optional</button><button type="button" data-choice="customize" aria-expanded="false" aria-controls="measurement-options">Choose settings</button></div><div id="measurement-options" hidden><label><input type="checkbox" data-purpose="analytics"> Visit and enquiry analytics</label><label><input type="checkbox" data-purpose="advertising"> Advertising measurement (no ad personalization)</label><p class="measurement-signal" hidden>Your browser privacy signal keeps advertising measurement off.</p><button type="button" data-choice="save">Save choices</button></div><p class="measurement-status" role="status" aria-live="polite"></p></div>';
+  panel.hidden = remembered;
+  var skipLink = document.querySelector('body > .skip-link');
+  if (skipLink) skipLink.after(panel); else document.body.prepend(panel);
+  var returnFocus = null;
+  panel.addEventListener('focusin', function (event) {
+    if (event.relatedTarget instanceof HTMLElement && event.relatedTarget !== document.body && !panel.contains(event.relatedTarget)) returnFocus = event.relatedTarget;
+  });
   var footer = document.querySelector('.footer-bottom') || document.querySelector('footer') || document.body;
   var settings = document.createElement('button'); settings.type = 'button'; settings.className = 'measurement-settings'; settings.textContent = 'Cookie choices'; settings.setAttribute('aria-controls', panel.id); settings.setAttribute('aria-expanded', String(!remembered)); footer.appendChild(settings);
   var live = document.createElement('span'); live.className = 'measurement-live'; live.setAttribute('role', 'status'); live.setAttribute('aria-live', 'polite'); footer.appendChild(live);
@@ -225,8 +243,8 @@
   function translate() {
     panel.lang = french ? 'fr-CA' : 'en-CA'; language.textContent = french ? 'English' : 'Français';
     settings.textContent = french ? 'Choix des témoins' : 'Cookie choices';
-    panel.querySelector('h2').textContent = french ? 'Vos choix de mesure' : 'Your measurement choices';
-    panel.querySelector('p').innerHTML = french ? 'Avec votre permission, les outils Google peuvent mesurer les visites, les demandes et la publicité au moyen de témoins et d’identifiants d’appareil. Aucun contenu de formulaire n’est envoyé dans les paramètres des événements. Votre demande fonctionne sans suivi facultatif. <a href="https://reviewsboost.ca/privacy-policy.html#confidentialite-fr">Politique de confidentialité</a>.' : 'With your permission, Google tools can measure visits, enquiries and advertising performance using cookies and device identifiers. No form contents are sent as event data. Your assessment request works without optional tracking. <a href="https://reviewsboost.ca/privacy-policy.html">Privacy policy</a>.';
+    panel.querySelector('h2').textContent = french ? 'Vos choix de témoins' : 'Cookie choices';
+    panel.querySelector('p').innerHTML = french ? 'Avec votre accord, les outils Google utilisent des témoins et des identifiants d’appareil pour mesurer les visites, les demandes et la publicité. Votre demande fonctionne sans suivi facultatif. <a href="https://reviewsboost.ca/privacy-policy.html#confidentialite-fr">Confidentialité</a>.' : 'With your permission, Google tools use cookies and device identifiers to measure visits, enquiries and ads. Your request works without optional tracking. <a href="https://reviewsboost.ca/privacy-policy.html">Privacy policy</a>.';
     var labels = french ? { accept: 'Accepter les mesures', reject: 'Refuser les mesures', customize: 'Choisir les paramètres', save: 'Enregistrer' } :
       { accept: 'Accept optional', reject: 'Reject optional', customize: 'Choose settings', save: 'Save choices' };
     Object.keys(labels).forEach(function (choice) { panel.querySelector('[data-choice="' + choice + '"]').textContent = labels[choice]; });
@@ -237,11 +255,33 @@
   language.addEventListener('click', function () { french = !french; translate(); }); translate();
   var analyticsInput = panel.querySelector('[data-purpose="analytics"]'), adsInput = panel.querySelector('[data-purpose="advertising"]');
   function syncInputs() { analyticsInput.checked = preferences.analytics; adsInput.checked = preferences.advertising; adsInput.disabled = privacySignal; panel.querySelector('.measurement-signal').hidden = !privacySignal; }
-  function closePanel() { panel.hidden = true; settings.setAttribute('aria-expanded', 'false'); settings.focus(); live.textContent = french ? 'Vos choix ont été enregistrés.' : 'Your measurement choices have been saved.'; }
-  settings.addEventListener('click', function () { syncInputs(); panel.hidden = false; settings.setAttribute('aria-expanded', 'true'); panel.scrollIntoView({ block: 'start', behavior: 'auto' }); panel.querySelector('button').focus(); });
+  function focusPanelControl(control) {
+    control.focus({ preventScroll: true });
+    var fieldBounds = control.getBoundingClientRect(), panelBounds = panel.getBoundingClientRect();
+    if (fieldBounds.bottom > panelBounds.bottom - 16) panel.scrollTop += fieldBounds.bottom - panelBounds.bottom + 16;
+    else if (fieldBounds.top < panelBounds.top + 16) panel.scrollTop += fieldBounds.top - panelBounds.top - 16;
+  }
+  function closePanel() {
+    panel.hidden = true; settings.setAttribute('aria-expanded', 'false');
+    panel.querySelector('#measurement-options').hidden = true;
+    panel.querySelector('[data-choice="customize"]').setAttribute('aria-expanded', 'false');
+    if (returnFocus && returnFocus.isConnected && returnFocus.getClientRects().length && !returnFocus.matches(':disabled')) returnFocus.focus({ preventScroll: true });
+    else {
+      var content = document.querySelector('main');
+      if (content) {
+        var temporaryFocus = !content.hasAttribute('tabindex');
+        if (temporaryFocus) content.setAttribute('tabindex', '-1');
+        content.focus({ preventScroll: true });
+        if (temporaryFocus) content.addEventListener('blur', function () { content.removeAttribute('tabindex'); }, { once: true });
+      }
+    }
+    returnFocus = null;
+    live.textContent = french ? 'Vos choix ont été enregistrés.' : 'Your measurement choices have been saved.';
+  }
+  settings.addEventListener('click', function () { returnFocus = settings; syncInputs(); panel.hidden = false; panel.scrollTop = 0; settings.setAttribute('aria-expanded', 'true'); focusPanelControl(panel.querySelector('[data-choice="accept"]')); });
   panel.addEventListener('click', function (event) {
     var action = event.target.closest('[data-choice]'); if (!action) return;
-    if (action.dataset.choice === 'customize') { syncInputs(); panel.querySelector('#measurement-options').hidden = false; action.setAttribute('aria-expanded', 'true'); analyticsInput.focus(); analyticsInput.scrollIntoView({ block: 'center', behavior: 'auto' }); return; }
+    if (action.dataset.choice === 'customize') { syncInputs(); panel.querySelector('#measurement-options').hidden = false; action.setAttribute('aria-expanded', 'true'); focusPanelControl(analyticsInput); return; }
     if (action.dataset.choice === 'accept') savePreferences(true, true);
     else if (action.dataset.choice === 'reject') savePreferences(false, false);
     else savePreferences(analyticsInput.checked, adsInput.checked);

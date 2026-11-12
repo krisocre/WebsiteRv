@@ -1,5 +1,98 @@
 # ReviewsBoost conversion measurement
 
+## Named Google Ads event helper — November 12, 2026
+
+The supplied `gtag_report_conversion(url)` helper is now defined in the
+shared head-loaded measurement.js and exposed on window. It sends the
+configured **AW-18568327970/XARtCKC2grYdEKLmiJZF** action with **1.0 CAD**,
+the supplied event_callback and the existing independent transaction ID /
+empty user_data privacy settings. No new base tag or second conversion
+sender was added.
+
+The existing saved-request handler calls confirmedLead, which validates
+and deduplicates the request before invoking this helper in a short-lived
+confirmed-lead context. Raw button clicks, failed submissions and direct
+helper calls outside that context do not count. The form keeps its existing
+submit handling: do not add an onclick handler that would cancel submission
+or count a click before saving. The quote flow passes no redirect URL, so
+the callback leaves the in-page success message intact. Advertising consent,
+URL privacy rules and all existing destination/account IDs are unchanged.
+
+Runtime references use `measurement.js?v=20261112-lead-snippet`; banner CSS
+keeps its existing cookie-banner version. Publish the updated HTML and JS
+together. Pending cookie-banner changes remain intact. No deployment or
+live test conversion was performed. The helper's presence alone does not
+verify the action inside Google Ads; that account-side verification remains
+the guided flow documented below.
+
+Validation and the complete incremental file list are in
+`.seo-private/lead-snippet-20261112/REPORT.md`.
+
+## Visible cookie choices — November 12, 2026
+
+The first-visit controls are now a compact, non-modal banner fixed near the
+bottom of the browser window. Accept, Reject and Settings are immediately
+visible, with equal accept/reject styling. The banner is separate from page
+layout, respects mobile safe areas and scrolls internally on short screens.
+It does not lock the page, trap focus or automatically grant permission.
+
+Saved choices hide the prompt on later visits. The footer Cookie choices
+button reopens it and restores focus on dismissal. Accepting/rejecting no
+longer scrolls the page to the footer; a visitor already using the form
+returns to that field. Keyboard navigation reaches the prompt after the
+skip link, and English/French controls remain available. Earlier references
+to footer-only consent controls below describe the previous presentation.
+
+Analytics/Ads IDs, consent defaults, GPC, preference storage, lead tracking,
+forms, Turnstile, Apps Script, pricing and legal policy versions are unchanged.
+The banner CSS uses `?v=20261112-cookie-banner`; shared JS uses the latest
+tracking release above. Both references prevent cached older assets.
+Publish the changed HTML, measurement.js and measurement.css together.
+Nothing was deployed automatically. Validation and the full file list are
+in `.seo-private/cookie-banner-20261112/REPORT.md`.
+
+## Google Ads account verification — November 11, 2026
+
+The owner clarified that the current status is **Unverified / Inactive** in
+Google Ads. The latest attachment contains the same Submit lead form action
+already configured: AW-18568327970/XARtCKC2grYdEKLmiJZF, CAD 1. Its base
+example still names the historical GTM-WQSPSM5Z container; it is not a new
+lead-action ID and does not justify changing containers again.
+
+Read-only checks of the live site confirmed the published WDP/GHB target,
+one executing container after cookie acceptance, a request for the correct
+Analytics destination, restored consent and matching production tracking /
+submission source. These checks intercepted Google collectors and submitted
+no forms; they did not establish Google Ads account verification. Evidence:
+`.seo-private/ads-verification-20261111/live-check.json`.
+
+Complete the account's guided verification:
+
+1. In Google Ads, open Goals → Summary → All conversions. Find **Submit
+   lead form**, hover its Unverified / Tag inactive status, and choose
+   **Troubleshoot → Continue**.
+2. Enter https://reviewsboost.ca/ and connect. Keep the Ads, Tag Assistant
+   and website tabs open. If prompted, select **Debug live version**.
+3. In the connected website tab, use Cookie choices to accept analytics
+   and advertising measurement. Complete the main quote form once with
+   your own contact details, labelled as an owner tracking test rather
+   than paid work. Complete the security check and wait for **Request
+   sent**. A button click or invalid submission does not fire this action.
+4. Return to the Tag Assistant badge, select **Finish**, inspect the
+   verified/failed result for the exact action above, then close Tag
+   Assistant. Google documents approximately 30 minutes for verified debug
+   results to update the account. **No recent conversions** can be the
+   normal status after verification; **Recording** requires conversions.
+
+If this guided session does not detect the action, retain its failure
+details for diagnosis. Do not add another event snippet, change IDs, click
+paid ads to test, or treat a local test as proof of private account status.
+The agent did not run the owner-account step or send a live test lead.
+
+Google instructions:
+https://support.google.com/google-ads/answer/10989978
+https://support.google.com/google-ads/answer/10031686?hl=en
+
 ## Active Analytics target — November 11, 2026, final correction
 
 The owner is testing **GTM-WDPZNW9T / G-HBMLS9LBV0**. The live website at
@@ -49,10 +142,9 @@ reports the owner's **Submit lead form** action:
   also excluded. A genuinely saved response with `notification_sent: false`
   remains a lead.
 - Route: `enquiry-flow.js` calls `ReviewsBoostMeasurement.confirmedLead`;
-  `measurement.js` sends `gtag('event', 'conversion', ...)` after advertising
-  consent. That is the conversion call wrapped by Google's example
-  `gtag_report_conversion` helper; that particular function name is not an
-  additional conversion or required second integration.
+  the named `gtag_report_conversion` helper in measurement.js then sends
+  `gtag('event', 'conversion', ...)` after advertising consent. This is one
+  guarded conversion route, including for the main homepage quote form.
 - Deduplication: the existing request key is checked in memory; the provider
   receives a separate random transaction ID and no form contents.
 
