@@ -7,7 +7,7 @@ for(const file of pages){
  const html=fs.readFileSync(path.join(root,file),'utf8');
  for(const asset of ['measurement-config.js','measurement.js','measurement.css'])assert.equal((html.match(new RegExp('(?:src|href)="[^"\\s]*'+asset.replace('.','\\.')+'(?:\\?v=[A-Za-z0-9-]+)?"','g'))||[]).length,1,file+': one '+asset);
  assert.ok(/<head>\s*<!-- ReviewsBoost measurement start -->/.test(html),file+': bootstrap first in head');
- assert.ok(/measurement-config\.js\?v=20261111-wdpznw9t-v2/.test(html)&&/measurement\.js\?v=20261112-lead-snippet/.test(html)&&/measurement\.css\?v=20261112-cookie-banner/.test(html),file+': versioned scripts');
+ assert.ok(/measurement-config\.js\?v=20261111-wdpznw9t-v2/.test(html)&&/measurement\.js\?v=20261113-footer-choices/.test(html)&&/measurement\.css\?v=20261112-cookie-banner/.test(html),file+': versioned scripts');
  assert.ok(!/googletagmanager\.com\/(?:gtm\.js|gtag\/js|ns\.html)/.test(html),file+': no consent bypass');
  assert.equal(installer.applyToHtml(html,file),html,file+': repeatable installer');
 }
@@ -34,7 +34,7 @@ const server=http.createServer((req,res)=>{
  }
  const layer=page=>page.evaluate(()=>dataLayer.map(entry=>entry.event?entry:Array.from(entry)));
  const status=page=>page.evaluate(()=>ReviewsBoostMeasurement.status());
- const choose=(page,choice)=>page.click('#measurement-preferences [data-choice="'+choice+'"]');
+ const choose=async(page,choice)=>{if(await page.$eval('#measurement-preferences',e=>e.hidden))await page.click('.measurement-settings');await page.click('#measurement-preferences [data-choice="'+choice+'"]');};
  async function lead(page,outcome='success'){
   await page.evaluate(()=>{const form=document.getElementById('removalForm');for(const [name,value]of Object.entries({full_name:'PRIVATE_PERSON',business_name:'PRIVATE_BUSINESS',email_address:'private.person@example.invalid',business_url:'PRIVATE_PROFILE',reason:'PRIVATE_REVIEW_TEXT'}))form.elements[name].value=value;form.dispatchEvent(new Event('input',{bubbles:true}));});
   await completePuppeteer(page);

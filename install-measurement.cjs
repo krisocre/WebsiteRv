@@ -12,7 +12,7 @@ function applyToHtml(html,file){
  const prefix=file==='404.html'?'/':'';
  const version='20261111-wdpznw9t-v2';
  const bannerVersion='20261112-cookie-banner';
- const measurementVersion='20261112-lead-snippet';
+ const measurementVersion='20261113-footer-choices';
  const container=/^GTM-[A-Z0-9]+$/.test(config.googleTagManagerId||'')?`\n<!-- Google Tag Manager ${config.googleTagManagerId}: loaded once after analytics consent. -->`:'';
  const block=`\n<!-- ReviewsBoost measurement start -->${container}\n<script src="${prefix}measurement-config.js?v=${version}" defer></script>\n<script src="${prefix}measurement.js?v=${measurementVersion}" defer></script>\n<link rel="stylesheet" href="${prefix}measurement.css?v=${bannerVersion}">\n<!-- ReviewsBoost measurement end -->`;
  // Put the shared loader first in the head, without bypassing cookie choices.

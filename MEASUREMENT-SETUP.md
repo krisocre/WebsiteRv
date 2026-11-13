@@ -1,5 +1,21 @@
 # ReviewsBoost conversion measurement
 
+## Automatic cookie banner removed — November 13, 2026
+
+The cookie panel now starts hidden on every visit. It opens only from Cookie
+choices in the footer. Existing saved choices are honoured; new visitors have
+optional analytics and advertising disabled until they choose otherwise.
+The form works without making a cookie choice and does not open the panel.
+With no automatic prompt, fewer new visitors will enable optional tracking.
+Browsing and submitting an enquiry do not grant permission automatically.
+
+Footer settings still support independent choices, withdrawal, the browser
+privacy signal and English/French controls. Google IDs, confirmed-lead events,
+forms, Turnstile and the Apps Script endpoint are unchanged. Publish the updated
+HTML and measurement.js together, using runtime version
+`20261113-footer-choices`; CSS and configuration keep their existing versions.
+Nothing was deployed. These notes supersede earlier automatic-banner behaviour.
+
 ## Named Google Ads event helper — November 12, 2026
 
 The supplied `gtag_report_conversion(url)` helper is now defined in the

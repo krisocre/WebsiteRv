@@ -31,7 +31,7 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
   }
   const commands=p=>p.evaluate(()=>Array.from(window.dataLayer||[],x=>Array.from(x)));
   async function events(p){return (await commands(p)).filter(x=>x[0]==='event');}
-  async function choose(p,choice){await p.click('#measurement-preferences [data-choice="'+choice+'"]');}
+  async function choose(p,choice){if(await p.$eval('#measurement-preferences',e=>e.hidden))await p.click('.measurement-settings');await p.click('#measurement-preferences [data-choice="'+choice+'"]');}
   async function submit(p,outcome='success'){
    if(await p.$('#removalForm[data-inline-enquiry]')){
     await p.$eval('[name=business_url]',e=>{e.value='https://example.ca/PRIVATE_PROFILE';});
@@ -50,7 +50,13 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
   }
   let test=await open({config:{ga4MeasurementId:null,googleAdsId:null,googleAdsLeadConversionLabel:null}}),page=test.page;
   assert.equal(await page.$('#measurement-preferences'),null);assert.equal((await commands(page)).length,0);await submit(page);assert.equal((await events(page)).length,0);await test.context.close();
-  test=await open();page=test.page;let start=google.length;assert.equal((await commands(page)).filter(x=>x[0]==='config').length,0);await choose(page,'reject');await submit(page);assert.equal(google.length,start);assert.equal((await events(page)).length,0);await test.context.close();
+  test=await open();page=test.page;let start=google.length;
+  assert.equal(await page.$eval('#measurement-preferences',e=>e.hidden),true,'No automatic cookie banner');
+  assert.equal(await page.$eval('.measurement-settings',e=>e.getAttribute('aria-expanded')),'false');
+  assert.equal(await page.evaluate(()=>localStorage.getItem('reviewsboost.measurement.v1')),null,'No automatic consent');
+  await submit(page);assert.equal(google.length,start);assert.equal((await events(page)).length,0);
+  assert.equal(await page.$eval('#measurement-preferences',e=>e.hidden),true,'Submitting without a cookie choice does not show the panel');await test.context.close();
+  test=await open();page=test.page;start=google.length;assert.equal((await commands(page)).filter(x=>x[0]==='config').length,0);await choose(page,'reject');await submit(page);assert.equal(google.length,start);assert.equal((await events(page)).length,0);await test.context.close();
   test=await open();page=test.page;start=google.length;await choose(page,'accept');await page.waitForFunction(()=>document.getElementById('reviewsboost-google-tag'));
   assert.equal(google.length-start,1);assert.equal((await events(page)).filter(x=>x[1]==='page_view').length,1);
   await page.click('.hero-actions a[href="#review-count"]');assert.equal((await events(page)).filter(x=>x[1]==='quote_cta_click').length,1);assert.equal((await events(page)).find(x=>x[1]==='quote_cta_click')[2].cta_location,'hero');assert.equal(await page.$('#orderModal.open'),null);assert.equal((await events(page)).filter(x=>x[1]==='quote_form_start').length,0);
@@ -67,7 +73,7 @@ assert.equal(digest(install(tagged,'index.html')),digest(tagged),'Measurement in
   for(const purpose of ['analytics','advertising']){test=await open();page=test.page;await choose(page,'customize');await page.click('[data-purpose="'+purpose+'"]');assert.equal(await page.$eval('[data-purpose="'+purpose+'"]',e=>e.checked),true,purpose+' checkbox must toggle');await choose(page,'save');assert.equal((await page.evaluate(()=>ReviewsBoostMeasurement.status()))[purpose+'Consent'],true,purpose+' choice must save');await submit(page);all=await events(page);assert.equal(all.filter(x=>x[1]==='generate_lead').length,purpose==='analytics'?1:0,purpose+' lead route');assert.equal(all.filter(x=>x[1]==='conversion').length,purpose==='advertising'?1:0,purpose+' Ads route');await test.context.close();}
   test=await open({gpc:true});page=test.page;await choose(page,'accept');assert.equal((await page.evaluate(()=>ReviewsBoostMeasurement.status())).advertisingConsent,false);assert.ok(!(await commands(page)).some(x=>x[0]==='config'&&x[1]===fixtures.googleAdsId));await test.context.close();
   test=await open({query:'?email=PRIVATE_EMAIL#PRIVATE_HASH'});page=test.page;start=google.length;await choose(page,'accept');await submit(page);assert.equal(google.length,start);assert.equal((await events(page)).length,0);assert.ok(page.url().includes('PRIVATE_EMAIL'));await test.context.close();
-  test=await open({blockedStorage:true,language:'fr-CA'});page=test.page;assert.equal(await page.$eval('#measurement-preferences',e=>e.lang),'fr-CA');await page.click('.measurement-language');assert.equal(await page.$eval('#measurement-preferences',e=>e.lang),'en-CA');await choose(page,'reject');await submit(page);await test.context.close();
+  test=await open({blockedStorage:true,language:'fr-CA'});page=test.page;assert.equal(await page.$eval('#measurement-preferences',e=>e.lang),'fr-CA');await page.click('.measurement-settings');await page.click('.measurement-language');assert.equal(await page.$eval('#measurement-preferences',e=>e.lang),'en-CA');await choose(page,'reject');await submit(page);await test.context.close();
   assert.deepEqual(posts,[]);assert.deepEqual(errors,[]);console.log('PASS: unconfigured fixtures stay disabled; installer duplication guard; consent/withdrawal/GPC; safe CTA/start/contact events; explicit-success-only GA4/Ads leads; request deduplication and distinct new enquiries; legacy/error exclusion; no personal data; blocked storage and bilingual controls. No real Google collection or form POST.');
  }finally{if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});
