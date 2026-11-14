@@ -64,13 +64,11 @@ const server = http.createServer((req,res) => {
       });
       const form=await prepare(page,file);
       if(width===1440){
-        for(const [name,bad]of [['full_name','$4,000 PROMO https://example.invalid'],['email_address','bot@sub.fldubai.com']]){
+        for(const [name,value]of [['full_name','$4,000 PROMO https://example.invalid'],['email_address','bot@sub.fldubai.com']]){
           const input=form.locator('[name="'+name+'"]'),original=await input.inputValue();
-          await input.fill(bad);await complete(page);await form.evaluate(n=>n.requestSubmit());
-          assert.equal(requests.length,0,file+' blocked input must not send a request');
-          assert.equal(await input.evaluate(n=>n.checkValidity()),false);
-          assert.equal(await input.inputValue(),bad,'Keep answers available to correct');
-          if(name==='email_address')assert.match(await input.evaluate(n=>n.validationMessage),/different email|autre adresse courriel/);
+          await input.fill(value);
+          assert.equal(await input.evaluate(n=>n.checkValidity()),true,'Do not filter suspicious-looking answers');
+          assert.equal(await input.inputValue(),value);
           await input.fill(original);
         }
       }
@@ -90,11 +88,15 @@ const server = http.createServer((req,res) => {
       assert.equal(await form.locator('[type="checkbox"]').count(),0);
       assert.equal(await legal.evaluate(node=>node.getBoundingClientRect().bottom<=node.parentElement.querySelector('.enquiry-actions').getBoundingClientRect().top),true,'Terms notice must precede the final action');
       await page.screenshot({path:path.join(os.tmpdir(),'conversion-'+file+'-'+width+'.png')});
+      const submittedName=width===1440?'$4,000 PROMO https://example.invalid':'Élodie Test';
+      const submittedEmail=width===1440?'bot@sub.fldubai.com':'test+case@example.ca';
+      await form.locator('[name="full_name"]').fill(submittedName);
+      await form.locator('[name="email_address"]').fill(submittedEmail);
       await complete(page);await form.evaluate(n=>{n.requestSubmit();n.dispatchEvent(new Event('submit',{bubbles:true,cancelable:true}));});
       await page.waitForFunction(()=>document.querySelector('.submission-success:not([hidden]), .platform-success:not([hidden])'));
       assert.equal(requests.length,1,file+' duplicate POST');
-      assert.equal(requests[0].get('full_name'),'Élodie Test');
-      assert.equal(requests[0].get('contact_detail'),'test+case@example.ca');
+      assert.equal(requests[0].get('full_name'),submittedName);
+      assert.equal(requests[0].get('contact_detail'),submittedEmail);
       assert.equal(requests[0].get('business_url'),profileText,'Free text survives each active form unchanged');
       assert.equal(requests[0].get('traffic_source'),'unknown');
       assert.ok(requests[0].get('reason').startsWith('[Traffic Source: Direct / unknown]\n'));

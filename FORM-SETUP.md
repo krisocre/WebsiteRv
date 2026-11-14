@@ -1,5 +1,32 @@
 # ReviewsBoost forms and Google Sheets
 
+## November 14: suspicious-content filters removed
+
+This supersedes the earlier input-restriction instructions below. The browser and
+prepared backend no longer reject dollar signs, links, numeric-only names, line
+breaks, long names/business names/phone numbers/notes, or fldubai.com addresses
+and their subdomains. Required/optional field settings, valid email format, the
+existing 1-50 review quantity, Turnstile verification/replay protection, formula
+protection in Sheets, traffic-source labels and existing notifications remain.
+
+Replace Code.gs with this site's complete [google-apps-script.gs](google-apps-script.gs)
+in the EXISTING separate ReviewsBoost Apps Script project. Keep all Script Properties
+and the existing /exec URL. Save, then use **Deploy > Manage deployments > Edit >
+New version > Deploy** for that same deployment. Do not use New deployment.
+Publishing website files alone does not change the live backend filters.
+
+If the legacy InputValidation.gs helper is still installed, do not leave an old
+second leadInputErrors definition: the complete Code.gs already contains the
+current function. The local apps-script-input-validation.gs helper also has the
+new rules for projects deliberately retaining that separate-file arrangement.
+
+Publish the modified form pages and enquiry-flow.js together. Their runtime version is
+20261114-input-filters-removed to bypass previously cached validation code.
+No design, price, required attribute, endpoint or tracking changes were made.
+Local checks use mocked providers/storage/mail; no live customer leads or backend
+deployments were performed by the agent. Earlier rejection tests below are
+historical and do not describe this release.
+
 ## November 8: replacement Web app deployment URL
 
 The owner chose New deployment for ReviewsBoost after copying the updated

@@ -57,29 +57,37 @@ test('the additive backend guard works without replacing an existing submit hand
   vm.runInNewContext(fs.readFileSync(path.join(root,'apps-script-input-validation.gs'),'utf8'),api);
   const data=backend().data;
   assert.equal(api.rejectInvalidLeadInput({parameter:data}),null);
-  assert.equal(JSON.parse(api.rejectInvalidLeadInput({parameter:{...data,email_address:'bot@fldubai.com'}}).text).code,'invalid_input');
+  assert.equal(api.rejectInvalidLeadInput({parameter:{...data,email_address:'bot@fldubai.com'}}),null);
   assert.equal(api.rejectInvalidLeadInput({parameter:{...data,form_type:'quote_request',review_count:''}}),null);
   assert.equal(JSON.parse(api.rejectInvalidLeadInput({parameter:{...data,form_type:'',review_count:'rbka80'}}).text).field,'review_count');
 });
 
-test('spam patterns and malformed input are rejected before saving or emailing',()=>{
+test('required fields, email format and numeric quantities still apply',()=>{
   const cases=[
-    [{full_name:'$4,000 PROMO https://www.google.com/share.google?q=TEST'},'full_name'],
-    [{full_name:'\uFF04 Bonus'},'full_name'], [{full_name:'\uFE69 Bonus'},'full_name'],
-    [{full_name:'https://example.invalid'},'full_name'], [{full_name:'www.example.invalid'},'full_name'],
-    [{full_name:'John\nSmith'},'full_name'], [{full_name:'12345'},'full_name'],
-    [{full_name:'A'.repeat(151)},'full_name'], [{full_name:' '},'full_name'],
-    [{business_name:'https://example.invalid'},'business_name'], [{business_name:'Shop\nName'},'business_name'],
-    [{business_name:' '},'business_name'], [{business_name:'A'.repeat(251)},'business_name'],
-    [{email_address:'bot@fldubai.com'},'email_address'], [{email_address:' BOT@FLDUBAI.COM '},'email_address'],
-    [{email_address:'bot@sub.fldubai.com'},'email_address'], [{contact_detail:'bot@fldubai.com'},'email_address'],
+    [{full_name:' '},'full_name'], [{business_name:' '},'business_name'],
     [{email_address:'a\u0000b@example.ca'},'email_address'], [{email_address:'invalid-email'},'email_address'],
-    ...['rbka80','2.5','0','51',''].map(review_count=>[{review_count},'review_count']),
-    [{reason:'a'.repeat(20001)},'reason'], [{review_links:'a'.repeat(12001)},'review_links'],
-    [{phone_number:'1'.repeat(81)},'phone_number']
+    ...['rbka80','2.5','0','51',''].map(review_count=>[{review_count},'review_count'])
   ];
   for(const [values,field]of cases){
     const b=backend(),result=b.run(values);assert.equal(result.code,'invalid_input',JSON.stringify(values));assert.equal(result.field,field);assert.equal(b.rows.length,0);assert.equal(b.mails.length,0);
+  }
+});
+
+test('previously filtered content is saved and sent to the owner',()=>{
+  const cases=[
+    {full_name:'$4,000 PROMO https://www.google.com/share.google?q=TEST'},
+    ...['\uFF04 Bonus','\uFE69 Bonus','https://example.invalid','www.example.invalid','John\nSmith','12345','A'.repeat(151)].map(full_name=>({full_name})),
+    ...['https://example.invalid','Shop\nName','A'.repeat(251)].map(business_name=>({business_name})),
+    ...['bot@fldubai.com',' BOT@FLDUBAI.COM ','bot@sub.fldubai.com'].map(email_address=>({email_address})),
+    {contact_detail:'bot@fldubai.com'}, {reason:'a'.repeat(20001)},
+    {review_links:'a'.repeat(12001)}, {phone_number:'1'.repeat(81)}
+  ];
+  const columns={full_name:2,business_name:3,email_address:4,phone_number:5,contact_detail:7,review_links:10,reason:11};
+  for(const values of cases){
+    const b=backend(),result=b.run(values);assert.equal(result.result,'success');assert.equal(b.rows.length,1);
+    const [field,value]=Object.entries(values)[0],expected=value.trim();
+    assert.ok(String(b.rows[0][columns[field]]).includes(expected),field+' must reach the sheet');
+    assert.ok(b.mails[0][2].includes(expected),field+' must reach the owner notification');
   }
 });
 

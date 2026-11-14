@@ -1,5 +1,15 @@
 # ReviewsBoost standalone Turnstile backend
 
+## November 14 input-filter update
+
+Turnstile is unchanged. Suspicious-text and email-domain filters have been removed
+from the browser and prepared backend; required fields and basic formats remain.
+Update the existing separate ReviewsBoost deployment with this site's complete
+[google-apps-script.gs](google-apps-script.gs), using Edit > New version. Keep its
+URL and Script Properties. See [FORM-SETUP.md](FORM-SETUP.md) for current steps.
+No backend deployment was performed by the agent. Earlier filter descriptions
+and validation results below are historical.
+
 ## Current deployment: November 8, 2026
 
 The standalone project already exists. After installing the updated Code.gs,
