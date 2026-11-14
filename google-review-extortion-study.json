@@ -1,0 +1,293 @@
+{
+  "title": "Canadian-coded extortion reports: a zero-recorded-loss audit",
+  "creator": "ReviewsBoost Editorial Team",
+  "version": "1.0.0",
+  "published": "2026-11-13",
+  "article_url": "https://reviewsboost.ca/google-review-extortion-canada-data-study.html",
+  "licence": "https://open.canada.ca/en/open-government-licence-canada",
+  "attribution": "Contains information licensed under the Open Government Licence – Canada. Original aggregation and interpretation: ReviewsBoost.",
+  "sources": {
+    "catalogue": "https://open.canada.ca/data/dataset/6a09c998-cddb-4a22-beff-4dca67ab892f",
+    "csv": "https://open.canada.ca/data/dataset/6a09c998-cddb-4a22-beff-4dca67ab892f/resource/43c67af5-e598-4a9b-a484-fe1cb5d775b5/download/cafc-open-gouv-database-2021-01-01-to-2025-09-30-extracted-2025-10-01.csv",
+    "definitions": "https://open.canada.ca/data/dataset/6a09c998-cddb-4a22-beff-4dca67ab892f/resource/ec49223e-d746-4171-a97b-12fcc79d360f/download/annex-e_open-government-statistics-description-and-associated-definitions.pdf",
+    "google_extortion": "https://support.google.com/business/answer/16404809?hl=en",
+    "google_reporting": "https://support.google.com/business/answer/4596773?hl=en",
+    "cafc_2026": "https://antifraudcentre-centreantifraude.ca/features-vedette/2026/08/fraud-trends-tendances-matiere-fraude-eng.htm"
+  },
+  "source_snapshot": {
+    "sha256": "c46f61591da71eadd91c3e47ed3e3cb8102880a8861c027ab7a35182c8bd719c",
+    "source_rows": 350361,
+    "columns": 21,
+    "unique_source_ids": 350361,
+    "catalogue_modified": "2026-03-25",
+    "nominal_window": "2021-01-01/2025-09-30",
+    "selected_min_date": "2021-01-02",
+    "selected_max_date": "2025-09-29"
+  },
+  "filters": {
+    "country_exact": "Canada",
+    "thematic_category_exact": "Extortion",
+    "canada_coded_source_rows": 266553,
+    "selected_records": 22801
+  },
+  "findings": {
+    "zero_recorded_loss": 20636,
+    "zero_loss_percent": 90.504802,
+    "positive_recorded_loss": 2165,
+    "victim_coded_records": 6493,
+    "victim_coded_zero_loss": 4328,
+    "victim_coded_zero_loss_percent": 66.656399,
+    "attempt_coded_records": 16109
+  },
+  "limitations": [
+    "These are broader extortion report records, not Google-review attacks or a business-only cohort.",
+    "Country=Canada is an explicit filter; Canadian-nexus reports coded Not Specified are excluded.",
+    "No field identifies Google, review removal, a specific review platform or removal outcomes.",
+    "A zero in Dollar Loss is a recorded monetary amount, not a measurement of reputational harm or intent.",
+    "Complaint Type is the publisher-provided status, not our determination of guilt, harm or identity.",
+    "No business population or exposure denominator is available; no national incidence rate is estimated.",
+    "2025 is a partial January-September export; do not compare its count with a full year as a growth rate.",
+    "The source contains public reports with reporting/classification limits; no causal trend is inferred.",
+    "No complaint IDs, individual dates, demographics or narrative text are republished.",
+    "The separately cited 2026 bulletin is context, not additional rows in this older export."
+  ],
+  "annual": [
+    {
+      "year": 2021,
+      "period": "Full calendar year",
+      "report_records": 9663,
+      "zero_recorded_loss": 8855,
+      "positive_recorded_loss": 808,
+      "zero_loss_percent": 91.638208,
+      "recorded_loss_cad": "15971983.57"
+    },
+    {
+      "year": 2022,
+      "period": "Full calendar year",
+      "report_records": 6082,
+      "zero_recorded_loss": 5541,
+      "positive_recorded_loss": 541,
+      "zero_loss_percent": 91.1049,
+      "recorded_loss_cad": "16697538.81"
+    },
+    {
+      "year": 2023,
+      "period": "Full calendar year",
+      "report_records": 2381,
+      "zero_recorded_loss": 2048,
+      "positive_recorded_loss": 333,
+      "zero_loss_percent": 86.01428,
+      "recorded_loss_cad": "8851221.76"
+    },
+    {
+      "year": 2024,
+      "period": "Full calendar year",
+      "report_records": 3083,
+      "zero_recorded_loss": 2806,
+      "positive_recorded_loss": 277,
+      "zero_loss_percent": 91.015245,
+      "recorded_loss_cad": "16657008.49"
+    },
+    {
+      "year": 2025,
+      "period": "January-September only",
+      "report_records": 1592,
+      "zero_recorded_loss": 1386,
+      "positive_recorded_loss": 206,
+      "zero_loss_percent": 87.060302,
+      "recorded_loss_cad": "9281129.65"
+    }
+  ],
+  "status_loss": [
+    {
+      "complaint_status": "Attempt",
+      "loss_class": "Zero recorded loss",
+      "report_records": 16109,
+      "status_denominator": 16109,
+      "share_within_status_percent": 100.0,
+      "selected_denominator": 22801
+    },
+    {
+      "complaint_status": "Attempt",
+      "loss_class": "Positive recorded loss",
+      "report_records": 0,
+      "status_denominator": 16109,
+      "share_within_status_percent": 0.0,
+      "selected_denominator": 22801
+    },
+    {
+      "complaint_status": "Victim",
+      "loss_class": "Zero recorded loss",
+      "report_records": 4328,
+      "status_denominator": 6493,
+      "share_within_status_percent": 66.656399,
+      "selected_denominator": 22801
+    },
+    {
+      "complaint_status": "Victim",
+      "loss_class": "Positive recorded loss",
+      "report_records": 2165,
+      "status_denominator": 6493,
+      "share_within_status_percent": 33.343601,
+      "selected_denominator": 22801
+    },
+    {
+      "complaint_status": "Other/Unknown/Incomplete",
+      "loss_class": "Zero recorded loss",
+      "report_records": 199,
+      "status_denominator": 199,
+      "share_within_status_percent": 100.0,
+      "selected_denominator": 22801
+    },
+    {
+      "complaint_status": "Other/Unknown/Incomplete",
+      "loss_class": "Positive recorded loss",
+      "report_records": 0,
+      "status_denominator": 199,
+      "share_within_status_percent": 0.0,
+      "selected_denominator": 22801
+    }
+  ],
+  "channels": [
+    {
+      "source_field": "Solicitation Method",
+      "category": "Direct call",
+      "report_records": 13333,
+      "selected_denominator": 22801,
+      "share_percent": 58.475505
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Email",
+      "report_records": 6626,
+      "selected_denominator": 22801,
+      "share_percent": 29.060129
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Internet-social network",
+      "report_records": 1351,
+      "selected_denominator": 22801,
+      "share_percent": 5.925179
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Text message",
+      "report_records": 423,
+      "selected_denominator": 22801,
+      "share_percent": 1.855182
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Internet",
+      "report_records": 416,
+      "selected_denominator": 22801,
+      "share_percent": 1.824481
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Other/unknown",
+      "report_records": 329,
+      "selected_denominator": 22801,
+      "share_percent": 1.442919
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Not Available",
+      "report_records": 218,
+      "selected_denominator": 22801,
+      "share_percent": 0.956098
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Mail",
+      "report_records": 61,
+      "selected_denominator": 22801,
+      "share_percent": 0.267532
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Door to door/in person",
+      "report_records": 20,
+      "selected_denominator": 22801,
+      "share_percent": 0.087715
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Video Call",
+      "report_records": 19,
+      "selected_denominator": 22801,
+      "share_percent": 0.08333
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Print",
+      "report_records": 2,
+      "selected_denominator": 22801,
+      "share_percent": 0.008772
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Radio",
+      "report_records": 1,
+      "selected_denominator": 22801,
+      "share_percent": 0.004386
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Fax",
+      "report_records": 1,
+      "selected_denominator": 22801,
+      "share_percent": 0.004386
+    },
+    {
+      "source_field": "Solicitation Method",
+      "category": "Television",
+      "report_records": 1,
+      "selected_denominator": 22801,
+      "share_percent": 0.004386
+    },
+    {
+      "source_field": "Complaint Received Type",
+      "category": "CAFC Website",
+      "report_records": 11347,
+      "selected_denominator": 22801,
+      "share_percent": 49.765361
+    },
+    {
+      "source_field": "Complaint Received Type",
+      "category": "Phone",
+      "report_records": 9095,
+      "selected_denominator": 22801,
+      "share_percent": 39.888601
+    },
+    {
+      "source_field": "Complaint Received Type",
+      "category": "NCFRS",
+      "report_records": 1660,
+      "selected_denominator": 22801,
+      "share_percent": 7.280382
+    },
+    {
+      "source_field": "Complaint Received Type",
+      "category": "Email",
+      "report_records": 696,
+      "selected_denominator": 22801,
+      "share_percent": 3.052498
+    },
+    {
+      "source_field": "Complaint Received Type",
+      "category": "Other",
+      "report_records": 2,
+      "selected_denominator": 22801,
+      "share_percent": 0.008772
+    },
+    {
+      "source_field": "Complaint Received Type",
+      "category": "Mail",
+      "report_records": 1,
+      "selected_denominator": 22801,
+      "share_percent": 0.004386
+    }
+  ]
+}

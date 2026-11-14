@@ -1,0 +1,21 @@
+source_field,category,report_records,selected_denominator,share_percent
+Solicitation Method,Direct call,13333,22801,58.475505
+Solicitation Method,Email,6626,22801,29.060129
+Solicitation Method,Internet-social network,1351,22801,5.925179
+Solicitation Method,Text message,423,22801,1.855182
+Solicitation Method,Internet,416,22801,1.824481
+Solicitation Method,Other/unknown,329,22801,1.442919
+Solicitation Method,Not Available,218,22801,0.956098
+Solicitation Method,Mail,61,22801,0.267532
+Solicitation Method,Door to door/in person,20,22801,0.087715
+Solicitation Method,Video Call,19,22801,0.08333
+Solicitation Method,Print,2,22801,0.008772
+Solicitation Method,Radio,1,22801,0.004386
+Solicitation Method,Fax,1,22801,0.004386
+Solicitation Method,Television,1,22801,0.004386
+Complaint Received Type,CAFC Website,11347,22801,49.765361
+Complaint Received Type,Phone,9095,22801,39.888601
+Complaint Received Type,NCFRS,1660,22801,7.280382
+Complaint Received Type,Email,696,22801,3.052498
+Complaint Received Type,Other,2,22801,0.008772
+Complaint Received Type,Mail,1,22801,0.004386

@@ -30,3 +30,6 @@ exclude:
   - GOOGLE-LANGUAGE-RESEARCH-NOTES.md
   - GOOGLE-STAFF-NAME-RESEARCH-NOTES.md
   - GOOGLE-COVERAGE-RESEARCH-NOTES.md
+  - GOOGLE-EXTORTION-RESEARCH-NOTES.md
+  - build-google-extortion-article.py
+  - plot-google-extortion-study.py

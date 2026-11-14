@@ -1,0 +1,34 @@
+ReviewsBoost — private Google review-extortion evidence worksheet
+Version 1.0.0 / November 13, 2026
+This file stays with you unless you choose to share it. It submits nothing.
+
+1. AFFECTED BUSINESS
+Public Business Profile link:
+Name/location needed to distinguish the correct listing:
+
+2. REVIEW RECORD
+Direct review link(s):
+Date/time observed and timezone:
+What you actually observed (separate facts from suspicions):
+Screenshot/original record location:
+
+3. THE DEMAND
+Original communication preserved where:
+Date/time received and timezone:
+What was requested, and its stated connection to the reviews:
+Relevant sender/channel information (keep private):
+What the material does not establish:
+
+4. REPORTING HISTORY
+Channel used:
+Date submitted:
+Reference/status exactly as provided (leave blank if none):
+Any eligible follow-up and supporting evidence:
+
+Google's dedicated guidance:
+https://support.google.com/business/answer/16404809?hl=en
+
+Preserve relevant originals. Minimise unrelated personal data in general enquiries.
+Do not put private sender details into a public reply. Never include passwords,
+verification codes, payment-card details or unrelated customer lists.
+This worksheet does not decide whether a crime or policy violation occurred.

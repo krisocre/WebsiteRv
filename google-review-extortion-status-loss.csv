@@ -1,0 +1,7 @@
+complaint_status,loss_class,report_records,status_denominator,share_within_status_percent,selected_denominator
+Attempt,Zero recorded loss,16109,16109,100.0,22801
+Attempt,Positive recorded loss,0,16109,0.0,22801
+Victim,Zero recorded loss,4328,6493,66.656399,22801
+Victim,Positive recorded loss,2165,6493,33.343601,22801
+Other/Unknown/Incomplete,Zero recorded loss,199,199,100.0,22801
+Other/Unknown/Incomplete,Positive recorded loss,0,199,0.0,22801
