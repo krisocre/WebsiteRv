@@ -1,5 +1,30 @@
 # ReviewsBoost forms and Google Sheets
 
+## November 17: Google Ads versus organic on new leads
+
+New enquiries identify valid `gclid`, `gbraid`, `wbraid`, `gad_source` and
+`gad_campaignid` tags, or Google paid UTM tags, as **Paid - Google Ads**.
+A recognised Google search referrer without ad/campaign signals is
+**Organic - Google**. Direct, missing or ambiguous signals stay **Direct / unknown**.
+Google's aggregate-tag reference:
+https://support.google.com/google-ads/answer/16193746?hl=en.
+
+The START of the existing **Reason/Notes** cell (column L) contains the label,
+such as `[Traffic Source: Paid - Google Ads]`; owner emails include it as well.
+**No Apps Script update, new project or new Sheet column is needed.**
+Publish the four updated form pages, enquiry-flow.js and measurement.js together
+(runtime `20261117-lead-source`). The current endpoint, Sheet layout, Turnstile,
+pricing, emails and Google Ads conversion triggers are preserved. Nothing deployed.
+
+Before an optional measurement choice, the source is a coarse current-page hint
+attached only when the visitor submits. It uses no cookies or browser storage,
+records no click ID, full query, search term or referrer URL and enables no Google
+tracking. Explicit measurement opt-outs and Global Privacy Control still produce
+an unknown source. Without the original landing tags/referrer, later internal
+navigation can be unknown. Missing ad tags alone are never proof of organic.
+This section supersedes older default-state source instructions below. Labels
+are inferred context, not verified advertising billing, and old leads are unchanged.
+
 ## November 14: suspicious-content filters removed
 
 This supersedes the earlier input-restriction instructions below. The browser and

@@ -13,6 +13,9 @@ function leadSourceDetails() {
     var campaignSource = String(params.get('utm_source') || '').trim().toLowerCase();
     if (click) {
       if (/^[A-Za-z0-9_-]{1,256}$/.test(params.get(click) || '')) source = click === 'dclid' ? 'paid_other' : 'paid_google';
+    } else if (params.has('gad_source') || params.has('gad_campaignid')) {
+      var aggregate = params.has('gad_source') ? 'gad_source' : 'gad_campaignid';
+      if (/^[1-9]\d{0,19}$/.test(params.get(aggregate) || '')) source = 'paid_google';
     } else if (params.has('utm_medium')) {
       if (['cpc', 'ppc', 'paid', 'paidsearch', 'paid_search', 'paid-social', 'paid_social', 'paidsocial', 'display', 'cpm', 'cpv'].includes(medium)) source = campaignSource === 'google' ? 'paid_google' : 'paid_other';
       else if (medium === 'organic') source = campaignSource === 'google' ? 'organic_google' : campaignSource === 'bing' ? 'organic_bing' : ['yahoo', 'duckduckgo', 'ecosia', 'brave'].includes(campaignSource) ? 'organic_other' : 'unknown';
@@ -29,8 +32,10 @@ function leadSourceDetails() {
       }
     }
     var consent = window.ReviewsBoostMeasurement?.status();
-    // Honour existing choices whenever optional measurement is installed.
+    // The current-page hint is private enquiry context, without tracking/storage.
+    // Honour explicit choices and older measurement APIs conservatively.
     if (window.navigator.globalPrivacyControl === true || (consent &&
+        consent.choiceRecorded !== false &&
         !(source.startsWith('paid_') ? consent.advertisingConsent === true : consent.analyticsConsent === true))) source = 'unknown';
   } catch (_) { source = 'unknown'; }
   var labels = {

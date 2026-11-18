@@ -12,6 +12,8 @@ const server=http.createServer((req,res)=>{
  browser=await puppeteer.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  for(const sample of [
   {query:'?gclid=LOCAL_CLICK',source:'paid_google',label:'Paid - Google Ads'},
+  {query:'?gad_source=1',source:'paid_google',label:'Paid - Google Ads'},
+  {query:'?gad_campaignid=123456789',source:'paid_google',label:'Paid - Google Ads'},
   {query:'',referer:'https://www.google.ca/',source:'organic_google',label:'Organic - Google'},
   {query:'?gclid=LOCAL_CLICK',consent:{analyticsConsent:false,advertisingConsent:false},source:'unknown',label:'Direct / unknown'}
  ]){
@@ -27,6 +29,10 @@ const server=http.createServer((req,res)=>{
    if(r.url().startsWith(base)&&r.method()==='GET')return r.continue();return r.abort();
   });
   await page.goto(base+'/'+sample.query,{waitUntil:'load',referer:sample.referer});
+  const measurement=await page.evaluate(()=>window.ReviewsBoostMeasurement.status());
+  assert.equal(measurement.choiceRecorded,false);assert.equal(measurement.analyticsConsent,false);
+  assert.equal(measurement.advertisingConsent,false);assert.equal(measurement.googleTagRequested,false);
+  assert.equal(measurement.tagManagerRequested,false);
   if(sample.consent)await page.evaluate(consent=>{window.ReviewsBoostMeasurement={status:()=>consent,confirmedLead:()=>{}};},sample.consent);
   await page.evaluate(()=>{
    const form=document.getElementById('removalForm');
@@ -43,5 +49,5 @@ const server=http.createServer((req,res)=>{
   assert.ok(!payload.toString().includes('LOCAL_CLICK'),'Click identifier must not enter the lead record');
   assert.deepEqual(errors,[]);await context.close();
  }
- console.log('PASS: paid Google, organic Google and consent-denied form submissions expose fixed source labels in legacy Reason/email; one POST, customer context preserved, no click ID forwarded. All submissions mocked.');
+ console.log('PASS: default-state Google Ads click/aggregate tags, organic Google and explicit opt-out forms expose fixed source labels in legacy Reason/email; one POST, customer context preserved, no click ID forwarded. All submissions mocked.');
 }finally{if(browser)await browser.close();server.closeAllConnections();server.close();}})().catch(error=>{console.error(error);process.exitCode=1;});

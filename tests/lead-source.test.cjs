@@ -17,6 +17,7 @@ function classify({query='',referrer='',consent,gpc=false}={}){
 test('private form source distinguishes tagged ads, search referrers and other visits without storing IDs',()=>{
  for(const [query,referrer,want] of [
   ['?gclid=LOCAL_CLICK','https://www.google.ca/','paid_google'],['?gbraid=LOCAL_CLICK','','paid_google'],['?wbraid=LOCAL_CLICK','','paid_google'],['?dclid=LOCAL_CLICK','','paid_other'],
+  ['?gad_source=1','https://google.com/','paid_google'],['?gad_campaignid=123','','paid_google'],
   ['?utm_source=google&utm_medium=cpc','','paid_google'],['?utm_source=bing&utm_medium=ppc','','paid_other'],
   ['?utm_source=google&utm_medium=organic','','organic_google'],['?utm_source=bing&utm_medium=organic','','organic_bing'],
   ['','https://www.google.ca/search?q=PRIVATE_QUERY','organic_google'],['','https://www.bing.com/search?q=PRIVATE_QUERY','organic_bing'],
@@ -28,7 +29,7 @@ test('ambiguous, internal and untagged direct entries are unknown rather than gu
  for(const [query,referrer] of [
   ['',''],['','https://reviewsboost.ca/blog.html'],['','https://www.reviewsboost.ca/'],
   ['?gclid=','https://www.google.com/'],['?gclid=bad%20id','https://www.google.com/'],
-  ['?utm_source=google','https://www.google.com/'],['?gad_campaignid=123','https://www.google.com/'],
+  ['?utm_source=google','https://www.google.com/'],['?gad_campaignid=not-a-number','https://www.google.com/'],['?gad_source=','https://google.com/'],
   ['?utm_source=PRIVATE_EMAIL&utm_medium=organic',''],['','file:///PRIVATE_PATH']
  ])assert.equal(classify({query,referrer}).label,'Direct / unknown');
 });
@@ -38,4 +39,13 @@ test('existing consent choices and Global Privacy Control suppress classificatio
  assert.equal(classify({query:'?gclid=LOCAL_CLICK',gpc:true}).source,'unknown');
  assert.equal(classify({query:'?gclid=LOCAL_CLICK',consent:{advertisingConsent:true}}).label,'Paid - Google Ads');
  assert.equal(classify({referrer:'https://google.ca/',consent:{analyticsConsent:true}}).label,'Organic - Google');
+});
+
+test('before an optional choice, current-page context reaches the private lead without using storage',()=>{
+ const consent={choiceRecorded:false,analyticsConsent:false,advertisingConsent:false};
+ assert.equal(classify({query:'?gad_source=1',consent}).source,'paid_google');
+ assert.equal(classify({query:'?gclid=LOCAL_CLICK',consent}).source,'paid_google');
+ assert.equal(classify({referrer:'https://www.google.ca/',consent}).source,'organic_google');
+ assert.equal(classify({query:'?gad_source=1',consent:{...consent,choiceRecorded:true}}).source,'unknown');
+ assert.equal(classify({query:'?gad_source=1',consent,gpc:true}).source,'unknown');
 });

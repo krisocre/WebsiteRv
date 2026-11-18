@@ -10,12 +10,13 @@
   var label = /^[A-Za-z0-9_-]+$/.test(config.googleAdsLeadConversionLabel || '') ? config.googleAdsLeadConversionLabel : null;
   if (!gtm && !ga4 && !ads) {
     window.ReviewsBoostMeasurement = Object.freeze({ confirmedLead: function () {}, recentEvents: function () { return []; },
-      status: function () { return { analyticsConsent: false, advertisingConsent: false, ga4Configured: false, adsLeadConfigured: false, googleTagRequested: false, tagManagerConfigured: false, tagManagerRequested: false, urlEligible: false }; } });
+      status: function () { return { analyticsConsent: false, advertisingConsent: false, choiceRecorded: false, ga4Configured: false, adsLeadConfigured: false, googleTagRequested: false, tagManagerConfigured: false, tagManagerRequested: false, urlEligible: false }; } });
     return;
   }
   var key = 'reviewsboost.measurement.v1';
   var ttl = 180 * 24 * 60 * 60 * 1000;
   var preferences = { analytics: false, advertising: false };
+  var choiceRecorded = false;
   var loaded = false, initialized = false, viewed = false;
   var managerLoaded = false, reportingConfirmedLead = false;
   var configured = new Set(), started = new WeakSet(), confirmed = new Set(), recent = [];
@@ -61,6 +62,7 @@
     if (stored && stored.version === 1 && stored.expires > Date.now() && stored.expires <= Date.now() + ttl &&
         typeof stored.analytics === 'boolean' && typeof stored.advertising === 'boolean') {
       preferences = { analytics: stored.analytics, advertising: stored.advertising && !privacySignal };
+      choiceRecorded = true;
     }
   } catch (_) { /* A blocked preference store must not break forms or imply consent. */ }
   function baseParameters() {
@@ -144,6 +146,7 @@
     if (preferences.analytics && !viewed && safeVisitorUrl()) { viewed = true; record('page_view'); }
   }
   function savePreferences(analytics, advertising) {
+    choiceRecorded = true;
     preferences = { analytics: analytics === true, advertising: advertising === true && !privacySignal };
     try { window.localStorage.setItem(key, JSON.stringify({ version: 1, analytics: preferences.analytics,
       advertising: preferences.advertising, expires: Date.now() + ttl })); } catch (_) {}
@@ -219,7 +222,7 @@
   window.gtag_report_conversion = gtag_report_conversion;
   window.ReviewsBoostMeasurement = Object.freeze({
     confirmedLead: confirmedLead,
-    status: function () { return { analyticsConsent: preferences.analytics, advertisingConsent: preferences.advertising,
+    status: function () { return { analyticsConsent: preferences.analytics, advertisingConsent: preferences.advertising, choiceRecorded: choiceRecorded,
       ga4Configured: !!ga4, adsLeadConfigured: !!(ads && label), googleTagRequested: loaded,
       tagManagerConfigured: !!gtm, tagManagerRequested: managerLoaded, urlEligible: safeVisitorUrl() }; },
     recentEvents: function () { return recent.slice(); }
