@@ -35,7 +35,7 @@ test('all active forms use the tested separate ReviewsBoost endpoint without sha
   const retired='AKfycby4mQu0BJFu8Jmbw_zZPzrBb9TF_YRw4j0Ayu3PFvwgicSN5vtzynX0ASet2utzxtlnMw';
   const otherBrand='AKfycbzK_hATDZaXApgEUITdZ1kgF6VirBLCpcK1q3tmiFoWhG2AZpy_B6uOy5CFjTejVo8T';
   assert.ok(!runtime.includes(retired)&&!runtime.includes(otherBrand));
-  for(const file of ['index.html','suppression-avis-google.html','remove-yelp-reviews.html','online-reputation-management.html']){
+  for(const file of ['index.html','suppression-avis-google.html','online-reputation-management.html']){
     const html=fs.readFileSync(path.join(root,file),'utf8');
     assert.deepEqual([...html.matchAll(/<script\b[^>]*\bsrc="(form-submission\.js(?:\?[^"]*)?)"/g)].map(x=>x[1]),['form-submission.js?v=20261108-backend'],file);
     assert.ok(!html.includes(retired)&&!html.includes(otherBrand),file);

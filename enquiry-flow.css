@@ -1,17 +1,17 @@
 .enquiry-note { margin: 14px 0; color: #44536a; font-size: 13px; line-height: 1.65; }
 .enquiry-note strong { color: #15243b; }
-.fee-total { border-top: 2px solid #d8e0e9; font-weight: 700; }
+.fee-total { border-top: 2px solid #d8e0e9; font-weight: 600; }
 .fee-scenarios { margin-top: 24px; padding: 24px; border: 1px solid #d8e0e9; border-radius: 12px; background: #f7f9fc; text-align: left; color: #27374c; }
 .fee-scenarios h3 { margin: 0 0 14px; font-size: 20px; }
 .fee-scenarios dl { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px 20px; margin: 0; }
 .fee-scenarios dt { margin: 0; }
-.fee-scenarios dd { margin: 0; font-weight: 700; text-align: right; }
+.fee-scenarios dd { margin: 0; font-weight: 600; text-align: right; }
 .fee-scenarios p { margin: 15px 0 0; font-size: 13px; line-height: 1.65; }
 .fee-scenarios a, .enquiry-note a { color: #164f8c; text-decoration: underline; }
 .enquiry-form [hidden] { display: none !important; }
 .enquiry-progress { display: flex; gap: 16px; margin: 0 0 20px; padding: 0; list-style: none; counter-reset: enquiry-step; }
 .enquiry-progress li { flex: 1; padding: 10px 0; border-bottom: 3px solid #dce2e9; color: #596577; font-size: 13px; }
-.enquiry-progress li[aria-current="step"] { color: #172c47; border-color: #245d92; font-weight: 700; }
+.enquiry-progress li[aria-current="step"] { color: #172c47; border-color: #245d92; font-weight: 600; }
 .enquiry-progress li::before { counter-increment: enquiry-step; content: counter(enquiry-step) '. '; }
 .enquiry-form .enquiry-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
 .enquiry-form .enquiry-grid > .field, .enquiry-form .enquiry-grid > .form-group { margin: 0; padding: 0; min-width: 0; }
@@ -47,8 +47,8 @@ body[data-platform] #request.platform-modal { background: rgba(11, 15, 24, .67);
 #removalSuccess.enquiry-success, #platformSuccess.enquiry-success { box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; width: 100%; max-width: 600px; min-height: 290px; margin: 0 auto; padding: 40px 24px; border: 0; border-radius: 12px; background: #fff; box-shadow: none; text-align: center; }
 #removalSuccess.enquiry-success:focus, #platformSuccess.enquiry-success:focus { outline: none; }
 .enquiry-success .enquiry-success-mark { display: grid; place-items: center; flex: 0 0 auto; width: 68px; height: 68px; border: 1px solid #c7e7d7; border-radius: 50%; background: #edf8f2; color: #23724f; }
-#removalSuccess.enquiry-success .enquiry-success-title, #platformSuccess.enquiry-success .enquiry-success-title { margin: 0; color: #172438; font-family: 'Merriweather', Georgia, serif; font-size: clamp(25px, 3vw, 30px); font-weight: 700; line-height: 1.3; letter-spacing: -.025em; }
-#removalSuccess.enquiry-success .enquiry-success-reset, #platformSuccess.enquiry-success .enquiry-success-reset { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: auto; max-width: 100%; min-height: 48px; margin: 0; padding: 13px 22px; border: 1px solid #d9dfe8; border-radius: 6px; background: #fff; color: #24334b; box-shadow: none; font: 700 14px/1.5 'Poppins', Arial, sans-serif; text-decoration: none; cursor: pointer; }
+#removalSuccess.enquiry-success .enquiry-success-title, #platformSuccess.enquiry-success .enquiry-success-title { margin: 0; color: #172438; font-family: 'Merriweather', Georgia, serif; font-size: clamp(25px, 3vw, 30px); font-weight: 600; line-height: 1.3; letter-spacing: -.025em; }
+#removalSuccess.enquiry-success .enquiry-success-reset, #platformSuccess.enquiry-success .enquiry-success-reset { display: inline-flex; align-items: center; justify-content: center; flex: 0 0 auto; width: auto; max-width: 100%; min-height: 48px; margin: 0; padding: 13px 22px; border: 1px solid #d9dfe8; border-radius: 6px; background: #fff; color: #24334b; box-shadow: none; font: 600 14px/1.5 'Poppins', Arial, sans-serif; text-decoration: none; cursor: pointer; }
 #removalSuccess.enquiry-success .enquiry-success-reset:hover, #platformSuccess.enquiry-success .enquiry-success-reset:hover { border-color: #a9b6c8; background: #f6f8fb; color: #172438; transform: none; }
 .enquiry-success-reset:focus-visible { outline: 2px solid #245d92; outline-offset: 4px; }
 .form-layout.is-submitted, .contact-layout.is-submitted { grid-template-columns: minmax(0, 1fr); }

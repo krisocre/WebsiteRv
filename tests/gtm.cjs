@@ -7,7 +7,7 @@ for(const file of pages){
  const html=fs.readFileSync(path.join(root,file),'utf8');
  for(const asset of ['measurement-config.js','measurement.js','measurement.css'])assert.equal((html.match(new RegExp('(?:src|href)="[^"\\s]*'+asset.replace('.','\\.')+'(?:\\?v=[A-Za-z0-9-]+)?"','g'))||[]).length,1,file+': one '+asset);
  assert.ok(/<head>\s*<!-- ReviewsBoost measurement start -->/.test(html),file+': bootstrap first in head');
- assert.ok(/measurement-config\.js\?v=20261111-wdpznw9t-v2/.test(html)&&/measurement\.js\?v=20261113-footer-choices/.test(html)&&/measurement\.css\?v=20261112-cookie-banner/.test(html),file+': versioned scripts');
+ assert.ok(/measurement-config\.js\?v=20261111-wdpznw9t-v2/.test(html)&&/measurement\.js\?v=20261119-google-only/.test(html)&&/measurement\.css\?v=20261112-cookie-banner/.test(html),file+': versioned scripts');
  assert.ok(!/googletagmanager\.com\/(?:gtm\.js|gtag\/js|ns\.html)/.test(html),file+': no consent bypass');
  assert.equal(installer.applyToHtml(html,file),html,file+': repeatable installer');
 }

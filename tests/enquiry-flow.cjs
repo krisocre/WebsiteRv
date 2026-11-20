@@ -117,11 +117,7 @@ const server = http.createServer((req,res) => {
       assert.equal(await success.locator('a, p, .enquiry-receipt').count(),0,'Confirmed state contains only its title, check and restart action');
       assert.ok(!/RB-|notification|Save My Request/.test(await success.textContent()));
       assert.equal(await success.evaluate(n=>n===document.activeElement),true,'Confirmation receives keyboard focus');
-      if(file==='remove-yelp-reviews.html'&&width===1440){
-        await page.locator('.platform-modal-close').click();
-        await page.locator('.pricing-calc [data-focus-form]').click();
-        assert.equal(await page.locator('#request').getAttribute('aria-labelledby'),'platformModalTitle','Reopening a closed confirmation restores its dialog label');
-      }else await success.locator('button').click();
+      await success.locator('button').click();
       assert.equal(await form.isVisible(),true,'Another request restores the form in place');
       assert.equal(await form.locator('[name="full_name"]').inputValue(),'');
       assert.equal(await page.evaluate(()=>document.querySelector('.is-submitted')===null),true,'The initial layout is restored');

@@ -28,7 +28,7 @@
     /^\/(?:[a-z0-9-]+\.html|blog\/[a-z0-9-]+\.html)?$/.test(canonical.pathname);
   var pagePath = canonicalSafe ? canonical.pathname : '/404.html';
   var pageLocation = 'https://reviewsboost.ca' + pagePath;
-  var platforms = ['google','facebook','yelp','trustpilot','tripadvisor','glassdoor'];
+  var platforms = ['google'];
   var platform = String(document.body.dataset.platform || (pagePath === '/' ? 'google' : 'other')).toLowerCase();
   if (!platforms.includes(platform)) platform = 'other';
   var pageType = pagePath === '/' ? 'homepage' : pagePath === '/blog.html' ? 'blog_index' : document.body.dataset.platform ? 'platform' : 'other';
@@ -207,7 +207,7 @@
       var url = new URL(href, window.location.href);
       if (url.origin === window.location.origin && ['#request','#contact','#review-count'].includes(url.hash)) {
         var targetPlatform = url.pathname === '/' || url.pathname === '/index.html' ? 'google' :
-          url.pathname.match(/^\/remove-(facebook|yelp|trustpilot|tripadvisor|glassdoor)-reviews\.html$/)?.[1];
+          platform;
         record('quote_cta_click', { cta_location: locationFor(link), service_platform: targetPlatform || platform });
       }
     } catch (_) {}

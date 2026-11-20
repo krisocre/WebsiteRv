@@ -16,39 +16,8 @@
   var success = document.getElementById('platformSuccess');
   var successClose = document.getElementById('platformSuccessClose');
   var requestSection = document.getElementById('request');
-  var legacyServiceLinks = document.querySelector('.service-links');
   var navLinks = document.getElementById('navLinks');
   var hamburger = document.getElementById('hamburger');
-  var servicesMenu = document.getElementById('servicesMenu');
-  var servicesMenuButton = document.getElementById('servicesMenuButton');
-  var servicesMenuFooter = document.querySelector('.services-dropdown-footer');
-  var serviceOptions = [
-    { name: 'Google', label: 'Google Review Removal', frLabel: 'Suppression d’avis Google', mark: 'G', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: '/', color: '#4285f4' },
-    { name: 'Facebook', label: 'Facebook Review Removal', frLabel: 'Suppression d’avis Facebook', mark: 'FB', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-facebook-reviews.html', color: '#1b63b7' },
-    { name: 'Yelp', label: 'Yelp Review Removal', frLabel: 'Suppression d’avis Yelp', mark: 'Y', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-yelp-reviews.html', color: '#c81e2b' },
-    { name: 'Tripadvisor', label: 'Tripadvisor Review Removal', frLabel: 'Suppression d’avis Tripadvisor', mark: 'TA', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-tripadvisor-reviews.html', color: '#006b5e' },
-    { name: 'Trustpilot', label: 'Trustpilot Review Removal', frLabel: 'Suppression d’avis Trustpilot', mark: 'TP', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-trustpilot-reviews.html', color: '#006b55' },
-    { name: 'Glassdoor', label: 'Glassdoor Review Removal', frLabel: 'Suppression d’avis Glassdoor', mark: 'GD', fee: '$45 upfront + $95 after removal', frFee: '45 $ au départ + 95 $ après suppression', href: 'remove-glassdoor-reviews.html', color: '#116b31' }
-  ];
-
-  if (!isFrench) {
-    document.querySelectorAll('#servicesDropdown > a').forEach(function (link) {
-      if (new URL(link.href, window.location.href).pathname === window.location.pathname) link.remove();
-    });
-  }
-
-  servicesMenuFooter.querySelectorAll('br').forEach(function (lineBreak) {
-    lineBreak.remove();
-  });
-
-  if (!isFrench) {
-    var frenchLink = document.createElement('a');
-    frenchLink.href = 'suppression-avis-google.html';
-    frenchLink.lang = 'fr-CA';
-    frenchLink.textContent = 'Français : suppression d’avis Google';
-    servicesMenuFooter.appendChild(frenchLink);
-  }
-
   if (!success) {
     success = document.createElement('div');
     success.className = 'platform-success';
@@ -64,25 +33,6 @@
     form.insertAdjacentElement('afterend', success);
     successClose = document.getElementById('platformSuccessClose');
   }
-
-  var servicesSection = document.createElement('section');
-  servicesSection.className = 'section platform-services';
-  servicesSection.id = 'other-services';
-  servicesSection.setAttribute('aria-labelledby', 'other-services-title');
-  servicesSection.innerHTML = '<div class="container"><div class="section-head">' +
-    (isFrench
-      ? '<p class="eyebrow">Autres services de suppression</p><h2 id="other-services-title">Aide pour les principales plateformes d’avis</h2><p>Choisissez la plateforme où l’avis apparaît. Les mêmes frais s’appliquent à chaque plateforme : 45 $ CA au départ et 95 $ CA après la suppression réussie de l’avis.</p>'
-      : '<p class="eyebrow">Other review-removal services</p><h2 id="other-services-title">Support for other major review platforms</h2><p>Choose the platform where the review appears. The same $45 CAD initial fee and $95 CAD after-removal fee apply to every supported platform.</p>') +
-    '</div><div class="platform-service-grid">' + serviceOptions.filter(function (service) {
-      return service.name !== platform;
-    }).map(function (service) {
-      return '<a class="platform-service-option" style="--service-color:' + service.color + '" href="' + service.href + '">' +
-        '<span class="platform-service-mark">' + service.mark + '</span>' +
-        '<span class="platform-service-copy"><strong>' + (isFrench ? service.frLabel : service.label) + '</strong><small>' + (isFrench ? service.frFee : service.fee) + '</small></span>' +
-        '<span class="platform-service-arrow" aria-hidden="true">&#8594;</span></a>';
-    }).join('') + '</div></div>';
-  requestSection.insertAdjacentElement('afterend', servicesSection);
-  if (legacyServiceLinks) legacyServiceLinks.remove();
 
   var pricingCalc = document.querySelector('.pricing-calc');
   if (usePopupForm) {
@@ -111,18 +61,8 @@
   }
   if (usePopupForm) {
     var profileLabels = {
-      Facebook: 'Facebook Business Page URL',
-      Yelp: 'Yelp Business Listing URL',
-      Tripadvisor: 'Tripadvisor Property or Listing URL',
-      Trustpilot: 'Trustpilot Business Profile URL',
-      Glassdoor: 'Glassdoor Employer Profile URL'
     };
     var profilePlaceholders = {
-      Facebook: 'https://facebook.com/...',
-      Yelp: 'https://yelp.ca/biz/...',
-      Tripadvisor: 'https://tripadvisor.ca/...',
-      Trustpilot: 'https://ca.trustpilot.com/review/...',
-      Glassdoor: 'https://glassdoor.ca/Reviews/...'
     };
     var intro = requestSection.querySelector('.form-layout > div:first-child');
     var introCopy = intro.querySelector(':scope > p:not(.eyebrow):not(.callout)');
@@ -188,48 +128,20 @@
     });
   }
 
-  function closeServicesMenu() {
-    servicesMenu.classList.remove('open');
-    servicesMenuButton.setAttribute('aria-expanded', 'false');
-  }
-  servicesMenuButton.addEventListener('click', function (event) {
-    event.stopPropagation();
-    var isOpen = servicesMenu.classList.toggle('open');
-    servicesMenuButton.setAttribute('aria-expanded', String(isOpen));
-  });
-  servicesMenu.addEventListener('mouseenter', function () {
-    if (window.matchMedia('(min-width: 1181px)').matches) servicesMenuButton.setAttribute('aria-expanded', 'true');
-  });
-  servicesMenu.addEventListener('mouseleave', function () {
-    if (window.matchMedia('(min-width: 1181px)').matches && !servicesMenu.contains(document.activeElement)) closeServicesMenu();
-  });
-  servicesMenu.addEventListener('focusout', function () {
-    window.setTimeout(function () {
-      if (!servicesMenu.contains(document.activeElement)) closeServicesMenu();
-    }, 0);
-  });
-  document.addEventListener('click', function (event) {
-    if (!servicesMenu.contains(event.target)) closeServicesMenu();
-  });
   document.addEventListener('keydown', function (event) {
-    if (event.key === 'Escape') {
-      if (usePopupForm && requestSection.classList.contains('open')) closeModal();
-      else {
-        servicesMenuButton.focus();
-        closeServicesMenu();
-      }
-    }
+    if (event.key !== 'Escape' || !navLinks.classList.contains('open')) return;
+    navLinks.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger.focus();
   });
   hamburger.addEventListener('click', function () {
     var isOpen = navLinks.classList.toggle('open');
     hamburger.setAttribute('aria-expanded', String(isOpen));
-    if (!isOpen) closeServicesMenu();
   });
   navLinks.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', function () {
       navLinks.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
-      closeServicesMenu();
     });
   });
 

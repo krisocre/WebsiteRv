@@ -114,7 +114,7 @@ function leadInputErrors(data, requireReviewCount) {
   success.setAttribute('aria-labelledby', successHeading.id);
   success.tabIndex = -1;
   restartButton.addEventListener('click', function (event) {
-    // Reopen the form in place, including the Yelp dialog, instead of closing it.
+    // Reopen the form in place instead of closing it.
     event.stopImmediatePropagation();
     success.hidden = true;
     form.hidden = false;

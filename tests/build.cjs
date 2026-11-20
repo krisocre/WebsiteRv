@@ -2,7 +2,7 @@
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),cp=require('node:child_process'),crypto=require('node:crypto'),assert=require('node:assert/strict');
 const root=path.resolve(__dirname,'..'),out=fs.mkdtempSync(path.join(os.tmpdir(),'reviewsboost-build-'));
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
-const files=cp.execFileSync('git',['ls-files','--cached','--others','--exclude-standard'],{cwd:root,encoding:'utf8'}).trim().split(/\r?\n/),sourceHashes=new Map();
+const files=cp.execFileSync('git',['ls-files','--cached','--others','--exclude-standard'],{cwd:root,encoding:'utf8'}).trim().split(/\r?\n/).filter(file=>fs.existsSync(path.join(root,file))),sourceHashes=new Map();
 try{
  for(const file of files){const source=path.resolve(root,file),target=path.resolve(out,file);if(!source.startsWith(root+path.sep)||!target.startsWith(out+path.sep))throw Error('Unsafe build path');const bytes=fs.readFileSync(source);sourceHashes.set(file,hash(bytes));fs.mkdirSync(path.dirname(target),{recursive:true});fs.writeFileSync(target,bytes);}
  const run=(file,args=[])=>{const result=cp.spawnSync(process.execPath,[file,...args],{cwd:out,encoding:'utf8'});if(result.status!==0)throw Error(result.stderr||result.stdout);return result.stdout;};

@@ -6,7 +6,7 @@
 #measurement-preferences .measurement-inner>p:not(.measurement-status){grid-area:copy;max-width:740px}
 #measurement-preferences a{text-decoration:underline;text-underline-offset:3px}
 #measurement-preferences .measurement-actions{grid-area:actions;display:flex;gap:8px;flex-wrap:wrap}
-#measurement-preferences button{font:700 13px/1.3 Arial,sans-serif;color:#16223b;background:#fff;border:1px solid #809993;border-radius:3px;padding:11px 16px;min-height:44px;cursor:pointer}
+#measurement-preferences button{font:600 13px/1.3 Arial,sans-serif;color:#16223b;background:#fff;border:1px solid #809993;border-radius:3px;padding:11px 16px;min-height:44px;cursor:pointer}
 #measurement-preferences button:hover{background:#e2eae4}
 #measurement-preferences button:focus-visible,.measurement-settings:focus-visible{outline:3px solid #b81722;outline-offset:3px}
 #measurement-preferences #measurement-options{grid-column:1/-1;margin-top:6px;padding-top:12px;border-top:1px solid #c3d0ca}
