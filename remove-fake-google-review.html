@@ -33,7 +33,7 @@
       title="ReviewsBoost learning centre"
       href="https://reviewsboost.ca/feed.xml"
     />
-    <link rel="stylesheet" href="content.css" />
+    <link rel="stylesheet" href="content.css?v=20261121-article-prices" />
     <meta property="og:type" content="article" />
     <meta property="og:locale" content="en_CA" />
     <meta property="og:site_name" content="ReviewsBoost" />
@@ -131,12 +131,12 @@
       }
     </script>
 </head>
-  <body>
+  <body class="article-pricing-page">
     <a class="skip-link" href="#article">Skip to article</a>
     <header class="site-header">
       <nav class="nav container" aria-label="Primary navigation">
         <a class="brand" href="/"
-          ><span class="brand-mark" aria-hidden="true">★</span>ReviewsBoost</a
+          ><span class="logo-icon" aria-hidden="true"><i class="fa-solid fa-star"></i></span>ReviewsBoost</a
         >
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
@@ -156,6 +156,27 @@
         <li aria-current="page">Remove a fake Google review</li>
       </ol>
     </nav>
+    <aside class="article-pricing" id="review-pricing" aria-label="Review removal pricing">
+      <details>
+        <summary class="button">
+          Google Removal Prices
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m4 11 5-5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="article-pricing-panel">
+          <label for="article-review-count">Number of reviews</label>
+          <div class="article-pricing-quantity">
+            <button type="button" data-pricing-step="-1" aria-label="Decrease number of reviews">&minus;</button>
+            <input id="article-review-count" type="number" min="1" max="50" step="1" value="1" inputmode="numeric">
+            <button type="button" data-pricing-step="1" aria-label="Increase number of reviews">+</button>
+          </div>
+          <dl class="article-pricing-totals" aria-live="polite">
+            <div><dt>Upfront <small>$45 per review</small></dt><dd data-pricing-upfront>$45 CAD</dd></div>
+            <div><dt>If all are removed <small>$95 per successful removal</small></dt><dd data-pricing-success>$95 CAD</dd></div>
+          </dl>
+          <a class="button" data-pricing-assessment href="/#assessment">Free Review Assessment</a>
+        </div>
+      </details>
+    </aside>
     <main id="article">
       <header class="hero article-hero">
         <div class="container">
@@ -166,16 +187,9 @@
             platform rule, preserve relevant evidence, use the official
             reporting path, and prepare a professional public response.
           </p>
-          <div class="meta-row">
-            <span>By <a href="editorial-policy.html#authorship" rel="author">ReviewsBoost Editorial Team</a></span
-            ><span
-              >Published
-              <time datetime="2026-09-02">September 2, 2026</time></span
-            ><span
-              >Updated
-              <time datetime="2026-09-13">September 13, 2026</time></span
-            ><span>11-minute read</span>
-          </div>
+          <div class="meta-row"><span class="post-published">Published <time datetime="2026-09-02">September 2, 2026</time></span><span class="post-updated">Last updated <time datetime="2026-09-13">September 13, 2026</time></span>
+<span>By <a href="editorial-policy.html#authorship" rel="author">ReviewsBoost Editorial Team</a></span
+            ><span>11-minute read</span></div>
         </div>
       </header>
       <div class="container article-shell">
@@ -189,6 +203,7 @@
           <h2 id="qualify">
             What kinds of Google reviews may qualify for removal?
           </h2>
+          <figure class="data-figure"><img src="google-review-removal-eligibility.svg" width="1200" height="675" loading="lazy" decoding="async" alt="A removal case is clearer when a specific policy concern is paired with a direct review link, complete screenshots and dated records."></figure>
           <p>
             Use the policy category that best fits the content. A precise report
             is more useful than saying only that a review is “fake” or “unfair.”
@@ -574,14 +589,11 @@
               >
             </li>
           </ul>
-          <div class="author-box">
-            <strong>About this guide</strong>
-            <p>
-              Prepared by the ReviewsBoost Editorial Team from public platform
-              and government sources. It is general educational information, not
-              legal advice, and does not promise a moderation outcome.
-            </p>
-          </div>
+          <aside class="author-box post-editor" id="article-editor" aria-label="Editorial credit">
+            <p class="eyebrow">Editorial pen name</p>
+            <p class="post-editor-name"><a href="editorial-policy.html#alex-martin">Alex Martin</a></p>
+            <p>The Alex Martin byline focuses on Google review policy, reporting and appeals. These guides help Canadian business owners document a concern, understand removal costs and choose a next step.</p>
+          </aside>
         </article>
         <aside class="toc" aria-label="On this page">
           <strong>On this page</strong>
@@ -601,21 +613,6 @@
         </aside>
       </div>
     </main>
-    <section class="cta">
-      <div class="container cta-grid">
-        <div>
-          <h2>Want help assessing a review?</h2>
-          <p>
-            ReviewsBoost offers case assessment and policy-based removal
-            support. Eligibility and outcomes depend on the facts and Google’s
-            decision.
-          </p>
-        </div>
-        <a class="button" href="/"
-          >View removal support</a
-        >
-      </div>
-    </section>
     <footer class="site-footer">
       <div class="container">
         <div class="footer-grid">
@@ -656,5 +653,42 @@
         </div>
       </div>
     </footer>
+    <script>
+      (() => {
+        const pricing = document.querySelector('#review-pricing details');
+        const quantity = pricing.querySelector('#article-review-count');
+        const upfront = pricing.querySelector('[data-pricing-upfront]');
+        const success = pricing.querySelector('[data-pricing-success]');
+        const assessment = pricing.querySelector('[data-pricing-assessment]');
+        const min = Number(quantity.min);
+        const max = Number(quantity.max);
+        const clamp = value => Math.max(min, Math.min(max, Math.round(value || min)));
+
+        function showPrices(count) {
+          upfront.textContent = `$${(45 * count).toLocaleString('en-CA')} CAD`;
+          success.textContent = `$${(95 * count).toLocaleString('en-CA')} CAD`;
+          assessment.href = count === 1 ? '/#assessment' : `/?reviews=${count}#assessment`;
+        }
+
+        quantity.addEventListener('input', () => showPrices(clamp(quantity.valueAsNumber)));
+        quantity.addEventListener('change', () => {
+          quantity.value = clamp(quantity.valueAsNumber);
+          showPrices(Number(quantity.value));
+        });
+        pricing.querySelectorAll('[data-pricing-step]').forEach(button => {
+          button.addEventListener('click', () => {
+            const count = clamp(clamp(quantity.valueAsNumber) + Number(button.dataset.pricingStep));
+            quantity.value = count;
+            showPrices(count);
+          });
+        });
+        pricing.addEventListener('keydown', event => {
+          if (event.key !== 'Escape' || !pricing.open) return;
+          pricing.open = false;
+          pricing.querySelector('summary').focus();
+        });
+        showPrices(clamp(quantity.valueAsNumber));
+      })();
+    </script>
   </body>
 </html>
