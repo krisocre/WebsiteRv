@@ -39,9 +39,19 @@
     var url = new URL(window.location.href);
     if (pagePath === '/404.html' || /noindex/i.test(document.querySelector('meta[name="robots"]')?.content || '') || document.querySelector('meta[http-equiv="refresh"]')) return false;
     var allowed = ['gclid','dclid','gbraid','wbraid','gad_source','gad_campaignid'];
+    var params = url.searchParams;
+    var googleUtm = {
+      utm_source: /^google$/i,
+      utm_medium: /^(?:cpc|ppc|paid|paidsearch|paid_search)$/i,
+      utm_campaign: /^[1-9]\d{0,19}$/,
+      utm_id: /^[1-9]\d{0,19}$/
+    };
+    var googlePaid = googleUtm.utm_source.test(params.get('utm_source') || '') &&
+      googleUtm.utm_medium.test(params.get('utm_medium') || '');
     for (var entry of url.searchParams) {
       if (entry[0] === '_dbg' && entry[1] === '1') continue;
       if (entry[0] === 'gtm_debug' && /^\d{10,16}$/.test(entry[1])) continue;
+      if (googlePaid && Object.hasOwn(googleUtm, entry[0]) && params.getAll(entry[0]).length === 1 && googleUtm[entry[0]].test(entry[1])) continue;
       if (!allowed.includes(entry[0]) || !/^[A-Za-z0-9_-]{1,256}$/.test(entry[1])) return false;
     }
     if (url.hash && (!/^#[A-Za-z][A-Za-z0-9_-]{0,80}$/.test(url.hash) || !document.getElementById(url.hash.slice(1)))) return false;
@@ -142,8 +152,17 @@
   function safeReplayUrl() {
     return window.location.origin === canonical.origin && safeVisitorUrl();
   }
+  function removeReplayTag() {
+    clarityScript.remove();
+    clarityScript = undefined;
+    clarityReady = false;
+    delete window.clarity;
+  }
   function stopSessionReplay() {
-    if (clarityReady) window.clarity('stop');
+    if (clarityReady) {
+      window.clarity('stop');
+      removeReplayTag();
+    }
     try { window.sessionStorage.removeItem('_cltk'); } catch (_) {}
   }
   function applySessionReplay() {
@@ -154,10 +173,7 @@
       stopSessionReplay();
       return;
     }
-    if (clarityScript) {
-      if (clarityReady) window.clarity('start', {});
-      return;
-    }
+    if (clarityScript) return;
     // Mask the forms and their surrounding confirmation regions before loading Clarity.
     document.querySelectorAll('form, .inline-assessment-card, .form-layout, .contact-layout, #removalSuccess, #platformSuccess').forEach(function (element) {
       element.setAttribute('data-clarity-mask', 'true');
@@ -176,14 +192,13 @@
           }
         });
       }
-    }, false, true);
+    }, false);
     clarityScript = document.createElement('script');
     clarityScript.id = 'reviewsboost-clarity-tag';
     clarityScript.async = true;
     clarityScript.src = 'https://www.clarity.ms/tag/' + clarityId;
     clarityScript.addEventListener('error', function () {
-      clarityScript.remove();
-      clarityScript = undefined;
+      removeReplayTag();
       replayActive = false;
       clearOptionalCookies();
     }, { once: true });
@@ -194,6 +209,7 @@
     if (ga4) window['ga-disable-' + ga4] = !preferences.analytics;
     if (managerGa4) window['ga-disable-' + managerGa4] = !preferences.analytics;
     window.gtag('consent', 'update', consent(preferences.analytics, preferences.advertising));
+    window.ReviewsBoostLeadSource?.sync();
     applySessionReplay();
     clearOptionalCookies();
     initializeDestinations();
@@ -261,7 +277,7 @@
     if (/^tel:/i.test(href)) { record('phone_click', { contact_method: 'phone' }); return; }
     try {
       var url = new URL(href, window.location.href);
-      if (url.origin === window.location.origin && ['#request','#contact','#review-count'].includes(url.hash)) {
+      if (url.origin === window.location.origin && (url.pathname === '/quote' || ['#request','#contact','#assessment','#review-count'].includes(url.hash))) {
         var targetPlatform = url.pathname === '/' || url.pathname === '/index.html' ? 'google' :
           platform;
         record('quote_cta_click', { cta_location: locationFor(link), service_platform: targetPlatform || platform });

@@ -1,4 +1,5 @@
 exclude:
+  - reviewsboost-lead-pipeline.gs
   - apps-script-turnstile.gs
   - TURNSTILE-SETUP.md
   - apps-script-input-validation.gs

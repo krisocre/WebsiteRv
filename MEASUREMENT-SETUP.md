@@ -1,5 +1,25 @@
 # ReviewsBoost conversion measurement
 
+## Microsoft Clarity session replay
+
+ReviewsBoost loads project `zh8w7u4689` through the shared measurement
+loader when a visitor enables **Session replay (Microsoft Clarity)**
+under **Cookie choices** in the footer. **Accept optional** also enables
+replay. Existing Google choices do not enable it. Replay is disabled for
+Global Privacy Control and on pages with unsupported URL parameters.
+Enquiry forms and confirmation areas are marked for masking before load.
+
+In the matching Clarity project, turn **Cookies** off under **Settings
+→ Setup → Advanced Settings** to enable Microsoft’s consent mode.
+The site passes analytics permission and advertising denial after the
+visitor enables replay. Keep the Clarity tag out of Google Tag Manager
+so it loads once and follows the separate replay choice.
+
+After publication, visit the plain ReviewsBoost homepage, enable replay
+from the footer, then browse the page. Use DevTools **Network → All**
+and filter for `clarity.ms` to find the tag request and collection POST.
+Check **Recordings** and **Heatmaps** in the Clarity project for the data.
+
 ## Automatic cookie banner removed — November 13, 2026
 
 The cookie panel now starts hidden on every visit. It opens only from Cookie

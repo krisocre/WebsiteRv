@@ -10,11 +10,10 @@ function applyToHtml(html,file){
  const stripped=html.replace(/\r\n?/g,'\n').replace(marker,'');
  if(/googletagmanager\.com\/(?:gtag\/js|gtm\.js)/.test(stripped.split('</head>')[0]))throw Error(file+': existing Google install requires a deliberate migration; refusing duplication');
  const prefix=file==='404.html'?'/':'';
- const version='20261121-clarity';
+ const version='20261121-lead-funnel';
  const bannerVersion='20261112-cookie-banner';
- const measurementVersion='20261121-clarity';
  const container=/^GTM-[A-Z0-9]+$/.test(config.googleTagManagerId||'')?`\n<!-- Google Tag Manager ${config.googleTagManagerId}: loaded once after analytics consent. -->`:'';
- const block=`\n<!-- ReviewsBoost measurement start -->${container}\n<script src="${prefix}measurement-config.js?v=${version}" defer></script>\n<script src="${prefix}measurement.js?v=${measurementVersion}" defer></script>\n<link rel="stylesheet" href="${prefix}measurement.css?v=${bannerVersion}">\n<!-- ReviewsBoost measurement end -->`;
+ const block=`\n<!-- ReviewsBoost measurement start -->${container}\n<script src="${prefix}measurement-config.js?v=${version}" defer></script>\n<script src="${prefix}lead-source.js?v=${version}" defer></script>\n<script src="${prefix}measurement.js?v=${version}" defer></script>\n<link rel="stylesheet" href="${prefix}measurement.css?v=${bannerVersion}">\n<!-- ReviewsBoost measurement end -->`;
  // Put the shared loader first in the head, without bypassing cookie choices.
  return stripped.replace(/(<head\b[^>]*>)[ \t]*\n*/i,(_,head)=>head+block+'\n');
 }

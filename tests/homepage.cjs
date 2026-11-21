@@ -21,10 +21,10 @@ const server=http.createServer((req,res)=>{
   const layouts=[];
   for(const width of [1440,1024,768,390,320]){
    await page.setViewport({width,height:width<700?844:900});await page.goto(base,{waitUntil:'networkidle0'});
-   const layout=await page.evaluate(()=>{const r=document.querySelector('.hero-actions a[href="#review-count"]').getBoundingClientRect();return {width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth+1,ctaTop:r.top,ctaBottom:r.bottom,viewport:innerHeight,height:document.documentElement.scrollHeight};});
+   const layout=await page.evaluate(()=>{const r=document.querySelector('.hero-actions a[href="#assessment"]').getBoundingClientRect();return {width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth+1,ctaTop:r.top,ctaBottom:r.bottom,viewport:innerHeight,height:document.documentElement.scrollHeight};});
    assert.equal(layout.overflow,false);assert.ok(layout.ctaTop>0&&layout.ctaBottom<layout.viewport);layouts.push(layout);
    assert.equal(await page.$$eval('h1',e=>e.length),1);assert.equal(await page.$$eval('title',e=>e.length),1);assert.equal(await page.$$eval('link[rel=canonical]',e=>e.length),1);
-   assert.equal(await page.$$eval('.steps-grid>article',e=>e.length),3);assert.equal(await page.$eval('.hero-actions a[href="#review-count"]',e=>e.getBoundingClientRect().height>=44),true);
+   assert.equal(await page.$$eval('.steps-grid>article',e=>e.length),3);assert.equal(await page.$eval('.hero-actions a[href="#assessment"]',e=>e.getBoundingClientRect().height>=44),true);
    assert.ok(await page.$eval('.hero-points',e=>e.textContent.includes('No account password needed')));
    assert.equal(await page.evaluate(()=>Array.from(document.scripts).some(script=>new URL(script.src,location.href).pathname.endsWith('/measurement.js'))),require('../install-measurement.cjs').enabled,'Measurement bootstrap matches real configuration');
    assert.equal(await page.evaluate(()=>document.getAnimations().filter(a=>a.playState==='running').length),0);
@@ -38,7 +38,7 @@ const server=http.createServer((req,res)=>{
     await (await page.$('#assessment')).screenshot({path:path.join(output,'assessment-'+width+'.png')});
     await cleanPreview.evaluate(element=>element.remove());
    }
-   await page.click('.hero-actions a[href="#review-count"]');await page.waitForFunction(()=>{const r=document.querySelector('#review-count').getBoundingClientRect();return r.top>=50&&r.top<innerHeight;});
+   await page.click('.hero-actions a[href="#assessment"]');await page.waitForFunction(()=>{const r=document.querySelector('#assessment').getBoundingClientRect();return r.top>=50&&r.top<innerHeight;});
    await page.click('.calculator .open-order');await page.waitForFunction(()=>{const r=document.querySelector('#assessment').getBoundingClientRect();return r.top>=50&&r.top<innerHeight;});
    assert.equal(await page.evaluate(()=>document.activeElement.id),'assessment-title','The in-page CTA focuses the assessment heading at '+width+'px');
    for(const id of ['businessUrl','formReviewQuantity','fullName','businessName','email'])assert.equal(await page.$eval('#'+id,e=>e.getClientRects().length>0),true,id+' is visible without an extra step');
@@ -54,7 +54,7 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='hidden');
     await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='visible');
-    await page.click('.mobile-cta a[href="#review-count"]');assert.equal(await page.$('#orderModal.open'),null);
+    await page.click('.mobile-cta a[href="#assessment"]');assert.equal(await page.$('#orderModal.open'),null);
    }
    if(width<700){await page.click('#hamburger');assert.equal(await page.$eval('#hamburger',e=>e.getAttribute('aria-expanded')),'true');await page.click('#hamburger');}
   }
@@ -71,6 +71,6 @@ const server=http.createServer((req,res)=>{
   assert.doesNotMatch(await page.$eval('#removalForm',e=>e.textContent),/You can send this form without JavaScript/);
   assert.equal(await page.$eval('#removalForm',e=>e.getClientRects().length>0&&e.method==='post'),true,'Native form remains visible and never sends personal details with GET');
   assert.deepEqual(errors,[]);assert.deepEqual(posts,[]);fs.writeFileSync(path.join(output,'layout-results.json'),JSON.stringify(layouts,null,2));
-  console.log('PASS: five homepage widths, pricing/inline form section order, quantity-first hero/mobile actions, accessible in-page CTA, visible form groups, no focus trap, synchronized estimates, native endpoint and no-JS security notice, unchanged form fields and canonical. No real submissions.');
+  console.log('PASS: five homepage widths, pricing/inline form section order, direct hero/mobile assessments, accessible in-page CTA, visible form groups, no focus trap, synchronized estimates, native endpoint and no-JS security notice, unchanged form fields and canonical. No real submissions.');
  }finally{if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});

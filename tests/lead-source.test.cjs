@@ -1,7 +1,7 @@
 const {test}=require('node:test');
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 const root=path.resolve(__dirname,'..');
-const source=fs.readFileSync(path.join(root,'enquiry-flow.js'),'utf8').match(/\/\/ BEGIN LEAD TRAFFIC SOURCE[\s\S]*?\/\/ END LEAD TRAFFIC SOURCE/)[0];
+const source=fs.readFileSync(path.join(root,'lead-source.js'),'utf8');
 function classify({query='',referrer='',consent,gpc=false}={}){
  let storageReads=0;
  const window={location:{href:'https://reviewsboost.ca/'+query},navigator:{globalPrivacyControl:gpc}};
@@ -9,7 +9,7 @@ function classify({query='',referrer='',consent,gpc=false}={}){
  Object.defineProperty(window,'localStorage',{get(){storageReads++;throw Error('No tracking storage permitted');}});
  if(consent)window.ReviewsBoostMeasurement={status:()=>consent};
  const context={window,document:{referrer},URL};vm.runInNewContext(source,context);
- const result=context.leadSourceDetails();assert.equal(storageReads,0);
+ const result=window.ReviewsBoostLeadSource.details();assert.equal(storageReads,0);
  assert.deepEqual(Object.keys(result).sort(),['label','source']);
  assert.ok(!/PRIVATE|LOCAL_CLICK|https:|@/.test(JSON.stringify(result)));
  return result;

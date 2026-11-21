@@ -105,7 +105,43 @@ Publish `index.html` and `home.css` to apply that sizing change. The short
 website notice and hidden acknowledgement payload remain intact.
 No deployment or live sheet cleanup was performed by the agent.
 
-## November 7: paid/organic label in notifications
+## ReviewsBoost enquiry pipeline
+
+Add [reviewsboost-lead-pipeline.gs](reviewsboost-lead-pipeline.gs) as a new
+script file in the existing, separate ReviewsBoost Apps Script project. In the
+editor, run **setupReviewsBoostLeadPipeline** once. It uses this project's
+configured lead sheet and keeps the existing web app deployment version.
+
+The setup adds a **ReviewsBoost Stage** dropdown after the existing columns.
+Mark each enquiry **Qualified** once it fits the service and **Paid** once
+payment is received. Use **Not qualified** for enquiries that do not fit.
+Blank stages count as new. Run the setup again to extend dropdowns if the
+sheet grows. Existing stage values and the reporting inputs are preserved.
+
+The **ReviewsBoost Lead Funnel** tab reports enquiries by submission date and
+current stage. Set the date range and enter Google Ads spend in CAD for that
+range. It reports cost per qualified Google Ads enquiry and cost per paid
+Google Ads case. A paid case also counts as qualified. The report uses
+ReviewsBoost request references and the saved channel labels, so it excludes
+legacy rows without a ReviewsBoost reference. Direct or unknown traffic
+contributes to the all-enquiries total only.
+
+## Current paid and organic attribution
+
+The website submits the same fixed channel labels as before. When the
+relevant optional measurement is enabled, the site can carry the channel
+label for 30 minutes within the same tab. It keeps only the label and its
+expiry in session storage. With no choice recorded, current-page classification
+still works. Rejecting the relevant measurement or using Global Privacy
+Control suppresses carryover. The website uses the existing form endpoint.
+
+Use Google Ads auto-tagging or `utm_source=google&utm_medium=cpc` for paid
+Google visits. Supported paid media also include `ppc`, `paid`,
+`paidsearch` and `paid_search`. If you add `utm_campaign` or `utm_id`,
+use the numeric campaign ID. Free-text and unsupported parameters still
+keep optional measurement off.
+
+## November 7 release: paid/organic label in notifications
 
 All four active forms now attach a fixed `traffic_source` enum and prefix the
 existing Reason with a readable label, such as

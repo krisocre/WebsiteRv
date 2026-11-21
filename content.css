@@ -98,15 +98,34 @@ textarea {
   text-decoration: none;
   white-space: nowrap;
 }
-.brand-mark {
+.brand,
+.platform-navbar .nav-logo {
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 20px;
+  letter-spacing: -.02em;
+}
+.brand-mark,
+.platform-navbar .logo-icon {
+  position: relative;
+  flex: 0 0 36px;
   width: 36px;
   height: 36px;
-  display: grid;
-  place-items: center;
   border-radius: 8px;
-  background: var(--blue);
-  color: #fff;
-  font-size: 19px;
+  background: #0885fe;
+  box-shadow: 0 5px 14px rgba(8, 133, 254, .22);
+  font-size: 0;
+}
+.brand-mark::before,
+.platform-navbar .logo-icon::before {
+  position: absolute;
+  inset: 0;
+  width: 17px;
+  height: 17px;
+  margin: auto;
+  background-color: #fff;
+  -webkit-mask: url("star-solid.svg") center / contain no-repeat;
+  mask: url("star-solid.svg") center / contain no-repeat;
+  content: "";
 }
 .nav-links {
   display: flex;
@@ -722,7 +741,7 @@ h1 {
   font-size: 13px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1120px) {
   .nav {
     justify-content: flex-end;
   }

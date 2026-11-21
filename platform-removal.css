@@ -22,7 +22,6 @@ body {
 }
 .platform-navbar .container { height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 28px; }
 .platform-navbar .nav-logo { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 10px; color: var(--navy); font-size: 20px; font-weight: 500; letter-spacing: -.02em; text-decoration: none; }
-.platform-navbar .logo-icon { width: 36px; height: 36px; display: grid; place-items: center; border-radius: 8px; background: #0885fe; color: #fff; box-shadow: 0 5px 14px rgba(8, 133, 254, .22); font-size: 18px; }
 .platform-navbar .nav-links { display: flex; align-items: center; justify-content: flex-end; flex-wrap: nowrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
 .platform-navbar .nav-links > li > a,
 .platform-navbar .services-toggle { display: inline-flex; min-height: 38px; align-items: center; gap: 7px; padding: 8px 11px; border: 0; border-radius: 8px; background: transparent; color: #3d4553; font: inherit; font-size: 13px; font-weight: 500; white-space: nowrap; text-decoration: none; cursor: pointer; transition: background .18s, color .18s; }
@@ -70,7 +69,6 @@ body {
 }
 .platform-header .nav { min-height: 74px; gap: 28px; }
 .platform-header .brand { font-size: 20px; letter-spacing: -.02em; }
-.platform-header .brand-mark { background: var(--accent); box-shadow: 0 5px 14px color-mix(in srgb, var(--accent) 24%, transparent); }
 .platform-header .nav-links { gap: 4px; }
 .platform-header .nav-links a {
   display: inline-flex;

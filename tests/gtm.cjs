@@ -5,10 +5,11 @@ const root=path.resolve(__dirname,'..'),installer=require('../install-measuremen
 const pages=fs.readdirSync(root).filter(file=>file.endsWith('.html'));
 for(const file of pages){
  const html=fs.readFileSync(path.join(root,file),'utf8');
- for(const asset of ['measurement-config.js','measurement.js','measurement.css'])assert.equal((html.match(new RegExp('(?:src|href)="[^"\\s]*'+asset.replace('.','\\.')+'(?:\\?v=[A-Za-z0-9-]+)?"','g'))||[]).length,1,file+': one '+asset);
+ for(const asset of ['measurement-config.js','lead-source.js','measurement.js','measurement.css'])assert.equal((html.match(new RegExp('(?:src|href)="[^"\\s]*'+asset.replace('.','\\.')+'(?:\\?v=[A-Za-z0-9-]+)?"','g'))||[]).length,1,file+': one '+asset);
  assert.ok(/<head>\s*<!-- ReviewsBoost measurement start -->/.test(html),file+': bootstrap first in head');
- assert.ok(/measurement-config\.js\?v=20261111-wdpznw9t-v2/.test(html)&&/measurement\.js\?v=20261119-google-only/.test(html)&&/measurement\.css\?v=20261112-cookie-banner/.test(html),file+': versioned scripts');
+ assert.ok(/measurement-config\.js\?v=20261121-lead-funnel/.test(html)&&/measurement\.js\?v=20261121-lead-funnel/.test(html)&&/measurement\.css\?v=20261112-cookie-banner/.test(html),file+': versioned scripts');
  assert.ok(!/googletagmanager\.com\/(?:gtm\.js|gtag\/js|ns\.html)/.test(html),file+': no consent bypass');
+ assert.ok(!html.includes('www.clarity.ms/tag/'),file+': no replay consent bypass');
  assert.equal(installer.applyToHtml(html,file),html,file+': repeatable installer');
 }
 const server=http.createServer((req,res)=>{
@@ -20,26 +21,66 @@ const server=http.createServer((req,res)=>{
  await new Promise(r=>server.listen(0,'127.0.0.1',r));const base='http://127.0.0.1:'+server.address().port+'/';
  browser=await puppeteer.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});
  const errors=[];
- async function open({query='',gpc=false}={}){
-  const context=await browser.createBrowserContext(),page=await context.newPage(),loads=[];
+ const productionOrigin = 'https://reviewsboost.ca/';
+ const clarityTag = 'https://www.clarity.ms/tag/zh8w7u4689';
+ const clarityFixture = `
+ (() => {
+  window.__clarityCalls = [];
+  const queued = Array.from(window.clarity.q || []);
+  let metadataCallback;
+  window.clarity = (command, ...args) => {
+    __clarityCalls.push([command, ...args]);
+    if (command === 'metadata') { metadataCallback = args[0]; metadataCallback(); }
+  };
+  queued.forEach(args => window.clarity(...args));
+ })();
+ `;
+ async function open({query='',gpc=false,production=false,legacyChoice=false,waitForReplay=false,file=''}={}){
+  const context=await browser.createBrowserContext(),page=await context.newPage(),loads=[],replayLoads=[];
+  const origin=production?productionOrigin:base;
+  let releaseReplay;
   await page.setViewport({width:390,height:844});await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
   await page.setRequestInterception(true);page.on('pageerror',e=>errors.push(e.message));page.on('request',request=>{
    if(isApi(request.url()))return request.respond({status:200,contentType:'text/javascript',body:fixture});
    if(request.url().startsWith('https://www.googletagmanager.com/')){loads.push(request.url());return request.respond({status:200,contentType:'text/javascript',body:'/* mocked Google library */'});}
+   if(request.url()===clarityTag){
+    replayLoads.push(request.url());
+    const deliver=()=>request.respond({status:200,contentType:'text/javascript',body:clarityFixture});
+    if(waitForReplay){releaseReplay=deliver;return;}
+    return deliver();
+   }
+   if(production&&request.url().startsWith(productionOrigin)&&request.method()==='GET'){
+    const pathname=new URL(request.url()).pathname;
+    const local=path.resolve(root,'.'+(pathname==='/'?'/index.html':pathname));
+    if(local.startsWith(root+path.sep)&&fs.existsSync(local)&&fs.statSync(local).isFile()){
+     const mime={'.html':'text/html;charset=utf-8','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.webp':'image/webp'};
+     return request.respond({status:200,contentType:mime[path.extname(local)]||'application/octet-stream',body:fs.readFileSync(local)});
+    }
+   }
    if(request.url().startsWith(base)&&request.method()==='GET')return request.continue();request.abort();
   });
   if(gpc)await page.evaluateOnNewDocument(()=>Object.defineProperty(navigator,'globalPrivacyControl',{get:()=>true}));
-  await page.goto(base+query,{waitUntil:'load'});await page.waitForFunction(()=>!!window.ReviewsBoostMeasurement);
-  return {context,page,loads};
+  if(legacyChoice)await page.evaluateOnNewDocument(()=>{
+   if(!localStorage.getItem('reviewsboost.measurement.v1'))localStorage.setItem('reviewsboost.measurement.v1',JSON.stringify({version:1,analytics:true,advertising:true,expires:Date.now()+3600000}));
+  });
+  await page.goto(origin+file+query,{waitUntil:'load'});await page.waitForFunction(()=>!!window.ReviewsBoostMeasurement);
+  return {context,page,loads,replayLoads,finishReplay:()=>releaseReplay()};
  }
  const layer=page=>page.evaluate(()=>dataLayer.map(entry=>entry.event?entry:Array.from(entry)));
  const status=page=>page.evaluate(()=>ReviewsBoostMeasurement.status());
- const choose=async(page,choice)=>{if(await page.$eval('#measurement-preferences',e=>e.hidden))await page.click('.measurement-settings');await page.click('#measurement-preferences [data-choice="'+choice+'"]');};
+ const choose=async(page,choice)=>{
+  if(await page.$eval('#measurement-preferences',panel=>panel.hidden)){
+   await page.$eval('.measurement-settings',button=>button.scrollIntoView({block:'center',behavior:'instant'}));
+   await page.click('.measurement-settings');
+   await page.waitForSelector('#measurement-preferences:not([hidden])',{timeout:3000});
+  }
+  await page.click('#measurement-preferences [data-choice="'+choice+'"]');
+ };
  async function lead(page,outcome='success'){
   await page.evaluate(()=>{const form=document.getElementById('removalForm');for(const [name,value]of Object.entries({full_name:'PRIVATE_PERSON',business_name:'PRIVATE_BUSINESS',email_address:'private.person@example.invalid',business_url:'PRIVATE_PROFILE',reason:'PRIVATE_REVIEW_TEXT'}))form.elements[name].value=value;form.dispatchEvent(new Event('input',{bubbles:true}));});
   await completePuppeteer(page);
   await page.evaluate(outcome=>{
-   window.fetch=async(url,options)=>{window.__requestId=options.body.get('request_id');return {ok:true,json:async()=>outcome==='success'?{result:'success',notification_sent:true}:{result:'error',error:'storage unavailable'}};};
+   window.fetch=async(url,options)=>{window.__requestId=options.body.get('request_id');window.__leadSource=options.body.get('traffic_source');return {ok:true,json:async()=>outcome==='success'?{result:'success',notification_sent:true}:{result:'error',error:'storage unavailable'}};};
    document.getElementById('removalForm').requestSubmit();
   },outcome);
   await page.waitForSelector(outcome==='success'?'#removalSuccess:not([hidden])':'#formStatus.error');
@@ -109,11 +150,81 @@ const server=http.createServer((req,res)=>{
  assert.equal(await t.page.evaluate(()=>window['ga-disable-G-HBMLS9LBV0']),true,'Withdrawing analytics disables the verified destination');
  await t.context.close();
  t=await open({gpc:true});await choose(t.page,'accept');await t.page.waitForSelector('#reviewsboost-tag-manager');assert.equal(t.loads.length,1);assert.ok(t.loads[0].includes('GTM-WDPZNW9T'));assert.equal((await status(t.page)).advertisingConsent,false);await t.context.close();
- for(const query of ['?_dbg=1','?gtm_debug=1770000000000']){
+ for(const query of ['?_dbg=1','?gtm_debug=1770000000000','?utm_source=google&utm_medium=cpc&utm_campaign=123&gclid=LOCAL_TEST']){
   t=await open({query});await choose(t.page,'accept');await t.page.waitForSelector('#reviewsboost-tag-manager');assert.equal(t.loads.length,1);await t.context.close();
  }
- for(const query of ['?email=PRIVATE_EMAIL','?_dbg=PRIVATE_VALUE','?gtm_debug=PRIVATE_VALUE']){
+ for(const query of ['?email=PRIVATE_EMAIL','?_dbg=PRIVATE_VALUE','?gtm_debug=PRIVATE_VALUE','?utm_source=google&utm_medium=cpc&utm_campaign=PRIVATE_NAME','?utm_source=google&utm_source=google&utm_medium=cpc']){
   t=await open({query});await choose(t.page,'accept');assert.equal(t.loads.length,0);assert.equal((await status(t.page)).urlEligible,false);await t.context.close();
  }
- assert.deepEqual(errors,[]);console.log('PASS: '+pages.length+' page bootstraps, only GTM-WDPZNW9T for the verified Analytics destination, no redundant linked Ads base loader, advertising-only fallback, reject/restore/withdrawal/GPC, safe debug URLs, unchanged supplied lead conversion once after confirmed success and no form data. No real provider collection or leads.');
+ // Same-tab consented carryover through the checker into a mocked assessment.
+ t=await open({production:true,query:'?utm_source=google&utm_medium=cpc&gclid=LOCAL_TEST'});
+ assert.equal(await t.page.evaluate(()=>sessionStorage.getItem('reviewsboost.lead-source.v1')),null);
+ await choose(t.page,'accept');
+ const storedSource=await t.page.evaluate(()=>JSON.parse(sessionStorage.getItem('reviewsboost.lead-source.v1')));
+ assert.deepEqual(Object.keys(storedSource).sort(),['expires','source']);
+ assert.equal(storedSource.source,'paid_google');
+ for(const destination of ['/google-review-removal-checker.html','/']){
+  await Promise.all([
+   t.page.waitForNavigation({waitUntil:'load'}),
+   t.page.evaluate(pathname=>location.assign(pathname),destination)
+  ]);
+  assert.equal(await t.page.evaluate(()=>ReviewsBoostLeadSource.details().source),'paid_google');
+ }
+ await lead(t.page);
+ assert.equal(await t.page.evaluate(()=>__leadSource),'paid_google');
+ await choose(t.page,'reject');
+ assert.equal(await t.page.evaluate(()=>sessionStorage.getItem('reviewsboost.lead-source.v1')),null);
+ assert.equal(await t.page.evaluate(()=>ReviewsBoostLeadSource.details().source),'unknown');
+ await t.context.close();
+
+ // The production origin is served from local files by interception, including the recorder stub.
+ t=await open({production:true,query:'?gad_source=1&gclid=LOCAL_TEST'});
+ assert.equal(await t.page.$eval('#measurement-preferences',panel=>panel.hidden),true);
+ assert.equal(t.replayLoads.length,0,'A first visit does not load replay');
+ await choose(t.page,'customize');
+ await t.page.click('[data-purpose="replay"]');
+ await choose(t.page,'save');
+ await t.page.waitForFunction(()=>window.__clarityCalls?.some(call=>call[0]==='consentv2'));
+ assert.deepEqual(t.replayLoads,[clarityTag]);
+ assert.deepEqual(t.loads,[],'Session replay only must not load any Google tag');
+ assert.deepEqual(await t.page.evaluate(()=>__clarityCalls.find(call=>call[0]==='consentv2')),
+  ['consentv2',{analytics_Storage:'granted',ad_Storage:'denied'}]);
+ assert.equal(await t.page.$eval('#removalForm',form=>form.getAttribute('data-clarity-mask')),'true');
+ assert.equal(await t.page.$eval('#removalSuccess',panel=>panel.getAttribute('data-clarity-mask')),'true');
+ await t.page.reload({waitUntil:'load'});
+ await t.page.waitForFunction(()=>window.__clarityCalls?.some(call=>call[0]==='consentv2'));
+ assert.equal(t.replayLoads.length,2,'Replay consent persists on the next page view');
+ await t.page.evaluate(()=>{document.cookie='_clck=fixture; path=/';sessionStorage.setItem('_cltk','fixture');});
+ await choose(t.page,'reject');
+ assert.equal((await status(t.page)).sessionReplayConsent,false);
+ assert.equal(await t.page.evaluate(()=>__clarityCalls.some(call=>call[0]==='stop')&&!document.cookie.includes('_clck=')&&sessionStorage.getItem('_cltk')===null),true);
+ assert.equal(await t.page.$('#reviewsboost-clarity-tag'),null,'The stopped tag is removed');
+ await t.page.evaluate(()=>{window.__clarityCalls=[];});
+ await choose(t.page,'accept');
+ await t.page.waitForFunction(()=>window.__clarityCalls?.some(call=>call[0]==='consentv2'));
+ assert.equal(t.replayLoads.length,3,'Fresh permission opens a new replay session');
+ assert.equal(await t.page.$$eval('#reviewsboost-clarity-tag',scripts=>scripts.length),1,'One active Clarity tag after opt-in');
+ await t.context.close();
+
+ t=await open({production:true,legacyChoice:true});
+ assert.equal((await status(t.page)).sessionReplayConsent,false,'Existing Google choice is not replay consent');
+ assert.equal(t.replayLoads.length,0);
+ await t.context.close();
+
+ for(const options of [{gpc:true},{query:'?email=PRIVATE_EMAIL'},{file:'404.html'}]){
+  t=await open({production:true,...options});
+  await choose(t.page,'accept');
+  assert.equal(t.replayLoads.length,0,'No replay on restricted visits');
+  await t.context.close();
+ }
+ t=await open({production:true,waitForReplay:true});
+ await choose(t.page,'accept');
+ await t.page.waitForSelector('#reviewsboost-clarity-tag');
+ await choose(t.page,'reject');
+ await t.finishReplay();
+ await t.page.waitForFunction(()=>window.__clarityCalls?.some(call=>call[0]==='stop'));
+ assert.equal(await t.page.evaluate(()=>__clarityCalls.some(call=>call[0]==='consentv2')),false,'No consent grant after pending download is revoked');
+ await t.context.close();
+
+ assert.deepEqual(errors,[]);console.log('PASS: '+pages.length+' page bootstraps, only GTM-WDPZNW9T for the verified Analytics destination, no redundant linked Ads base loader, advertising-only fallback, reject/restore/withdrawal/GPC, safe debug URLs, masked opt-in Clarity replay and withdrawal, unchanged supplied lead conversion once after confirmed success and no form data. No real provider collection or leads.');
 }finally{if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}})().catch(error=>{console.error(error);process.exitCode=1;});
