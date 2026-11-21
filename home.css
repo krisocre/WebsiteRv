@@ -11,14 +11,14 @@
 .home-page .mobile-cta.is-assessing{visibility:hidden;pointer-events:none}
 .home-page #pricing{background:#fcfaf9;padding:72px 0;border-bottom:1px solid #eee5e3}
 .home-page .pricing-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:88px;align-items:center}
-.home-page .pricing-copy .section-title,.home-page .assessment-heading .section-title{font-weight:600;font-size:clamp(32px,3.2vw,43px);line-height:1.2;letter-spacing:-.035em}
+.home-page .pricing-copy .section-title,.home-page .assessment-heading .section-title{font-weight:500;font-size:clamp(32px,3.2vw,43px);line-height:1.2;letter-spacing:-.035em}
 .home-page .pricing-copy .section-sub{max-width:430px;font-size:16px;color:#625d64}
 .home-page .service-fees{display:grid;grid-template-columns:1fr 1fr;margin:30px 0 24px;padding:24px 0;border-block:1px solid #ded5d3}
 .home-page .service-fees>div{min-width:0;padding-right:24px}
 .home-page .service-fees>div+div{padding:0 0 0 28px;border-left:1px solid #ded5d3}
 .home-page .service-fees span{display:block;color:#514a52;font-size:13px}
-.home-page .service-fees strong{display:block;margin:12px 0;color:var(--red-dark);font:600 57px/1 'Merriweather',Georgia,serif;letter-spacing:-.055em}
-.home-page .service-fees strong sup{font:400 25px/1 'Lato',Arial,sans-serif;vertical-align:top;position:relative;top:8px;margin-right:4px;letter-spacing:0}
+.home-page .service-fees strong{display:block;margin:12px 0;color:var(--red-dark);font:700 57px/1 'Merriweather',Georgia,serif;letter-spacing:-.055em}
+.home-page .service-fees strong sup{font:700 25px/1 'Lato',Arial,sans-serif;vertical-align:top;position:relative;top:8px;margin-right:4px;letter-spacing:0}
 .home-page .service-fees>div+div strong{color:var(--navy)}
 .home-page .service-fees p{font-size:13px;color:#625d64}
 .home-page .pricing-included{max-width:430px;margin:0 0 12px;color:#333f51;font-size:15px;line-height:1.7}
@@ -29,29 +29,29 @@
 .home-page .fee-examples>summary::after{content:'+';font-size:20px;text-decoration:none}
 .home-page .fee-examples[open]>summary::after{content:'−'}
 .home-page .fee-examples .fee-scenarios{margin-top:8px;padding:20px;background:#fff;border-color:#e4dad7;border-radius:8px}
-.home-page .fee-examples .fee-scenarios h3{font-size:16px;font-weight:600}
+.home-page .fee-examples .fee-scenarios h3{font-size:16px;font-weight:500}
 .home-page .fee-examples .fee-scenarios dl{font-size:12px;gap:12px}
 .home-page .fee-examples .fee-scenarios p{font-size:12px}
 .home-page .calculator{display:block;min-width:0;width:100%;max-width:490px;justify-self:end;padding:0;border:1px solid #e4dcd9;border-top:4px solid var(--red);border-radius:12px;background:#fff;color:var(--navy);overflow:hidden;box-shadow:0 14px 36px #16223b09}
 .home-page .estimate-head{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:0 30px;padding:25px 0 22px;border-bottom:1px solid #eee7e5}
-.home-page .estimate-head h3{font:600 21px/1.4 'Merriweather',Georgia,serif;letter-spacing:-.025em}
+.home-page .estimate-head h3{font:500 21px/1.4 'Merriweather',Georgia,serif;letter-spacing:-.025em}
 .home-page .estimate-head>span{flex-shrink:0;padding:5px 8px;border-radius:4px;background:#f4f3f5;font-size:11px;letter-spacing:.06em;color:#5d6170}
 .home-page .estimate-body{padding:24px 30px 26px}
 .home-page .estimate-selection{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:23px}
-.home-page .calculator label{display:block;margin:0;color:var(--navy);font-size:14px;letter-spacing:0;text-transform:none;font-weight:600}
+.home-page .calculator label{display:block;margin:0;color:var(--navy);font-size:14px;letter-spacing:0;text-transform:none;font-weight:500}
 .home-page .quantity-hint{color:#686470;font-size:12px;line-height:1.5;margin-top:5px}
 .home-page .calculator .quantity{flex:0 0 156px;gap:0;margin:0;grid-template-columns:44px minmax(0,1fr) 44px;border:1px solid #cec6c7;border-radius:6px;overflow:hidden}
 .home-page .calculator .quantity button{height:48px;border:0;border-radius:0;background:#faf6f5;color:var(--navy);font-size:22px}
 .home-page .calculator .quantity button:hover{background:#ffe9e7;color:var(--red-dark)}
-.home-page .calculator .quantity input{height:48px;border:0;border-inline:1px solid #e8e0df;border-radius:0;font-size:21px;font-weight:600;appearance:textfield;-moz-appearance:textfield}
+.home-page .calculator .quantity input{height:48px;border:0;border-inline:1px solid #e8e0df;border-radius:0;font-size:21px;font-weight:500;appearance:textfield;-moz-appearance:textfield}
 .home-page .calculator .quantity input::-webkit-inner-spin-button{appearance:none;margin:0}
 .home-page .calculator .quantity :focus-visible{outline:2px solid var(--red-dark);outline-offset:-3px}
 .home-page .calculator .total-row{gap:18px;padding:15px 0;border-color:#eee7e5;color:#434753;font-size:14px;line-height:1.45}
 .home-page .calculator .total-row small{display:block;margin-top:4px;color:#746b71;font-size:12px}
-.home-page .calculator .total-row strong{flex-shrink:0;color:var(--navy);font:600 24px/1.3 'Lato',Arial,sans-serif;font-variant-numeric:tabular-nums}
-.home-page .calculator .fee-total{margin:10px 0 20px;padding:19px 16px;border:0;border-radius:6px;background:#f6f2f1;color:var(--navy);font-size:13px;font-weight:600}
+.home-page .calculator .total-row strong{flex-shrink:0;color:var(--navy);font:700 24px/1.3 'Lato',Arial,sans-serif;font-variant-numeric:tabular-nums}
+.home-page .calculator .fee-total{margin:10px 0 20px;padding:19px 16px;border:0;border-radius:6px;background:#f6f2f1;color:var(--navy);font-size:13px;font-weight:500}
 .home-page .calculator .fee-total strong{color:var(--red-dark);font-size:32px;letter-spacing:-.035em}
-.home-page #pricing .btn,.home-page #assessment .btn{min-height:50px;font-weight:600;box-shadow:none;transition:background .15s}
+.home-page #pricing .btn,.home-page #assessment .btn{min-height:50px;font-weight:500;box-shadow:none;transition:background .15s}
 .home-page #pricing .btn:hover,.home-page #assessment .btn:hover{transform:none}
 .home-page .calculator .btn{justify-content:space-between;width:100%;padding:15px 19px;font-size:14px}
 .home-page .estimate-note{margin:14px 0 0;color:#736a70;text-align:center;font-size:12px;line-height:1.6}
@@ -65,7 +65,7 @@
 .home-page .inline-assessment-card{grid-area:form;min-width:0;padding:30px 32px;border:1px solid #e7e8ec;border-radius:12px;background:#fff;color:var(--navy)}
 .home-page .inline-assessment-card>[hidden]{display:none!important}
 .home-page .assessment-form-intro{margin-bottom:22px}
-.home-page .assessment-form-intro h3{font-size:22px;font-weight:600;line-height:1.3;margin-bottom:6px}
+.home-page .assessment-form-intro h3{font-size:22px;font-weight:500;line-height:1.3;margin-bottom:6px}
 .home-page .assessment-form-intro p{color:#626775;font-size:13px}
 .home-page .inline-assessment-card .form-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .home-page .inline-assessment-card .form-group{margin:0 0 17px;min-width:0}
@@ -73,14 +73,14 @@
 .home-page .inline-assessment-card .enquiry-grid>.form-group{margin:0}
 .home-page .inline-assessment-card .enquiry-grid[role=group]+.enquiry-grid[role=group]{margin-top:18px}
 .home-page .inline-assessment-card .enquiry-extra,.home-page .inline-assessment-card .form-group:has(input[name=business_url]),.home-page .inline-assessment-card .form-group:has(input[type=email]),.home-page .inline-assessment-card .form-review-count{grid-column:1/-1}
-.home-page .inline-assessment-card label{display:block;font-size:13px;color:#353f50;font-weight:600;line-height:1.5;margin-bottom:7px}
+.home-page .inline-assessment-card label{display:block;font-size:13px;color:#353f50;font-weight:500;line-height:1.5;margin-bottom:7px}
 .home-page .inline-assessment-card :is(input:not([type=hidden]),select,textarea){min-height:46px;font-size:16px;border:1px solid #c7cbd3;border-radius:5px;color:var(--navy);background:#fff;box-sizing:border-box;width:100%;padding:10px 12px}
 .home-page .inline-assessment-card :is(input,select,textarea):focus{outline:2px solid var(--red-dark);outline-offset:2px;box-shadow:none}
 .home-page .inline-assessment-card input::placeholder,.home-page .inline-assessment-card textarea::placeholder{color:#6d7380}
 .home-page .inline-assessment-card textarea{min-height:76px;resize:vertical}
 .home-page .inline-assessment-card .form-review-count{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:2px 0}
 .home-page .inline-assessment-card .form-review-count label{margin:0}
-.home-page .inline-assessment-card .form-review-count input{width:100px;text-align:center;font-weight:600}
+.home-page .inline-assessment-card .form-review-count input{width:100px;text-align:center;font-weight:500}
 .home-page .inline-assessment-card .enquiry-extra{border:1px solid #e3e5ea;border-radius:5px;background:#f8f9fb;padding:0 14px}
 .home-page .inline-assessment-card .enquiry-extra>summary{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:46px;padding:10px 0;list-style:none;color:#485267;font-size:12px;line-height:1.6;font-weight:400}
 .home-page .inline-assessment-card .enquiry-extra>summary::-webkit-details-marker{display:none}
@@ -95,20 +95,20 @@
 .home-page .inline-assessment-card .form-status{text-align:left;font-size:13px;font-weight:400}
 .home-page .inline-assessment-card .form-status.error{color:#a11923}
 .home-page .inline-assessment-card .submission-success{margin:0;text-align:left;max-height:none;overflow:visible}
-.home-page .inline-assessment-card .submission-success h2{font-size:26px;font-weight:600;color:var(--navy)}
+.home-page .inline-assessment-card .submission-success h2{font-size:26px;font-weight:500;color:var(--navy)}
 .home-page .inline-assessment-card .enquiry-receipt button{font-size:12px}
 .home-page .assessment-aside{grid-area:aside;min-width:0;position:sticky;top:94px}
 .home-page .request-estimate{padding:26px;border:1px solid #40506b;border-radius:10px;background:#1e2e49;color:#fff}
 .home-page .request-estimate-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:12px}
-.home-page .request-estimate-heading h3{font:600 19px/1.4 'Merriweather',Georgia,serif}
+.home-page .request-estimate-heading h3{font:500 19px/1.4 'Merriweather',Georgia,serif}
 .home-page .request-estimate-heading>span{font-size:12px;color:#ccd6e7}
 .home-page .request-estimate dl>div{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid #3a4962;font-size:13px;color:#d5ddea}
-.home-page .request-estimate dd{margin:0;color:#fff;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}
+.home-page .request-estimate dd{margin:0;color:#fff;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
 .home-page .request-estimate .request-estimate-total{align-items:baseline;color:#fff;border:0;margin-top:4px;padding:17px 0 8px}
 .home-page .request-estimate-total dd{font-size:32px;letter-spacing:-.035em}
 .home-page .request-estimate>p{margin-top:12px;font-size:12px;line-height:1.6;color:#bdc9dc}
 .home-page .assessment-next{padding:28px 5px 0}
-.home-page .assessment-next h3{font-size:17px;color:#fff;font-weight:600;margin-bottom:12px}
+.home-page .assessment-next h3{font-size:17px;color:#fff;font-weight:500;margin-bottom:12px}
 .home-page .assessment-next>p{color:#cbd4e3;font-size:14px;line-height:1.8}
 .home-page .assessment-next .assessment-contact{margin-top:20px;font-size:13px}
 .home-page .assessment-contact a{display:inline-flex;align-items:center;gap:7px;min-height:44px;color:#ffb5b7;text-decoration:underline;text-underline-offset:4px}
@@ -162,3 +162,5 @@
  .home-page .service-fees>div+div{padding-left:15px}
  .home-page .inline-assessment-card{padding-inline:17px}
 }
+
+.home-page .price-amount{font-weight:700}
