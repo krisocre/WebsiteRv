@@ -6,5 +6,6 @@ window.ReviewsBoostMeasurementConfig = Object.freeze({
   googleAdsViaTagManager: true,
   ga4MeasurementId: null,
   googleAdsId: 'AW-18568327970',
-  googleAdsLeadConversionLabel: 'XARtCKC2grYdEKLmiJZF'
+  googleAdsLeadConversionLabel: 'XARtCKC2grYdEKLmiJZF',
+  clarityProjectId: 'zh8w7u4689'
 });
