@@ -33,7 +33,7 @@
       title="ReviewsBoost learning centre"
       href="https://reviewsboost.ca/feed.xml"
     />
-    <link rel="stylesheet" href="content.css?v=20261121-article-prices" />
+    <link rel="stylesheet" href="content.css?v=20261121-pricing-link" />
     <meta property="og:type" content="article" />
     <meta property="og:locale" content="en_CA" />
     <meta property="og:site_name" content="ReviewsBoost" />
@@ -157,25 +157,7 @@
       </ol>
     </nav>
     <aside class="article-pricing" id="review-pricing" aria-label="Review removal pricing">
-      <details>
-        <summary class="button">
-          Google Removal Prices
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="m4 11 5-5 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </summary>
-        <div class="article-pricing-panel">
-          <label for="article-review-count">Number of reviews</label>
-          <div class="article-pricing-quantity">
-            <button type="button" data-pricing-step="-1" aria-label="Decrease number of reviews">&minus;</button>
-            <input id="article-review-count" type="number" min="1" max="50" step="1" value="1" inputmode="numeric">
-            <button type="button" data-pricing-step="1" aria-label="Increase number of reviews">+</button>
-          </div>
-          <dl class="article-pricing-totals" aria-live="polite">
-            <div><dt>Upfront <small>$45 per review</small></dt><dd data-pricing-upfront>$45 CAD</dd></div>
-            <div><dt>If all are removed <small>$95 per successful removal</small></dt><dd data-pricing-success>$95 CAD</dd></div>
-          </dl>
-          <a class="button" data-pricing-assessment href="/#assessment">Free Review Assessment</a>
-        </div>
-      </details>
+      <a class="button" href="/#pricing">Google Removal Prices <span aria-hidden="true">↗</span></a>
     </aside>
     <main id="article">
       <header class="hero article-hero">
@@ -653,42 +635,5 @@
         </div>
       </div>
     </footer>
-    <script>
-      (() => {
-        const pricing = document.querySelector('#review-pricing details');
-        const quantity = pricing.querySelector('#article-review-count');
-        const upfront = pricing.querySelector('[data-pricing-upfront]');
-        const success = pricing.querySelector('[data-pricing-success]');
-        const assessment = pricing.querySelector('[data-pricing-assessment]');
-        const min = Number(quantity.min);
-        const max = Number(quantity.max);
-        const clamp = value => Math.max(min, Math.min(max, Math.round(value || min)));
-
-        function showPrices(count) {
-          upfront.textContent = `$${(45 * count).toLocaleString('en-CA')} CAD`;
-          success.textContent = `$${(95 * count).toLocaleString('en-CA')} CAD`;
-          assessment.href = count === 1 ? '/#assessment' : `/?reviews=${count}#assessment`;
-        }
-
-        quantity.addEventListener('input', () => showPrices(clamp(quantity.valueAsNumber)));
-        quantity.addEventListener('change', () => {
-          quantity.value = clamp(quantity.valueAsNumber);
-          showPrices(Number(quantity.value));
-        });
-        pricing.querySelectorAll('[data-pricing-step]').forEach(button => {
-          button.addEventListener('click', () => {
-            const count = clamp(clamp(quantity.valueAsNumber) + Number(button.dataset.pricingStep));
-            quantity.value = count;
-            showPrices(count);
-          });
-        });
-        pricing.addEventListener('keydown', event => {
-          if (event.key !== 'Escape' || !pricing.open) return;
-          pricing.open = false;
-          pricing.querySelector('summary').focus();
-        });
-        showPrices(clamp(quantity.valueAsNumber));
-      })();
-    </script>
   </body>
 </html>

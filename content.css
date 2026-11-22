@@ -736,97 +736,9 @@ h1 {
   bottom: calc(18px + env(safe-area-inset-bottom, 0px));
 }
 .article-pricing .button {
+  gap: 8px;
   margin: 0;
   box-shadow: 0 5px 18px rgba(22, 34, 59, .22);
-}
-.article-pricing details {
-  position: relative;
-}
-.article-pricing summary {
-  gap: 10px;
-  list-style: none;
-}
-.article-pricing summary::-webkit-details-marker {
-  display: none;
-}
-.article-pricing details[open] summary svg {
-  transform: rotate(180deg);
-}
-.article-pricing-panel {
-  position: absolute;
-  inset-inline-end: 0;
-  bottom: calc(100% + 8px);
-  width: min(340px, calc(100vw - 48px));
-  max-height: calc(100vh - 86px - env(safe-area-inset-bottom, 0px));
-  max-height: calc(100dvh - 86px - env(safe-area-inset-bottom, 0px));
-  overflow-y: auto;
-  padding: 16px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--paper);
-  box-shadow: var(--shadow);
-  color: var(--navy);
-}
-.article-pricing-panel label {
-  display: block;
-  margin-bottom: 6px;
-}
-.article-pricing-quantity {
-  display: inline-flex;
-  border: 1px solid #aeb9c6;
-  border-radius: 6px;
-}
-.article-pricing-quantity button,
-.article-pricing-quantity input {
-  min-height: 44px;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-  background: var(--paper);
-  color: inherit;
-  text-align: center;
-}
-.article-pricing-quantity button {
-  width: 44px;
-  cursor: pointer;
-}
-.article-pricing-quantity button:hover {
-  background: var(--blue-soft);
-}
-.article-pricing-quantity input {
-  width: 56px;
-  border-inline: 1px solid var(--line);
-  appearance: textfield;
-}
-.article-pricing-quantity input::-webkit-inner-spin-button,
-.article-pricing-quantity input::-webkit-outer-spin-button {
-  appearance: none;
-  margin: 0;
-}
-.article-pricing-totals {
-  margin: 14px 0;
-  font-size: 14px;
-}
-.article-pricing-totals > div {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 10px;
-  padding: 8px 0;
-  border-top: 1px solid var(--line);
-}
-.article-pricing-totals small {
-  display: block;
-  color: var(--muted);
-}
-.article-pricing-totals dd {
-  margin: 0;
-  font-weight: 700;
-  white-space: nowrap;
-}
-.article-pricing-panel .button {
-  width: 100%;
-  box-shadow: none;
 }
 .article-pricing-page .site-footer {
   padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
@@ -840,7 +752,6 @@ h1 {
     background: #fff;
   }
   .article-pricing .button { display: flex; width: 100%; box-shadow: none; }
-  .article-pricing-panel { width: 100%; }
 }
 .result {
   margin-top: 22px;

@@ -777,10 +777,6 @@
             else phone.value = digits;
         });
 
-        var requestedReviews = Number(new URLSearchParams(window.location.search).get('reviews'));
-        if (Number.isInteger(requestedReviews) && requestedReviews >= 1 && requestedReviews <= 50) {
-            quantity.value = requestedReviews;
-        }
         updatePrice();
     })();
 </script>
