@@ -4,6 +4,7 @@ exclude:
   - TURNSTILE-SETUP.md
   - apps-script-input-validation.gs
   - apply-commercial-seo.cjs
+  - pricing-shortcut.cjs
   - COMMERCIAL-SEO-UPDATE.md
   - _retired
   - tests

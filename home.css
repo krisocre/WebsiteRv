@@ -8,7 +8,6 @@
 
 /* Homepage pricing and a single-page assessment in ReviewsBoost colours. */
 .home-page #pricing,.home-page #assessment{scroll-margin-top:84px}
-.home-page .mobile-cta.is-assessing{visibility:hidden;pointer-events:none}
 .home-page #pricing{background:#fcfaf9;padding:72px 0;border-bottom:1px solid #eee5e3}
 .home-page .pricing-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.9fr);gap:88px;align-items:center}
 .home-page .pricing-copy .section-title,.home-page .assessment-heading .section-title{font-weight:500;font-size:clamp(32px,3.2vw,43px);line-height:1.2;letter-spacing:-.035em}

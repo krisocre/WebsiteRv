@@ -8,6 +8,12 @@ try{
  const run=(file,args=[])=>{const result=cp.spawnSync(process.execPath,[file,...args],{cwd:out,encoding:'utf8'});if(result.status!==0)throw Error(result.stderr||result.stdout);return result.stdout;};
  run('apply-commercial-seo.cjs');run('build-legal-pages.cjs');run('install-measurement.cjs');
  const outputFiles=files.filter(f=>f.endsWith('.html')||['sitemap.xml','robots.txt','feed.xml'].includes(f)),first=new Map(outputFiles.map(f=>[f,hash(fs.readFileSync(path.join(out,f)))]));
+ for(const file of outputFiles.filter(file=>file.endsWith('.html')&&!file.includes('/'))){
+  const html=fs.readFileSync(path.join(out,file),'utf8');
+  assert.equal((html.match(/class="pricing-shortcut" href="\/#pricing"/g)||[]).length,1,'One pricing shortcut on '+file);
+  assert.equal((html.match(/href="\/pricing-shortcut\.css\?/g)||[]).length,1,'Shared shortcut styles on '+file);
+ }
+ run('pricing-shortcut.cjs');
  run('apply-commercial-seo.cjs');run('build-legal-pages.cjs');run('install-measurement.cjs');
  for(const file of outputFiles)assert.equal(hash(fs.readFileSync(path.join(out,file))),first.get(file),'Repeated builds must preserve '+file);
  assert.equal(fs.readFileSync(path.join(out,'index.html'),'utf8'),fs.readFileSync(path.join(root,'index.html'),'utf8'),'Generator must preserve homepage implementation/metadata');

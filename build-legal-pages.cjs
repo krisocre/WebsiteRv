@@ -109,7 +109,8 @@ function build(originOverride){
   const page=`<!doctype html><html lang="en-CA"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escape(title)}</title><meta name="description" content="${escape(description)}"><meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="${origin}/${file}"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="${removal?'styles.css':'content.css'}"><link rel="stylesheet" href="legal-notice.css"><meta property="og:type" content="website"><meta property="og:site_name" content="${brand}"><meta property="og:locale" content="en_CA"><meta property="og:title" content="${escape(title)}"><meta property="og:description" content="${escape(description)}"><meta property="og:url" content="${origin}/${file}"><meta property="og:image" content="${image}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="${image}"><script type="application/ld+json">${JSON.stringify(schema)}</script>${removal?'<script src="script.js" defer></script>':''}</head><body class="legal-page" id="top"><a class="skip-link" href="#main">Skip to main content</a>${header}<main id="main">${body}</main>${footer}</body></html>\n`;
   // ReviewRemoval's domain pass supplies canonical/social/robots tags once.
   const finalPage=removal?page.replace(/<link rel="canonical"[^>]*>|<meta(?: name="(?:robots|twitter:[^"]+)"| property="og:[^"]+")[^>]*>/g,''):page;
-  fs.writeFileSync(path.join(root,file),contactLinksOnly(finalPage));
+  const output=removal?finalPage:require('./pricing-shortcut.cjs').withPricingShortcut(finalPage);
+  fs.writeFileSync(path.join(root,file),contactLinksOnly(output));
  }
  if(!removal){
   const refundFile=path.join(root,'refund-policy.html');

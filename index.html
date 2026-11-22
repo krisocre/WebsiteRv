@@ -252,7 +252,6 @@
         .submission-success-icon{width:92px;height:92px;margin:0 auto 22px;color:#117a49;display:grid;place-items:center;font-size:49px;line-height:1}
         .submission-success h2{margin-bottom:10px}
         .submission-success p{max-width:370px;margin:0 auto 22px;color:#615a5c;line-height:1.65}
-        .mobile-cta{display:none}
 
         @media(max-width:1180px){
             .nav-links{display:none}.nav-links.open{display:flex;position:absolute;top:68px;left:0;right:0;flex-direction:column;align-items:stretch;gap:4px;padding:14px 20px 20px;background:#fff;border-bottom:1px solid #eee;box-shadow:0 12px 24px rgba(0,0,0,.08)}.nav-links a{display:block;padding:9px 4px}.nav-links .nav-cta{text-align:center;margin-top:4px}.hamburger{display:block}
@@ -269,7 +268,7 @@
             .footer-grid{grid-template-columns:1.5fr 1fr 1fr;gap:30px}.footer-grid>div:last-child{display:none}
         }
         @media(max-width:620px){
-            body{padding-bottom:68px}.container{padding:0 16px}.section-pad{padding:56px 0}.section-title{font-size:27px}
+            .container{padding:0 16px}.section-pad{padding:56px 0}.section-title{font-size:27px}
             .hero{padding:102px 0 58px}.hero-proof-item{padding:11px 8px}.hero-proof-item strong,.hero-proof-item .metric-rate{font-size:24px}.hero-proof-item span{font-size:10px}.hero h1{font-size:32px}.hero-desc{font-size:15px}.hero-points{grid-template-columns:1fr;justify-items:start;max-width:290px;margin-left:auto;margin-right:auto}.hero-actions{flex-direction:column;align-items:stretch}.hero-actions .btn{width:100%}
             .case-header{padding:16px}.case-body{padding:16px}.review-meta{grid-template-columns:34px 1fr}.review-age{grid-column:2}.case-numbers{grid-template-columns:1fr}.case-number+.case-number{border-left:0;border-top:1px solid #e6dfde}.testimonial-card-head{padding:15px 16px}.testimonial-content{padding:22px 18px 18px}.testimonial-quote p{font-size:15px}
             .trust-grid{grid-template-columns:1fr}.trust-item{border-right:0;border-bottom:1px solid #e7eaf0!important;padding:17px 8px}.trust-item:last-child{border-bottom:0!important}
@@ -278,13 +277,11 @@
             .policy-grid{grid-template-columns:1fr}.seal{width:100%;max-width:270px;min-height:150px}.seal strong,.seal .metric-rate{font-size:42px}.guarantee h2{font-size:29px}.guarantee-points{flex-direction:column;gap:8px}
             .cta-box{padding:35px 25px;flex-direction:column;align-items:flex-start}.cta-copy h2{font-size:25px}.cta-box .btn{width:100%}
             .footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child{grid-column:1/-1}.footer-bottom{flex-direction:column;text-align:center}.form-row{grid-template-columns:1fr}.modal{padding:26px 20px}
-            .mobile-cta{display:flex;position:fixed;z-index:1200;bottom:0;left:0;right:0;height:68px;background:#fff;border-top:1px solid #dfe3e9;padding:9px 12px;gap:10px;box-shadow:0 -8px 24px rgba(22,34,59,.08)}.mobile-price{display:flex;flex-direction:column;justify-content:center;min-width:112px}.mobile-price strong{font-size:17px;color:var(--red);line-height:1}.mobile-price span{font-size:9.5px;color:#8b8586;margin-top:4px}.mobile-cta .btn{flex:1;padding:10px}
         }
         :focus-visible{outline:3px solid #ffbf47;outline-offset:3px}
         .section-tag{color:#a9131d}
         .hero-note,.case-kicker,.review-age,.case-reason span,.case-number span,
         .trust-item span,.price-label,.success-fee span,.price-disclaimer,
-        .mobile-price span{color:#615a5c}
         /* Lighter typography, aligned with the Learning Centre. */
         h1,h2,h3,h4,h5,h6,b,strong,th,dt{font-weight:400}
         .section-tag,.hero-badge,.hero-points li,.case-kicker,.case-status,
@@ -330,7 +327,9 @@
 <noscript><link rel="stylesheet" href="enquiry-flow.css?v=20261121-icons"></noscript>
 <link rel="stylesheet" href="legal-notice.css">
 <script src="submission-terms.js" defer></script>
-<link rel="stylesheet" href="home.css?v=price-emphasis">
+<link rel="stylesheet" href="home.css?v=20261121-pricing-shortcut">
+
+  <link rel="stylesheet" href="/pricing-shortcut.css?v=20261121">
 </head>
 <body class="home-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -354,7 +353,7 @@
     <section class="hero" aria-labelledby="hero-title">
         <div class="container hero-grid">
             <div class="hero-copy">
-                <div class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Toronto-first, Canada-wide review removal</div>
+                <div class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Canada-wide review removal</div>
                 <h1 id="hero-title">Google Review Removal in <span>Toronto and Across Canada</span></h1>
                 <p class="hero-desc">ReviewsBoost provides fully managed Google review removal in Toronto, Montréal, Vancouver and across Canada. Send us the bad review and our specialists handle the removal from start to finish, with clear CAD pricing and updates.</p>
                 <ul class="hero-points">
@@ -650,8 +649,8 @@
     </div>
 </footer>
 
-<div class="mobile-cta">
-    <div class="mobile-price"><strong><b class="price-amount">$45</b> upfront</strong><span><b class="price-amount">+$95</b> when removed</span></div>
+<div class="mobile-cta pricing-dock">
+    <a class="pricing-shortcut" href="/#pricing" lang="en-CA">Google Removal Prices <span aria-hidden="true">↗</span></a>
     <a class="btn btn-primary" href="#assessment" data-measurement-location="mobile">Get a free assessment <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
 </div>
 
