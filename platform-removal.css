@@ -282,7 +282,7 @@ body {
   box-shadow: 0 18px 46px rgba(22, 34, 59, .11);
   text-align: center;
 }
-.platform-success-icon { width: 58px; height: 58px; display: grid; place-items: center; margin: 0 auto 20px; border-radius: 50%; background: #eaf8f0; color: var(--green); font-size: 27px; font-weight: 500; }
+.platform-success-icon { width: 58px; height: 58px; display: grid; place-items: center; margin: 0 auto 20px; color: var(--green); font-size: 27px; font-weight: 500; }
 .platform-success h2 { margin: 0 0 12px; font-size: 32px; }
 .platform-success p { max-width: 480px; margin: 0 auto 24px; color: var(--muted); }
 .platform-success .button { background: var(--accent); }
@@ -318,7 +318,7 @@ body[data-platform]:not([data-platform="Google"]) #request.open { display: flex;
 .platform-modal .form-privacy { margin: 10px 0 0; color: #777; font-size: 10.5px; text-align: center; }
 .platform-modal .form-privacy a { color: #4d5969; text-decoration: underline; }
 .platform-modal .platform-success { min-height: 0; padding: 30px 8px 12px; border: 0; box-shadow: none; }
-.platform-modal .platform-success-icon { width: 92px; height: 92px; margin-bottom: 22px; border: 2px solid #8bd5ad; font-size: 49px; }
+.platform-modal .platform-success-icon { width: 92px; height: 92px; margin-bottom: 22px; font-size: 49px; }
 .platform-modal .platform-success h2 { margin-bottom: 10px; font-size: 25px; }
 .platform-modal .platform-success p { max-width: 370px; margin-bottom: 22px; color: #615a5c; line-height: 1.65; }
 .platform-modal .platform-success .button { width: 100%; min-height: 46px; background: #e1292f; }
