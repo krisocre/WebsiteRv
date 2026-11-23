@@ -36,15 +36,20 @@
 .home-page .estimate-head h3{font:500 21px/1.4 'Merriweather',Georgia,serif;letter-spacing:-.025em}
 .home-page .estimate-head>span{flex-shrink:0;padding:5px 8px;border-radius:4px;background:#f4f3f5;font-size:11px;letter-spacing:.06em;color:#5d6170}
 .home-page .estimate-body{padding:24px 30px 26px}
-.home-page .estimate-selection{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:23px}
+.home-page .estimate-selection{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:12px}
 .home-page .calculator label{display:block;margin:0;color:var(--navy);font-size:14px;letter-spacing:0;text-transform:none;font-weight:500}
 .home-page .quantity-hint{color:#686470;font-size:12px;line-height:1.5;margin-top:5px}
 .home-page .calculator .quantity{flex:0 0 156px;gap:0;margin:0;grid-template-columns:44px minmax(0,1fr) 44px;border:1px solid #cec6c7;border-radius:6px;overflow:hidden}
 .home-page .calculator .quantity button{height:48px;border:0;border-radius:0;background:#faf6f5;color:var(--navy);font-size:22px}
-.home-page .calculator .quantity button:hover{background:#ffe9e7;color:var(--red-dark)}
+.home-page .calculator .quantity button:hover:not(:disabled){background:#ffe9e7;color:var(--red-dark)}
+.home-page .calculator .quantity button:disabled{color:#847680;cursor:default}
 .home-page .calculator .quantity input{height:48px;border:0;border-inline:1px solid #e8e0df;border-radius:0;font-size:21px;font-weight:500;appearance:textfield;-moz-appearance:textfield}
 .home-page .calculator .quantity input::-webkit-inner-spin-button{appearance:none;margin:0}
 .home-page .calculator .quantity :focus-visible{outline:2px solid var(--red-dark);outline-offset:-3px}
+.home-page .estimate-presets{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:13px}
+.home-page .estimate-presets button{min-width:44px;min-height:44px;padding:6px 13px;border:1px solid #ded2d3;border-radius:24px;background:#fff;color:var(--navy);font:500 14px/1.3 'Lato',Arial,sans-serif;cursor:pointer}
+.home-page .estimate-presets button:hover{background:#faf2ef}
+.home-page .estimate-presets button[aria-pressed="true"]{border-color:var(--red-dark);background:#faede8;color:var(--red-dark)}
 .home-page .calculator .total-row{gap:18px;padding:15px 0;border-color:#eee7e5;color:#434753;font-size:14px;line-height:1.45}
 .home-page .calculator .total-row small{display:block;margin-top:4px;color:#746b71;font-size:12px}
 .home-page .calculator .total-row strong{flex-shrink:0;color:var(--navy);font:700 24px/1.3 'Lato',Arial,sans-serif;font-variant-numeric:tabular-nums}

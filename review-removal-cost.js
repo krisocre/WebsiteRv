@@ -13,10 +13,14 @@
     if(!event||event.type==='change'||event.target===count)count.value=String(n);
     successes.max=String(n);
     successes.value=String(r);
-    tool.querySelector('[data-cost="upfront"]').textContent=money.format(n*45);
-    tool.querySelector('[data-cost="success"]').textContent=money.format(r*95);
-    tool.querySelector('[data-cost="total"]').textContent=money.format(n*45+r*95);
-    tool.querySelector('[data-cost="summary"]').textContent=n+' '+(n===1?'review':'reviews')+' ordered, '+r+' removed: '+money.format(n*45)+' upfront + '+money.format(r*95)+' success fees = '+money.format(n*45+r*95)+' CAD before applicable taxes.';
+    var upfrontAmount=n*45,successAmount=r*95;
+    var upfront=money.format(upfrontAmount);
+    var success=money.format(successAmount);
+    var total=money.format(upfrontAmount+successAmount);
+    tool.querySelector('[data-cost="upfront"]').textContent=upfront;
+    tool.querySelector('[data-cost="success"]').textContent=success;
+    tool.querySelector('[data-cost="total"]').textContent=total;
+    tool.querySelector('[data-cost="summary"]').textContent=n+' '+(n===1?'review':'reviews')+' ordered, '+r+' removed: '+upfront+' upfront + '+success+' success fees = '+total+' CAD before applicable taxes.';
   }
   [count,successes].forEach(function(input){input.addEventListener('input',render);input.addEventListener('change',render);});
   render();

@@ -1,5 +1,13 @@
 # ReviewsBoost conversion measurement
 
+## Cookie prompt restored — November 22, 2026
+
+Visitors without a saved choice see a compact card at the bottom right on
+desktop and a bottom bar on phones. The pricing shortcut gives way while the
+card is open. The footer’s **Cookie choices** button reopens the settings.
+Analytics, advertising and Clarity still follow the existing consent rules.
+The shared prompt assets use `20261122-cookie-prompt`.
+
 ## Microsoft Clarity session replay
 
 ReviewsBoost loads project `zh8w7u4689` through the shared measurement

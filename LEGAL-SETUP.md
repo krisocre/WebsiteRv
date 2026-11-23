@@ -1,10 +1,10 @@
 # Terms, privacy and request acknowledgements
 
-Pricing update, November 2, 2026: ReviewsBoost now uses CAD $25 upfront per accepted
-review plus CAD $50 for each successfully removed review on all supported platforms.
-The active forms link to `legal-versions/policies-2026-11-02.json`. The October 27
-snapshot is retained unchanged for earlier enquiries and orders; existing accepted
-orders keep their agreed terms. No backend redeployment is required for this update.
+Current ReviewsBoost pricing is CAD $45 upfront per accepted Google review and
+CAD $95 for each successfully removed review. An assessment request is free.
+The active forms link to `legal-versions/policies-2026-11-21-lead-funnel.json`.
+Earlier snapshots remain available for the requests that used them. Accepted
+orders keep their agreed terms.
 
 Draft implemented October 27, 2026. This is website implementation and a researched
 contract draft, not a legal opinion or a guarantee of enforceability.
@@ -32,9 +32,9 @@ contract draft, not a legal opinion or a guarantee of enforceability.
   field. This works with the deployed twelve-column Apps Script handler; no backend
   redeployment is required for these extra lines. The backend supplies its own row
   timestamp. Client-supplied metadata is not independent proof of identity or reading.
-- `legal-versions/policies-2026-10-27.json` preserves the bilingual policy text for
-  this release and is linked in the submission record. Keep older snapshots after
-  later releases. Commit/tag the published version and keep order confirmations.
+- Each submission record references the bilingual policy snapshot in use at the
+  time. Keep older snapshots after later releases. Commit/tag the
+  published version and keep order confirmations.
 
 ## Complete before taking paid orders
 

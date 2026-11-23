@@ -189,6 +189,7 @@ function leadInputErrors(data, requireReviewCount) {
   actions.after(note);
 
   function totals() {
+    if (inline) return; // The homepage calculator owns both inline estimates.
     if (reputation) { summary.textContent = 'Tell us what you need. We will discuss the scope and price before any paid work is agreed.'; return; }
     var n = Number(field('review_count').value) || 1;
     summary.textContent = fr

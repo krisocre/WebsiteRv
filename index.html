@@ -5,8 +5,8 @@
 <!-- Google Tag Manager GTM-WDPZNW9T: loaded once after analytics consent. -->
 <script src="measurement-config.js?v=20261121-lead-funnel" defer></script>
 <script src="lead-source.js?v=20261121-lead-funnel" defer></script>
-<script src="measurement.js?v=20261121-lead-funnel" defer></script>
-<link rel="stylesheet" href="measurement.css?v=20261112-cookie-banner">
+<script src="measurement.js?v=20261122-cookie-prompt" defer></script>
+<link rel="stylesheet" href="measurement.css?v=20261122-cookie-prompt">
 <!-- ReviewsBoost measurement end -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -327,7 +327,7 @@
 <noscript><link rel="stylesheet" href="enquiry-flow.css?v=20261121-icons"></noscript>
 <link rel="stylesheet" href="legal-notice.css">
 <script src="submission-terms.js" defer></script>
-<link rel="stylesheet" href="home.css?v=20261121-pricing-shortcut">
+<link rel="stylesheet" href="home.css?v=20261122-estimate">
 
   <link rel="stylesheet" href="/pricing-shortcut.css?v=20261121">
 </head>
@@ -424,10 +424,18 @@
             <div class="calculator" id="review-count" aria-labelledby="estimate-title">
                 <div class="estimate-head"><h3 id="estimate-title">Build your estimate</h3><span>CAD</span></div>
                 <div class="estimate-body">
-                    <div class="estimate-selection"><div><label for="reviewQuantity">How many reviews?</label><p class="quantity-hint" id="quantity-help">Choose between 1 and 50.</p></div><div class="quantity"><button type="button" id="decreaseQty" aria-label="Remove one review">&minus;</button><input type="number" id="reviewQuantity" value="1" min="1" max="50" inputmode="numeric" aria-describedby="quantity-help"><button type="button" id="increaseQty" aria-label="Add one review">+</button></div></div>
-                    <div class="total-row"><span>Upfront<small><b class="price-amount">$45</b> per review, once you approve</small></span><strong id="upfrontTotal">$45</strong></div>
-                    <div class="total-row"><span>If all are removed<small><b class="price-amount">$95</b> per successful removal</small></span><strong id="successTotal">$95</strong></div>
-                    <div class="total-row fee-total"><span>Total if all are removed</span><strong id="combinedTotal">$140</strong></div>
+                    <div class="estimate-selection"><div><label for="reviewQuantity">How many reviews?</label><p class="quantity-hint" id="quantity-help">Tap a count or type a number from 1 to 50.</p></div><div class="quantity"><button type="button" id="decreaseQty" aria-label="Remove one review" disabled>&minus;</button><input type="number" id="reviewQuantity" value="1" min="1" max="50" inputmode="numeric" aria-describedby="quantity-help"><button type="button" id="increaseQty" aria-label="Add one review">+</button></div></div>
+                    <div class="estimate-presets" role="group" aria-label="Quick review counts">
+                        <button type="button" data-review-count="1" aria-label="1 review" aria-pressed="true">1</button>
+                        <button type="button" data-review-count="3" aria-label="3 reviews" aria-pressed="false">3</button>
+                        <button type="button" data-review-count="5" aria-label="5 reviews" aria-pressed="false">5</button>
+                        <button type="button" data-review-count="10" aria-label="10 reviews" aria-pressed="false">10</button>
+                    </div>
+                    <div role="status">
+                        <div class="total-row"><span>Upfront<small><b class="price-amount">$45</b> per review, once you approve</small></span><strong id="upfrontTotal">$45</strong></div>
+                        <div class="total-row"><span>Success fees if all are removed<small><b class="price-amount">$95</b> per successful removal</small></span><strong id="successTotal">$95</strong></div>
+                        <div class="total-row fee-total"><span>Total if all are removed</span><strong id="combinedTotal">$140</strong></div>
+                    </div>
                     <a class="btn btn-primary open-order" href="#assessment">Get my free assessment <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
                     <p class="estimate-note">No payment now. Success fees apply only to reviews that are removed.</p>
                 </div>
@@ -662,6 +670,9 @@
         var navLinks = document.getElementById('navLinks');
         var quantity = document.getElementById('reviewQuantity');
         var formQuantity = document.getElementById('formReviewQuantity');
+        var decreaseQty = document.getElementById('decreaseQty');
+        var increaseQty = document.getElementById('increaseQty');
+        var quantityPresets = document.querySelectorAll('.estimate-presets button');
         var upfrontTotal = document.getElementById('upfrontTotal');
         var successTotal = document.getElementById('successTotal');
         var selectedPlan = document.getElementById('selectedPlan');
@@ -671,37 +682,47 @@
         var removalSuccess = document.getElementById('removalSuccess');
         var phone = document.getElementById('phone');
 
-        function currentQuantity(source) {
-            var value = parseInt((source || quantity).value, 10) || 1;
-            return Math.max(1, Math.min(50, value));
+        var selectedCount;
+        function money(amount) {
+            return '$' + amount.toLocaleString('en-CA', { useGrouping: true });
         }
-
-        function updatePrice(source) {
-            var count = currentQuantity(source);
-            quantity.value = count;
-            formQuantity.value = count;
-            upfrontTotal.textContent = '$' + (count * 45);
-            successTotal.textContent = '$' + (count * 95);
-            document.getElementById('combinedTotal').textContent = '$' + (count * 140);
+        function updatePrice(value, editingInput) {
+            var count = Math.max(1, Math.min(50, Math.trunc(Number(value)) || 1));
+            [quantity, formQuantity].forEach(function (input) {
+                if (input !== editingInput && input.value !== String(count)) input.value = count;
+            });
+            if (count === selectedCount) return;
+            selectedCount = count;
+            decreaseQty.disabled = count === 1;
+            increaseQty.disabled = count === 50;
+            quantityPresets.forEach(function (button) {
+                button.setAttribute('aria-pressed', String(Number(button.dataset.reviewCount) === count));
+            });
+            upfrontTotal.textContent = money(count * 45);
+            successTotal.textContent = money(count * 95);
+            document.getElementById('combinedTotal').textContent = money(count * 140);
             document.querySelector('[data-estimate="count"]').textContent = count + (count === 1 ? ' review' : ' reviews');
-            document.querySelector('[data-estimate="upfront"]').textContent = '$' + (count * 45);
-            document.querySelector('[data-estimate="success"]').textContent = '$' + (count * 95);
-            document.querySelector('[data-estimate="total"]').textContent = '$' + (count * 140);
+            document.querySelector('[data-estimate="upfront"]').textContent = money(count * 45);
+            document.querySelector('[data-estimate="success"]').textContent = money(count * 95);
+            document.querySelector('[data-estimate="total"]').textContent = money(count * 140);
             selectedPlan.value = 'Google Review Removal - ' + count + (count === 1 ? ' review' : ' reviews') + ' - $' + (count * 45) + ' upfront + $95 per successfully removed review';
         }
 
-        document.getElementById('decreaseQty').addEventListener('click', function () {
-            quantity.value = Math.max(1, currentQuantity() - 1);
-            updatePrice(quantity);
+        decreaseQty.addEventListener('click', function () { updatePrice(selectedCount - 1); });
+        increaseQty.addEventListener('click', function () { updatePrice(selectedCount + 1); });
+        quantityPresets.forEach(function (button) {
+            button.addEventListener('click', function () { updatePrice(button.dataset.reviewCount); });
         });
-        document.getElementById('increaseQty').addEventListener('click', function () {
-            quantity.value = Math.min(50, currentQuantity() + 1);
-            updatePrice(quantity);
+        [quantity, formQuantity].forEach(function (input) {
+            input.addEventListener('input', function () {
+                var count = input.valueAsNumber;
+                if (Number.isInteger(count) && count >= 1 && count <= 50) updatePrice(count, input);
+            });
+            input.addEventListener('change', function () { updatePrice(input.value || selectedCount); });
+            input.addEventListener('blur', function () {
+                if (input.value === '') updatePrice(selectedCount);
+            });
         });
-        quantity.addEventListener('input', function () { updatePrice(quantity); });
-        quantity.addEventListener('blur', function () { updatePrice(quantity); });
-        formQuantity.addEventListener('input', function () { updatePrice(formQuantity); });
-        formQuantity.addEventListener('blur', function () { updatePrice(formQuantity); });
 
         document.getElementById('removalSuccessClose').addEventListener('click', function () {
             removalSuccess.hidden = true;
@@ -775,9 +796,9 @@
             else phone.value = digits;
         });
 
-        updatePrice();
+        updatePrice(quantity.value);
     })();
 </script>
-<script src="enquiry-flow.js?v=20261121-lead-funnel"></script>
+<script src="enquiry-flow.js?v=20261122-estimate"></script>
 </body>
 </html>

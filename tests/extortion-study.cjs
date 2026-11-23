@@ -36,7 +36,7 @@ const server=http.createServer((req,res)=>{
   await page.setViewport({width,height:1000});assert.equal((await page.goto(base+name,{waitUntil:'networkidle0'})).status(),200);
   assert.equal(await page.$$eval('h1',nodes=>nodes.length),1);assert.equal(await page.$$eval('title',nodes=>nodes.length),1);
   const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);assert.equal(overflow,false,name+' overflow at '+width);layouts.push({file:name,width,overflow});
-  assert.equal(await page.$eval('#measurement-preferences',node=>node.hidden),true,'The new article does not restore an automatic cookie banner');
+  assert.equal(await page.$eval('#measurement-preferences',node=>node.hidden),false,'The new article shows the prompt before a choice is saved');
   if(name===file){
    assert.equal(await page.$eval('.toc details',node=>node.open),false,'Contents disclosure does not displace the opening text on mobile');
    await page.click('.toc summary');assert.equal(await page.$eval('.toc details',node=>node.open),true);

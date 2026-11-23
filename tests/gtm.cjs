@@ -7,7 +7,8 @@ for(const file of pages){
  const html=fs.readFileSync(path.join(root,file),'utf8');
  for(const asset of ['measurement-config.js','lead-source.js','measurement.js','measurement.css'])assert.equal((html.match(new RegExp('(?:src|href)="[^"\\s]*'+asset.replace('.','\\.')+'(?:\\?v=[A-Za-z0-9-]+)?"','g'))||[]).length,1,file+': one '+asset);
  assert.ok(/<head>\s*<!-- ReviewsBoost measurement start -->/.test(html),file+': bootstrap first in head');
- assert.ok(/measurement-config\.js\?v=20261121-lead-funnel/.test(html)&&/measurement\.js\?v=20261121-lead-funnel/.test(html)&&/measurement\.css\?v=20261112-cookie-banner/.test(html),file+': versioned scripts');
+ const runtime=file==='google-review-removal-checker.html'?'20261122-review-checker':'20261122-cookie-prompt';
+ assert.ok(/measurement-config\.js\?v=20261121-lead-funnel/.test(html)&&html.includes('measurement.js?v='+runtime)&&/measurement\.css\?v=20261122-cookie-prompt/.test(html),file+': versioned scripts');
  assert.ok(!/googletagmanager\.com\/(?:gtm\.js|gtag\/js|ns\.html)/.test(html),file+': no consent bypass');
  assert.ok(!html.includes('www.clarity.ms/tag/'),file+': no replay consent bypass');
  assert.equal(installer.applyToHtml(html,file),html,file+': repeatable installer');
@@ -179,7 +180,7 @@ const server=http.createServer((req,res)=>{
 
  // The production origin is served from local files by interception, including the recorder stub.
  t=await open({production:true,query:'?gad_source=1&gclid=LOCAL_TEST'});
- assert.equal(await t.page.$eval('#measurement-preferences',panel=>panel.hidden),true);
+ assert.equal(await t.page.$eval('#measurement-preferences',panel=>panel.hidden),false);
  assert.equal(t.replayLoads.length,0,'A first visit does not load replay');
  await choose(t.page,'customize');
  await t.page.click('[data-purpose="replay"]');

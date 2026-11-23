@@ -1,64 +1,69 @@
 (function () {
   'use strict';
 
-  const form = document.getElementById('evidenceForm');
-  const link = document.getElementById('caseReview');
-  const continueButton = document.getElementById('reviewContinue');
-  const details = document.getElementById('reviewDetails');
-  const reviewText = document.getElementById('reviewText');
-  const concern = document.getElementById('concern');
-  const status = document.getElementById('caseStatus');
-  const output = document.getElementById('caseOutput');
-  const heading = document.getElementById('caseHeading');
-  const findings = document.getElementById('caseFindings');
-  const advice = document.getElementById('caseAdvice');
-  const route = document.getElementById('officialRoute');
-  const preview = document.getElementById('casePreview');
-  const notesStatus = document.getElementById('notesStatus');
-  const policies = 'https://support.google.com/contributionpolicy/answer/7400114';
+  const form = document.getElementById('policy-check-form');
+  const input = form.querySelector('textarea');
+  const error = document.getElementById('policy-check-error');
+  const result = document.getElementById('policy-check-result');
+  const heading = document.getElementById('policy-result-title');
+  const advice = document.getElementById('policy-result-advice');
+  const findings = document.getElementById('policy-result-findings');
+  const openReview = document.getElementById('policy-open-review');
+  const googleGuide = document.getElementById('policy-google-guide');
+  const notes = result.querySelector('pre');
   const reporting = 'https://support.google.com/business/answer/4596773';
   const extortion = 'https://support.google.com/business/answer/16404809';
+  const pricingDock = document.querySelector('.pricing-dock');
+  if (pricingDock && typeof IntersectionObserver === 'function') {
+    const inlineActions = result.querySelector('.checker-result-actions');
+    new IntersectionObserver(([entry]) => {
+      pricingDock.classList.toggle('policy-dock-obscured', entry.isIntersecting);
+    }).observe(inlineActions);
+  }
 
-  const policyConcerns = {
+  // Each pattern is a narrow wording clue. The surrounding facts can change its meaning.
+  const policies = {
     extortion: {
-      title: 'Possible payment demand',
-      next: 'If someone demanded payment or a favour to take down reviews, save the original message, date and related review links. Use Google’s dedicated reporting form for confirmed demands.',
-      matches: /\b(?:pay|send)\s+(?:me|us)\b/i,
-      related: /\b(?:remove|delete|take down)\b[^.!?]{0,45}\b(?:review|rating)s?\b/i
+      title: 'Payment demand',
+      next: 'Save the original demand, timestamps and related review links. Google has a dedicated reporting form for review extortion.',
+      clue: /\b(?:pay|send)\s+(?:me|us)\b[^.!?\n]{0,110}\b(?:remove|delete|take down)\b[^.!?\n]{0,40}\b(?:reviews?|ratings?)\b/iu
     },
     harassment: {
-      title: 'Possible threat or targeted harassment',
-      next: 'Save a dated screenshot and the exact words in context. Point out the specific threat or targeted conduct when you report it.',
-      matches: /\b(?:i|we)(?:['’]ll| (?:will|(?:am|are) going to))\s+(?:hurt|kill|attack|find and hurt|come after)\s+(?:you|your (?:staff|family|employees))\b/i
+      title: 'Threats or targeted harassment',
+      next: 'Save the exact wording in context and a dated screenshot. Point to the specific threat or targeted conduct in a report.',
+      clue: /\b(?:i|we)(?:'ll| will| (?:am|are) going to)\s+(?:hurt|kill|attack|come after)\s+(?:you|your (?:staff|family|employees))\b/iu
     },
     privacy: {
-      title: 'Possible exposure of personal information',
-      next: 'Check whether a private detail was actually revealed without permission. Record the evidence privately. A publicly listed business contact may be allowed.',
-      matches: /\b(?:home address|personal (?:phone number|email address|address)|social insurance number)\b\s*(?:is\s+|:\s*)\S/i
+      title: 'Private personal information',
+      next: 'Check that the detail is private and shared without permission. Keep it in a private record. Public business contact details can be allowed.',
+      clue: /\b(?:home address|personal (?:phone number|email address)|social insurance number)\s*(?:is\s+|:\s*)[\d\w]/iu
     },
     spam: {
-      title: 'Possible promotional or off-topic content',
-      next: 'Save the wording and explain how it relates to a different business or promotes an unrelated product. If you see duplicates, save their links and dates.',
-      matches: /\b(?:use (?:my|our) (?:promo|discount|coupon) code|(?:dm|message) me to (?:buy|order)|buy now at)\b/i
+      title: 'Promotional or off-topic content',
+      next: 'Point out the promotion or explain how the content is unrelated to your business. Save links and dates for any identical posts you find.',
+      clue: /\b(?:use (?:my|our) (?:promo|discount|coupon) code|(?:dm|message) me to (?:buy|order)|buy now at)\b/iu
     },
     conflict: {
-      title: 'Possible conflict of interest',
-      next: 'Save evidence that connects the reviewer to the employment, competitor or other business relationship. A similar name on its own doesn’t establish the connection.',
-      matches: /\b(?:i (?:work|worked|used to work) (?:for|at) (?:this|your) (?:business|company|restaurant|store)|i(?:['’]m| am) (?:the owner of a competing business|a former employee))\b/i
-    }
-  };
-  const contextGuidance = {
+      title: 'Conflict of interest',
+      next: 'Find a dated source that connects the author to the employment, competitor or other business relationship and keep it with the review.',
+      clue: /\b(?:i (?:work|worked|used to work) (?:for|at) (?:this|your) (?:business|company|restaurant|store)|i(?:'m| am) (?:the owner of a competing business|a former employee))\b/iu
+    },
+    fake: {
+      title: 'Review may not reflect a genuine experience',
+      next: 'Save the wording and check the specific dates, location or transaction details you can verify. An unfamiliar reviewer name alone is weak evidence.',
+      clue: /\b(?:i (?:was|got) paid to (?:write|post) (?:this|the) review|i(?:'ve| have) never (?:dealt with|interacted with|used) (?:this|your) (?:business|company|service))\b/iu
+    },
     unknown: {
-      title: 'Check for a business or location mismatch',
-      next: 'Compare the location, product and dates with what your business can verify. Document a specific mismatch. An unfamiliar name by itself doesn’t establish fake engagement.'
+      title: 'Possible business or location mismatch',
+      next: 'Compare the place, product and dates with your records. Save a specific mismatch you can show, such as the wrong branch or a service you never offered.'
     },
     negative: {
-      title: 'Start with the customer’s experience',
-      next: 'Check the details and consider a calm public reply. A low rating or a disputed opinion by itself generally stays on Google. You can still document any separate policy concern.'
+      title: 'A complaint about the customer experience',
+      next: 'Check what happened and consider a short, calm public response. You can still document a separate policy concern if one comes to light.'
     }
   };
 
-  const standardMapsHosts = new Set(['google.com', 'www.google.com', 'google.ca', 'www.google.ca']);
+  const googleHosts = new Set(['google.com', 'www.google.com', 'google.ca', 'www.google.ca']);
   const mapsHosts = new Set(['maps.google.com', 'maps.google.ca']);
   const sharePaths = new Map([
     ['maps.app.goo.gl', /^\/[a-z0-9_-]+\/?$/i],
@@ -68,136 +73,131 @@
     ['share.google', /^\/[a-z0-9_-]+\/?$/i]
   ]);
 
-  function parseReviewLink(value) {
+  function googleLink(value) {
     let url;
     try {
-      url = new URL(value.trim());
+      url = new URL(value.includes('://') ? value : 'https://' + value);
     } catch {
       return null;
     }
-    if (url.protocol !== 'https:' || url.username || url.password || url.port) return null;
-
-    if (sharePaths.get(url.hostname)?.test(url.pathname)) return url;
-    const mapsPath = /^\/maps(?:\/|$)/.test(url.pathname);
-    if (mapsPath && (standardMapsHosts.has(url.hostname) || mapsHosts.has(url.hostname))) return url;
-    if (mapsHosts.has(url.hostname) && url.pathname === '/' && url.search) return url;
-    return null;
+    if (!['https:', 'http:'].includes(url.protocol) || url.username || url.password || url.port) return null;
+    const mapsPage = /^\/maps(?:\/|$)/.test(url.pathname);
+    const mapsQuery = mapsHosts.has(url.hostname) && url.pathname === '/' && url.searchParams.has('q');
+    const searchReview = googleHosts.has(url.hostname) && url.pathname === '/search' && url.hash.startsWith('#lrd=');
+    if (!(sharePaths.get(url.hostname)?.test(url.pathname) || mapsQuery || searchReview ||
+          (mapsPage && (mapsHosts.has(url.hostname) || googleHosts.has(url.hostname))))) return null;
+    url.protocol = 'https:';
+    return url;
   }
 
-  function assess(text, selected) {
-    const signals = Object.entries(policyConcerns).filter(([key, concern]) =>
-      key === selected || (concern.matches.test(text) && (!concern.related || concern.related.test(text)))
-    );
-    const guidance = Object.hasOwn(contextGuidance, selected) ? contextGuidance[selected] : null;
-    return {
-      possibleIssue: signals.length > 0,
-      items: [...signals.map(([, item]) => item), ...(guidance ? [guidance] : [])],
-      officialLink: signals.some(([key]) => key === 'extortion') ? extortion : reporting
-    };
+  function readInput() {
+    const value = input.value.trim();
+    const [firstLine, ...rest] = value.split(/\r?\n/);
+    const first = firstLine.trim();
+    const looksLikeLink = /^\S+$/u.test(first) && /^(?:[a-z][a-z0-9+.-]*:\/\/|(?:[\w-]+\.)+[a-z]{2,}\/)/i.test(first);
+    return looksLikeLink ? { text: rest.join('\n').trim(), url: googleLink(first), hasLink: true }
+      : { text: value, url: null, hasLink: false };
   }
 
-  function showResult(result, reviewUrl, text) {
-    heading.textContent = result.possibleIssue ? 'You have a policy concern to check' : 'You have a useful next step';
-    advice.textContent = result.possibleIssue
-      ? 'Here’s what to check and save before deciding whether to report the review.'
-      : 'There’s no clear policy signal from what you entered. Look for a specific detail you can verify, such as a wrong location, or reply calmly if the review describes a genuine experience.';
+  function showResult(text, url, selected) {
+    const wording = text.replace(/[‘’]/gu, "'");
+    const matches = Object.keys(policies).filter(key => policies[key].clue?.test(wording));
+    const topics = new Set(matches);
+    if (Object.hasOwn(policies, selected)) topics.add(selected);
 
-    findings.replaceChildren();
-    for (const item of result.items) {
+    if (matches.length) {
+      heading.textContent = 'There’s a possible policy issue worth checking';
+      advice.textContent = 'You have a specific place to start. Check the wording in context and save what supports the concern before you report it.';
+    } else if (topics.size && selected !== 'negative') {
+      heading.textContent = 'You have a concern worth documenting';
+      advice.textContent = 'The context you selected gives you a starting point. Gather the details below to see whether they support a report.';
+    } else if (url && !text && !selected) {
+      heading.textContent = 'You’re ready for the next step';
+      advice.textContent = 'This looks like a Google share or Maps link. Open it, find the review, then paste its wording on a new line below the link and check again. If it’s a star rating with no text, you can ask for a free assessment with any details you have.';
+    } else {
+      heading.textContent = 'No clear policy issue from what you shared';
+      advice.textContent = 'You still have options. Check for a detail the wording can’t settle, such as a wrong location or a reviewer’s connection to the business. If it describes a genuine experience, a thoughtful reply is a good place to start.';
+    }
+
+    const rows = [...topics].map(key => {
       const row = document.createElement('li');
-      const title = document.createElement('h3');
+      const title = document.createElement('strong');
+      title.textContent = policies[key].title;
       const next = document.createElement('p');
-      title.textContent = item.title;
-      next.textContent = item.next;
+      next.textContent = policies[key].next;
       row.append(title, next);
-      findings.append(row);
-    }
-    findings.hidden = result.items.length === 0;
-    route.href = result.officialLink;
-    route.textContent = result.officialLink === extortion
-      ? 'See Google’s review extortion guidance'
-      : 'See Google’s reporting and appeal guidance';
+      return row;
+    });
+    findings.replaceChildren(...rows);
+    findings.hidden = rows.length === 0;
+    if (url) openReview.href = url.href;
+    else openReview.removeAttribute('href');
+    openReview.hidden = !url;
+    googleGuide.href = topics.has('extortion') ? extortion : reporting;
+    googleGuide.textContent = topics.has('extortion') ? 'Google’s review extortion guidance' : 'Google’s reporting and appeals guide';
 
-    preview.textContent = [
-      'GOOGLE REVIEW CASE NOTES', 'Prepared locally with ReviewsBoost', '',
-      'Review link: ' + reviewUrl.href,
-      'Review text: ' + (text || '[Add an excerpt if available]'), '',
-      heading.textContent, advice.textContent,
-      ...result.items.map(item => item.title + '\n' + item.next),
-      '', 'What I can verify: [Add dates and evidence references]',
-      'Google policies: ' + policies, 'Official guidance: ' + result.officialLink,
-      'These are working notes. Google decides whether a review can be removed.'
-    ].join('\n');
-    document.getElementById('caseNotes').open = false;
-    notesStatus.textContent = '';
-    status.textContent = '';
-    output.hidden = false;
-    output.focus();
+    if (notes) {
+      notes.textContent = [
+        'GOOGLE REVIEW CASE NOTES', 'Prepared locally with ReviewsBoost', '',
+        'Review link: ' + (url?.href || '[Add the link if available]'),
+        'Review text: ' + (text || '[Add an excerpt if available]'), '',
+        heading.textContent, advice.textContent,
+        ...[...topics].map(key => policies[key].title + '\n' + policies[key].next),
+        '', 'What I can verify: [Add dates and evidence references]', 'Official guidance: ' + googleGuide.href,
+        'Google decides whether a review can be removed.'
+      ].join('\n');
+      notes.closest('details').open = false;
+      document.getElementById('notesStatus').textContent = '';
+    }
+    result.hidden = false;
+    result.focus();
   }
 
-  let reviewUrl = null;
-  form.addEventListener('input', event => {
-    status.textContent = '';
-    output.hidden = true;
-    if (event.target === link) {
-      reviewUrl = null;
-      details.hidden = true;
-      continueButton.hidden = false;
-      link.removeAttribute('aria-invalid');
-    }
-  });
-
+  const concern = form.querySelector('select');
   form.addEventListener('submit', event => {
     event.preventDefault();
-    if (details.hidden) {
-      reviewUrl = parseReviewLink(link.value);
-      if (!reviewUrl) {
-        status.textContent = 'Use the link from Share review in Google Maps.';
-        link.setAttribute('aria-invalid', 'true');
-        link.focus();
-        return;
+    const { text, url, hasLink } = readInput();
+    const selected = concern?.value || '';
+    if ((hasLink && !url) || (!text && !url && !selected)) {
+      error.textContent = hasLink ? 'Use the link from Share review in Google Maps, or paste the review wording.' : 'Paste a Google review link or the review wording to start.';
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+      return;
+    }
+    showResult(text, url, selected);
+  });
+
+  form.addEventListener('input', () => {
+    result.hidden = true;
+    error.textContent = '';
+    input.removeAttribute('aria-invalid');
+  });
+
+  if (notes) {
+    const notesStatus = document.getElementById('notesStatus');
+    document.getElementById('copyCase').addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(notes.textContent);
+        notesStatus.textContent = 'Case notes copied.';
+      } catch {
+        const range = document.createRange();
+        range.selectNodeContents(notes);
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+        notesStatus.textContent = 'Copy the selected notes or choose Download .txt.';
       }
-      status.textContent = '';
-      link.removeAttribute('aria-invalid');
-      details.hidden = false;
-      continueButton.hidden = true;
-      reviewText.focus();
-      return;
-    }
-    const text = reviewText.value.trim();
-    if (!text && !concern.value) {
-      status.textContent = 'Paste the review text or choose a concern for a rating without text.';
-      reviewText.focus();
-      return;
-    }
-    showResult(assess(text, concern.value), reviewUrl, text);
-  });
+    });
+    document.getElementById('downloadCase').addEventListener('click', () => {
+      const url = URL.createObjectURL(new Blob([notes.textContent], { type: 'text/plain;charset=utf-8' }));
+      const download = document.createElement('a');
+      download.href = url;
+      download.download = 'google-review-case-worksheet.txt';
+      download.click();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      notesStatus.textContent = 'Case notes download started.';
+    });
+  }
 
-  document.getElementById('openReview').addEventListener('click', () => {
-    if (reviewUrl) window.open(reviewUrl.href, '_blank', 'noopener,noreferrer');
-  });
-  document.getElementById('copyCase').addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(preview.textContent);
-      notesStatus.textContent = 'Case notes copied.';
-    } catch {
-      const range = document.createRange();
-      range.selectNodeContents(preview);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      notesStatus.textContent = 'Copy the selected notes or choose Download .txt.';
-    }
-  });
-  document.getElementById('downloadCase').addEventListener('click', () => {
-    const url = URL.createObjectURL(new Blob([preview.textContent], { type: 'text/plain;charset=utf-8' }));
-    const download = document.createElement('a');
-    download.href = url;
-    download.download = 'google-review-case-worksheet.txt';
-    download.click();
-    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
-    notesStatus.textContent = 'Case notes download started.';
-  });
-
-  document.getElementById('checkerFields').disabled = false;
+  form.querySelector('fieldset').disabled = false;
 })();

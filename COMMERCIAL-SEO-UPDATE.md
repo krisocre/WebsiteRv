@@ -2,6 +2,8 @@
 
 November 5, 2026. Implemented locally; no deployment, commit, push, live customer submission or account configuration change.
 
+This report records the November 5 implementation. The current Google review removal price is CAD $45 upfront per approved review plus CAD $95 per successful removal.
+
 ## Outcome
 
 Google review removal assistance for Canadian businesses is the primary service; Yelp is the only secondary review-removal service. Repositioned the permitted non-blog metadata, retired four unsupported public service offerings while preserving their exact source, corrected machine-readable service information, and fixed two pricing examples with the owner's separate permission. Existing national/city coverage, CAD $50 upfront + $90 successful-removal pricing, active forms, design, runtime scripts and the entire blog remain intact.

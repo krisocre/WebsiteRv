@@ -6,13 +6,10 @@
 .evidence-form { max-width: none; }
 .evidence-form fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
 .evidence-form h2 { margin: 0 0 18px; font-size: clamp(23px, 4vw, 30px); }
-.evidence-form textarea { display: block; width: 100%; padding: 12px; border: 1px solid #aeb9c6; border-radius: 7px; color: var(--ink); background: #fff; resize: vertical; }
+.evidence-form textarea { display: block; width: 100%; min-height: 115px; padding: 12px; border: 1px solid #aeb9c6; border-radius: 7px; color: var(--ink); background: #fff; resize: vertical; font: inherit; }
 .evidence-form textarea:focus-visible { outline: 3px solid #0885fe; outline-offset: 3px; }
+.evidence-form textarea[aria-invalid=true] { border-color: #914535; }
 .evidence-form .field .fine-print { margin: 8px 0 0; }
-.checker-details { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line); }
-.checker-detail-heading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 12px; margin-bottom: 8px; }
-.checker-detail-heading h3 { margin: 0; font-size: 21px; }
-.checker-link-button { min-height: 44px; padding: 0; border: 0; background: transparent; color: var(--blue-dark); text-align: left; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
 .checker-concern { margin-top: 12px; }
 .checker-reference { margin-block: 24px; }
 .checker-reference > details { padding: 0 20px; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
@@ -23,8 +20,12 @@
 .case-output { margin-top: 24px; padding: 28px; border: 1px solid var(--line); border-left: 4px solid #557e72; border-radius: 14px; background: #fff; }
 .case-output h2 { margin: 0 0 8px; }
 .checker-findings { margin: 18px 0; padding-left: 20px; }
-.checker-findings h3 { margin: 0 0 4px; font-size: 18px; }
+.checker-findings strong { display: block; margin: 0 0 4px; font-size: 18px; }
 .checker-findings p { margin: 0 0 14px; }
+.checker-result-links, .checker-result-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 16px; }
+.checker-result-actions { padding-block: 10px; }
+.checker-result-actions a, .checker-result-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.pricing-dock.policy-dock-obscured { visibility: hidden; }
 .case-output pre { white-space: pre-wrap; overflow-wrap: anywhere; padding: 18px; background: var(--wash); font: inherit; font-size: 14px; border-radius: 8px; }
 .tool-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .table-wrap { max-width: 100%; overflow-x: auto; }

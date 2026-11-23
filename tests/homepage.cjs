@@ -21,6 +21,8 @@ const server=http.createServer((req,res)=>{
   const layouts=[];
   for(const width of [1440,1024,768,390,320]){
    await page.setViewport({width,height:width<700?844:900});await page.goto(base,{waitUntil:'networkidle0'});
+   const rejectCookies=await page.$('#measurement-preferences:not([hidden]) [data-choice="reject"]');
+   if(rejectCookies)await rejectCookies.click();
    const layout=await page.evaluate(()=>{const r=document.querySelector('.hero-actions a[href="#assessment"]').getBoundingClientRect();return {width:innerWidth,overflow:document.documentElement.scrollWidth>innerWidth+1,ctaTop:r.top,ctaBottom:r.bottom,viewport:innerHeight,height:document.documentElement.scrollHeight};});
    assert.equal(layout.overflow,false);assert.ok(layout.ctaTop>0&&layout.ctaBottom<layout.viewport);layouts.push(layout);
    assert.equal(await page.$$eval('h1',e=>e.length),1);assert.equal(await page.$$eval('title',e=>e.length),1);assert.equal(await page.$$eval('link[rel=canonical]',e=>e.length),1);
@@ -50,7 +52,10 @@ const server=http.createServer((req,res)=>{
    assert.equal(await page.$eval('.enquiry-extra',e=>e.open),false,'Optional fields are initially collapsed');
    await page.focus('#fullName');await page.keyboard.down('Shift');await page.keyboard.press('Tab');await page.keyboard.up('Shift');assert.equal(await page.evaluate(()=>document.activeElement.closest('#removalForm')),null,'Keyboard users can leave the inline form');
    if(width===390){
-    await page.$eval('#assessment',e=>e.scrollIntoView({behavior:'instant',block:'start'}));
+    // Observe a fresh entry into the form after the prior focus and scroll checks.
+    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+    await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='visible');
+    await page.$eval('#assessment',e=>window.scrollTo({top:window.scrollY+e.getBoundingClientRect().top-82,behavior:'instant'}));
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='hidden');
     await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='visible');
@@ -58,7 +63,25 @@ const server=http.createServer((req,res)=>{
    }
    if(width<700){await page.click('#hamburger');assert.equal(await page.$eval('#hamburger',e=>e.getAttribute('aria-expanded')),'true');await page.click('#hamburger');}
   }
-  await page.$eval('#reviewQuantity',e=>{e.value=3;e.dispatchEvent(new Event('input',{bubbles:true}));});
+  await page.$eval('#reviewQuantity',e=>e.scrollIntoView({block:'center',behavior:'instant'}));
+  assert.equal(await page.$eval('#decreaseQty',e=>e.disabled),true);
+  await page.click('.calculator [data-review-count="5"]');
+  assert.equal(await page.$eval('.calculator [aria-pressed="true"]',e=>e.dataset.reviewCount),'5');
+  assert.equal(await page.$eval('#formReviewQuantity',e=>e.value),'5');
+  await page.click('#increaseQty');
+  assert.equal(await page.$eval('#reviewQuantity',e=>e.value),'6');
+  await page.focus('#reviewQuantity');
+  await page.keyboard.down('Control');await page.keyboard.press('a');await page.keyboard.up('Control');await page.keyboard.press('Backspace');
+  assert.equal(await page.$eval('#reviewQuantity',e=>e.value),'','Deleting the previous count leaves room for typing');
+  assert.equal(await page.$eval('#formReviewQuantity',e=>e.value),'6','A partial edit does not change the form');
+  assert.equal(await page.$eval('#combinedTotal',e=>e.textContent),'$840','A partial edit keeps the last valid estimate');
+  await page.keyboard.type('12');
+  assert.equal(await page.$eval('#formReviewQuantity',e=>e.value),'12');
+  assert.equal(await page.$eval('#combinedTotal',e=>e.textContent),'$1,680');
+  await page.$eval('#reviewQuantity',e=>{e.value='51';e.dispatchEvent(new Event('change',{bubbles:true}));});
+  assert.equal(await page.$eval('#reviewQuantity',e=>e.value),'50');
+  assert.equal(await page.$eval('#increaseQty',e=>e.disabled),true);
+  await page.focus('.calculator [data-review-count="3"]');await page.keyboard.press('Enter');
   assert.equal(await page.$eval('#combinedTotal',e=>e.textContent),'$420');assert.equal(await page.$eval('#upfrontTotal',e=>e.textContent),'$135');assert.equal(await page.$eval('#successTotal',e=>e.textContent),'$285');
   assert.equal(await page.$eval('#formReviewQuantity',e=>e.value),'3');
   assert.equal(await page.$eval('[data-estimate="total"]',e=>e.textContent),'$420');
@@ -66,11 +89,31 @@ const server=http.createServer((req,res)=>{
   assert.equal(await page.$eval('#reviewQuantity',e=>e.value),'4');
   assert.equal(await page.$eval('[data-estimate="total"]',e=>e.textContent),'$560');
   assert.match(await page.$eval('#selectedPlan',e=>e.value),/\$180 upfront \+ \$95 per successfully removed review/);
-  await page.setJavaScriptEnabled(false);await page.goto(base,{waitUntil:'load'});assert.ok(await page.$eval('noscript .no-script-request',e=>e.getClientRects().length>0));
+  await page.goto(base+'google-review-removal-cost-canada.html',{waitUntil:'load'});
+  const feeTotals=()=>page.$$eval('[data-cost="upfront"],[data-cost="success"],[data-cost="total"]',els=>els.map(e=>e.textContent));
+  assert.deepEqual(await feeTotals(),['$135','$190','$325']);
+  await page.$eval('#fee-calculator',tool=>{
+   const ordered=tool.querySelector('#cost-review-count'),removed=tool.querySelector('#cost-removed-count');
+   ordered.value='5';ordered.dispatchEvent(new Event('change',{bubbles:true}));
+   removed.value='3';removed.dispatchEvent(new Event('change',{bubbles:true}));
+  });
+  assert.deepEqual(await feeTotals(),['$225','$285','$510']);
+  await page.$eval('#cost-removed-count',e=>{e.value='0';e.dispatchEvent(new Event('change',{bubbles:true}));});
+  assert.deepEqual(await feeTotals(),['$225','$0','$225']);
+  await page.goto(base+'suppression-avis-google.html',{waitUntil:'load'});
+  await page.$eval('#reviewQuantity',e=>{e.value='5';e.dispatchEvent(new Event('input',{bubbles:true}));});
+  assert.equal(await page.$eval('#upfrontTotal',e=>e.textContent),'225 $');
+  assert.equal(await page.$eval('#successTotal',e=>e.textContent),'475 $');
+  assert.match(await page.$eval('#selectedPlan',e=>e.value),/\$225 upfront \+ \$95 per successfully removed review/);
+  await page.setJavaScriptEnabled(false);
+  await page.goto(base+'google-review-removal-cost-canada.html',{waitUntil:'load'});
+  assert.deepEqual(await feeTotals(),['$135','$190','$325']);
+  assert.match(await page.$eval('#fee-calculator noscript',e=>e.textContent),/CAD \$325/);
+  await page.goto(base,{waitUntil:'load'});assert.ok(await page.$eval('noscript .no-script-request',e=>e.getClientRects().length>0));
   assert.match(await page.$eval('noscript .turnstile-noscript',e=>e.textContent),/Enable JavaScript to complete the security check/);
   assert.doesNotMatch(await page.$eval('#removalForm',e=>e.textContent),/You can send this form without JavaScript/);
   assert.equal(await page.$eval('#removalForm',e=>e.getClientRects().length>0&&e.method==='post'),true,'Native form remains visible and never sends personal details with GET');
   assert.deepEqual(errors,[]);assert.deepEqual(posts,[]);fs.writeFileSync(path.join(output,'layout-results.json'),JSON.stringify(layouts,null,2));
-  console.log('PASS: five homepage widths, pricing/inline form section order, direct hero/mobile assessments, accessible in-page CTA, visible form groups, no focus trap, synchronized estimates, native endpoint and no-JS security notice, unchanged form fields and canonical. No real submissions.');
+  console.log('PASS: five homepage widths, accessible assessment, synchronized English and French estimates and quote values, partial and zero-removal totals, static pricing fallback, unchanged form fields and canonical. No real submissions.');
  }finally{if(browser)await browser.close();server.closeAllConnections();await new Promise(r=>server.close(r));}
 })().catch(e=>{console.error(e);process.exitCode=1;});
