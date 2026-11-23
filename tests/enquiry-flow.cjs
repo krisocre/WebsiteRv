@@ -177,6 +177,7 @@ const server = http.createServer((req,res) => {
       assert.equal(await form.locator('[name="full_name"]').inputValue(),'Élodie Test');
       assert.equal(await page.locator('#removalSuccess').isVisible(),false);
       assert.equal(await page.locator('.enquiry-receipt').count(),1,'Unconfirmed requests retain recovery details');
+      assert.equal(await page.locator('.enquiry-receipt a').count(),0,'Recovery provides a saved reference without an email link');
       if(mode==='offline') { assert.equal(posts,0); assert.equal(await form.locator('[type="submit"]').isDisabled(),false); }
       else {
         assert.equal(posts,1);

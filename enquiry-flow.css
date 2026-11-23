@@ -41,7 +41,6 @@ body[data-platform] #request.platform-modal { background: rgba(11, 15, 24, .67);
 .enquiry-form button:disabled { opacity: .65; cursor: wait; }
 .enquiry-receipt { overflow-wrap: anywhere; }
 .enquiry-receipt pre { white-space: pre-wrap; text-align: left; padding: 16px; border-radius: 8px; background: #f2f7fc; color: #263a52; font: inherit; font-size: 13px; line-height: 1.7; }
-.enquiry-receipt a { color: #164f8c; text-decoration: underline; }
 .enquiry-receipt button { margin: 14px 0; }
 .enquiry-success[hidden] { display: none !important; }
 #removalSuccess.enquiry-success, #platformSuccess.enquiry-success { box-sizing: border-box; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; width: 100%; max-width: 600px; min-height: 290px; margin: 0 auto; padding: 40px 24px; border: 0; border-radius: 12px; background: #fff; box-shadow: none; text-align: center; }

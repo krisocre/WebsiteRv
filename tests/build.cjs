@@ -10,8 +10,9 @@ try{
  const outputFiles=files.filter(f=>f.endsWith('.html')||['sitemap.xml','robots.txt','feed.xml'].includes(f)),first=new Map(outputFiles.map(f=>[f,hash(fs.readFileSync(path.join(out,f)))]));
  for(const file of outputFiles.filter(file=>file.endsWith('.html')&&!file.includes('/'))){
   const html=fs.readFileSync(path.join(out,file),'utf8');
-  assert.equal((html.match(/class="pricing-shortcut" href="\/#pricing"/g)||[]).length,1,'One pricing shortcut on '+file);
-  assert.equal((html.match(/href="\/pricing-shortcut\.css\?/g)||[]).length,1,'Shared shortcut styles on '+file);
+  const shortcuts=file==='index.html'?0:1;
+  assert.equal((html.match(/class="pricing-shortcut" href="\/#pricing"/g)||[]).length,shortcuts,'Expected pricing shortcut count on '+file);
+  assert.equal((html.match(/href="\/pricing-shortcut\.css\?/g)||[]).length,shortcuts,'Expected shortcut styles on '+file);
  }
  run('pricing-shortcut.cjs');
  run('apply-commercial-seo.cjs');run('build-legal-pages.cjs');run('install-measurement.cjs');

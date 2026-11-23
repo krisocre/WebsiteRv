@@ -49,10 +49,6 @@ body:has(> .pricing-dock):not(:has(> footer)) {
   padding-bottom: calc(86px + env(safe-area-inset-bottom, 0px));
 }
 
-.pricing-dock.mobile-cta > .btn {
-  display: none;
-}
-
 @media (max-width: 620px) {
   .pricing-dock {
     display: flex;
@@ -68,40 +64,6 @@ body:has(> .pricing-dock):not(:has(> footer)) {
     box-shadow: none;
   }
 
-  .pricing-dock.mobile-cta {
-    z-index: 1200;
-    gap: 10px;
-    padding: 9px 12px calc(9px + env(safe-area-inset-bottom, 0px));
-    box-shadow: 0 -8px 24px rgba(22, 34, 59, .08);
-  }
-
-  .pricing-dock.mobile-cta :is(.pricing-shortcut, .btn) {
-    flex: 1 1 0;
-    min-width: 0;
-    min-height: 49px;
-    padding: 7px 8px;
-    gap: 5px;
-    font-size: 13px;
-    line-height: 1.35;
-    text-align: center;
-  }
-
-  .pricing-dock.mobile-cta > .btn {
-    display: inline-flex;
-  }
-
-  .pricing-dock.mobile-cta.is-assessing {
-    visibility: hidden;
-    pointer-events: none;
-  }
-
-  body.home-page:has(> .pricing-dock) {
-    padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px));
-  }
-
-  body.home-page:has(> .pricing-dock) > footer {
-    padding-bottom: 24px;
-  }
 }
 
 @media print {

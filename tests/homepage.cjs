@@ -65,8 +65,9 @@ const server=http.createServer((req,res)=>{
   }
   await page.$eval('#reviewQuantity',e=>e.scrollIntoView({block:'center',behavior:'instant'}));
   assert.equal(await page.$eval('#decreaseQty',e=>e.disabled),true);
-  await page.click('.calculator [data-review-count="5"]');
-  assert.equal(await page.$eval('.calculator [aria-pressed="true"]',e=>e.dataset.reviewCount),'5');
+  assert.deepEqual(await page.$$eval('.calculator button',els=>els.map(el=>el.id)),['decreaseQty','increaseQty']);
+  for(let count=1;count<6;count++)await page.click('#increaseQty');
+  await page.click('#decreaseQty');
   assert.equal(await page.$eval('#formReviewQuantity',e=>e.value),'5');
   await page.click('#increaseQty');
   assert.equal(await page.$eval('#reviewQuantity',e=>e.value),'6');
@@ -81,7 +82,8 @@ const server=http.createServer((req,res)=>{
   await page.$eval('#reviewQuantity',e=>{e.value='51';e.dispatchEvent(new Event('change',{bubbles:true}));});
   assert.equal(await page.$eval('#reviewQuantity',e=>e.value),'50');
   assert.equal(await page.$eval('#increaseQty',e=>e.disabled),true);
-  await page.focus('.calculator [data-review-count="3"]');await page.keyboard.press('Enter');
+  await page.focus('#reviewQuantity');
+  await page.keyboard.down('Control');await page.keyboard.press('a');await page.keyboard.up('Control');await page.keyboard.type('3');
   assert.equal(await page.$eval('#combinedTotal',e=>e.textContent),'$420');assert.equal(await page.$eval('#upfrontTotal',e=>e.textContent),'$135');assert.equal(await page.$eval('#successTotal',e=>e.textContent),'$285');
   assert.equal(await page.$eval('#formReviewQuantity',e=>e.value),'3');
   assert.equal(await page.$eval('[data-estimate="total"]',e=>e.textContent),'$420');

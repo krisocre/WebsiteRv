@@ -17,7 +17,7 @@ function withPricingShortcut(html) {
 
 if (require.main === module) {
   for (const entry of fs.readdirSync(__dirname, {withFileTypes: true})) {
-    if (!entry.isFile() || !entry.name.endsWith('.html')) continue;
+    if (!entry.isFile() || !entry.name.endsWith('.html') || entry.name === 'index.html') continue;
     const filename = path.join(__dirname, entry.name);
     const html = fs.readFileSync(filename, 'utf8');
     const updated = withPricingShortcut(html);

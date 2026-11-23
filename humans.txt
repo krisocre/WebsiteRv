@@ -1,7 +1,7 @@
 /* SITE */
 Name: ReviewsBoost
 URL: https://reviewsboost.ca/
-Contact: support@reviewsboost.ca
+Contact: https://reviewsboost.ca/online-reputation-management.html#contact
 Language: English (Canada)
 
 /* CONTENT */

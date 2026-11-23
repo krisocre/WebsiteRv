@@ -369,10 +369,7 @@ function leadInputErrors(data, requireReviewCount) {
     var copy = element('p', '', (fr ? 'Référence : ' : 'Reference: ') + reference);
     var save = element('button', originalButtonClasses, fr ? 'Enregistrer ma demande' : 'Save My Request'); save.type = 'button';
     save.addEventListener('click', function () { download(savedRecord, savedReference); });
-    var support = element('a', '', fr ? 'Contacter ReviewsBoost par courriel' : 'Email ReviewsBoost about this request');
-    support.href = 'mailto:support@reviewsboost.ca?subject=' + encodeURIComponent('Request ' + reference);
-    box.append(copy, save, element('p'));
-    box.lastChild.appendChild(support);
+    box.append(copy, save);
     status.after(box);
   }
   form.addEventListener('submit', function (event) {
@@ -445,7 +442,7 @@ function leadInputErrors(data, requireReviewCount) {
         ? (fr ? 'Vous êtes hors ligne. Vos réponses sont conservées dans ce formulaire. Reconnectez-vous, puis réessayez.' : 'You appear to be offline. Your answers are still in this form. Reconnect, then try again.')
         : rejected
           ? (fr ? 'Le serveur n’a pas accepté la demande. Vos réponses sont conservées; corrigez-les ou réessayez.' : 'The server did not accept the request. Your answers are preserved; correct them or try again.')
-          : (fr ? 'Nous ne pouvons pas confirmer la réception. Vos réponses sont conservées. Enregistrez votre demande et contactez-nous avec la référence ci-dessous avant de la renvoyer.' : 'We could not confirm receipt. Your answers are still here. Save your request and email us with the reference below before sending it again.'), true);
+          : (fr ? 'Nous ne pouvons pas confirmer la réception. Vos réponses sont conservées. Enregistrez une copie de votre demande et gardez la référence ci-dessous.' : 'We could not confirm receipt. Your answers are still here. Save a copy of your request and keep the reference below.'), true);
       receipt(payload, false); emit('submission_unconfirmed', { offline: offline });
     }).finally(function () {
       clearTimeout(slow); busy = false; submit.disabled = locked; back.disabled = false;
