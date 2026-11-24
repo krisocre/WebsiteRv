@@ -37,3 +37,4 @@ exclude:
   - GOOGLE-EXTORTION-RESEARCH-NOTES.md
   - build-google-extortion-article.py
   - plot-google-extortion-study.py
+  - build-one-star-equivalence.py
