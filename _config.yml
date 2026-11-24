@@ -1,4 +1,6 @@
 exclude:
+  - workers
+  - wrangler.jsonc
   - reviewsboost-lead-pipeline.gs
   - apps-script-turnstile.gs
   - TURNSTILE-SETUP.md

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developers.cloudflare.com/workers/wrangler/config-schema.json",
+  "name": "reviewsboost-case-assessment",
+  "main": "workers/case-assessment.mjs",
+  "compatibility_date": "2026-11-24",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "reviewsboost.ca/api/case-assessment", "zone_name": "reviewsboost.ca" }],
+  "ai": { "binding": "AI" },
+  "observability": { "enabled": false },
+  "ratelimits": [{ "name": "CASE_ASSESSMENT_LIMIT", "namespace_id": "407902026", "simple": { "limit": 8, "period": 60 } }]
+}

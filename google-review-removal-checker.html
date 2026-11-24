@@ -11,13 +11,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Google Review Removal Checker | ReviewsBoost</title>
-  <meta name="description" content="Paste a Google review to check for common policy issues. Start with the wording or a Google link, then get a practical next step.">
+  <meta name="description" content="Start with a Google review link or excerpt. Answer up to two questions and get a case brief with a policy assessment and evidence checklist.">
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
   <meta name="author" content="ReviewsBoost Editorial Team">
   <meta name="theme-color" content="#0885fe">
   <link rel="canonical" href="https://reviewsboost.ca/google-review-removal-checker.html">
   <link rel="stylesheet" href="content.css?v=20261121-editor-bio">
-  <link rel="stylesheet" href="review-tools.css?v=20261122-checker">
+  <link rel="stylesheet" href="review-tools.css?v=20261124-case-desk">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="manifest" href="site.webmanifest">
   <link rel="alternate" type="application/rss+xml" title="ReviewsBoost learning centre" href="https://reviewsboost.ca/feed.xml">
@@ -25,7 +25,7 @@
   <meta property="og:locale" content="en_CA">
   <meta property="og:site_name" content="ReviewsBoost">
   <meta property="og:title" content="Google Review Removal Checker | ReviewsBoost">
-  <meta property="og:description" content="Paste a Google review to check for common policy issues. Start with the wording or a Google link, then get a practical next step.">
+  <meta property="og:description" content="Start with a Google review link or excerpt. Answer up to two questions and get a case brief with a policy assessment and evidence checklist.">
   <meta property="og:url" content="https://reviewsboost.ca/google-review-removal-checker.html">
   <meta property="og:image" content="https://reviewsboost.ca/social-card.png">
   <meta property="og:image:width" content="1200">
@@ -33,17 +33,18 @@
   <meta property="og:image:alt" content="ReviewsBoost tools for managing Google reviews">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Google Review Removal Checker | ReviewsBoost">
-  <meta name="twitter:description" content="Paste a Google review to check for common policy issues. Start with the wording or a Google link, then get a practical next step.">
+  <meta name="twitter:description" content="Start with a Google review link or excerpt. Answer up to two questions and get a case brief with a policy assessment and evidence checklist.">
   <meta name="twitter:image" content="https://reviewsboost.ca/social-card.png">
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
     {"@type":"Organization","@id":"https://reviewsboost.ca/#organization","name":"ReviewsBoost","url":"https://reviewsboost.ca/"},
-    {"@type":"WebPage","@id":"https://reviewsboost.ca/google-review-removal-checker.html#webpage","url":"https://reviewsboost.ca/google-review-removal-checker.html","name":"Google Review Removal Checker","description":"A private browser-based check for possible policy concerns in Google reviews.","datePublished":"2026-09-05","dateModified":"2026-11-22","inLanguage":"en-CA","mainEntity":{"@id":"https://reviewsboost.ca/google-review-removal-checker.html#tool"}},
-    {"@type":"WebApplication","@id":"https://reviewsboost.ca/google-review-removal-checker.html#tool","name":"Google Review Removal Checker","url":"https://reviewsboost.ca/google-review-removal-checker.html","applicationCategory":"BusinessApplication","operatingSystem":"Any web browser","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"},"featureList":["Review link validation","Review text and concern screening","Downloadable case notes","Local browser processing"],"creator":{"@type":"Organization","name":"ReviewsBoost Editorial Team","url":"https://reviewsboost.ca/editorial-policy.html#authorship"},"publisher":{"@id":"https://reviewsboost.ca/#organization"}},
+    {"@type":"WebPage","@id":"https://reviewsboost.ca/google-review-removal-checker.html#webpage","url":"https://reviewsboost.ca/google-review-removal-checker.html","name":"Google Review Removal Checker","description":"A guided check for possible policy concerns in Google reviews, with a downloadable case brief.","datePublished":"2026-09-05","dateModified":"2026-11-24","inLanguage":"en-CA","mainEntity":{"@id":"https://reviewsboost.ca/google-review-removal-checker.html#tool"}},
+    {"@type":"WebApplication","@id":"https://reviewsboost.ca/google-review-removal-checker.html#tool","name":"Google Review Removal Checker","url":"https://reviewsboost.ca/google-review-removal-checker.html","applicationCategory":"BusinessApplication","operatingSystem":"Any web browser","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"CAD"},"featureList":["Review link validation","Up to two follow-up questions","Downloadable case brief"],"creator":{"@type":"Organization","name":"ReviewsBoost Editorial Team","url":"https://reviewsboost.ca/editorial-policy.html#authorship"},"publisher":{"@id":"https://reviewsboost.ca/#organization"}},
     {"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://reviewsboost.ca/"},{"@type":"ListItem","position":2,"name":"Learning Centre","item":"https://reviewsboost.ca/blog.html"},{"@type":"ListItem","position":3,"name":"Review removal checker","item":"https://reviewsboost.ca/google-review-removal-checker.html"}]}
   ]}
   </script>
-  <script src="review-removal-checker.js?v=20261122-checker" defer></script>
+  <script src="case-assessment-questions.js?v=20261124" defer></script>
+  <script src="review-removal-checker.js?v=20261124-case-desk" defer></script>
 
   <link rel="stylesheet" href="/pricing-shortcut.css?v=20261121">
 </head>
@@ -64,59 +65,70 @@
   <nav class="breadcrumb" aria-label="Breadcrumb"><ol class="container"><li><a href="/">Home</a></li><li><a href="blog.html">Learning Centre</a></li><li aria-current="page">Review removal checker</li></ol></nav>
   <main id="main">
     <header class="hero checker-hero">
-      <div class="container checker-width">
+      <div class="container case-desk-width">
         <p class="eyebrow">Free tool for Canadian businesses</p>
         <h1>Google Review Removal Checker</h1>
-        <p class="lede">Find out what’s worth checking and leave with a clear next step.</p>
-          <div class="meta-row"><span class="post-published">Published <time datetime="2026-09-05">September 5, 2026</time></span><span class="post-updated">Last updated <time datetime="2026-11-22">November 22, 2026</time></span></div>
+        <p class="lede">See whether a review raises a Google policy concern and what to save before you report it.</p>
+        <div class="meta-row"><span class="post-published">Published <time datetime="2026-09-05">September 5, 2026</time></span><span class="post-updated">Last updated <time datetime="2026-11-24">November 24, 2026</time></span></div>
       </div>
     </header>
     <section class="section alt checker-section" id="checker" aria-labelledby="checker-title">
-      <div class="container checker-width" data-clarity-mask="true">
+      <div class="container case-desk-width" data-clarity-mask="true">
         <noscript><p>Enable JavaScript to use the checker, or <a href="google-review-evidence-worksheet.txt" download>download the evidence worksheet</a>.</p></noscript>
-        <form class="calculator evidence-form" id="policy-check-form" method="post" autocomplete="off">
-          <fieldset id="checkerFields" disabled>
-            <h2 id="checker-title">Does this review break a Google policy?</h2>
-            <div class="field">
-              <label for="policy-check-input">Review text or Google review link</label>
-              <textarea id="policy-check-input" rows="4" maxlength="12000" spellcheck="false" placeholder="Paste the review or its link here" aria-describedby="policy-check-help policy-check-error"></textarea>
-              <p class="fine-print" id="policy-check-help">Paste the wording for a policy check. You can also start with the link and add the wording on the next line. Your entries stay in your browser.</p>
-            </div>
-            <details class="checker-concern">
-                <summary>Add context for a review or star rating</summary>
+        <div class="case-desk">
+          <aside class="case-desk-rail" aria-label="Case progress">
+            <p id="checker-title" class="case-desk-name">Review case desk</p>
+            <ol id="case-steps">
+              <li aria-current="step">Review details</li>
+              <li>Context</li>
+              <li>Case brief</li>
+            </ol>
+          </aside>
+          <div class="case-desk-work">
+            <form class="evidence-form" id="policy-check-form" method="post" autocomplete="off" aria-labelledby="case-start-title">
+              <fieldset id="checkerFields" disabled>
+                <h2 id="case-start-title" tabindex="-1">Start with what you have</h2>
+                <p class="case-intro">Enter the review wording, its Google link, or both.</p>
                 <div class="field">
-                  <label for="concern">What stands out?</label>
-                  <select id="concern">
-                    <option value="">Choose a concern</option>
-                    <option value="conflict">Competitor or employee involvement</option>
-                    <option value="spam">Spam, promotion or off-topic content</option>
-                    <option value="privacy">Private personal information</option>
-                    <option value="harassment">Threats or targeted harassment</option>
-                    <option value="extortion">A demand for payment to remove reviews</option>
-                    <option value="fake">A review that may not reflect a genuine experience</option>
-                    <option value="unknown">A review that may describe the wrong business</option>
-                    <option value="negative">A negative experience or disputed opinion</option>
-                  </select>
+                  <label for="case-wording">Review wording</label>
+                  <textarea id="case-wording" rows="4" maxlength="3600" spellcheck="false" placeholder="Paste the relevant part of the review" aria-describedby="case-privacy"></textarea>
                 </div>
-            </details>
-            <button class="button" type="submit">Check this review</button>
-            <p class="checker-status" id="policy-check-error" role="status"></p>
-          </fieldset>
-        </form>
-        <section class="case-output" id="policy-check-result" aria-labelledby="policy-result-title" tabindex="-1" hidden>
-          <h2 id="policy-result-title">Your next step</h2>
-          <p id="policy-result-advice"></p>
-          <ul class="checker-findings" id="policy-result-findings" hidden></ul>
-          <div class="checker-result-links"><a id="policy-open-review" target="_blank" rel="noopener noreferrer" hidden>Open the Google link &#8599;</a><a id="policy-google-guide" href="https://support.google.com/business/answer/4596773">Google's reporting guidance</a></div>
-          <p class="fine-print">This check looks for common clues. Google decides which reviews can be removed.</p>
-          <div class="checker-result-actions"><a class="button" href="/#assessment">Get a free assessment</a><a href="/#pricing">See pricing</a></div>
-          <details id="caseNotes">
-            <summary>Save your case notes</summary>
-            <pre id="casePreview"></pre>
-            <div class="tool-actions"><button class="button" id="copyCase" type="button">Copy notes</button><button class="button" id="downloadCase" type="button">Download .txt</button></div>
-            <p class="checker-status" id="notesStatus" role="status"></p>
-          </details>
-        </section>
+                <div class="field">
+                  <label for="case-url">Google review link</label>
+                  <input id="case-url" type="text" inputmode="url" maxlength="2048" spellcheck="false" placeholder="https://maps.app.goo.gl/…">
+                </div>
+                <p class="fine-print" id="case-privacy">The online check uses the wording and your answers. Leave out names and other private details. <a href="privacy-policy.html">Privacy Policy</a></p>
+                <button class="button" id="case-start" type="submit">Start review check</button>
+              </fieldset>
+            </form>
+            <section id="case-question" aria-labelledby="case-question-title" hidden>
+              <p class="case-step-caption" id="case-question-count"></p>
+              <h2 id="case-question-title" tabindex="-1">Review context</h2>
+              <p id="case-question-help"></p>
+              <div id="case-question-options"></div>
+            </section>
+            <p class="checker-status" id="policy-check-status" role="status" aria-live="polite"></p>
+            <section class="case-output" id="policy-check-result" aria-labelledby="policy-result-title" hidden>
+              <p class="case-step-caption" id="case-method"></p>
+              <h2 id="policy-result-title" tabindex="-1">Your case brief</h2>
+              <p id="policy-result-advice"></p>
+              <div class="case-evidence">
+                <h3>What to document</h3>
+                <ul class="checker-findings" id="policy-result-findings"></ul>
+              </div>
+              <div class="checker-result-links"><a id="policy-open-review" target="_blank" rel="noopener noreferrer" hidden>Open Google link &#8599;</a><a id="policy-google-guide" href="https://support.google.com/business/answer/4596773">Google’s reporting guidance</a></div>
+              <p class="fine-print">Google makes the final decision on removal.</p>
+              <div class="checker-result-actions"><a class="button" href="/#assessment">Get a free assessment</a><a href="/#pricing">See pricing</a></div>
+              <details id="caseNotes">
+                <summary>Save your case brief</summary>
+                <pre id="casePreview"></pre>
+                <div class="tool-actions"><button class="button" id="copyCase" type="button">Copy brief</button><button class="button" id="downloadCase" type="button">Download .txt</button></div>
+                <p class="checker-status" id="notesStatus" role="status"></p>
+              </details>
+              <button class="case-text-button" id="case-restart" type="button">Check another review</button>
+            </section>
+          </div>
+        </div>
       </div>
     </section>
     <div class="container checker-width checker-reference">
@@ -126,7 +138,7 @@
         <h2 id="decision-table">What evidence belongs with each review concern?</h2>
         <figure class="guide-figure">
           <figcaption>How the review check works</figcaption>
-          <ol class="guide-steps"><li>Paste the review wording or link</li><li>Add context if you have it</li><li>See what’s worth checking next</li></ol>
+          <ol class="guide-steps"><li>Paste the review wording or link</li><li>Answer up to two follow-ups</li><li>Get a brief with evidence to save</li></ol>
         </figure>
         <p>Use this guide alongside <a href="https://support.google.com/contributionpolicy/answer/7400114">Google's content policies</a> to decide what to document before making a report.</p>
         <div class="table-wrap"><table class="comparison">
@@ -150,16 +162,16 @@
         <p>For an appeal, include the earlier decision and the supporting facts it may have missed. Keep your original screenshots and a separate copy of each submission.</p>
         <h2 id="extortion">When someone demands money to remove reviews</h2>
         <p>Google has a separate <a href="https://support.google.com/business/answer/16404809">review extortion reporting process</a> for direct demands for money or favours in exchange for taking down reviews. Preserve the communications and related review links. Google advises against paying or engaging with the sender.</p>
-        <p>The checker points you to that process if you select a payment demand. A suspected fake review without a direct demand follows the ordinary reporting workflow.</p>
+        <p>The checker points you to that process when a payment demand is identified. Suspected fake reviews without a direct demand follow the ordinary reporting workflow.</p>
         <h2 id="download">Download a blank review evidence template</h2>
         <p><a href="google-review-evidence-worksheet.txt" download>Download the blank review evidence worksheet (.txt)</a>. Use one copy per review, or reference a shared timeline for related posts. It opens in any text editor and can be pasted into your internal case notes.</p>
         <p>Keep customer records and exposed personal details in a private evidence folder. Use attachment references in working notes; share supporting material only through the appropriate private reporting channel.</p>
         <h2 id="questions">Questions about this checker</h2>
-        <h3>What does the checker assess?</h3><p>It looks for possible policy concerns in the wording you paste and helps you document any context you select. It recognizes common Google links. Open the link and copy the wording to check it. Some concerns, including suspected fake reviews, need evidence beyond the text.</p>
+        <h3>What does the checker assess?</h3><p>It looks for possible policy concerns in the wording you paste and asks up to two questions if more context could help. When you start with a Google link, open it to copy the relevant wording or continue with what you know. Some concerns, including suspected fake reviews, need evidence beyond the text.</p>
         <h3>How can I use the result?</h3><p>Save your notes so you know what to document before you report the review or ask our team for an assessment. <a href="/">Get help with a Google review</a>.</p>
-        <h3>Does the case text leave my browser?</h3><p>The tool does not send or store your entries. Copy and download happen only when you select those actions. Following a Google link opens Google's service; you decide what to submit there.</p>
+        <h3>Does the case text leave my browser?</h3><p>The online checker uses the wording you paste and your follow-up answers for analysis. Leave out names and private details. The fallback works in your browser, and copying or downloading the brief happens on your device.</p>
         <h3>What if there is no clear policy issue?</h3><p>Use a measured reply and investigate the underlying experience. Start with our <a href="respond-to-google-reviews.html#inaccurate">response examples for disputed reviews</a> and <a href="get-more-google-reviews.html">genuine customer feedback workflow</a>.</p>
-        <div class="author-box"><strong>Method and maintenance</strong><p>The <a href="editorial-policy.html#authorship">ReviewsBoost Editorial Team</a> checked the linked policy sources on <time datetime="2026-11-21">November 21, 2026</time>. The checker uses a limited set of wording clues and editorial guidance. Send corrections through our <a href="online-reputation-management.html#contact">contact form</a>.</p></div>
+        <div class="author-box"><strong>Method and maintenance</strong><p>The <a href="editorial-policy.html#authorship">ReviewsBoost Editorial Team</a> maintains the evidence guidance and linked policy sources. The checker combines wording analysis with the facts you select. It can miss issues that require records outside the review. Send corrections through our <a href="online-reputation-management.html#contact">contact form</a>.</p></div>
         </article>
       </details>
     </div>
