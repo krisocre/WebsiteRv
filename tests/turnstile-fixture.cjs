@@ -3,7 +3,10 @@ const crypto=require('node:crypto');
 const fixture=`(function(){
  var records=[],counter=0;
  window.__turnstileWidgets=records;
- window.turnstile={ready:function(fn){fn();},render:function(container,options){
+ window.turnstile={ready:function(fn){
+  if(document.querySelector('script[async][src*="/turnstile/v0/api.js"]'))throw Error('Turnstile ready() rejects an async loader');
+  fn();
+ },render:function(container,options){
   if(typeof container==='string')container=document.querySelector(container);
   var id=String(counter++),item={id:id,options:options,container:container,token:'',removed:false};records.push(item);
   var button=document.createElement('button');button.type='button';button.textContent='LOCAL SECURITY FIXTURE';button.dataset.testTurnstile=id;

@@ -269,7 +269,8 @@ function leadInputErrors(data, requireReviewCount) {
       loader.onload = function () {
         clearTimeout(timer);
         if (typeof window.turnstile?.render !== 'function') { failed(); return; }
-        if (window.turnstile.ready) window.turnstile.ready(render); else render();
+        // The script has loaded, and ready() rejects an async/defer loader.
+        render();
       };
       loader.onerror = function () { clearTimeout(timer); loader.remove(); loader = null; failed(); };
       timer = window.setTimeout(failed, 15000); document.head.appendChild(loader);
