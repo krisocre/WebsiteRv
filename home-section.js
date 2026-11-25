@@ -1,9 +1,14 @@
 (() => {
-  const section = document.currentScript.dataset.section;
+  const script = document.currentScript;
+  const section = script.dataset.section;
 
   document.addEventListener('DOMContentLoaded', () => {
-    // Leave explicit fragments to the browser and the existing navigation.
-    if (window.location.hash) return;
+    const { hash, search } = window.location;
+    if (script.hasAttribute('data-use-homepage-url')) {
+      // Keep the original request's referrer and campaign parameters.
+      window.history.replaceState(window.history.state, '', '/' + search + (hash || section));
+    }
+    if (hash) return;
 
     const target = document.querySelector(section);
     if (!target) return;

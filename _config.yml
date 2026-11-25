@@ -1,4 +1,5 @@
 exclude:
+  - "*.py"
   - workers
   - wrangler.jsonc
   - reviewsboost-lead-pipeline.gs
@@ -15,6 +16,14 @@ exclude:
   - LEGAL-SETUP.md
   - build-legal-pages.cjs
   - legal-settings.json
+  - legal-versions/policies-2026-10-27.json
+  - legal-versions/policies-2026-11-02.json
+  - legal-versions/policies-2026-11-05-v2.json
+  - legal-versions/policies-2026-11-05.json
+  - legal-versions/policies-2026-11-07-lead-source.json
+  - legal-versions/policies-2026-11-07-turnstile.json
+  - legal-versions/policies-2026-11-10-tag-manager.json
+  - legal-versions/policies-2026-11-11-analytics-container.json
   - CANADA-SEO.md
   - FORM-SETUP.md
   - GOOGLE-TIMING-RESEARCH-NOTES.md
@@ -35,6 +44,3 @@ exclude:
   - GOOGLE-STAFF-NAME-RESEARCH-NOTES.md
   - GOOGLE-COVERAGE-RESEARCH-NOTES.md
   - GOOGLE-EXTORTION-RESEARCH-NOTES.md
-  - build-google-extortion-article.py
-  - plot-google-extortion-study.py
-  - build-one-star-equivalence.py

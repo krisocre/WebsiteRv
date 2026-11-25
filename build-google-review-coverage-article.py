@@ -118,7 +118,7 @@ body=f'''
 <h2 id="downloads">Download the data, reproduce the figures and cite the work</h2>
 <ul>{''.join('<li><a href="'+name+'" download>'+label+'</a>'+(' · <a href="'+name+'-metadata.json" download>CSVW field definitions</a>' if kind=='text/csv' else '')+'.</li>' for name,label,kind in distribution_files)}
 <li><a href="google-review-coverage-sources.json" download>Source manifest, field audit and SHA-256 fingerprints</a>.</li>
-<li><a href="build-google-review-coverage-data.py" download>Data builder</a> · <a href="audit-google-review-coverage.py" download>Independent arithmetic audit</a> · <a href="plot-google-review-coverage.py" download>Chart script</a> · <a href="build-google-review-coverage-article.py" download>Article builder</a>.</li>
+<li><a href="reviewsboost-research-code.zip" download>Research source scripts (.zip)</a> · · ·.</li>
 <li><a href="google-review-coverage-study.bib" download>BibTeX citation</a> · <a href="google-review-coverage-study.cff" download>Citation File Format</a>.</li></ul>
 <p>Rebuild with <code>python build-google-review-coverage-data.py</code>, then <code>python audit-google-review-coverage.py</code>. Plotting uses <code>python plot-google-review-coverage.py</code> and Matplotlib. The optional <code>--capture</code> flag on the data builder refreshes private source captures and public fingerprints; it does not collect user reviews.</p>
 <p>Our original compilation, calculations and chart artwork are released under <a href="{LICENSE}">CC BY 4.0</a>. Source publishers retain rights in their documentation and article. Cite Google for the API limits and ReviewsBoost for this compilation and derived calculations; label the probability examples as hypothetical.</p>

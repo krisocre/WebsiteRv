@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://reviewsboost.ca/</loc>
-    <lastmod>2026-11-02</lastmod>
+    <lastmod>2026-11-24</lastmod>
     <xhtml:link rel="alternate" hreflang="en-CA" href="https://reviewsboost.ca/"/>
     <xhtml:link rel="alternate" hreflang="fr-CA" href="https://reviewsboost.ca/suppression-avis-google.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://reviewsboost.ca/"/>
@@ -20,7 +20,8 @@
   </url>
   <url><loc>https://reviewsboost.ca/blog.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://reviewsboost.ca/one-star-google-review-no-text.html</loc><lastmod>2026-11-24</lastmod><image:image><image:loc>https://reviewsboost.ca/one-star-google-rating-equivalence.png</image:loc></image:image></url>
-  <url><loc>https://reviewsboost.ca/google-review-removal-cost-canada.html</loc><lastmod>2026-11-22</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-review-removal-cost-canada.html</loc><lastmod>2026-11-24</lastmod></url>
+  <url><loc>https://reviewsboost.ca/paid-google-review-removal.html</loc><lastmod>2026-11-24</lastmod></url>
   <url>
     <loc>https://reviewsboost.ca/fake-review-statistics.html</loc>
     <lastmod>2026-11-19</lastmod>
@@ -45,9 +46,9 @@
   <url><loc>https://reviewsboost.ca/remove-fake-google-review.html</loc><lastmod>2026-09-13</lastmod></url>
   <url><loc>https://reviewsboost.ca/google-review-link-qr-code.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://reviewsboost.ca/google-review-policy-canada.html</loc><lastmod>2026-09-13</lastmod></url>
-  <url><loc>https://reviewsboost.ca/google-reviews-faq.html</loc><lastmod>2026-09-13</lastmod></url>
+  <url><loc>https://reviewsboost.ca/google-reviews-faq.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://reviewsboost.ca/google-review-calculator.html</loc><lastmod>2026-09-06</lastmod></url>
-  <url><loc>https://reviewsboost.ca/about.html</loc><lastmod>2026-09-07</lastmod></url>
+  <url><loc>https://reviewsboost.ca/about.html</loc><lastmod>2026-11-24</lastmod></url>
   <url><loc>https://reviewsboost.ca/editorial-policy.html</loc><lastmod>2026-09-06</lastmod></url>
   <url><loc>https://reviewsboost.ca/privacy-policy.html</loc><lastmod>2026-11-21</lastmod></url>
   <url><loc>https://reviewsboost.ca/terms-of-service.html</loc><lastmod>2026-11-21</lastmod></url>

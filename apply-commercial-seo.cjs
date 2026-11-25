@@ -4,9 +4,10 @@ const path=require('node:path');
 const root=__dirname,origin='https://reviewsboost.ca';
 const services=Object.freeze([{name:'Google',file:'index.html',enabled:true,primary:true}]);
 const metadata={
- 'index.html':{title:'Google Review Removal Service Canada | ReviewsBoost.ca',description:'Professional Google review removal assistance for Canadian businesses. Help with fake, spam and policy-violating reviews. Request a free assessment.'},
+ 'index.html':{title:'Google Review Removal Service Canada | ReviewsBoost.ca',description:'Google review removal service for Canadian businesses. CAD $45 upfront per accepted review, plus $95 if removed. Request a free assessment.'},
  'suppression-avis-google.html':{title:'Suppression d’avis Google au Canada | ReviewsBoost',description:'Service de suppression d’avis Google pour entreprises canadiennes : analyse et signalement. 45 $ CA au départ, puis 95 $ par avis supprimé.'},
- 'about.html':{title:'About ReviewsBoost | Google Review Removal Canada',description:'Learn how ReviewsBoost helps Canadian businesses assess and report Google reviews, with clear CAD fees and practical guidance.'},
+ 'about.html':{title:'About ReviewsBoost | Google Review Removal in Canada',description:'Meet ReviewsBoost, a Canadian Google review removal and reputation service. Find out what our team handles and how to get a free assessment.'},
+ 'paid-google-review-removal.html':{title:'How Paid Google Review Removal Works | ReviewsBoost',description:'See how ReviewsBoost handles Google review removal for Canadian businesses, from a free assessment and written quote to reporting and case updates.'},
  'online-reputation-management.html':{title:'Online Reputation Management Toronto & Canada | ReviewsBoost',description:'Google review reporting, response planning and reputation support for Canadian businesses. Discuss your situation and request an assessment.'}
 };
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
