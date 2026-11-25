@@ -19,6 +19,11 @@ const server=http.createServer((req,res)=>{
   await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
   await page.setRequestInterception(true);page.on('request',r=>{if(isApi(r.url())){r.respond({status:200,contentType:'text/javascript',body:turnstileFixture});return;}if(r.method()!=='GET'){posts.push(r.url());r.abort();}else if(r.url().startsWith(base)||r.url().startsWith('data:'))r.continue();else r.abort();});page.on('pageerror',e=>errors.push(e.message));
   const layouts=[];
+  const waitForAssessment=()=>page.waitForFunction(()=>{
+   const header=document.querySelector('#navbar').getBoundingClientRect().bottom;
+   const heading=document.querySelector('.assessment-heading').getBoundingClientRect().top;
+   return Math.abs(heading-header-12)<3&&document.activeElement.id==='assessment-title';
+  });
   for(const width of [1440,1024,768,390,320]){
    await page.setViewport({width,height:width<700?844:900});await page.goto(base,{waitUntil:'networkidle0'});
    const rejectCookies=await page.$('#measurement-preferences:not([hidden]) [data-choice="reject"]');
@@ -30,7 +35,10 @@ const server=http.createServer((req,res)=>{
    assert.ok(await page.$eval('.hero-points',e=>e.textContent.includes('No account password needed')));
    assert.equal(await page.evaluate(()=>Array.from(document.scripts).some(script=>new URL(script.src,location.href).pathname.endsWith('/measurement.js'))),require('../install-measurement.cjs').enabled,'Measurement bootstrap matches real configuration');
    assert.equal(await page.evaluate(()=>document.getAnimations().filter(a=>a.playState==='running').length),0);
-   assert.deepEqual(await page.$$eval('main>section',e=>e.slice(0,4).map(n=>n.id||n.classList[0])),['hero','trust-strip','pricing','assessment'],'Pricing then the form follows the existing hero');
+   assert.deepEqual(await page.$$eval('main>section',e=>e.slice(0,5).map(n=>n.id||n.classList[0])),['hero','trust-strip','press-mentions','pricing','assessment'],'Press mentions precede pricing and the assessment');
+   assert.deepEqual(await page.$$eval('.press-track > ul:not([aria-hidden]) li',items=>items.map(item=>item.textContent.trim())),['Financial Post','Toronto Times','ProMark Business Solutions','Profit Parrot']);
+   assert.equal(await page.$('.press-mentions a'),null,'Publication names are unlinked');
+   assert.equal(await page.$eval('.press-motion',button=>button.getClientRects().length),0,'Reduced motion shows a static publication list');
    assert.equal(await page.$$eval('[role="dialog"],.modal-overlay',e=>e.length),0,'Homepage form is part of the page');
    if([1440,390].includes(width)){
     await page.evaluate(()=>document.activeElement?.blur());
@@ -40,8 +48,8 @@ const server=http.createServer((req,res)=>{
     await (await page.$('#assessment')).screenshot({path:path.join(output,'assessment-'+width+'.png')});
     await cleanPreview.evaluate(element=>element.remove());
    }
-   await page.click('.hero-actions a[href="#assessment"]');await page.waitForFunction(()=>{const r=document.querySelector('#assessment').getBoundingClientRect();return r.top>=50&&r.top<innerHeight;});
-   await page.click('.calculator .open-order');await page.waitForFunction(()=>{const r=document.querySelector('#assessment').getBoundingClientRect();return r.top>=50&&r.top<innerHeight;});
+   await page.click('.hero-actions a[href="#assessment"]');await waitForAssessment();
+   await page.click('.calculator .open-order');await waitForAssessment();
    assert.equal(await page.evaluate(()=>document.activeElement.id),'assessment-title','The in-page CTA focuses the assessment heading at '+width+'px');
    for(const id of ['businessUrl','formReviewQuantity','fullName','businessName','email'])assert.equal(await page.$eval('#'+id,e=>e.getClientRects().length>0),true,id+' is visible without an extra step');
    const profileSize=await page.$eval('#businessUrl',e=>({width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height,group:e.closest('.enquiry-grid').getBoundingClientRect().width}));
@@ -59,7 +67,28 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='hidden');
     await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='visible');
-    await page.click('.mobile-cta a[href="#assessment"]');assert.equal(await page.$('#orderModal.open'),null);
+    await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'no-preference'}]);
+    await page.$eval('.press-mentions',section=>section.scrollIntoView({block:'center',behavior:'instant'}));
+    await page.waitForFunction(()=>getComputedStyle(document.querySelector('.press-track')).animationPlayState==='running');
+    const tickerPosition=()=>page.$eval('.press-track',track=>track.getBoundingClientRect().left);
+    const startingPosition=await tickerPosition();
+    await page.waitForFunction(start=>document.querySelector('.press-track').getBoundingClientRect().left<start-1,{},startingPosition);
+    await page.focus('.press-motion');await page.keyboard.press('Space');
+    assert.equal(await page.$eval('.press-motion',button=>button.getAttribute('aria-label')),'Play press banner');
+    assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationPlayState),'paused');
+    await page.keyboard.press('Space');
+    assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationPlayState),'running');
+    await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
+    await page.evaluate(()=>{
+     const focus=HTMLElement.prototype.focus;
+     HTMLElement.prototype.focus=function(options){
+      return this.id==='assessment-title'?focus.call(this):focus.call(this,options);
+     };
+    });
+    await page.click('.mobile-cta a[href="#assessment"]');
+    await waitForAssessment();
+    assert.equal(await page.$('#orderModal.open'),null);
+    await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
    }
    if(width<700){await page.click('#hamburger');assert.equal(await page.$eval('#hamburger',e=>e.getAttribute('aria-expanded')),'true');await page.click('#hamburger');}
   }

@@ -294,6 +294,7 @@
         .btn,.nav-logo,.nav-service{font-weight:500!important}
         /* Primary toolbar and accessible service menu. */
         .navbar{background:rgba(255,255,255,.97);border-bottom:1px solid #e7e9ee;box-shadow:0 4px 22px rgba(22,34,59,.05)}
+        .navbar.is-scrolled{box-shadow:0 3px 18px rgba(48,15,17,.08)}
         .navbar .container{height:74px;gap:28px}.nav-logo{flex:0 0 auto;font-size:20px;letter-spacing:-.02em}.logo-icon{box-shadow:0 5px 14px rgba(8,133,254,.22)}
         .nav-links{gap:4px}.nav-links>li>a,.services-toggle{display:inline-flex;min-height:38px;align-items:center;gap:7px;padding:8px 11px!important;border-radius:8px;color:#3d4553!important;font-size:13px!important;font-weight:500!important;white-space:nowrap;transition:background .18s,color .18s,transform .18s}
         .nav-links>li>a:not(.nav-cta)::after{display:none}.nav-links>li>a:hover,.services-toggle:hover,.nav-dropdown.open .services-toggle{background:#f3f5f8;color:var(--navy)!important;transform:none}
@@ -327,7 +328,9 @@
 <noscript><link rel="stylesheet" href="enquiry-flow.css?v=20261123-contact-form"></noscript>
 <link rel="stylesheet" href="legal-notice.css">
 <script src="submission-terms.js" defer></script>
-<link rel="stylesheet" href="home.css?v=20261123-contact-form">
+<link rel="stylesheet" href="home.css?v=20261125-press-ticker">
+<script src="form-submission.js?v=20261108-backend" defer></script>
+<script src="enquiry-flow.js?v=20261125-turnstile-load" defer></script>
 </head>
 <body class="home-page">
 <a class="skip-link" href="#main">Skip to content</a>
@@ -398,6 +401,23 @@
             <div class="trust-item"><div class="trust-icon"><i class="fa-solid fa-user-tie"></i></div><div><strong>Fully Managed</strong><span>Specialists handle the process</span></div></div>
             <div class="trust-item"><div class="trust-icon"><i class="fa-solid fa-comment-dots"></i></div><div><strong>Clear Updates</strong><span>Know how the removal is progressing</span></div></div>
             <div class="trust-item"><div class="trust-icon"><i class="fa-solid fa-location-dot"></i></div><div><strong>Toronto First</strong><span>Plus Montréal, Vancouver and all Canada</span></div></div>
+        </div>
+    </section>
+
+    <section class="press-mentions" aria-labelledby="press-mentions-title">
+        <div class="container press-mentions-inner">
+            <h2 id="press-mentions-title">Press &amp; online mentions</h2>
+            <div class="press-window">
+                <div class="press-track">
+                    <ul aria-label="Publications">
+                        <li>Financial Post</li>
+                        <li>Toronto Times</li>
+                        <li>ProMark Business Solutions</li>
+                        <li>Profit Parrot</li>
+                    </ul>
+                </div>
+            </div>
+            <button class="press-motion" type="button" aria-label="Pause press banner" hidden>Pause</button>
         </div>
     </section>
 
@@ -653,7 +673,6 @@
     <a class="btn btn-primary" href="#assessment" data-measurement-location="mobile">Get a free assessment <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
 </div>
 
-<script src="form-submission.js?v=20261108-backend"></script>
 <script>
     (function () {
         var navbar = document.getElementById('navbar');
@@ -673,8 +692,9 @@
         var phone = document.getElementById('phone');
 
         var selectedCount;
+        var priceNumberFormat = new Intl.NumberFormat('en-CA');
         function money(amount) {
-            return '$' + amount.toLocaleString('en-CA', { useGrouping: true });
+            return '$' + priceNumberFormat.format(amount);
         }
         function updatePrice(value, editingInput) {
             var count = Math.max(1, Math.min(50, Math.trunc(Number(value)) || 1));
@@ -685,13 +705,16 @@
             selectedCount = count;
             decreaseQty.disabled = count === 1;
             increaseQty.disabled = count === 50;
-            upfrontTotal.textContent = money(count * 45);
-            successTotal.textContent = money(count * 95);
-            document.getElementById('combinedTotal').textContent = money(count * 140);
+            var upfront = money(count * 45);
+            var success = money(count * 95);
+            var total = money(count * 140);
+            upfrontTotal.textContent = upfront;
+            successTotal.textContent = success;
+            document.getElementById('combinedTotal').textContent = total;
             document.querySelector('[data-estimate="count"]').textContent = count + (count === 1 ? ' review' : ' reviews');
-            document.querySelector('[data-estimate="upfront"]').textContent = money(count * 45);
-            document.querySelector('[data-estimate="success"]').textContent = money(count * 95);
-            document.querySelector('[data-estimate="total"]').textContent = money(count * 140);
+            document.querySelector('[data-estimate="upfront"]').textContent = upfront;
+            document.querySelector('[data-estimate="success"]').textContent = success;
+            document.querySelector('[data-estimate="total"]').textContent = total;
             selectedPlan.value = 'Google Review Removal - ' + count + (count === 1 ? ' review' : ' reviews') + ' - $' + (count * 45) + ' upfront + $95 per successfully removed review';
         }
 
@@ -764,14 +787,20 @@
                 var target = document.querySelector(href);
                 if (!target) return;
                 event.preventDefault();
+                if (href === '#assessment') {
+                    document.getElementById('assessment-title').focus({preventScroll:true});
+                    var heading = target.querySelector('.assessment-heading');
+                    var top = heading.getBoundingClientRect().top + window.scrollY - navbar.getBoundingClientRect().bottom - 12;
+                    window.scrollTo({top: top, behavior: 'instant'});
+                    return;
+                }
                 window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 82, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
-                if (href === '#assessment') document.getElementById('assessment-title').focus({preventScroll:true});
             });
         });
 
         window.addEventListener('scroll', function () {
-            navbar.style.boxShadow = window.scrollY > 20 ? '0 3px 18px rgba(48,15,17,.08)' : 'none';
-        });
+            navbar.classList.toggle('is-scrolled', window.scrollY > 20);
+        }, {passive:true});
 
         phone.addEventListener('input', function () {
             var digits = phone.value.replace(/\D/g, '').slice(0, 10);
@@ -780,9 +809,28 @@
             else phone.value = digits;
         });
 
+        var press = document.querySelector('.press-mentions');
+        var pressTrack = press.querySelector('.press-track');
+        var pressControl = press.querySelector('.press-motion');
+        var pressCopy = pressTrack.firstElementChild.cloneNode(true);
+        pressCopy.setAttribute('aria-hidden', 'true');
+        pressTrack.append(pressCopy);
+        press.classList.add('press-ticker-ready');
+        pressControl.hidden = false;
+        pressControl.addEventListener('click', function () {
+            var paused = press.classList.toggle('press-is-paused');
+            pressControl.textContent = paused ? 'Play' : 'Pause';
+            pressControl.setAttribute('aria-label', paused ? 'Play press banner' : 'Pause press banner');
+        });
+        if ('IntersectionObserver' in window) {
+            press.classList.add('press-is-offscreen');
+            new IntersectionObserver(function (entries) {
+                press.classList.toggle('press-is-offscreen', !entries[0].isIntersecting);
+            }).observe(press);
+        }
+
         updatePrice(quantity.value);
     })();
 </script>
-<script src="enquiry-flow.js?v=20261125-turnstile-load"></script>
 </body>
 </html>

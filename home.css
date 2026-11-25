@@ -6,6 +6,36 @@
 :where(.home-page) .fa-solid{display:inline-block;flex-shrink:0;width:1em;height:1em;font-style:normal;line-height:1;vertical-align:-.125em}
 .home-page .no-script-request{margin-top:15px;font-size:14px}.home-page .no-script-request a{text-decoration:underline}
 
+/* A wrapping publication list enhanced with motion when available. */
+.home-page .press-mentions{background:#f7f8fb;border-bottom:1px solid #e6e9ee;color:var(--navy)}
+.home-page .press-mentions-inner{display:flex;align-items:center;gap:18px;padding-block:10px}
+.home-page .press-mentions h2{margin:0;border-left:3px solid var(--red);padding-left:10px;font-size:13px;font-weight:500;line-height:1.45}
+.home-page .press-window{flex:1;min-width:0}
+.home-page .press-mentions ul{display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:8px 0;margin:0;padding:0;list-style:none}
+.home-page .press-mentions li{padding-inline:clamp(12px,2.1vw,29px);border-right:1px solid #d4dce6;font-family:'Merriweather',Georgia,serif;font-size:clamp(13px,1.4vw,17px);line-height:1.4}
+.home-page .press-mentions li:last-child{border-right:0}
+.home-page .press-track>[aria-hidden]{display:none}
+.home-page .press-motion{min-width:58px;min-height:44px;padding:4px 8px;border:1px solid #d4dce6;border-radius:5px;background:#fff;color:inherit;font:inherit;font-size:12px;cursor:pointer}
+.home-page .press-motion:hover{background:#edf0f5}
+@media(max-width:680px){
+ .home-page .press-mentions-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+ .home-page .press-window{grid-column:1/-1;padding-block:2px 6px}
+ .home-page .press-motion{grid-column:2;grid-row:1}
+ .home-page .press-mentions ul{justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+ .home-page .press-motion{display:none}
+}
+@media(prefers-reduced-motion:no-preference){
+ .home-page .press-ticker-ready .press-window{overflow:hidden;mask-image:linear-gradient(to right,transparent,#000 10px,#000 calc(100% - 10px),transparent)}
+ .home-page .press-ticker-ready .press-track{display:flex;width:max-content;min-width:200%;animation:reviewsboost-press-scroll 28s linear 750ms infinite}
+ .home-page .press-ticker-ready .press-track>ul{display:flex;flex:1 0 auto;flex-wrap:nowrap;justify-content:space-around;gap:0}
+ .home-page .press-ticker-ready li{border-right:1px solid #d4dce6;white-space:nowrap}
+ .home-page .press-is-paused .press-track,
+ .home-page .press-is-offscreen .press-track{animation-play-state:paused}
+}
+@keyframes reviewsboost-press-scroll{to{transform:translateX(-50%)}}
+
 /* Homepage pricing and a single-page assessment in ReviewsBoost colours. */
 .home-page #pricing,.home-page #assessment{scroll-margin-top:84px}
 .home-page #pricing{background:#fcfaf9;padding:72px 0;border-bottom:1px solid #eee5e3}
