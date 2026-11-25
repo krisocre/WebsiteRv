@@ -5,7 +5,7 @@ const structured=html=>[...html.matchAll(/<script\b[^>]*type="application\/ld\+j
 const flatten=node=>!node||typeof node!=='object'?[]:[node,...Object.values(node).flatMap(v=>Array.isArray(v)?v.flatMap(flatten):flatten(v))];
 const decode=s=>s.replaceAll('&amp;','&').replaceAll('&#39;',"'");
 const active=services.filter(s=>s.enabled);
-const retired=/yelp|facebook|trustpilot|tripadvisor|glassdoor|booking[.-]com|remove-indeed/i;
+const retired=/yelp|facebook|trustpilot|tripadvisor|glassdoor|sitejabber|booking[.-]com|remove-indeed|\bplatforms\.html|review removal services by platform|review.removal services across major platforms/i;
 assert.deepEqual(active.map(s=>s.name),['Google']);
 for(const [file,m] of Object.entries(metadata)){
  const html=read(file),head=html.split('</head>')[0];assert.equal(updateHead(file,html),html,file+' metadata idempotence');

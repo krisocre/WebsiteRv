@@ -1,5 +1,5 @@
 // Aggregate integrity and browser QA. No third-party collection or lead submissions.
-const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),assert=require('node:assert/strict'),cp=require('node:child_process'),crypto=require('node:crypto'),puppeteer=require('puppeteer');
+const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),http=require('node:http'),assert=require('node:assert/strict'),cp=require('node:child_process'),crypto=require('node:crypto'),puppeteer=require('puppeteer');
 const root=path.resolve(__dirname,'..'),file='google-review-extortion-canada-data-study.html';
 const d=JSON.parse(fs.readFileSync(path.join(root,'google-review-extortion-study.json'),'utf8'));
 assert.equal(d.filters.selected_records,22801);assert.equal(d.findings.zero_recorded_loss,20636);
@@ -20,8 +20,29 @@ assert.equal((blog.match(/<!-- extortion research card start -->/g)||[]).length,
 const blogSchema=JSON.parse(blog.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
 assert.ok(blogSchema['@graph'].some(node=>node['@type']==='ItemList'&&node.itemListElement.some(item=>item.url===d.article_url)));
 const publicFiles=[file,'blog.html','feed.xml','sitemap.xml'];
-const hash=name=>crypto.createHash('sha256').update(fs.readFileSync(path.join(root,name))).digest('hex');
-const before=publicFiles.map(hash);cp.execFileSync('python',['build-google-extortion-article.py'],{cwd:root});cp.execFileSync(process.execPath,['install-measurement.cjs'],{cwd:root});assert.deepEqual(publicFiles.map(hash),before,'Repeat generation must preserve output and prevent duplicate discovery entries');
+const buildRoot=fs.mkdtempSync(path.join(os.tmpdir(),'reviewsboost-extortion-'));
+const hashes=dir=>publicFiles.map(name=>crypto.createHash('sha256').update(fs.readFileSync(path.join(dir,name))).digest('hex'));
+const before=hashes(root);
+try {
+ for (const name of [...publicFiles,'build-google-extortion-article.py','google-review-extortion-study.json',
+  'google-review-widget-coverage-study.html','install-measurement.cjs','measurement-config.js']) {
+  fs.copyFileSync(path.join(root,name),path.join(buildRoot,name));
+ }
+ const build=()=>{
+  cp.execFileSync('python',['build-google-extortion-article.py'],{cwd:buildRoot});
+  cp.execFileSync(process.execPath,['install-measurement.cjs'],{cwd:buildRoot});
+ };
+ build();
+ const generated=hashes(buildRoot);
+ assert.deepEqual(generated.slice(2),before.slice(2),'Rebuilding a published study preserves the newer feed and sitemap dates');
+ build();
+ assert.deepEqual(hashes(buildRoot),generated,'Repeat generation prevents duplicate discovery entries');
+ assert.deepEqual(hashes(root),before,'Generation leaves the working tree untouched');
+} finally {
+ const resolved=fs.realpathSync(buildRoot);
+ if(!resolved.startsWith(path.resolve(os.tmpdir())+path.sep)||!path.basename(resolved).startsWith('reviewsboost-extortion-'))throw Error('Unsafe temporary cleanup');
+ fs.rmSync(resolved,{recursive:true,force:true});
+}
 const output=path.join(root,'.seo-private/extortion-article-20261113');fs.mkdirSync(output,{recursive:true});
 const server=http.createServer((req,res)=>{
  const u=new URL(req.url,'http://local'),target=path.resolve(root,'.'+(u.pathname==='/'?'/index.html':decodeURIComponent(u.pathname)));
@@ -39,14 +60,19 @@ const server=http.createServer((req,res)=>{
   assert.equal(await page.$eval('#measurement-preferences',node=>node.hidden),false,'The new article shows the prompt before a choice is saved');
   if(name===file){
    assert.equal(await page.$eval('.toc details',node=>node.open),false,'Contents disclosure does not displace the opening text on mobile');
-   await page.click('.toc summary');assert.equal(await page.$eval('.toc details',node=>node.open),true);
-   await page.keyboard.press('Space');assert.equal(await page.$eval('.toc details',node=>node.open),false);
+    await page.focus('.toc summary');
+    await page.keyboard.press('Enter');
+    await page.waitForSelector('.toc details[open]');
+    await page.keyboard.press('Space');
+    await page.waitForSelector('.toc details[open]',{hidden:true});
    await page.$$eval('.data-figure img',nodes=>nodes.forEach(node=>node.loading='eager'));await page.waitForFunction(()=>Array.from(document.querySelectorAll('.data-figure img')).every(node=>node.complete&&node.naturalWidth>0));
    assert.equal(await page.$$eval('.data-figure',nodes=>nodes.length),3);
    if([1440,390].includes(width)){await page.screenshot({path:path.join(output,'article-'+width+'.png')});await(await page.$('.data-figure')).screenshot({path:path.join(output,'figure-'+width+'.png')});}
   }
  }
- await page.goto(base+'blog.html',{waitUntil:'networkidle0'});await page.click('a[href="'+file+'"]');assert.ok(page.url().endsWith(file));
+ await page.goto(base+'blog.html',{waitUntil:'networkidle0'});
+ await Promise.all([page.waitForNavigation({waitUntil:'load'}),page.click('a[href="'+file+'"]')]);
+ assert.ok(page.url().endsWith(file));
  await page.setJavaScriptEnabled(false);await page.reload({waitUntil:'networkidle0'});assert.equal(await page.$$eval('.comparison tbody tr',nodes=>nodes.length),9,'Both result tables remain complete without JS');
  for(const name of ['annual.csv','status-loss.csv','channels.csv','study.json','analysis.py','evidence-worksheet.txt','study.bib'])assert.equal((await fetch(base+'google-review-extortion-'+name)).status,200);
  assert.deepEqual(errors,[]);assert.deepEqual(posts,[]);fs.writeFileSync(path.join(output,'browser-checks.json'),JSON.stringify({layouts,errors,realPostRequests:posts.length,aggregateRows:31,noJsTables:true},null,2));

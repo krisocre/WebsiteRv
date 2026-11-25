@@ -119,7 +119,7 @@ for (const file of files) {
     .filter(tag => attribute(tag, 'rel') === 'alternate' && attribute(tag, 'hreflang'))
     .map(tag => [attribute(tag, 'hreflang').toLowerCase(), attribute(tag, 'href')]));
   if (isIndexable) localePages.set(canonical, { file, isIndexable, alternates, language: attribute(tags(markup, 'html')[0] || '', 'lang')?.toLowerCase() });
-  const structuredTypes = new Set();
+  const structuredNodes = [];
 
   if (titleMatches.length !== 1 || !title.trim()) errors.push(`${file}: expected one nonempty title; found ${titleMatches.length}`);
   if (descriptionMatches.length !== 1 || !description.trim()) errors.push(`${file}: expected one nonempty meta description; found ${descriptionMatches.length}`);
@@ -189,16 +189,48 @@ for (const file of files) {
     try {
       const data = JSON.parse(match[1]);
       const nodes = Array.isArray(data) ? data : (data['@graph'] || [data]);
-      for (const node of nodes) {
-        const types = Array.isArray(node?.['@type']) ? node['@type'] : [node?.['@type']];
-        for (const type of types.filter(Boolean)) structuredTypes.add(type);
+      structuredNodes.push(...nodes);
+      if (/"@type"\s*:\s*"(?:Review|AggregateRating)"/.test(match[1])) {
+        errors.push(`${file}: unexpected Review or AggregateRating markup`);
       }
     } catch (error) {
       errors.push(`${file}: invalid JSON-LD (${error.message})`);
     }
   }
-  if (file === 'index.html' && !structuredTypes.has('WebSite')) {
-    errors.push('index.html: homepage needs WebSite structured data for the preferred site name');
+  const organizationId = SITE_ORIGIN + '/#organization';
+  const site = structuredNodes.find(node => node['@type'] === 'WebSite');
+  const organization = structuredNodes.find(node => node['@id'] === organizationId);
+  if (site && (site.name !== 'ReviewsBoost' || site.url !== SITE_ORIGIN + '/' ||
+      site.publisher?.['@id'] !== organizationId)) errors.push(`${file}: inconsistent WebSite identity`);
+  if (organization && (organization.name !== 'ReviewsBoost' || organization.url !== SITE_ORIGIN + '/')) {
+    errors.push(`${file}: inconsistent Organization identity`);
+  }
+  if (file === 'index.html') {
+    if (!site || !organization || organization.logo?.url !== SITE_ORIGIN + '/favicon-512.png') {
+      errors.push('index.html: missing homepage WebSite, Organization or logo');
+    }
+    const icon = tags(markup, 'link').find(tag => attribute(tag, 'rel') === 'icon');
+    if (attribute(icon || '', 'href') !== 'favicon.svg' ||
+        !/viewBox="0 0 (\d+) \1"/.test(fs.readFileSync('favicon.svg', 'utf8'))) {
+      errors.push('index.html: expected a square branded favicon');
+    }
+  }
+  for (const node of structuredNodes) {
+    if (node['@type'] === 'BreadcrumbList') {
+      const items = node.itemListElement || [];
+      if (items.length < 2 || items.at(-1)?.item !== canonical || items.some((item, index) =>
+        item.position !== index + 1 || !item.name || !item.item?.startsWith(SITE_ORIGIN + '/'))) {
+        errors.push(`${file}: incomplete breadcrumb or incorrect canonical destination`);
+      }
+      for (const item of items) if (item.item) checkLocalReference(item.item, file, 'breadcrumb');
+    }
+    if (['Article', 'BlogPosting'].includes(node['@type'])) {
+      const articlePage = node.mainEntityOfPage?.['@id'] || node.mainEntityOfPage;
+      if (!node.headline || articlePage !== canonical || !node.datePublished ||
+          node.publisher?.['@id'] !== organizationId) {
+        errors.push(`${file}: article headline, canonical, publication date or publisher missing`);
+      }
+    }
   }
 
   for (const tag of tags(markup, '(?:a|link)')) {

@@ -1,4 +1,5 @@
 """Build one article and its discovery entries; preserve existing articles/homepage."""
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 import html
 import json
@@ -96,7 +97,7 @@ header=re.search(r'<header class="site-header">[\s\S]*?</header>',template)[0]
 footer=re.search(r'<footer class="site-footer">[\s\S]*?</footer>',template)[0]
 downloads=[('google-review-extortion-annual.csv','Five period aggregates','text/csv'),('google-review-extortion-status-loss.csv','Six status-loss aggregates','text/csv'),('google-review-extortion-channels.csv','Twenty channel aggregates','text/csv'),('google-review-extortion-study.json','Complete methods and aggregate release','application/json')]
 graph={'@context':'https://schema.org','@graph':[
- {'@type':'Article','@id':URL+'#article','headline':H1,'description':DESC,'url':URL,'mainEntityOfPage':URL,'datePublished':DATE,'dateModified':DATE,'inLanguage':'en-CA','isAccessibleForFree':True,'author':{'@type':'Organization','name':'ReviewsBoost Editorial Team','url':'https://reviewsboost.ca/editorial-policy.html#authorship'},'publisher':{'@type':'Organization','name':'ReviewsBoost','url':'https://reviewsboost.ca/'},'citation':list(sources.values()),'image':['https://reviewsboost.ca/'+name+'.png' for name,_ in figures],'mainEntity':{'@id':URL+'#dataset'}},
+ {'@type':'Article','@id':URL+'#article','headline':H1,'description':DESC,'url':URL,'mainEntityOfPage':URL,'datePublished':DATE,'dateModified':DATE,'inLanguage':'en-CA','isAccessibleForFree':True,'author':{'@type':'Organization','name':'ReviewsBoost Editorial Team','url':'https://reviewsboost.ca/editorial-policy.html#authorship'},'publisher':{'@type':'Organization','@id':'https://reviewsboost.ca/#organization','name':'ReviewsBoost','url':'https://reviewsboost.ca/'},'citation':list(sources.values()),'image':['https://reviewsboost.ca/'+name+'.png' for name,_ in figures],'mainEntity':{'@id':URL+'#dataset'}},
  {'@type':'Dataset','@id':URL+'#dataset','name':D['title'],'description':'Original secondary aggregation of 22,801 Canada-coded broader extortion records into 31 aggregate rows. Not Google-review cases, a business-only sample, a national incidence rate or removal outcomes.','url':URL+'#downloads','version':'1.0.0','datePublished':DATE,'creator':{'@type':'Organization','name':'ReviewsBoost Editorial Team'},'isBasedOn':sources['catalogue'],'citation':[sources['csv'],sources['definitions']],'temporalCoverage':D['source_snapshot']['nominal_window'],'spatialCoverage':{'@type':'Country','name':'Canada'},'variableMeasured':['Source-coded report-record count','Zero versus positive recorded dollar loss','Publisher complaint status','Solicitation versus report-intake method'],'measurementTechnique':'Exact country/category filtering, decimal currency parsing and aggregate cross-tabulation of a SHA-256-pinned CSV.','distribution':[{'@type':'DataDownload','name':label,'contentUrl':'https://reviewsboost.ca/'+name,'encodingFormat':kind} for name,label,kind in downloads]},
  {'@type':'BreadcrumbList','itemListElement':[{'@type':'ListItem','position':1,'name':'Home','item':'https://reviewsboost.ca/'},{'@type':'ListItem','position':2,'name':'Learning Centre','item':'https://reviewsboost.ca/blog.html'},{'@type':'ListItem','position':3,'name':'Google review extortion data audit','item':URL}]}]}
 toc=''.join(f'<li><a href="#{match[0]}">{match[1]}</a></li>' for match in re.findall(r'<h2 id="([^"]+)">([^<]+)</h2>',body))
@@ -109,13 +110,12 @@ assert len(TITLE)<=65 and len(DESC)<=165
 blog_path=ROOT/'blog.html';blog=blog_path.read_text(encoding='utf-8')
 card=f'''<!-- extortion research card start --><article class="card"><span class="tag">New Canadian research · November 2026</span><h3>Google review extortion and the $0-loss gap</h3><p>We audited 22,801 broader Canada-coded extortion records. Explore three new figures, 31 aggregate data rows and a practical review-and-demand evidence worksheet.</p><a href="{FILE}">Read the research and download the data →</a></article><!-- extortion research card end -->'''
 marker=r'<!-- extortion research card start -->[\s\S]*?<!-- extortion research card end -->'
-if re.search(marker,blog):blog=re.sub(marker,lambda _:card,blog,count=1)
-else:
+if not re.search(marker,blog):
     section=blog.index('aria-labelledby="tools-and-answers"');point=blog.index('<article class="card">',section);blog=blog[:point]+card+'\n'+blog[point:]
 def update_schema(match):
     schema=json.loads(match[1])
     for node in schema.get('@graph',[]):
-        if node.get('@type')=='CollectionPage':node['dateModified']=DATE
+        if node.get('@type')=='CollectionPage':node['dateModified']=max(DATE,node.get('dateModified',DATE))
         if node.get('@type')=='ItemList':
             items=node.get('itemListElement',[])
             items=[item for item in items if item.get('url')!=URL and item.get('item')!=URL]
@@ -128,14 +128,17 @@ blog=re.sub(r'<script type="application/ld\+json">([\s\S]*?)</script>',update_sc
 blog_path.write_text(blog,encoding='utf-8')
 
 sitemap_path=ROOT/'sitemap.xml';sitemap=sitemap_path.read_text(encoding='utf-8')
-sitemap=re.sub(r'(<loc>https://reviewsboost\.ca/blog\.html</loc>\s*<lastmod>)[^<]+',lambda m:m[1]+DATE,sitemap)
+sitemap=re.sub(r'(<loc>https://reviewsboost\.ca/blog\.html</loc>\s*<lastmod>)(\d{4}-\d{2}-\d{2})',lambda m:m[1]+max(DATE,m[2]),sitemap)
 entry='<url><loc>'+URL+'</loc><lastmod>'+DATE+'</lastmod>'+''.join('<image:image><image:loc>https://reviewsboost.ca/'+name+'.png</image:loc></image:image>' for name,_ in figures)+'</url>'
 pattern=r'<url>\s*<loc>'+re.escape(URL)+r'</loc>[\s\S]*?</url>'
 sitemap=re.sub(pattern,lambda _:entry,sitemap,count=1) if re.search(pattern,sitemap) else sitemap.replace('</urlset>','  '+entry+'\n</urlset>')
 sitemap_path.write_text(sitemap,encoding='utf-8')
 feed_path=ROOT/'feed.xml';feed=feed_path.read_text(encoding='utf-8');pubdate='Fri, 13 Nov 2026 00:00:00 -0500'
-feed=re.sub(r'<lastBuildDate>[^<]+</lastBuildDate>','<lastBuildDate>'+pubdate+'</lastBuildDate>',feed,count=1)
 item=f'<item><title>{esc(H1)}</title><link>{URL}</link><guid isPermaLink="true">{URL}</guid><pubDate>{pubdate}</pubDate><description>{esc(DESC)}</description></item>'
-if URL not in feed:feed=feed.replace('<item>',item+'\n    <item>',1)
+if URL not in feed:
+    feed=feed.replace('<item>',item+'\n    <item>',1)
+    feed=re.sub(r'<lastBuildDate>([^<]+)</lastBuildDate>',
+                lambda m: '<lastBuildDate>'+pubdate+'</lastBuildDate>'
+                if parsedate_to_datetime(m[1])<parsedate_to_datetime(pubdate) else m[0],feed,count=1)
 feed_path.write_text(feed,encoding='utf-8')
 print('Built article, existing blog-grid card/ItemList, RSS and image-sitemap discovery. Homepage and existing posts unchanged.')

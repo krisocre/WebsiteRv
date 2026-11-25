@@ -11,7 +11,7 @@ for(const file of pages){
  assert.ok(/measurement-config\.js\?v=20261121-lead-funnel/.test(html)&&html.includes('measurement.js?v='+runtime)&&/measurement\.css\?v=20261122-cookie-prompt/.test(html),file+': versioned scripts');
  assert.ok(!/googletagmanager\.com\/(?:gtm\.js|gtag\/js|ns\.html)/.test(html),file+': no consent bypass');
  assert.ok(!html.includes('www.clarity.ms/tag/'),file+': no replay consent bypass');
- assert.equal(installer.applyToHtml(html,file),html,file+': repeatable installer');
+ assert.equal(installer.applyToHtml(html,file),html.replace(/\r\n?/g,'\n'),file+': repeatable installer');
 }
 const server=http.createServer((req,res)=>{
  const name=new URL(req.url,'http://localhost').pathname,file=path.resolve(root,'.'+(name==='/'?'/index.html':name));
