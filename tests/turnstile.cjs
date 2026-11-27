@@ -68,7 +68,9 @@ const server=http.createServer((req,res)=>{
 
  t=await open('index.html',true);page=t.page;await fill(page);
  await page.waitForSelector('.enquiry-security-retry:not([hidden])');assert.equal(t.posts.length,0);
- await page.click('.enquiry-security-retry');await completePuppeteer(page);assert.equal(t.calls.length,2,'Failed loader is retryable');
+ await page.focus('.enquiry-security-retry');
+ assert.equal(await page.$eval('.enquiry-security-retry',button=>button.hidden),false,'Focusing Retry preserves the recovery action');
+ await page.keyboard.press('Enter');await completePuppeteer(page);assert.equal(t.calls.length,2,'A deliberate retry loads the provider once');
  // A recovery download must never contain a reusable challenge token.
  await page.evaluate(()=>{const original=URL.createObjectURL;URL.createObjectURL=b=>{window.__savedRequest=b;return original(b);};HTMLAnchorElement.prototype.click=function(){};window.fetch=async()=>{throw Error('LOCAL_NETWORK_FAILURE');};});
  await submit(page);await page.waitForSelector('.enquiry-receipt button');await page.click('.enquiry-receipt button');

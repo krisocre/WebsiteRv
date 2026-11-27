@@ -136,11 +136,11 @@ const server = http.createServer((req,res) => {
       await form.locator('[name="concern_category"]').selectOption('Off-topic content');
       await form.locator('[name="review_links"]').fill('https://example.ca/review');
       await form.locator('[name="reason"]').fill('Additional test context');
-      await form.locator('[name="phone_number"]').fill('416-555-0100');
+      await form.locator('[name="phone_number"]').fill('+1 (416) 555-0100 ext. 204');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,'Expanded optional fields fit at 320px');
       await complete(page);await form.locator('[type="submit"]').click();
       await page.waitForFunction(()=>!document.querySelector('#removalSuccess').hidden);
-      assert.equal(received.get('phone_number'),'416-555-0100');
+      assert.equal(received.get('phone_number'),'+1 (416) 555-0100 ext. 204','Country code and extension reach the submission intact');
       assert.equal(received.get('review_links'),'https://example.ca/review');
       assert.match(received.get('reason'),/Off-topic content\nAdditional test context/);
       await page.locator('#removalSuccessClose').click();

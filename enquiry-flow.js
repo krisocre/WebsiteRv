@@ -181,7 +181,6 @@ function leadInputErrors(data, requireReviewCount) {
   var legalNotice = form.querySelector('.submission-legal');
   if (legalNotice) actions.before(legalNotice);
   form.querySelectorAll('.form-privacy, .platform-disclaimer').forEach(function (notice) { notice.remove(); });
-  status.hidden = true;
   status.style.display = '';
   var note = element('p', 'enquiry-note', fr
     ? 'Envoi gratuit, sans paiement. Vos renseignements servent à évaluer la demande et à vous répondre. Aucun mot de passe ni dossier client privé.'
@@ -259,8 +258,8 @@ function leadInputErrors(data, requireReviewCount) {
       } catch (_) { failed(); }
     }
     function load() {
-      if (!visible || form.hidden) return;
-      if (window.turnstile) { render(); return; }
+      if (!visible || form.hidden || !retry.hidden) return;
+      if (typeof window.turnstile?.render === 'function') { render(); return; }
       if (loader) return;
       status(fr ? 'Vérification sécurisée du navigateur…' : 'Checking your browser securely…', false);
       loader = document.createElement('script');
@@ -289,7 +288,13 @@ function leadInputErrors(data, requireReviewCount) {
     }
     retry.addEventListener('click', function () {
       if (busy) return;
-      if (loader && !window.turnstile) { clearTimeout(timer); loader.remove(); loader = null; }
+      retry.hidden = true;
+      if (loader && typeof window.turnstile?.render !== 'function') {
+        clearTimeout(timer);
+        loader.onload = loader.onerror = null;
+        loader.remove();
+        loader = null;
+      }
       reset(); load();
     });
     var observer = 'IntersectionObserver' in window ? new IntersectionObserver(function (entries) {
@@ -373,9 +378,11 @@ function leadInputErrors(data, requireReviewCount) {
     box.append(copy, save);
     status.after(box);
   }
+  var sender = window.ReviewSubmission;
+  var canSend = typeof sender?.send === 'function';
   form.addEventListener('submit', function (event) {
     event.preventDefault();
-    if (busy || locked) return;
+    if (!canSend || busy || locked) return;
     if (!inline && step === 0) { forward(); return; }
     if (!valid(0) || !valid(1)) return;
     var verificationToken = security.token();
@@ -404,7 +411,7 @@ function leadInputErrors(data, requireReviewCount) {
     message(fr ? 'Envoi sécurisé de votre demande…' : 'Sending your request securely…');
     emit('submission_started');
     var slow = setTimeout(function () { message(fr ? 'L’envoi prend un peu plus de temps. Gardez cette page ouverte; aucune nouvelle demande n’est nécessaire.' : 'This is taking a little longer. Keep this page open; there is no need to submit again.'); }, 4000);
-    ReviewSubmission.send(payload).then(function (result) {
+    Promise.resolve().then(function () { return sender.send(payload); }).then(function (result) {
       // Only the backend's explicit success is a measured lead. The sender's
       // legacy notification-error accommodation remains a UI-only outcome.
       if (result.result === 'success' && result.warning !== 'owner_notification_failed') {
@@ -469,4 +476,10 @@ function leadInputErrors(data, requireReviewCount) {
   });
   window.ReviewEnquiry = { focus: focus };
   show(0, false);
+  submit.disabled = !canSend;
+  if (canSend) {
+    status.hidden = true;
+  } else {
+    message(fr ? 'Le service d’envoi n’a pas pu se charger. Actualisez la page pour réessayer.' : 'The submission service could not load. Reload this page to try again.', true);
+  }
 })();

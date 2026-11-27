@@ -17,7 +17,8 @@ const server=http.createServer((req,res)=>{
  try{
   browser=await puppeteer.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});const page=await browser.newPage(),errors=[],posts=[];
   await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
-  await page.setRequestInterception(true);page.on('request',r=>{if(isApi(r.url())){r.respond({status:200,contentType:'text/javascript',body:turnstileFixture});return;}if(r.method()!=='GET'){posts.push(r.url());r.abort();}else if(r.url().startsWith(base)||r.url().startsWith('data:'))r.continue();else r.abort();});page.on('pageerror',e=>errors.push(e.message));
+  let blockedFormScript;
+  await page.setRequestInterception(true);page.on('request',r=>{if(blockedFormScript && new URL(r.url()).pathname==='/'+blockedFormScript){r.abort();return;}if(isApi(r.url())){r.respond({status:200,contentType:'text/javascript',body:turnstileFixture});return;}if(r.method()!=='GET'){posts.push(r.url());r.abort();}else if(r.url().startsWith(base)||r.url().startsWith('data:'))r.continue();else r.abort();});page.on('pageerror',e=>errors.push(e.message));
   const layouts=[];
   const waitForAssessment=()=>page.waitForFunction(()=>{
    const header=document.querySelector('#navbar').getBoundingClientRect().bottom;
@@ -38,7 +39,8 @@ const server=http.createServer((req,res)=>{
    assert.deepEqual(await page.$$eval('main>section',e=>e.slice(0,5).map(n=>n.id||n.classList[0])),['hero','trust-strip','press-mentions','pricing','assessment'],'Press mentions precede pricing and the assessment');
    assert.deepEqual(await page.$$eval('.press-track > ul:not([aria-hidden]) li',items=>items.map(item=>item.textContent.trim())),['Financial Post','Toronto Times','ProMark Business Solutions','Profit Parrot']);
    assert.equal(await page.$('.press-mentions a'),null,'Publication names are unlinked');
-   assert.equal(await page.$eval('.press-motion',button=>button.getClientRects().length),0,'Reduced motion shows a static publication list');
+   assert.equal(await page.$('.press-mentions button'),null,'Press names have no separate playback button');
+   assert.equal(await page.$eval('.press-track>[aria-hidden]',copy=>copy.getClientRects().length),0,'Reduced motion shows each publication once');
    assert.equal(await page.$$eval('[role="dialog"],.modal-overlay',e=>e.length),0,'Homepage form is part of the page');
    if([1440,390].includes(width)){
     await page.evaluate(()=>document.activeElement?.blur());
@@ -69,15 +71,19 @@ const server=http.createServer((req,res)=>{
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.mobile-cta')).visibility==='visible');
     await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'no-preference'}]);
     await page.$eval('.press-mentions',section=>section.scrollIntoView({block:'center',behavior:'instant'}));
+    await page.mouse.move(0,0);
     await page.waitForFunction(()=>getComputedStyle(document.querySelector('.press-track')).animationPlayState==='running');
     const tickerPosition=()=>page.$eval('.press-track',track=>track.getBoundingClientRect().left);
     const startingPosition=await tickerPosition();
     await page.waitForFunction(start=>document.querySelector('.press-track').getBoundingClientRect().left<start-1,{},startingPosition);
-    await page.focus('.press-motion');await page.keyboard.press('Space');
-    assert.equal(await page.$eval('.press-motion',button=>button.getAttribute('aria-label')),'Play press banner');
+    await page.hover('.press-window');
     assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationPlayState),'paused');
-    await page.keyboard.press('Space');
-    assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationPlayState),'running');
+    await page.mouse.move(0,0);
+    await page.focus('.press-window');
+    assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationName),'none');
+    assert.equal(await page.$eval('.press-track>[aria-hidden]',copy=>copy.getClientRects().length),0);
+    await page.keyboard.press('Tab');
+    assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationName),'reviewsboost-press-scroll');
     await page.evaluate(()=>window.scrollTo({top:0,behavior:'instant'}));
     await page.evaluate(()=>{
      const focus=HTMLElement.prototype.focus;
@@ -136,12 +142,43 @@ const server=http.createServer((req,res)=>{
   assert.equal(await page.$eval('#upfrontTotal',e=>e.textContent),'225 $');
   assert.equal(await page.$eval('#successTotal',e=>e.textContent),'475 $');
   assert.match(await page.$eval('#selectedPlan',e=>e.value),/\$225 upfront \+ \$95 per successfully removed review/);
+  await page.setViewport({width:320,height:650});
+  await page.goto(base,{waitUntil:'load'});
+  await page.focus('.skip-link');await page.keyboard.press('Enter');
+  assert.equal(await page.evaluate(()=>document.activeElement.id),'main','Skip link moves keyboard focus into main content');
+  await page.keyboard.press('Tab');
+  assert.equal(await page.$eval('.hero-actions a',link=>link===document.activeElement),true);
+  await page.focus('#hamburger');await page.keyboard.press('Enter');
+  assert.equal(await page.$eval('#navLinks a',link=>link===document.activeElement),true,'Opening the mobile menu by keyboard focuses the first link');
+  await page.keyboard.press('ArrowDown');
+  assert.equal(await page.$eval('#navLinks li:nth-child(2) a',link=>link===document.activeElement),true,'Arrow keys navigate on devices that skip links when tabbing');
+  await page.focus('#navLinks a[href="#pricing"]');await page.keyboard.press('Enter');
+  assert.equal(await page.$eval('#pricing h2',heading=>heading===document.activeElement),true,'Following a menu link moves focus to its content');
+  const firstQuestion=await page.$('.faq-question');
+  await firstQuestion.focus();await page.keyboard.press('Tab');
+  assert.equal(await page.evaluate(()=>Boolean(document.activeElement.closest('.faq-item:not(.open) .faq-answer'))),false,'Collapsed FAQ answers cannot receive keyboard focus');
+  await firstQuestion.click();await page.addStyleTag({content:'.faq-answer p{font-size:200%}'});
+  assert.equal(await page.$eval('.faq-item.open .faq-answer',answer=>answer.scrollHeight<=answer.clientHeight+1),true,'Enlarged text remains readable in the expanded FAQ');
+  for(const dependency of ['enquiry-flow.js','form-submission.js']){
+   blockedFormScript=dependency;
+   await page.goto(base,{waitUntil:'load'});
+   assert.equal(await page.$eval('#submitButton',button=>button.disabled),true,'Submit waits for '+dependency);
+   assert.match(await page.$eval('#formStatus',node=>node.innerText),/reload/i,'Visible recovery instruction for '+dependency);
+   await page.$eval('#removalForm',form=>{
+    form.elements.full_name.value='Local Test';form.elements.business_name.value='Test Business';form.elements.email_address.value='local@example.invalid';
+   });
+   await page.focus('#email');await page.keyboard.press('Enter');
+   assert.equal(page.url(),base);
+   assert.equal(await page.$eval('#removalForm',form=>form.getAttribute('aria-busy')),null);
+  }
+  blockedFormScript=undefined;
   await page.setJavaScriptEnabled(false);
   await page.goto(base+'google-review-removal-cost-canada.html',{waitUntil:'load'});
   assert.deepEqual(await feeTotals(),['$135','$190','$325']);
   assert.match(await page.$eval('#fee-calculator noscript',e=>e.textContent),/CAD \$325/);
   await page.goto(base,{waitUntil:'load'});assert.ok(await page.$eval('noscript .no-script-request',e=>e.getClientRects().length>0));
   assert.match(await page.$eval('noscript .turnstile-noscript',e=>e.textContent),/Enable JavaScript to complete the security check/);
+  assert.equal(await page.$eval('#submitButton',button=>button.disabled),true,'Secure submission requires JavaScript');
   assert.doesNotMatch(await page.$eval('#removalForm',e=>e.textContent),/You can send this form without JavaScript/);
   assert.equal(await page.$eval('#removalForm',e=>e.getClientRects().length>0&&e.method==='post'),true,'Native form remains visible and never sends personal details with GET');
   assert.deepEqual(errors,[]);assert.deepEqual(posts,[]);fs.writeFileSync(path.join(output,'layout-results.json'),JSON.stringify(layouts,null,2));
