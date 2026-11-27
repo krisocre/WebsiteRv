@@ -25,12 +25,10 @@
  .home-page .press-ticker-ready .press-track{display:flex;width:max-content;min-width:200%;animation:reviewsboost-press-scroll 32s linear infinite}
  .home-page .press-ticker-ready .press-track>ul{display:flex;flex:1 0 auto;flex-wrap:nowrap;justify-content:space-around}
  .home-page .press-is-offscreen .press-track{animation-play-state:paused}
- .home-page .press-ticker-ready .press-window:focus{overflow-x:auto;mask-image:none}
- .home-page .press-window:focus .press-track{animation:none;min-width:100%}
- .home-page .press-window:focus .press-track>[aria-hidden]{display:none}
-}
-@media(hover:hover){
- .home-page .press-ticker-ready:hover .press-track{animation-play-state:paused}
+ .home-page .press-ticker-ready .press-window:focus-visible{mask-image:none}
+ .home-page .press-window:focus-visible .press-track{display:block;width:auto;min-width:0;animation:none}
+ .home-page .press-window:focus-visible .press-track>ul{flex-wrap:wrap;justify-content:flex-start}
+ .home-page .press-window:focus-visible .press-track>[aria-hidden]{display:none}
 }
 @keyframes reviewsboost-press-scroll{to{transform:translateX(-50%)}}
 

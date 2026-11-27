@@ -328,7 +328,7 @@
 <noscript><link rel="stylesheet" href="enquiry-flow.css?v=20261123-contact-form"></noscript>
 <link rel="stylesheet" href="legal-notice.css">
 <script src="submission-terms.js" defer></script>
-<link rel="stylesheet" href="home.css?v=20261127-press-strip">
+<link rel="stylesheet" href="home.css?v=20261127-press-selection">
 <script src="form-submission.js?v=20261108-backend" defer></script>
 <script src="enquiry-flow.js?v=20261126-form-recovery" defer></script>
 </head>
@@ -792,24 +792,25 @@
             });
         });
 
+        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         document.querySelectorAll('a[href^="#"]:not(.skip-link)').forEach(function (link) {
             link.addEventListener('click', function (event) {
-                var href = link.getAttribute('href');
-                if (href === '#') return;
-                var target = document.querySelector(href);
+                if (event.defaultPrevented || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                var target = document.getElementById(link.getAttribute('href').slice(1));
                 if (!target) return;
+
                 event.preventDefault();
-                if (href === '#assessment') {
-                    document.getElementById('assessment-title').focus({preventScroll:true});
-                    var heading = target.querySelector('.assessment-heading');
-                    var top = heading.getBoundingClientRect().top + window.scrollY - navbar.getBoundingClientRect().bottom - 12;
-                    window.scrollTo({top: top, behavior: 'instant'});
-                    return;
-                }
-                var destinationHeading = target.querySelector('h1, h2, h3') || target;
-                destinationHeading.setAttribute('tabindex', '-1');
-                destinationHeading.focus({preventScroll:true});
-                window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 82, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+                var scrollTarget = target.id === 'assessment' ? target.querySelector('.assessment-heading') : target;
+                var heading = scrollTarget.querySelector('h1, h2, h3') || scrollTarget;
+                var start = window.scrollY;
+                heading.tabIndex = -1;
+                heading.focus({preventScroll: true});
+                // Preserve the starting point if the browser scrolls when focus moves.
+                if (window.scrollY !== start) window.scrollTo({top: start, behavior: 'instant'});
+
+                var headerOffset = navbar.getBoundingClientRect().bottom + 12;
+                var top = window.scrollY + scrollTarget.getBoundingClientRect().top - headerOffset;
+                window.scrollTo({top: top, behavior: reduceMotion.matches ? 'instant' : 'smooth'});
             });
         });
 

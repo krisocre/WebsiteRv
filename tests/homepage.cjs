@@ -76,10 +76,31 @@ const server=http.createServer((req,res)=>{
     const tickerPosition=()=>page.$eval('.press-track',track=>track.getBoundingClientRect().left);
     const startingPosition=await tickerPosition();
     await page.waitForFunction(start=>document.querySelector('.press-track').getBoundingClientRect().left<start-1,{},startingPosition);
-    await page.hover('.press-window');
-    assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationPlayState),'paused');
-    await page.mouse.move(0,0);
-    await page.focus('.press-window');
+    const copyPoint=await page.$eval('.press-window',container=>{
+     const view=container.getBoundingClientRect();
+     for(const item of container.querySelectorAll('li')){
+      const text=item.firstChild;
+      const word=text.textContent.split(' ')[0];
+      const range=document.createRange();
+      range.setStart(text,0);
+      range.setEnd(text,word.length);
+      const bounds=range.getBoundingClientRect();
+      if(bounds.left>view.left+12&&bounds.right<view.right-12){
+       return {x:bounds.left+bounds.width/2,y:bounds.top+bounds.height/2};
+      }
+     }
+     return null;
+    });
+    assert.ok(copyPoint,'A visible publication word can be selected');
+    await page.mouse.click(copyPoint.x,copyPoint.y,{clickCount:2});
+    assert.ok(await page.evaluate(()=>window.getSelection().toString().trim()),'Double-click selects publication text');
+    assert.equal(await page.$eval('.press-window',container=>getComputedStyle(container).overflowX),'clip');
+    assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationPlayState),'running');
+    const afterSelection=await tickerPosition();
+    await page.waitForFunction(start=>document.querySelector('.press-track').getBoundingClientRect().left<start-1,{},afterSelection);
+    await page.focus('.hero-note a');
+    await page.keyboard.press('Tab');
+    assert.equal(await page.$eval('.press-window',container=>container.matches(':focus-visible')),true);
     assert.equal(await page.$eval('.press-track',track=>getComputedStyle(track).animationName),'none');
     assert.equal(await page.$eval('.press-track>[aria-hidden]',copy=>copy.getClientRects().length),0);
     await page.keyboard.press('Tab');
@@ -88,10 +109,29 @@ const server=http.createServer((req,res)=>{
     await page.evaluate(()=>{
      const focus=HTMLElement.prototype.focus;
      HTMLElement.prototype.focus=function(options){
-      return this.id==='assessment-title'?focus.call(this):focus.call(this,options);
+      focus.call(this,options);
+      if(this.id==='assessment-title') {
+       // Reproduce the viewport change in browsers that scroll when focus moves.
+       const top=scrollY+this.getBoundingClientRect().top;
+       window.scrollTo({top,behavior:'instant'});
+      }
      };
     });
-    await page.click('.mobile-cta a[href="#assessment"]');
+    const scrollPositions=await page.$eval('.mobile-cta a[href="#assessment"]',async link=>{
+     const start=scrollY;
+     const heading=document.querySelector('.assessment-heading');
+     const navbar=document.querySelector('#navbar');
+     const distance=heading.getBoundingClientRect().top-navbar.getBoundingClientRect().bottom-12;
+     link.click();
+     const positions=[scrollY-start];
+     for(let frame=0;frame<16;frame++){
+      await new Promise(resolve=>requestAnimationFrame(resolve));
+      positions.push(scrollY-start);
+     }
+     return {positions,distance};
+    });
+    assert.equal(scrollPositions.positions[0],0,'Focusing the assessment does not jump the viewport');
+    assert.ok(scrollPositions.positions.some(position=>position>8&&position<scrollPositions.distance-8),'Scroll passes through intermediate positions');
     await waitForAssessment();
     assert.equal(await page.$('#orderModal.open'),null);
     await page.emulateMediaFeatures([{name:'prefers-reduced-motion',value:'reduce'}]);
